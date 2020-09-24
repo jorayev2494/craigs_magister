@@ -27,7 +27,7 @@ class ExampleTest extends TestCase
     public function testBasicTest()
     {
         $this->assertTrue(true);
-        User::factory()->count(1)->make();
+        // User::factory()->count(1)->make();
     }
 
     public function testThisIsMyTest()

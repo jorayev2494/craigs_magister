@@ -56,6 +56,14 @@ services:
         environment: 
             - MYSQL_DATABASE=laravel-${COMPOSE_PROJECT_NAME}
             - MYSQL_ROOT_PASSWORD=laravel
+        command: [
+                'mysqld', 
+                '--character-set-server=utf8mb4', 
+                '--collation-server=utf8mb4_unicode_ci'
+            ]
+            # - mysqld \ 
+            #   --character-set-server=utf8mb4 \ 
+            #   --collation-server=utf8mb4_unicode_ci
         networks: 
             - laravel-${COMPOSE_PROJECT_NAME}
 
