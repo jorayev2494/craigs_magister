@@ -1,0 +1,74 @@
+version: "3.7"
+services: 
+    # Nginx Service
+    ngx:
+        build: 
+            context: ./nginx
+            dockerfile: dockerfile
+        container_name: ${COMPOSE_PROJECT_NAME}_ngx
+        restart: unless-stopped
+        tty: true
+        volumes: 
+            - ../:/var/project
+        links: 
+            - php
+        ports: 
+            - ${NGX_PORT}:80
+        networks: 
+            - laravel-${COMPOSE_PROJECT_NAME}
+
+    # PHP Service
+    php:
+        build: 
+            context: ./php
+            dockerfile: dockerfile
+        container_name: ${COMPOSE_PROJECT_NAME}_php_fpm
+        tty: true
+        volumes: 
+            - ../:/var/project
+        links: 
+            - mysql
+        networks: 
+            - laravel-${COMPOSE_PROJECT_NAME}
+
+    # Node Service
+    node:
+        build: 
+            context: ./node
+            dockerfile: dockerfile
+        container_name: ${COMPOSE_PROJECT_NAME}_node
+        tty: true
+        volumes: 
+            - ../:/var/project
+        networks: 
+            - laravel-${COMPOSE_PROJECT_NAME}
+
+    # MySQL Service
+    mysql:
+        image: mysql:5.7
+        container_name: ${COMPOSE_PROJECT_NAME}_db
+        restart: unless-stopped
+        tty: true
+        volumes: 
+            - ./mysql/data:/var/lib/mysql
+        ports: 
+            - ${MYSQL_PORT}:3306
+        environment: 
+            - MYSQL_DATABASE=laravel-${COMPOSE_PROJECT_NAME}
+            - MYSQL_ROOT_PASSWORD=laravel
+        networks: 
+            - laravel-${COMPOSE_PROJECT_NAME}
+
+    # REDIS Service
+    redis:
+        image: redis:latest
+        container_name: ${COMPOSE_PROJECT_NAME}_redis
+        restart: unless-stopped
+        ports: 
+            - ${REDIS_PORT}:6379
+        networks: 
+            - laravel-${COMPOSE_PROJECT_NAME}
+
+networks: 
+    laravel-craigs:
+        driver: bridge
