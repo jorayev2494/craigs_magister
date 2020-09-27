@@ -2,10 +2,17 @@
 
 namespace App\Exceptions;
 
+use App\Traits\ErrorFormatResponse;
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
+
+    use ErrorFormatResponse;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -33,5 +40,24 @@ class Handler extends ExceptionHandler
     public function register()
     {
         //
+    }
+
+    public function render($request, Throwable $exception)
+    {
+
+        if ($exception instanceof AlreadyCreatedException) {
+            return response($this->errorResponse($exception->getMessage()), Response::HTTP_FORBIDDEN);
+        }
+
+        if ($exception instanceof Exception) {
+            logger($exception->getTraceAsString());
+
+            $HTTP_CODES = array_values(Response::$statusTexts);
+            $ERROR_CODE = in_array($exception->getCode(), $HTTP_CODES, true) ? $exception->getCode() : Response::HTTP_INTERNAL_SERVER_ERROR;
+
+            return response($this->errorResponse($exception->getMessage()), $ERROR_CODE);
+        }
+
+        return parent::render($request, $exception);
     }
 }

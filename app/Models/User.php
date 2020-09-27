@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Abstracts\JWTAuthModel;
+use App\Models\Interfaces\IBaseUserModel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends JWTAuthModel implements IBaseUserModel
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
