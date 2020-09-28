@@ -1,1 +1,2 @@
-require('./bootstrap');
+// require('./bootstrap');
+import './src/main.js'

@@ -58,8 +58,8 @@ services:
             - MYSQL_ROOT_PASSWORD=laravel
         command: [
                 'mysqld', 
-                '--character-set-server=utf8mb4',               # utf8mb4 
-                '--collation-server=utf8mb4_unicode_ci'         # utf8mb4_unicode_ci
+                '--character-set-server=utf8mb4',
+                '--collation-server=utf8mb4_unicode_ci'
             ]
             # - mysqld \ 
             #   --character-set-server=utf8mb4 \ 
