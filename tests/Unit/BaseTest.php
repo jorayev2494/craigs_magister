@@ -4,9 +4,10 @@ namespace Tests\Unit;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\TestCase;
+// use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class BaseTest extends TestCase
 {
 
     use RefreshDatabase;

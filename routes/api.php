@@ -14,7 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::get('/', ['uses' => 'UserController@index', 'as' => 'index']);
+
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.'], static function() {
+    Route::post('/login', ['uses' => 'AuthController@login', 'as' => 'login']);
+    Route::post('/register', ['uses' => 'AuthController@register', 'as' => 'register']);
+    Route::post('/logout', ['uses' => 'AuthController@logout', 'as' => 'logout']) ;
+    Route::get('/token/refresh', ['uses' => 'AuthController@refreshToken', 'as' => 'token_refresh']);
+    Route::put('email_confirmation', ['uses' => 'EmailConfirmationController', 'as' => 'email_confirmation']);
+
+    Route::group(['prefix' => 'forgot_password', 'middleware' => 'guest', 'as' => 'forgot_password'], static function() : void {
+        Route::post('/email', ['uses' => 'ForgotPasswordController@sendResetTokenEmail', 'as' => 'send_reset_token_email']);
+        Route::put('/reset', ['uses' => 'ForgotPasswordController@resetPassword', 'as' => 'reset_password']);
+    });
 });
 

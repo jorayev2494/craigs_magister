@@ -1,70 +1,72 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Auth\LoginRequest;
 use App\Http\Requests\Admin\Auth\RegisterRequest;
-use App\Services\AdminService;
+use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Symfony\Component\VarDumper\Cloner\VarCloner;
 
 final class AuthController extends Controller
 {
 
     /**
-     * @var AdminService
-     */
-    private AdminService $adminService;
+    * @var UserService $userService
+    */
+    private UserService $userService;
 
-    public function __construct(AdminService $adminService) {
-        $this->adminService = $adminService;
-        $this->middleware(['auth:admin'])->except('register', 'login');
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+        $this->middleware(['auth:user'])->except('register', 'login');
     }
 
     /**
-     * Admin register
+     * User Register
      *
      * @param RegisterRequest $request
      * @return JsonResponse
      */
     public function register(RegisterRequest $request) : JsonResponse
     {
-        return response()->json($this->adminService->register($request->validated()));
+        return response()->json($this->userService->register($request->validated()));
     }
 
     /**
-     * Admin login
+     * User login
      *
      * @param LoginRequest $request
      * @return JsonResponse
      */
     public function login(LoginRequest $request) : JsonResponse
     {
-        ['access_token' => $token, 'user_data' => $userData] = $this->adminService->auth($request->email, $request->password);
-        return response()->json(array('access_token' => $token, 'user_data' => $userData));
+        ['access_token' => $token, 'user_data' => $userData] = $this->userService->auth($request->email, $request->password);
+        return response()->json(['access_token' => $token, 'user_data' => $userData]);
     }
 
     /**
-     * Admin logout
+     * User logout
      *
      * @return Response
      */
     public function logout() : Response
     {
-        $this->adminService->logout();
+        $this->userService->logout();
         return response()->noContent();
     }
 
     /**
-     * Admin refreshToken
+     * User refreshToken
      *
      * @param Request $request
      * @return JsonResponse
      */
     public function refreshToken(Request $request) : JsonResponse
     {
-        return response()->json($this->adminService->tokenRefresh($request));
+        return response()->json($this->userService->tokenRefresh($request));
     }
 }

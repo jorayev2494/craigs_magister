@@ -4,11 +4,9 @@ namespace App\Services\Base\Interfaces;
 
 interface IBaseAppGuards 
 {
-    public const ADMIN = "admin";
+    public const ADMIN  = "admin";
 
-    public const SHIPPER = "shipper";
+    public const USER   = "user";
 
-    public const CARRIER = "carrier";
-
-    public const ALL_GUARDS = [self::CARRIER, self::SHIPPER, self::ADMIN];
+    public const ALL_GUARDS = [self::ADMIN, self::USER];
 }

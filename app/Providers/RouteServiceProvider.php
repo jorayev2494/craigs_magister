@@ -38,22 +38,15 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
-
             #region Admin Route and Controller
-            Route::prefix('api/admin')
-                    ->name('api.admin.')
-                    ->middleware('api')
-                    ->namespace($this->namespace . '\Admin')
-                    ->group(base_path('routes/api.admin.php'));
+            $this->adminApiRoute();
             #endregion
 
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
+            #region User Route and Controller
+            $this->userApiRoute();
+            #endregion
+
+            $this->webRoute();
         });
     }
 
@@ -67,5 +60,29 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60);
         });
+    }
+
+    private function adminApiRoute() : void
+    {
+        Route::prefix('api/admin')
+                    ->name('api.admin.')
+                    ->middleware('api')
+                    ->namespace($this->namespace . '\Admin')
+                    ->group(base_path('routes/api.admin.php'));
+    }
+
+    private function userApiRoute() : void
+    {
+        Route::prefix('api')
+                ->middleware('api')
+                ->namespace($this->namespace . '\User')
+                ->group(base_path('routes/api.php'));
+    }
+
+    private function webRoute() : void
+    {
+        Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/web.php'));
     }
 }
