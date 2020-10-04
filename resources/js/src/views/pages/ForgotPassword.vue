@@ -20,13 +20,13 @@
                         <div class="vx-col sm:w-full md:w-full lg:w-1/2 mx-auto self-center d-theme-dark-bg">
                             <div class="p-8">
                                 <div class="vx-card__title mb-8">
-                                    <h4 class="mb-4">Recover your password</h4>
-                                    <p>Please enter your email address and we'll send you instructions on how to reset your password.</p>
+                                    <h4 class="mb-4">{{ $t('recover_your_password') }}</h4>
+                                    <p>{{ $t('recover_your_password_text') }}</p>
                                 </div>
 
-                                <vs-input type="email" label-placeholder="Email" v-model="value1" class="w-full mb-8" />
-                                <vs-button type="border" to="/pages/login" class="px-4 w-full md:w-auto">Back To Login</vs-button>
-                                <vs-button class="float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0">Recover Password</vs-button>
+                                <vs-input type="email" v-validate="'required|email|min:3'" data-vv-validate-on="blur" :label-placeholder="$t('email')" icon-no-border v-model="email" class="w-full mb-8" />
+                                <vs-button type="border" :to="{ name: 'admin-page-login' }" class="px-4 w-full md:w-auto">{{ $t('back_to_login') }}</vs-button>
+                                <vs-button class="float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0" :disablde="!validateForm" @click="forgotPassword()">{{ $t('recover_password') }}</vs-button>
                             </div>
                         </div>
                     </div>
@@ -40,8 +40,49 @@
 export default {
     data() {
         return {
-            value1: ''
+            email: ''
         }
-    }
+    },
+    methods: {
+        checkLogin() {
+            // If user is already logged in notify
+            if (this.$store.state.auth.isUserLoggedIn()) {
+                // Close animation if passed as payload
+                this.$vs.loading.close();
+
+                this.$vs.notify({
+                    title: 'Login Attempt',
+                    text: 'You are already logged in!',
+                    iconPack: 'feather',
+                    icon: 'icon-alert-circle',
+                    color: 'warning'
+                })
+
+                return false
+            }
+            return true
+        },
+
+        forgotPassword() {
+            if (!this.checkLogin()) return;
+
+            // Loading
+            this.$vs.loading()
+
+            const payload = {
+                email: this.email,
+                notify: this.$vs.notify,
+                closeAnimation: this.$vs.loading.close,
+                i18n: this.$i18n,
+            }
+
+            this.$store.dispatch('auth/forgotPasswordJWT', payload);
+        }
+    },
+    computed: {
+        validateForm() {
+            return !this.errors.any() && this.email != '' && this.password != '';
+        },
+    },
 }
 </script>

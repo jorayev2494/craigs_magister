@@ -18,6 +18,7 @@ class CreateAdminsTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email', 255)->unique()->index();
+            $table->string('avatar')->nullable()->default('default.jpg');
             // $table->string('phone', 225)->nullable();
             $table->string('password');
             // $table->timestamp('email_verified_at')->nullable();

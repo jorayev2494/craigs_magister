@@ -27,7 +27,8 @@ class LoginRequest extends APIFormRequest
     {
         return [
             'email'             => 'required',
-            'password'          => 'required|string'
+            'password'          => 'required|string',
+            'remember'          => 'nullable|boolean'
         ];
     }
 }

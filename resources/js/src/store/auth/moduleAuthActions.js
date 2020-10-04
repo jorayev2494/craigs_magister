@@ -55,6 +55,7 @@ export default {
             dispatch('login', newPayload)
         }
     },
+
     login({ commit, state, dispatch }, payload) {
 
         // If user is already logged in notify and exit
@@ -241,6 +242,7 @@ export default {
                 })
             })
     },
+
     registerUser({dispatch}, payload) {
 
         // create user using firebase
@@ -270,6 +272,7 @@ export default {
                 })
             })
     },
+
     updateUsername({ commit }, payload) {
         payload.user.updateProfile({
             displayName: payload.displayName
@@ -287,7 +290,7 @@ export default {
                 router.push(router.currentRoute.query.to || '/')
             }
         }).catch((err) => {
-              payload.notify({
+            payload.notify({
                 time: 8800,
                 title: 'Error',
                 text: err.message,
@@ -298,65 +301,207 @@ export default {
         })
     },
 
-
-    // JWT
+    // #region JWT
     loginJWT({ commit }, payload) {
-
       return new Promise((resolve,reject) => {
-        jwt.login(payload.userDetails.email, payload.userDetails.password)
-          .then(response => {
-
+        jwt.login(payload.userDetails.email, payload.userDetails.password, payload.userDetails.remember_me).then(response => {
             // If there's user data in response
-            if(response.data.userData) {
-              // Navigate User to homepage
-              router.push(router.currentRoute.query.to || '/')
+            if(response.data.user_data && response.data.access_token) {
 
-              // Set accessToken
-              localStorage.setItem("accessToken", response.data.accessToken)
+                // Navigate User to homepage
+                router.push(router.currentRoute.query.to || { name: 'admin-dashboard' });
 
-              // Update user details
-              commit('UPDATE_USER_INFO', response.data.userData, {root: true})
+                // // Set accessToken
+                // window.localStorage.setItem("accessToken", response.data.access_token);
 
-              // Set bearer token in axios
-              commit("SET_BEARER", response.data.accessToken)
+                // Update user details
+                commit('UPDATE_USER_INFO', response.data.user_data, { root: true });
 
-              resolve(response)
-            }else {
-              reject({message: "Wrong Email or Password"})
+                // Set bearer token in axios
+                commit("SET_BEARER", response.data.access_token);
+
+                resolve(response);
+
+                // Close animation if passed as payload
+                if(payload.closeAnimation) payload.closeAnimation();
+            } else {
+                reject({message: "Wrong Email or Password"});
             }
 
-          })
-          .catch(error => { reject(error) })
+        }).catch(error => { 
+            // Close animation if passed as payload
+            if(payload.closeAnimation) payload.closeAnimation();
+
+            error.response.data.errors.forEach(error => {
+                payload.notify({
+                    time: 2500,
+                    title: payload.i18n.t('error'),
+                    text: payload.i18n.t(error),
+                    iconPack: 'feather',
+                    icon: 'icon-alert-circle',
+                    color: 'danger'
+                });
+            });
+
+            // reject(error);
+
+        })
       })
     },
+
     registerUserJWT({ commit }, payload) {
+        const { firstName, lastName, email, password, confirmPassword } = payload.userDetails
 
-      const { displayName, email, password, confirmPassword } = payload.userDetails
+        return new Promise((resolve, reject) => {
 
-      return new Promise((resolve,reject) => {
+            // Check confirm password
+            if(password !== confirmPassword) {
+                reject({ message: "Password doesn't match. Please try again." })
+            }
 
-        // Check confirm password
-        if(password !== confirmPassword) {
-          reject({message: "Password doesn't match. Please try again."})
-        }
+            jwt.registerUser(firstName, lastName, email, password, confirmPassword).then(response => {
+                console.table(response);
+                // Redirect User
+                router.push(router.currentRoute.query.to || { name: 'admin-page-login' });
 
-        jwt.registerUser(displayName, email, password)
-          .then(response => {
-            // Redirect User
-            router.push(router.currentRoute.query.to || '/')
+                // // Update data in localStorage
+                // window.localStorage.setItem("accessToken", response.data.access_token)
+                // commit('UPDATE_USER_INFO', response.data.user_data, {root: true});
 
-            // Update data in localStorage
-            localStorage.setItem("accessToken", response.data.accessToken)
-            commit('UPDATE_USER_INFO', response.data.userData, {root: true})
+                resolve(response);
 
-            resolve(response)
-          })
-          .catch(error => { reject(error) })
-      })
+                // Close animation if passed as payload
+                if(payload.closeAnimation) payload.closeAnimation();
+            }).catch(error => { 
+
+                // Close animation if passed as payload
+                if(payload.closeAnimation) payload.closeAnimation();
+
+                error.response.data.errors.forEach(error => {
+                    payload.notify({
+                        time: 2500,
+                        title: payload.i18n.t('error'),
+                        text: payload.i18n.t(error),
+                        iconPack: 'feather',
+                        icon: 'icon-alert-circle',
+                        color: 'danger'
+                    });
+                });
+
+                // reject(error);
+            })
+        })
     },
+
     fetchAccessToken() {
       return new Promise((resolve) => {
         jwt.refreshToken().then(response => { resolve(response) })
       })
+    },
+
+    forgotPasswordJWT({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            jwt.forgotPassword(payload.email).then((response) => {
+                
+                if (response.status == 202) {
+                    router.push({ name: 'admin-page-login' });
+
+                    // Close animation if passed as payload
+                    if(payload.closeAnimation) payload.closeAnimation();
+
+                    payload.notify({
+                        time: 8800,
+                        title: 'Success',
+                        text: payload.i18n.t('reset_link_sent_email'),
+                        iconPack: 'feather',
+                        icon: 'icon-alert-circle',
+                        color: 'success'
+                    });
+                }
+
+            }).catch((error) => {
+                
+                console.log(error.response);
+
+                // Close animation if passed as payload
+                if(payload.closeAnimation) payload.closeAnimation();
+
+                // #region Laravel Validation Errors
+                for (const property in error.response.data.errors) {
+                    if (error.response.data.errors.hasOwnProperty(property)) {
+                        const elementArr = error.response.data.errors[property];
+                        elementArr.forEach(element => {
+                            payload.notify({
+                                time: 2500,
+                                title: payload.i18n.t('error'),
+                                text: payload.i18n.t(`server_validation.${element}`),
+                                iconPack: 'feather',
+                                icon: 'icon-alert-circle',
+                                color: 'danger'
+                            });
+                        });
+                    }
+                }
+                // #endregion
+                
+            });
+        })
+    },
+
+    resetPasswordJWT({ commit }, payload) {
+
+        const { password, passwordConfirmation, token } = payload.data;
+
+        return new Promise((resolve, reject) => {
+            // Check confirm password
+            if(password !== passwordConfirmation) {
+                reject({ message: "Password doesn't match. Please try again." })
+            }
+
+            jwt.resetPassword(password, passwordConfirmation, token).then((response) => {
+                
+                console.log(response);
+
+                if (response.status == 204) {
+                    router.push({ name: 'admin-page-login' });
+
+                    // Close animation if passed as payload
+                    if(payload.closeAnimation) payload.closeAnimation();
+
+                    payload.notify({
+                        time: 8800,
+                        title: 'Success',
+                        text: payload.i18n.t('your_password_has_been_successfully_reset'),
+                        iconPack: 'feather',
+                        icon: 'icon-alert-circle',
+                        color: 'success'
+                    });
+                }
+
+            }).catch((error) => {
+                // Close animation if passed as payload
+                if(payload.closeAnimation) payload.closeAnimation();
+
+                // #region Laravel Validation Errors
+                for (const property in error.response.data.errors) {
+                    if (error.response.data.errors.hasOwnProperty(property)) {
+                        const elementArr = error.response.data.errors[property];
+                        elementArr.forEach(element => {
+                            payload.notify({
+                                time: 2500,
+                                title: payload.i18n.t('error'),
+                                text: payload.i18n.t(`server_validation.${element}`),
+                                iconPack: 'feather',
+                                icon: 'icon-alert-circle',
+                                color: 'danger'
+                            });
+                        });
+                    }
+                }
+                // #endregion
+                
+            });
+        });
     }
+    // #endregion
 }

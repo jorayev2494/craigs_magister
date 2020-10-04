@@ -9,9 +9,25 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
+    "babel": {
+        "presets": [
+            "@babel/preset-env",
+            "@babel/preset-react"
+        ],
+        "plugins": [
+            [
+                "@babel/plugin-proposal-class-properties",
+                {
+                    "loose": true
+                }
+            ]
+        ]
+    },
     "devDependencies": {
-        "@babel/plugin-proposal-class-properties": "^7.5.5",
+        "@babel/plugin-proposal-class-properties": "^7.10.4",
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+        "@babel/preset-env": "^7.11.5",
+        "@babel/preset-react": "^7.10.4",
         "@chenfengyuan/vue-countdown": "^1.1.2",
         "@fullhuman/postcss-purgecss": "^1.2.0",
         "@vue/cli-plugin-babel": "^3.7.0",

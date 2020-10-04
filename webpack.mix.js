@@ -19,6 +19,9 @@
 const mix = require('laravel-mix');
 let tailwindcss = require('tailwindcss');
 require('dotenv').config();
+// require("@babel/core").transform("code", {
+//     plugins: ["@babel/plugin-proposal-class-properties"]
+// });
 
 
 /*

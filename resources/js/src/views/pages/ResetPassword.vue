@@ -20,16 +20,16 @@
                         <div class="vx-col sm:w-full md:w-full lg:w-1/2 mx-auto self-center  d-theme-dark-bg">
                             <div class="p-8">
                                 <div class="vx-card__title mb-8">
-                                    <h4 class="mb-4">Reset Password</h4>
-                                    <p>Please enter your new password.</p>
+                                    <h4 class="mb-4">{{ $t('reset_password') }}</h4>
+                                    <p>{{ $t('please_enter_your_new_password') }}</p>
                                 </div>
-                                <vs-input type="email" label-placeholder="Email" v-model="value1" class="w-full mb-6" />
-                                <vs-input type="password" label-placeholder="Password" v-model="value2" class="w-full mb-6" />
-                                <vs-input type="password" label-placeholder="Confirm Password" v-model="value3" class="w-full mb-8" />
+
+                                <vs-input type="password" v-validate="'required|min:6|max:10'" data-vv-validate-on="blur" :label-placeholder="$t('password')" v-model="password" class="w-full mb-6" />
+                                <vs-input type="password" v-validate="'min:6|max:10|confirmed:password'" data-vv-validate-on="blur" :label-placeholder="$t('password_confirm')" v-model="password_confirmation" class="w-full mb-8" />
 
                                 <div class="flex flex-wrap justify-between flex-col-reverse sm:flex-row">
-                                    <vs-button type="border" to="/pages/login" class="w-full sm:w-auto mb-8 sm:mb-auto mt-3 sm:mt-auto">Go Back To Login</vs-button>
-                                    <vs-button class="w-full sm:w-auto">Reset</vs-button>
+                                    <vs-button type="border" :to="{ name: 'admin-page-login' }" class="w-full sm:w-auto mb-8 sm:mb-auto mt-3 sm:mt-auto">{{ $t('go_back_to_login') }}</vs-button>
+                                    <vs-button class="w-full sm:w-auto" @click="resetPassword()">{{ $t('reset') }}</vs-button>
                                 </div>
 
                             </div>
@@ -45,10 +45,58 @@
 export default {
     data() {
         return {
-            value1: '',
-            value2: '',
-            value3: '',
+            password: '',
+            password_confirmation: '',
+            token: ''
         }
-    }
+    },
+    methods: {
+        checkLogin() {
+            // If user is already logged in notify
+            if (this.$store.state.auth.isUserLoggedIn()) {
+                // Close animation if passed as payload
+                this.$vs.loading.close();
+
+                this.$vs.notify({
+                    title: 'Login Attempt',
+                    text: 'You are already logged in!',
+                    iconPack: 'feather',
+                    icon: 'icon-alert-circle',
+                    color: 'warning'
+                })
+
+                return false
+            }
+            return true
+        },
+
+        resetPassword() {
+            if (!this.checkLogin()) return;
+
+            // Loading
+            this.$vs.loading()
+
+            const payload = {
+                data : {
+                    password: this.password,
+                    passwordConfirmation: this.password_confirmation,
+                    token: this.token
+                },
+                notify: this.$vs.notify,
+                closeAnimation: this.$vs.loading.close,
+                i18n: this.$i18n,
+            }
+
+            this.$store.dispatch('auth/resetPasswordJWT', payload);
+        }
+    },
+    computed: {
+        validateForm() {
+            return !this.errors.any() && this.password != '' && this.password_confirmation != '';
+        },
+    },
+    mounted () {
+        this.token = this.$route.query.token;
+    },
 }
 </script>

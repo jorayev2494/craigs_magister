@@ -18,15 +18,10 @@ const webAuth = new auth0.WebAuth({
     scope: 'openid profile email'
 });
 
-var idToken = 1;
-var profile = "admin";
-var tokenExpiry = 4445464686886;
-
-
 class AuthService extends EventEmitter {
-    // idToken = null;
-    // profile = null;
-    // tokenExpiry = null;
+    idToken = null;
+    profile = null;
+    tokenExpiry = null;
 
     // Starts the user login flow
     login(customState) {
@@ -51,20 +46,20 @@ class AuthService extends EventEmitter {
     }
 
     localLogin(authResult) {
-        idToken = authResult.idToken;
-        profile = authResult.idTokenPayload;
+        this.idToken = authResult.idToken;
+        this.profile = authResult.idTokenPayload;
 
         // Convert the JWT expiry time from seconds to milliseconds
-        tokenExpiry = new Date(profile.exp * 1000);
-        localStorage.setItem(tokenExpiryKey, tokenExpiry);
+        this.tokenExpiry = new Date(this.profile.exp * 1000);
+        localStorage.setItem(tokenExpiryKey, this.tokenExpiry);
         localStorage.setItem(localStorageKey, 'true');
 
         store.commit("UPDATE_USER_INFO", {
-            displayName: profile.name,
-            email: profile.email,
-            photoURL: profile.picture,
-            providerId: profile.sub.substr(0, profile.sub.indexOf('|')),
-            uid: profile.sub
+            displayName: this.profile.name,
+            email: this.profile.email,
+            photoURL: this.profile.picture,
+            providerId: this.profile.sub.substr(0, this.profile.sub.indexOf('|')),
+            uid: this.profile.sub
         })
 
         this.emit(loginEvent, {
@@ -77,7 +72,7 @@ class AuthService extends EventEmitter {
     renewTokens() {
         // reject can be used as parameter in promise for using reject
         return new Promise((resolve) => {
-            if (localStorage.getItem(localStorageKey) !== "true") {
+            if (window.localStorage.getItem(localStorageKey) !== "true") {
                 // return reject("Not logged in");
             }
 
@@ -93,13 +88,13 @@ class AuthService extends EventEmitter {
     }
 
     logOut() {
-        localStorage.removeItem(localStorageKey);
-        localStorage.removeItem(tokenExpiryKey);
-        localStorage.removeItem('userInfo');
+        window.localStorage.removeItem(localStorageKey);
+        window.localStorage.removeItem(tokenExpiryKey);
+        window.localStorage.removeItem('userInfo');
 
-        idToken = null;
-        tokenExpiry = null;
-        profile = null;
+        this.idToken = null;
+        this.tokenExpiry = null;
+        this.profile = null;
 
         webAuth.logout({
             returnTo: window.location.origin + process.env.BASE_URL
@@ -110,8 +105,8 @@ class AuthService extends EventEmitter {
 
     isAuthenticated() {
         return (
-            new Date(Date.now()) < new Date(localStorage.getItem(tokenExpiryKey)) &&
-            localStorage.getItem(localStorageKey) === 'true'
+            new Date(Date.now()) < new Date(window.localStorage.getItem(tokenExpiryKey)) &&
+            window.localStorage.getItem(localStorageKey) === 'true'
         );
     }
 }

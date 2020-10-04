@@ -20,6 +20,7 @@ class User extends JWTAuthModel implements IBaseUserModel
     protected $fillable = [
         'first_name',
         'last_name',
+        'avatar',
         'email',
         'password',
         'email_confirmed',
@@ -27,6 +28,7 @@ class User extends JWTAuthModel implements IBaseUserModel
         'remember_token',
         'last_login',
         'last_activity',
+        'about',
     ];
 
     /**
