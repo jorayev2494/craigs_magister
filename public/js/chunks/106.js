@@ -55,10 +55,53 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      value1: '',
-      value2: '',
-      value3: ''
+      password: '',
+      password_confirmation: '',
+      token: ''
     };
+  },
+  methods: {
+    checkLogin: function checkLogin() {
+      // If user is already logged in notify
+      if (this.$store.state.auth.isUserLoggedIn()) {
+        // Close animation if passed as payload
+        this.$vs.loading.close();
+        this.$vs.notify({
+          title: 'Login Attempt',
+          text: 'You are already logged in!',
+          iconPack: 'feather',
+          icon: 'icon-alert-circle',
+          color: 'warning'
+        });
+        return false;
+      }
+
+      return true;
+    },
+    resetPassword: function resetPassword() {
+      if (!this.checkLogin()) return; // Loading
+
+      this.$vs.loading();
+      var payload = {
+        data: {
+          password: this.password,
+          passwordConfirmation: this.password_confirmation,
+          token: this.token
+        },
+        notify: this.$vs.notify,
+        closeAnimation: this.$vs.loading.close,
+        i18n: this.$i18n
+      };
+      this.$store.dispatch('auth/resetPasswordJWT', payload);
+    }
+  },
+  computed: {
+    validateForm: function validateForm() {
+      return !this.errors.any() && this.password != '' && this.password_confirmation != '';
+    }
+  },
+  mounted: function mounted() {
+    this.token = this.$route.query.token;
   }
 });
 
@@ -127,54 +170,61 @@ var render = function() {
                       [
                         _c("div", { staticClass: "vx-card__title mb-8" }, [
                           _c("h4", { staticClass: "mb-4" }, [
-                            _vm._v("Reset Password")
+                            _vm._v(_vm._s(_vm.$t("reset_password")))
                           ]),
                           _vm._v(" "),
-                          _c("p", [_vm._v("Please enter your new password.")])
+                          _c("p", [
+                            _vm._v(
+                              _vm._s(_vm.$t("please_enter_your_new_password"))
+                            )
+                          ])
                         ]),
                         _vm._v(" "),
                         _c("vs-input", {
-                          staticClass: "w-full mb-6",
-                          attrs: {
-                            type: "email",
-                            "label-placeholder": "Email"
-                          },
-                          model: {
-                            value: _vm.value1,
-                            callback: function($$v) {
-                              _vm.value1 = $$v
-                            },
-                            expression: "value1"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("vs-input", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required|min:6|max:10",
+                              expression: "'required|min:6|max:10'"
+                            }
+                          ],
                           staticClass: "w-full mb-6",
                           attrs: {
                             type: "password",
-                            "label-placeholder": "Password"
+                            "data-vv-validate-on": "blur",
+                            "label-placeholder": _vm.$t("password")
                           },
                           model: {
-                            value: _vm.value2,
+                            value: _vm.password,
                             callback: function($$v) {
-                              _vm.value2 = $$v
+                              _vm.password = $$v
                             },
-                            expression: "value2"
+                            expression: "password"
                           }
                         }),
                         _vm._v(" "),
                         _c("vs-input", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "min:6|max:10|confirmed:password",
+                              expression: "'min:6|max:10|confirmed:password'"
+                            }
+                          ],
                           staticClass: "w-full mb-8",
                           attrs: {
                             type: "password",
-                            "label-placeholder": "Confirm Password"
+                            "data-vv-validate-on": "blur",
+                            "label-placeholder": _vm.$t("password_confirm")
                           },
                           model: {
-                            value: _vm.value3,
+                            value: _vm.password_confirmation,
                             callback: function($$v) {
-                              _vm.value3 = $$v
+                              _vm.password_confirmation = $$v
                             },
-                            expression: "value3"
+                            expression: "password_confirmation"
                           }
                         }),
                         _vm._v(" "),
@@ -190,15 +240,25 @@ var render = function() {
                               {
                                 staticClass:
                                   "w-full sm:w-auto mb-8 sm:mb-auto mt-3 sm:mt-auto",
-                                attrs: { type: "border", to: "/pages/login" }
+                                attrs: {
+                                  type: "border",
+                                  to: { name: "admin-page-login" }
+                                }
                               },
-                              [_vm._v("Go Back To Login")]
+                              [_vm._v(_vm._s(_vm.$t("go_back_to_login")))]
                             ),
                             _vm._v(" "),
                             _c(
                               "vs-button",
-                              { staticClass: "w-full sm:w-auto" },
-                              [_vm._v("Reset")]
+                              {
+                                staticClass: "w-full sm:w-auto",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.resetPassword()
+                                  }
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.$t("reset")))]
                             )
                           ],
                           1

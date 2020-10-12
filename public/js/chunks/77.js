@@ -1,16 +1,16 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[77],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/forms/form-elements/radio/Radio.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/forms/form-elements/radio/Radio.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ClipboardDirective_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClipboardDirective.vue */ "./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue");
-/* harmony import */ var _ClipboardWithoutDirective_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ClipboardWithoutDirective.vue */ "./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue");
+/* harmony import */ var _RadioDefault_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RadioDefault.vue */ "./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue");
+/* harmony import */ var _RadioColor_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RadioColor.vue */ "./resources/js/src/views/forms/form-elements/radio/RadioColor.vue");
 //
 //
 //
@@ -32,17 +32,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ClipboardDirective: _ClipboardDirective_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    ClipboardWithoutDirective: _ClipboardWithoutDirective_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    RadioDefault: _RadioDefault_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    RadioColor: _RadioColor_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/forms/form-elements/radio/RadioColor.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/forms/form-elements/radio/RadioColor.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -112,42 +112,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      text: 'Copy Me'
+      radios2: 'primary'
     };
-  },
-  methods: {
-    onCopy: function onCopy() {
-      this.$vs.notify({
-        title: 'Success',
-        text: 'Text copied successfully',
-        color: 'success',
-        iconPack: 'feather',
-        position: 'top-center',
-        icon: 'icon-check-circle'
-      });
-    },
-    onError: function onError() {
-      this.$vs.notify({
-        title: 'Failed',
-        text: 'Error in copying text',
-        color: 'danger',
-        iconPack: 'feather',
-        position: 'top-center',
-        icon: 'icon-alert-circle'
-      });
-    }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -209,44 +214,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      text2: 'Copy Me Without Directive'
+      radios1: 'luis'
     };
-  },
-  methods: {
-    copyText: function copyText() {
-      var thisIns = this;
-      this.$copyText(this.text2).then(function () {
-        thisIns.$vs.notify({
-          title: 'Success',
-          text: 'Text copied successfully',
-          color: 'success',
-          iconPack: 'feather',
-          position: 'top-center',
-          icon: 'icon-check-circle'
-        });
-      }, function () {
-        thisIns.$vs.notify({
-          title: 'Failed',
-          text: 'Error in copying text',
-          color: 'danger',
-          iconPack: 'feather',
-          position: 'top-center',
-          icon: 'icon-alert-circle'
-        });
-      });
-    }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue?vue&type=template&id=1703b540&":
-/*!*************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue?vue&type=template&id=1703b540& ***!
-  \*************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/forms/form-elements/radio/Radio.vue?vue&type=template&id=320f311e&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/forms/form-elements/radio/Radio.vue?vue&type=template&id=320f311e& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -260,8 +256,8 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "page-clipboard-demo" } },
-    [_c("clipboard-directive"), _vm._v(" "), _c("clipboard-without-directive")],
+    { attrs: { id: "form-element-radio-demo" } },
+    [_c("radio-default"), _vm._v(" "), _c("radio-color")],
     1
   )
 }
@@ -272,10 +268,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue?vue&type=template&id=8eb74d02&":
-/*!**********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue?vue&type=template&id=8eb74d02& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/forms/form-elements/radio/RadioColor.vue?vue&type=template&id=1dc33d95&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/forms/form-elements/radio/RadioColor.vue?vue&type=template&id=1dc33d95& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -289,58 +285,201 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "vx-card",
-    {
-      attrs: {
-        title: "Using Directive",
-        subtitle: "Use directive on button to copy text",
-        "code-toggler": ""
-      }
-    },
+    { attrs: { title: "Color", "code-toggler": "" } },
     [
-      _c("vs-input", {
-        staticClass: "inline-flex mb-2 mr-2",
-        model: {
-          value: _vm.text,
-          callback: function($$v) {
-            _vm.text = $$v
-          },
-          expression: "text"
-        }
-      }),
-      _vm._v(" "),
       _c(
-        "vs-button",
-        {
-          directives: [
-            {
-              name: "clipboard",
-              rawName: "v-clipboard:copy",
-              value: _vm.text,
-              expression: "text",
-              arg: "copy"
-            },
-            {
-              name: "clipboard",
-              rawName: "v-clipboard:success",
-              value: _vm.onCopy,
-              expression: "onCopy",
-              arg: "success"
-            },
-            {
-              name: "clipboard",
-              rawName: "v-clipboard:error",
-              value: _vm.onError,
-              expression: "onError",
-              arg: "error"
-            }
-          ]
-        },
-        [_vm._v("\n\t\t\tCopy\n\t\t")]
+        "p",
+        [
+          _vm._v("You can change the color with the property "),
+          _c("code", [_vm._v("color")]),
+          _vm._v(". You are able to use the "),
+          _c("router-link", { attrs: { to: "/colors" } }, [
+            _vm._v("Main Colors")
+          ]),
+          _vm._v(" or "),
+          _c("strong", [_vm._v("RGB")]),
+          _vm._v(" and "),
+          _c("strong", [_vm._v("HEX")]),
+          _vm._v(" colors.")
+        ],
+        1
       ),
       _vm._v(" "),
+      _c(
+        "vs-alert",
+        {
+          staticClass: "mt-5",
+          attrs: { icon: "warning", active: "true", color: "warning" }
+        },
+        [
+          _c("span", [
+            _vm._v("Only "),
+            _c("strong", [_vm._v("RGB")]),
+            _vm._v(" and "),
+            _c("strong", [_vm._v("HEX")]),
+            _vm._v(" colors are supported.")
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("ul", { staticClass: "demo-alignment" }, [
+        _c(
+          "li",
+          [
+            _c(
+              "vs-radio",
+              {
+                attrs: { "vs-value": "primary" },
+                model: {
+                  value: _vm.radios2,
+                  callback: function($$v) {
+                    _vm.radios2 = $$v
+                  },
+                  expression: "radios2"
+                }
+              },
+              [_vm._v("Primary")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c(
+              "vs-radio",
+              {
+                attrs: { color: "success", "vs-value": "Success" },
+                model: {
+                  value: _vm.radios2,
+                  callback: function($$v) {
+                    _vm.radios2 = $$v
+                  },
+                  expression: "radios2"
+                }
+              },
+              [_vm._v("Success")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c(
+              "vs-radio",
+              {
+                attrs: { color: "danger", "vs-value": "Danger" },
+                model: {
+                  value: _vm.radios2,
+                  callback: function($$v) {
+                    _vm.radios2 = $$v
+                  },
+                  expression: "radios2"
+                }
+              },
+              [_vm._v("Danger")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c(
+              "vs-radio",
+              {
+                attrs: { color: "warning", "vs-value": "Warning" },
+                model: {
+                  value: _vm.radios2,
+                  callback: function($$v) {
+                    _vm.radios2 = $$v
+                  },
+                  expression: "radios2"
+                }
+              },
+              [_vm._v("Warning")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c(
+              "vs-radio",
+              {
+                attrs: { color: "dark", "vs-value": "Dark" },
+                model: {
+                  value: _vm.radios2,
+                  callback: function($$v) {
+                    _vm.radios2 = $$v
+                  },
+                  expression: "radios2"
+                }
+              },
+              [_vm._v("Dark")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c(
+              "vs-radio",
+              {
+                attrs: { color: "rgb(87, 251, 187)", "vs-value": "RGB" },
+                model: {
+                  value: _vm.radios2,
+                  callback: function($$v) {
+                    _vm.radios2 = $$v
+                  },
+                  expression: "radios2"
+                }
+              },
+              [_vm._v("RGB")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c(
+              "vs-radio",
+              {
+                attrs: { color: "#e48346", "vs-value": "HEX" },
+                model: {
+                  value: _vm.radios2,
+                  callback: function($$v) {
+                    _vm.radios2 = $$v
+                  },
+                  expression: "radios2"
+                }
+              },
+              [_vm._v("HEX")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("li", { staticClass: "op-block" }, [
+          _vm._v("\n                " + _vm._s(_vm.radios2) + "\n            ")
+        ])
+      ]),
+      _vm._v(" "),
       _c("template", { slot: "codeContainer" }, [
         _vm._v(
-          "\n<template>\n    <vs-input v-model=\"text\" class=\"inline-flex\" />\n    <vs-button\n        v-clipboard:copy=\"text\"\n        v-clipboard:success=\"onCopy\"\n        v-clipboard:error=\"onError\">\n        Copy\n    </vs-button>\n</template>\n\n<script>\nexport default {\n    data() {\n        return {\n            text: 'Copy Me!',\n        }\n    },\n    methods: {\n        onCopy() {\n            this.$vs.notify({\n                title: 'Success',\n                text: 'Text copied successfully',\n                color: 'success',\n                iconPack: 'feather',\n                position: 'top-center',\n                icon: 'icon-check-circle'\n            })\n        },\n        onError() {\n            this.$vs.notify({\n                title: 'Failed',\n                text: 'Error in copying text',\n                color: 'danger',\n                iconPack: 'feather',\n                position: 'top-center',\n                icon: 'icon-alert-circle'\n            })\n        },\n    }\n}\n</script>\n\t\t"
+          '\n\n<template>\n    <ul class="centerx">\n      <li>\n        <vs-radio v-model="radios2" vs-value="primary">Primary</vs-radio>\n      </li>\n      <li>\n        <vs-radio color="success" v-model="radios2" vs-value="Success">Success</vs-radio>\n      </li>\n      <li>\n        <vs-radio color="danger" v-model="radios2" vs-value="Danger">Danger</vs-radio>\n      </li>\n      <li>\n        <vs-radio color="warning" v-model="radios2" vs-value="Warning">Warning</vs-radio>\n      </li>\n      <li>\n        <vs-radio color="dark" v-model="radios2" vs-value="Dark">Dark</vs-radio>\n      </li>\n      <li>\n        <vs-radio color="rgb(87, 251, 187)" v-model="radios2" vs-value="RGB">RGB</vs-radio>\n      </li>\n      <li>\n        <vs-radio color="#e48346" v-model="radios2" vs-value="HEX">HEX</vs-radio>\n      </li>\n      <li class="modelx">\n        ' +
+            _vm._s("{{ radios2 }}") +
+            "}\n      </li>\n    </ul>\n</template>\n\n<script>\nexport default {\n  data(){\n    return {\n      radios2:'primary',\n    }\n  }\n}\n</script>\n\n        "
         )
       ])
     ],
@@ -354,10 +493,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue?vue&type=template&id=2d68c667&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue?vue&type=template&id=2d68c667& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue?vue&type=template&id=b76f321a&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue?vue&type=template&id=b76f321a& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -371,31 +510,125 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "vx-card",
-    {
-      attrs: {
-        title: "Without directive",
-        subtitle:
-          "You can copy text without a specific button. Use $copyText to copy text when event got fired.",
-        "code-toggler": ""
-      }
-    },
+    { attrs: { title: "Default", "code-toggler": "" } },
     [
-      _c("vs-input", {
-        staticClass: "inline-flex mb-2 mr-2",
-        model: {
-          value: _vm.text2,
-          callback: function($$v) {
-            _vm.text2 = $$v
-          },
-          expression: "text2"
-        }
-      }),
+      _c("p", [
+        _vm._v("To implement a radio button you just add the "),
+        _c("code", [_vm._v("vs-radio")]),
+        _vm._v(" component and add a "),
+        _c("code", [_vm._v("v-model")])
+      ]),
       _vm._v(" "),
-      _c("vs-button", { on: { click: _vm.copyText } }, [_vm._v("Copy")]),
+      _c(
+        "vs-alert",
+        {
+          staticClass: "mt-5",
+          attrs: { icon: "warning", active: "true", color: "warning" }
+        },
+        [
+          _c("span", [
+            _vm._v("The "),
+            _c("strong", [_vm._v("Radio Button")]),
+            _vm._v(" is always going to replace the current value.")
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("ul", { staticClass: "demo-alignment" }, [
+        _c(
+          "li",
+          [
+            _c(
+              "vs-radio",
+              {
+                attrs: { "vs-value": "luis" },
+                model: {
+                  value: _vm.radios1,
+                  callback: function($$v) {
+                    _vm.radios1 = $$v
+                  },
+                  expression: "radios1"
+                }
+              },
+              [_vm._v("Luis")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c(
+              "vs-radio",
+              {
+                attrs: { "vs-value": "carols" },
+                model: {
+                  value: _vm.radios1,
+                  callback: function($$v) {
+                    _vm.radios1 = $$v
+                  },
+                  expression: "radios1"
+                }
+              },
+              [_vm._v("Carols")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c(
+              "vs-radio",
+              {
+                attrs: { "vs-value": "summer" },
+                model: {
+                  value: _vm.radios1,
+                  callback: function($$v) {
+                    _vm.radios1 = $$v
+                  },
+                  expression: "radios1"
+                }
+              },
+              [_vm._v("Summer")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c(
+              "vs-radio",
+              {
+                attrs: { disabled: "true", "vs-value": "lyon" },
+                model: {
+                  value: _vm.radios1,
+                  callback: function($$v) {
+                    _vm.radios1 = $$v
+                  },
+                  expression: "radios1"
+                }
+              },
+              [_vm._v("Lyon - disabled")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("li", { staticClass: "op-block" }, [
+          _vm._v("\n                " + _vm._s(_vm.radios1) + "\n            ")
+        ])
+      ]),
       _vm._v(" "),
       _c("template", { slot: "codeContainer" }, [
         _vm._v(
-          "\n<template>\n    <vs-input v-model=\"text2\" class=\"inline-flex\" />\n    <vs-button @click=\"copyText\">Copy</vs-button>\n</template>\n\n<script>\nexport default {\n    data() {\n        return {\n            text2: 'Copy Me Without Directive',\n        }\n    },\n    methods: {\n        copyText() {\n            const thisIns = this;\n            this.$copyText(this.text2).then(function() {\n                thisIns.$vs.notify({\n                    title: 'Success',\n                    text: 'Text copied successfully',\n                    color: 'success',\n                    iconPack: 'feather',\n                    position: 'top-center',\n                    icon: 'icon-check-circle'\n                })\n            }, function() {\n                thisIns.$vs.notify({\n                    title: 'Failed',\n                    text: 'Error in copying text',\n                    color: 'danger',\n                    iconPack: 'feather',\n                    position: 'top-center',\n                    icon: 'icon-alert-circle'\n                })\n            })\n        }\n    }\n}\n</script>\n\t\t"
+          '\n\n<ul class="centerx">\n  <li>\n    <vs-radio v-model="radios1" vs-value="luis">Luis</vs-radio>\n  </li>\n  <li>\n    <vs-radio v-model="radios1" vs-value="carols">Carols</vs-radio>\n  </li>\n  <li>\n    <vs-radio v-model="radios1" vs-value="summer">Summer</vs-radio>\n  </li>\n  <li>\n    <vs-radio disabled="true" v-model="radios1" vs-value="lyon">Lyon - disabled</vs-radio>\n  </li>\n  <li class="modelx">\n    ' +
+            _vm._s("{{ radios1 }}") +
+            "\n  </li>\n</ul>\n\n<script>\nexport default {\n  data(){\n    return {\n      radios1:'luis',\n    }\n  }\n}\n</script>\n\n        "
         )
       ])
     ],
@@ -409,17 +642,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue":
-/*!************************************************************************************!*\
-  !*** ./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue ***!
-  \************************************************************************************/
+/***/ "./resources/js/src/views/forms/form-elements/radio/Radio.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/src/views/forms/form-elements/radio/Radio.vue ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Clipboard_vue_vue_type_template_id_1703b540___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Clipboard.vue?vue&type=template&id=1703b540& */ "./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue?vue&type=template&id=1703b540&");
-/* harmony import */ var _Clipboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Clipboard.vue?vue&type=script&lang=js& */ "./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Radio_vue_vue_type_template_id_320f311e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Radio.vue?vue&type=template&id=320f311e& */ "./resources/js/src/views/forms/form-elements/radio/Radio.vue?vue&type=template&id=320f311e&");
+/* harmony import */ var _Radio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Radio.vue?vue&type=script&lang=js& */ "./resources/js/src/views/forms/form-elements/radio/Radio.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -429,9 +662,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Clipboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Clipboard_vue_vue_type_template_id_1703b540___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Clipboard_vue_vue_type_template_id_1703b540___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Radio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Radio_vue_vue_type_template_id_320f311e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Radio_vue_vue_type_template_id_320f311e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -441,54 +674,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/views/components/extra-components/clipboard/Clipboard.vue"
+component.options.__file = "resources/js/src/views/forms/form-elements/radio/Radio.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Clipboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Clipboard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Clipboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue?vue&type=template&id=1703b540&":
-/*!*******************************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue?vue&type=template&id=1703b540& ***!
-  \*******************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Clipboard_vue_vue_type_template_id_1703b540___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Clipboard.vue?vue&type=template&id=1703b540& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue?vue&type=template&id=1703b540&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Clipboard_vue_vue_type_template_id_1703b540___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Clipboard_vue_vue_type_template_id_1703b540___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue":
+/***/ "./resources/js/src/views/forms/form-elements/radio/Radio.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************!*\
-  !*** ./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue ***!
+  !*** ./resources/js/src/views/forms/form-elements/radio/Radio.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ClipboardDirective_vue_vue_type_template_id_8eb74d02___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClipboardDirective.vue?vue&type=template&id=8eb74d02& */ "./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue?vue&type=template&id=8eb74d02&");
-/* harmony import */ var _ClipboardDirective_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ClipboardDirective.vue?vue&type=script&lang=js& */ "./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Radio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Radio.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/forms/form-elements/radio/Radio.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Radio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/src/views/forms/form-elements/radio/Radio.vue?vue&type=template&id=320f311e&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/src/views/forms/form-elements/radio/Radio.vue?vue&type=template&id=320f311e& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Radio_vue_vue_type_template_id_320f311e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Radio.vue?vue&type=template&id=320f311e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/forms/form-elements/radio/Radio.vue?vue&type=template&id=320f311e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Radio_vue_vue_type_template_id_320f311e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Radio_vue_vue_type_template_id_320f311e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/views/forms/form-elements/radio/RadioColor.vue":
+/*!*************************************************************************!*\
+  !*** ./resources/js/src/views/forms/form-elements/radio/RadioColor.vue ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _RadioColor_vue_vue_type_template_id_1dc33d95___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RadioColor.vue?vue&type=template&id=1dc33d95& */ "./resources/js/src/views/forms/form-elements/radio/RadioColor.vue?vue&type=template&id=1dc33d95&");
+/* harmony import */ var _RadioColor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RadioColor.vue?vue&type=script&lang=js& */ "./resources/js/src/views/forms/form-elements/radio/RadioColor.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -498,9 +731,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ClipboardDirective_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ClipboardDirective_vue_vue_type_template_id_8eb74d02___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ClipboardDirective_vue_vue_type_template_id_8eb74d02___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _RadioColor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _RadioColor_vue_vue_type_template_id_1dc33d95___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _RadioColor_vue_vue_type_template_id_1dc33d95___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -510,107 +743,107 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue"
+component.options.__file = "resources/js/src/views/forms/form-elements/radio/RadioColor.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************/
+/***/ "./resources/js/src/views/forms/form-elements/radio/RadioColor.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/src/views/forms/form-elements/radio/RadioColor.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClipboardDirective_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ClipboardDirective.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClipboardDirective_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RadioColor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./RadioColor.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/forms/form-elements/radio/RadioColor.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RadioColor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue?vue&type=template&id=8eb74d02&":
-/*!****************************************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue?vue&type=template&id=8eb74d02& ***!
-  \****************************************************************************************************************************/
+/***/ "./resources/js/src/views/forms/form-elements/radio/RadioColor.vue?vue&type=template&id=1dc33d95&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/src/views/forms/form-elements/radio/RadioColor.vue?vue&type=template&id=1dc33d95& ***!
+  \********************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClipboardDirective_vue_vue_type_template_id_8eb74d02___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ClipboardDirective.vue?vue&type=template&id=8eb74d02& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/extra-components/clipboard/ClipboardDirective.vue?vue&type=template&id=8eb74d02&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClipboardDirective_vue_vue_type_template_id_8eb74d02___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RadioColor_vue_vue_type_template_id_1dc33d95___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./RadioColor.vue?vue&type=template&id=1dc33d95& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/forms/form-elements/radio/RadioColor.vue?vue&type=template&id=1dc33d95&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RadioColor_vue_vue_type_template_id_1dc33d95___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClipboardDirective_vue_vue_type_template_id_8eb74d02___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RadioColor_vue_vue_type_template_id_1dc33d95___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue":
+/***/ "./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue":
+/*!***************************************************************************!*\
+  !*** ./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _RadioDefault_vue_vue_type_template_id_b76f321a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RadioDefault.vue?vue&type=template&id=b76f321a& */ "./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue?vue&type=template&id=b76f321a&");
+/* harmony import */ var _RadioDefault_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RadioDefault.vue?vue&type=script&lang=js& */ "./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _RadioDefault_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _RadioDefault_vue_vue_type_template_id_b76f321a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _RadioDefault_vue_vue_type_template_id_b76f321a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/src/views/forms/form-elements/radio/RadioDefault.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue ***!
+  !*** ./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ClipboardWithoutDirective_vue_vue_type_template_id_2d68c667___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClipboardWithoutDirective.vue?vue&type=template&id=2d68c667& */ "./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue?vue&type=template&id=2d68c667&");
-/* harmony import */ var _ClipboardWithoutDirective_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ClipboardWithoutDirective.vue?vue&type=script&lang=js& */ "./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ClipboardWithoutDirective_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ClipboardWithoutDirective_vue_vue_type_template_id_2d68c667___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ClipboardWithoutDirective_vue_vue_type_template_id_2d68c667___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RadioDefault_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./RadioDefault.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RadioDefault_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClipboardWithoutDirective_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ClipboardWithoutDirective.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClipboardWithoutDirective_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue?vue&type=template&id=2d68c667&":
-/*!***********************************************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue?vue&type=template&id=2d68c667& ***!
-  \***********************************************************************************************************************************/
+/***/ "./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue?vue&type=template&id=b76f321a&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue?vue&type=template&id=b76f321a& ***!
+  \**********************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClipboardWithoutDirective_vue_vue_type_template_id_2d68c667___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ClipboardWithoutDirective.vue?vue&type=template&id=2d68c667& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/extra-components/clipboard/ClipboardWithoutDirective.vue?vue&type=template&id=2d68c667&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClipboardWithoutDirective_vue_vue_type_template_id_2d68c667___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RadioDefault_vue_vue_type_template_id_b76f321a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./RadioDefault.vue?vue&type=template&id=b76f321a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/forms/form-elements/radio/RadioDefault.vue?vue&type=template&id=b76f321a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RadioDefault_vue_vue_type_template_id_b76f321a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClipboardWithoutDirective_vue_vue_type_template_id_2d68c667___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RadioDefault_vue_vue_type_template_id_b76f321a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

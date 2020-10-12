@@ -8,9 +8,9 @@
 ========================================================================================== -->
 
 <template>
-<div id="app" :class="vueAppClasses">
-    <router-view @setAppClasses="setAppClasses" />
-</div>
+    <div id="app" :class="vueAppClasses">
+        <router-view @setAppClasses="setAppClasses" />
+    </div>
 </template>
 
 <script>
@@ -78,7 +78,7 @@ export default {
 
         // Auth0
         try {
-            await this.$auth.renewTokens()
+            // await this.$auth.renewTokens()
         } catch (e) {
             console.error(e)
         }

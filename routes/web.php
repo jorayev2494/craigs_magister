@@ -17,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/{any}', 'ApplicationController')->where('any', '.*');
+Route::get('/admin/{any}', 'ApplicationController')->where('any', '.*');
+Route::get('/{any}', 'ApplicationController@index')->where('any', '.*');

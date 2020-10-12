@@ -1,19 +1,19 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[64],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/Collapse.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/collapse/Collapse.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/Tabs.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/tabs/Tabs.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CollapseDefault_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CollapseDefault.vue */ "./resources/js/src/views/components/vuesax/collapse/CollapseDefault.vue");
-/* harmony import */ var _CollapseAccordion_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CollapseAccordion.vue */ "./resources/js/src/views/components/vuesax/collapse/CollapseAccordion.vue");
-/* harmony import */ var _CollapseType_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CollapseType.vue */ "./resources/js/src/views/components/vuesax/collapse/CollapseType.vue");
-/* harmony import */ var _CollapseOpenHover_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CollapseOpenHover.vue */ "./resources/js/src/views/components/vuesax/collapse/CollapseOpenHover.vue");
-/* harmony import */ var _CollapseChangeArrowIcon_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CollapseChangeArrowIcon.vue */ "./resources/js/src/views/components/vuesax/collapse/CollapseChangeArrowIcon.vue");
+/* harmony import */ var _TabsDefault_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TabsDefault.vue */ "./resources/js/src/views/components/vuesax/tabs/TabsDefault.vue");
+/* harmony import */ var _TabsColor_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TabsColor.vue */ "./resources/js/src/views/components/vuesax/tabs/TabsColor.vue");
+/* harmony import */ var _TabsAlignments_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TabsAlignments.vue */ "./resources/js/src/views/components/vuesax/tabs/TabsAlignments.vue");
+/* harmony import */ var _TabsPosition_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TabsPosition.vue */ "./resources/js/src/views/components/vuesax/tabs/TabsPosition.vue");
+/* harmony import */ var _TabsIcons_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TabsIcons.vue */ "./resources/js/src/views/components/vuesax/tabs/TabsIcons.vue");
 //
 //
 //
@@ -41,41 +41,25 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    CollapseDefault: _CollapseDefault_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    CollapseAccordion: _CollapseAccordion_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    CollapseType: _CollapseType_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    CollapseChangeArrowIcon: _CollapseChangeArrowIcon_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    CollapseOpenHover: _CollapseOpenHover_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    TabsDefault: _TabsDefault_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    TabsColor: _TabsColor_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    TabsAlignments: _TabsAlignments_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    TabsPosition: _TabsPosition_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    TabsIcons: _TabsIcons_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/CollapseType.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/collapse/CollapseType.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/TabsColor.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/tabs/TabsColor.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -179,17 +163,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      type: 'shadow'
+      colorx: 'success'
     };
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/Collapse.vue?vue&type=template&id=17756483&":
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/collapse/Collapse.vue?vue&type=template&id=17756483& ***!
-  \*************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/Tabs.vue?vue&type=template&id=28147c23&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/tabs/Tabs.vue?vue&type=template&id=28147c23& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -203,17 +187,17 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "collapse-demo" } },
+    { attrs: { id: "tabs-demo" } },
     [
-      _c("collapse-default"),
+      _c("tabs-default"),
       _vm._v(" "),
-      _c("collapse-accordion"),
+      _c("tabs-color"),
       _vm._v(" "),
-      _c("collapse-type"),
+      _c("tabs-alignments"),
       _vm._v(" "),
-      _c("collapse-open-hover"),
+      _c("tabs-position"),
       _vm._v(" "),
-      _c("collapse-change-arrow-icon")
+      _c("tabs-icons")
     ],
     1
   )
@@ -225,10 +209,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/CollapseAccordion.vue?vue&type=template&id=72b00a35&":
-/*!**********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/collapse/CollapseAccordion.vue?vue&type=template&id=72b00a35& ***!
-  \**********************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/TabsAlignments.vue?vue&type=template&id=1c8eb973&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/tabs/TabsAlignments.vue?vue&type=template&id=1c8eb973& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -242,75 +226,107 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "vx-card",
-    { attrs: { title: "Accordion", "code-toggler": "" } },
+    { attrs: { title: "Alignments", "code-toggler": "" } },
     [
       _c("p", [
         _vm._v(
-          "You may need to show only one element at a time. For this add "
-        ),
-        _c("code", [_vm._v("accordion")]),
-        _vm._v(" prop to "),
-        _c("code", [_vm._v("vs-collapse")])
+          "Change the alignment of the buttons with the property alignments. Allowed values are:"
+        )
       ]),
+      _vm._v(" "),
+      _c("vx-list", {
+        staticClass: "mt-3",
+        attrs: { list: ["center", "right", "fixed"] }
+      }),
       _vm._v(" "),
       _c(
         "div",
         { staticClass: "mt-5" },
         [
+          _c("h6", { staticClass: "mb-3" }, [_vm._v(" Default ")]),
+          _vm._v(" "),
           _c(
-            "vs-collapse",
-            { attrs: { accordion: "" } },
+            "vs-tabs",
             [
-              _c("vs-collapse-item", [
-                _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                  _vm._v("Collapse item")
-                ]),
-                _vm._v(
-                  "\n\n                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus eros tortor, non fringilla lectus cursus et. Fusce vel nisi ante. Aliquam sit amet lectus pharetra, luctus mi sed, aliquet felis. Mauris a tortor viverra, ornare tellus in, consectetur leo.\n                    "
-                ),
-                _c("br"),
-                _c("br"),
-                _vm._v(
-                  "\n                    Etiam nec nunc nec nisl luctus tincidunt efficitur vitae elit. Vestibulum iaculis nibh commodo neque ultrices lobortis. Cras magna massa, pretium vitae mattis varius, pharetra nec massa. Aliquam ac ex enim. Quisque consequat dui libero, vel blandit lorem porttitor sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam sed lobortis nisl, quis eleifend metus.\n                "
-                )
-              ]),
+              _c("vs-tab", { attrs: { label: "Home" } }, [_c("div")]),
               _vm._v(" "),
-              _c("vs-collapse-item", [
-                _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                  _vm._v("Collapse item 2")
-                ]),
-                _vm._v(
-                  "\n\n                    Nunc auctor et leo vitae suscipit. Nullam aliquet purus scelerisque enim hendrerit tristique. Maecenas tincidunt dui arcu, a aliquet nisl venenatis vitae. Praesent mauris ligula, porta at maximus ac, rutrum vitae sapien. Donec a sapien id erat dapibus dignissim sodales in est. Donec gravida dapibus sapien at sollicitudin. Maecenas iaculis quam ex,\n                    "
-                ),
-                _c("br"),
-                _c("br"),
-                _vm._v(
-                  "\n                    eu aliquam erat sagittis eget. Suspendisse mollis felis nec ipsum vehicula, at posuere libero viverra. Nam hendrerit dapibus eleifend. Aliquam elit nulla, tincidunt pellentesque enim mollis, consectetur placerat enim. Integer condimentum tristique ante et ullamcorper. Mauris placerat pretium ex. Nam aliquam sed tortor sit amet\n                    "
-                ),
-                _c("br"),
-                _c("br"),
-                _vm._v(
-                  "\n                    efficitur. Mauris quis faucibus nulla. Pellentesque egestas non ipsum vel maximus.\n                "
-                )
-              ]),
+              _c("vs-tab", { attrs: { label: "Documents" } }, [_c("div")]),
               _vm._v(" "),
-              _c("vs-collapse-item", { attrs: { disabled: "" } }, [
-                _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                  _vm._v("Collapse item 3 - Disabled")
-                ]),
-                _vm._v(
-                  "\n\n                    Suspendisse aliquet condimentum diam, sed aliquam nisl dapibus et. Aliquam euismod ullamcorper dolor eu\n                "
-                )
-              ]),
+              _c("vs-tab", { attrs: { label: "Contributors" } }, [_c("div")]),
               _vm._v(" "),
-              _c("vs-collapse-item", [
-                _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                  _vm._v("Collapse item 4")
-                ]),
-                _vm._v(
-                  "\n\n                    Suspendisse aliquet condimentum diam, sed aliquam nisl dapibus et. Aliquam euismod ullamcorper dolor eu imperdiet. Nullam eget odio at magna gravida suscipit sed vestibulum odio. Maecenas porta elit vel lectus molestie, eget aliquam enim feugiat. Vivamus nec faucibus nisl. Nunc venenatis tempus finibus.\n                "
-                )
-              ])
+              _c("vs-tab", { attrs: { label: "Ecosystem" } }, [_c("div")])
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "mt-5" },
+        [
+          _c("h6", { staticClass: "mb-3" }, [_vm._v(" Center ")]),
+          _vm._v(" "),
+          _c(
+            "vs-tabs",
+            { attrs: { alignment: "center" } },
+            [
+              _c("vs-tab", { attrs: { label: "Home" } }, [_c("div")]),
+              _vm._v(" "),
+              _c("vs-tab", { attrs: { label: "Documents" } }, [_c("div")]),
+              _vm._v(" "),
+              _c("vs-tab", { attrs: { label: "Contributors" } }, [_c("div")]),
+              _vm._v(" "),
+              _c("vs-tab", { attrs: { label: "Ecosystem" } }, [_c("div")])
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "mt-5" },
+        [
+          _c("h6", { staticClass: "mb-3" }, [_vm._v(" Right ")]),
+          _vm._v(" "),
+          _c(
+            "vs-tabs",
+            { attrs: { alignment: "right" } },
+            [
+              _c("vs-tab", { attrs: { label: "Home" } }, [_c("div")]),
+              _vm._v(" "),
+              _c("vs-tab", { attrs: { label: "Documents" } }, [_c("div")]),
+              _vm._v(" "),
+              _c("vs-tab", { attrs: { label: "Contributors" } }, [_c("div")]),
+              _vm._v(" "),
+              _c("vs-tab", { attrs: { label: "Ecosystem" } }, [_c("div")])
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "mt-5" },
+        [
+          _c("h6", { staticClass: "mb-3" }, [_vm._v(" Fixed ")]),
+          _vm._v(" "),
+          _c(
+            "vs-tabs",
+            { attrs: { alignment: "fixed" } },
+            [
+              _c("vs-tab", { attrs: { label: "Home" } }, [_c("div")]),
+              _vm._v(" "),
+              _c("vs-tab", { attrs: { label: "Documents" } }, [_c("div")]),
+              _vm._v(" "),
+              _c("vs-tab", { attrs: { label: "Contributors" } }, [_c("div")]),
+              _vm._v(" "),
+              _c("vs-tab", { attrs: { label: "Ecosystem" } }, [_c("div")])
             ],
             1
           )
@@ -320,7 +336,7 @@ var render = function() {
       _vm._v(" "),
       _c("template", { slot: "codeContainer" }, [
         _vm._v(
-          '\n<template>\n\n  <vs-collapse accordion>\n\n    <vs-collapse-item>\n      <div slot="header">\n        Collapse item\n      </div>\n      Lorem...metus.\n    </vs-collapse-item>\n\n    <vs-collapse-item>\n      <div slot="header">\n        Collapse item 2\n      </div>\n      Nunc...maximus.\n    </vs-collapse-item>\n\n    <vs-collapse-item disabled>\n      <div slot="header">\n        Collapse item 3 - Disabled\n      </div>\n      Suspendisse...eu\n    </vs-collapse-item>\n\n    <vs-collapse-item>\n      <div slot="header">\n        Collapse item 4\n      </div>\n      Suspendisse...finibus.\n    </vs-collapse-item>\n  </vs-collapse>\n</template>\n        '
+          '\n<template>\n  <div class="mt-5">\n    <h3> Default </h3>\n    <vs-tabs>\n      <vs-tab label="Home">\n        <div></div>\n      </vs-tab>\n      <vs-tab label="Documents">\n        <div></div>\n      </vs-tab>\n      <vs-tab label="Contributors">\n        <div></div>\n      </vs-tab>\n      <vs-tab label="Ecosystem">\n        <div></div>\n      </vs-tab>\n    </vs-tabs>\n  </div>\n\n  <div class="mt-5">\n    <h3> Center </h3>\n    <vs-tabs alignment="center">\n      <vs-tab label="Home">\n        <div></div>\n      </vs-tab>\n      <vs-tab label="Documents">\n        <div></div>\n      </vs-tab>\n      <vs-tab label="Contributors">\n        <div></div>\n      </vs-tab>\n      <vs-tab label="Ecosystem">\n        <div></div>\n      </vs-tab>\n    </vs-tabs>\n  </div>\n\n  <div class="mt-5">\n    <h3> Right </h3>\n    <vs-tabs alignment="right">\n      <vs-tab label="Home">\n        <div></div>\n      </vs-tab>\n      <vs-tab label="Documents">\n        <div></div>\n      </vs-tab>\n      <vs-tab label="Contributors">\n        <div></div>\n      </vs-tab>\n      <vs-tab label="Ecosystem">\n        <div></div>\n      </vs-tab>\n    </vs-tabs>\n  </div>\n\n  <div class="mt-5">\n    <h3> Fixed </h3>\n    <vs-tabs alignment="fixed">\n      <vs-tab label="Home">\n        <div></div>\n      </vs-tab>\n      <vs-tab label="Documents">\n        <div></div>\n      </vs-tab>\n      <vs-tab label="Contributors">\n        <div></div>\n      </vs-tab>\n      <vs-tab label="Ecosystem">\n        <div></div>\n      </vs-tab>\n    </vs-tabs>\n  </div>\n</template>\n        '
         )
       ])
     ],
@@ -334,10 +350,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/CollapseChangeArrowIcon.vue?vue&type=template&id=54e9f302&":
-/*!****************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/collapse/CollapseChangeArrowIcon.vue?vue&type=template&id=54e9f302& ***!
-  \****************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/TabsColor.vue?vue&type=template&id=26dd0db0&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/tabs/TabsColor.vue?vue&type=template&id=26dd0db0& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -351,41 +367,27 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "vx-card",
-    { attrs: { title: "Change Arrow Icon", "code-toggler": "" } },
+    { attrs: { title: "Color", "code-toggler": "" } },
     [
       _c("p", [
-        _vm._v("You can customise the arrow on the component "),
-        _c("code", [_vm._v("vs-collapse-item")]),
-        _vm._v(" by passing the string name of an icon to the "),
-        _c("code", [_vm._v("icon-arrow")]),
-        _vm._v(" property")
+        _vm._v(
+          "You can change the color of the component with the property color, the parameter allows the main colors and HEX or RGB"
+        )
       ]),
       _vm._v(" "),
       _c(
         "vs-alert",
         {
           staticClass: "mt-5",
-          attrs: { color: "primary", icon: "new_releases", active: "true" }
+          attrs: { icon: "warning", active: "true", color: "warning" }
         },
         [
-          _c("p", [
-            _vm._v(
-              "Vuesax uses the Google Material Icons font library by default. For a list of all available icons, visit the official "
-            ),
-            _c(
-              "a",
-              {
-                attrs: { href: "https://material.io/icons/", target: "_blank" }
-              },
-              [_vm._v("Material Icons page")]
-            ),
-            _vm._v(".")
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "FontAwesome and other fonts library are supported. Simply use the icon-pack with fa or fas. You still need to include the Font Awesome icons in your project."
-            )
+          _c("span", [
+            _vm._v("Only "),
+            _c("strong", [_vm._v("RGB")]),
+            _vm._v(" and "),
+            _c("strong", [_vm._v("HEX")]),
+            _vm._v(" colors are supported.")
           ])
         ]
       ),
@@ -395,90 +397,141 @@ var render = function() {
         { staticClass: "mt-5" },
         [
           _c(
-            "vs-collapse",
+            "vs-tabs",
+            { attrs: { color: _vm.colorx } },
             [
               _c(
-                "vs-collapse-item",
+                "vs-tab",
                 {
-                  attrs: {
-                    "icon-pack": "feather",
-                    "icon-arrow": "icon-arrow-down"
+                  attrs: { label: "Success" },
+                  on: {
+                    click: function($event) {
+                      _vm.colorx = "success"
+                    }
                   }
                 },
                 [
-                  _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                    _vm._v("Collapse item")
-                  ]),
-                  _vm._v(
-                    "\n\n                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus eros tortor, non fringilla lectus cursus et. Fusce vel nisi ante. Aliquam sit amet lectus pharetra, luctus mi sed, aliquet felis. Mauris a tortor viverra, ornare tellus in, consectetur leo.\n                    "
-                  ),
-                  _c("br"),
-                  _c("br"),
-                  _vm._v(
-                    "\n                    Etiam nec nunc nec nisl luctus tincidunt efficitur vitae elit. Vestibulum iaculis nibh commodo neque ultrices lobortis. Cras magna massa, pretium vitae mattis varius, pharetra nec massa. Aliquam ac ex enim. Quisque consequat dui libero, vel blandit lorem porttitor sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam sed lobortis nisl, quis eleifend metus.\n                "
-                  )
+                  _c("div", { staticClass: "con-tab-ejemplo" }, [
+                    _c("p", [
+                      _vm._v(
+                        "Muffin cupcake candy chocolate cake gummi bears fruitcake donut dessert pie. Wafer toffee bonbon dragée. Jujubes cotton candy gummies chupa chups. Sweet fruitcake cheesecake biscuit cotton candy. Cookie powder marshmallow donut. Candy cookie sweet roll bear claw sweet roll. Cake tiramisu cotton candy gingerbread cheesecake toffee cake. Cookie liquorice dessert candy canes jelly."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mt-2" }, [
+                      _vm._v(
+                        "Sweet chocolate muffin fruitcake gummies jujubes pie lollipop. Brownie marshmallow caramels gingerbread jelly beans chocolate bar oat cake wafer. Chocolate bar danish icing sweet apple pie jelly-o carrot cake cookie cake. "
+                      )
+                    ])
+                  ])
                 ]
               ),
               _vm._v(" "),
               _c(
-                "vs-collapse-item",
+                "vs-tab",
                 {
-                  attrs: { "icon-pack": "feather", "icon-arrow": "icon-star" }
+                  attrs: { label: "Danger" },
+                  on: {
+                    click: function($event) {
+                      _vm.colorx = "danger"
+                    }
+                  }
                 },
                 [
-                  _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                    _vm._v("Collapse item 2")
-                  ]),
-                  _vm._v(
-                    "\n\n                    Nunc auctor et leo vitae suscipit. Nullam aliquet purus scelerisque enim hendrerit tristique. Maecenas tincidunt dui arcu, a aliquet nisl venenatis vitae. Praesent mauris ligula, porta at maximus ac, rutrum vitae sapien. Donec a sapien id erat dapibus dignissim sodales in est. Donec gravida dapibus sapien at sollicitudin. Maecenas iaculis quam ex,\n                    "
-                  ),
-                  _c("br"),
-                  _c("br"),
-                  _vm._v(
-                    "\n                    eu aliquam erat sagittis eget. Suspendisse mollis felis nec ipsum vehicula, at posuere libero viverra. Nam hendrerit dapibus eleifend. Aliquam elit nulla, tincidunt pellentesque enim mollis, consectetur placerat enim. Integer condimentum tristique ante et ullamcorper. Mauris placerat pretium ex. Nam aliquam sed tortor sit amet\n                    "
-                  ),
-                  _c("br"),
-                  _c("br"),
-                  _vm._v(
-                    "\n                    efficitur. Mauris quis faucibus nulla. Pellentesque egestas non ipsum vel maximus.\n                "
-                  )
+                  _c("div", { staticClass: "con-tab-ejemplo" }, [
+                    _c("p", [
+                      _vm._v(
+                        "Biscuit macaroon sugar plum sesame snaps oat cake halvah fruitcake pudding cotton candy. Cheesecake tart wafer soufflé. Chocolate marzipan donut pie soufflé dragée cheesecake. Gummi bears dessert croissant chocolate jujubes fruitcake. Pie cupcake halvah. "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mt-2" }, [
+                      _vm._v(
+                        "Tiramisu carrot cake marzipan sugar plum powder marzipan sugar plum bonbon powder. Macaroon jujubes ice cream sugar plum lollipop wafer caramels. Cheesecake chocolate tart cake gingerbread fruitcake cake candy jelly-o. Candy cookie lollipop. Wafer lemon drops chocolate cake gummi bears."
+                      )
+                    ])
+                  ])
                 ]
               ),
               _vm._v(" "),
               _c(
-                "vs-collapse-item",
+                "vs-tab",
                 {
-                  attrs: {
-                    disabled: "",
-                    "icon-pack": "feather",
-                    "icon-arrow": "icon-bookmark"
+                  attrs: { label: "Warning" },
+                  on: {
+                    click: function($event) {
+                      _vm.colorx = "warning"
+                    }
                   }
                 },
                 [
-                  _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                    _vm._v("Collapse item 3 - Disabled")
-                  ]),
-                  _vm._v(
-                    "\n\n                    Suspendisse aliquet condimentum diam, sed aliquam nisl dapibus et. Aliquam euismod ullamcorper dolor eu\n                "
-                  )
+                  _c("div", { staticClass: "con-tab-ejemplo" }, [
+                    _c("p", [
+                      _vm._v(
+                        "Brownie ice cream biscuit candy biscuit jujubes. Dessert cake gummies fruitcake chocolate cake sweet roll pastry croissant danish. Pudding chocolate bar sweet roll muffin cake tootsie roll biscuit pastry. Chupa chups dessert donut. Pastry gummi bears tart cookie apple pie sugar plum bear claw."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mt-2" }, [
+                      _vm._v(
+                        "Pudding jelly chocolate powder jelly beans icing candy soufflé sweet. Cotton candy sugar plum fruitcake dessert dragée. Toffee chocolate cake chocolate cake oat cake topping macaroon caramels cotton candy. Ice cream lemon drops lollipop."
+                      )
+                    ])
+                  ])
                 ]
               ),
               _vm._v(" "),
               _c(
-                "vs-collapse-item",
+                "vs-tab",
                 {
-                  attrs: {
-                    "icon-pack": "feather",
-                    "icon-arrow": "icon-chevrons-down"
+                  attrs: { label: "Dark" },
+                  on: {
+                    click: function($event) {
+                      _vm.colorx = "dark"
+                    }
                   }
                 },
                 [
-                  _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                    _vm._v("Collapse item 4")
-                  ]),
-                  _vm._v(
-                    "\n\n                    Suspendisse aliquet condimentum diam, sed aliquam nisl dapibus et. Aliquam euismod ullamcorper dolor eu imperdiet. Nullam eget odio at magna gravida suscipit sed vestibulum odio. Maecenas porta elit vel lectus molestie, eget aliquam enim feugiat. Vivamus nec faucibus nisl. Nunc venenatis tempus finibus.\n                "
-                  )
+                  _c("div", { staticClass: "con-tab-ejemplo" }, [
+                    _c("p", [
+                      _vm._v(
+                        "Chocolate powder candy canes cake gummies tart donut. Gummi bears sesame snaps bonbon apple pie carrot cake croissant marzipan candy canes jelly-o. Marshmallow sweet cake gummies ice cream toffee. Jelly gingerbread jelly beans tart tart. Jelly-o bonbon jelly-o lemon drops sweet roll jujubes cake. Chocolate cake dessert sugar plum."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mt-2" }, [
+                      _vm._v(
+                        "Jelly beans brownie chocolate bar. Jujubes lemon drops apple pie chocolate cake bear claw cupcake chocolate sweet pastry. Pastry carrot cake liquorice. Sesame snaps sugar plum chupa chups tiramisu. Halvah cake chocolate bar jelly beans dragée chocolate halvah pudding pudding."
+                      )
+                    ])
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "vs-tab",
+                {
+                  attrs: { label: "RGB | HEX" },
+                  on: {
+                    click: function($event) {
+                      _vm.colorx = "rgb(16, 233, 179)"
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "con-tab-ejemplo" }, [
+                    _c("p", [
+                      _vm._v(
+                        "Gingerbread tart marzipan sweet lemon drops wafer soufflé apple pie lemon drops. Cake pie apple pie icing fruitcake liquorice dessert sugar plum liquorice. Cake liquorice sugar plum cake croissant sweet. Jelly beans donut dessert. Cake jelly-o marzipan candy canes biscuit jelly toffee. Gummi bears jelly-o pastry macaroon gummies gingerbread liquorice bonbon chocolate cake."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mt-2" }, [
+                      _vm._v(
+                        "Dragée muffin lemon drops. Cake sweet tootsie roll cupcake cake sugar plum lemon drops. Pudding gingerbread sesame snaps sweet. Gummi bears gingerbread pastry cotton candy sesame snaps toffee. Cake chocolate bonbon marzipan jelly-o powder. Cupcake jujubes fruitcake oat cake powder caramels."
+                      )
+                    ])
+                  ])
                 ]
               )
             ],
@@ -490,7 +543,7 @@ var render = function() {
       _vm._v(" "),
       _c("template", { slot: "codeContainer" }, [
         _vm._v(
-          '\n<template>\n\n  <vs-collapse>\n\n    <vs-collapse-item icon-pack="feather" icon-arrow="icon-arrow-down">\n      <div slot="header">\n        Collapse item\n      </div>\n      Lorem....metus.\n    </vs-collapse-item>\n\n    <vs-collapse-item icon-pack="feather" icon-arrow="icon-star">\n      <div slot="header">\n        Collapse item 2\n      </div>\n      Nunc....maximus.\n    </vs-collapse-item>\n\n    <vs-collapse-item disabled icon-pack="feather" icon-arrow="icon-bookmark">\n      <div slot="header">\n        Collapse item 3 - Disabled\n      </div>\n      Suspendisse....eu\n    </vs-collapse-item>\n\n    <vs-collapse-item icon-pack="feather" icon-arrow="icon-chevrons-down">\n      <div slot="header">\n        Collapse item 4\n      </div>\n      Suspendisse....finibus.\n    </vs-collapse-item>\n  </vs-collapse>\n</template>\n        '
+          '\n<template>\n  <vs-tabs :color="colorx">\n    <vs-tab @click="colorx = \'success\'" label="Success">\n      <div class="con-tab-ejemplo">\n      <span>Jujubes ....</span></div>\n    </vs-tab>\n\n    <vs-tab @click="colorx = \'danger\'" label="Danger">\n      <div class="con-tab-ejemplo">\n      <span>Halvah ...</span></div>\n    </vs-tab>\n\n    <vs-tab @click="colorx = \'warning\'" label="Warning">\n      <div class="con-tab-ejemplo">\n      <span>Chocolate ....</span></div>\n    </vs-tab>\n\n    <vs-tab @click="colorx = \'dark\'" label="Dark">\n      <div class="con-tab-ejemplo">\n      <span>Macaroon ....</span></div>\n    </vs-tab>\n\n    <vs-tab @click="colorx = \'rgb(16, 233, 179)\'" label="RGB | HEX">\n      <div class="con-tab-ejemplo">\n      <span>Cupcake ....</span></div>\n    </vs-tab>\n  </vs-tabs>\n</template>\n\n<script>\nexport default {\n  data:()=>({\n    colorx:\'success\'\n  }),\n}\n</script>\n        '
         )
       ])
     ],
@@ -504,10 +557,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/CollapseDefault.vue?vue&type=template&id=502cf024&":
-/*!********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/collapse/CollapseDefault.vue?vue&type=template&id=502cf024& ***!
-  \********************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/TabsDefault.vue?vue&type=template&id=63a2c764&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/tabs/TabsDefault.vue?vue&type=template&id=63a2c764& ***!
+  \************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -524,338 +577,126 @@ var render = function() {
     { attrs: { title: "Default", "code-toggler": "" } },
     [
       _c("p", [
-        _vm._v("To implement the collapse we have the component "),
-        _c("code", [_vm._v("vs-collapse")]),
-        _vm._v(" and as sub-component for each item the component "),
-        _c("code", [_vm._v("vs-collapse-item")])
+        _vm._v("To implement a tabs, use the "),
+        _c("code", [_vm._v("vs-tabs")]),
+        _vm._v(" component. It must include "),
+        _c("code", [_vm._v("vs-tab")]),
+        _vm._v(" child components that represent each tab")
       ]),
       _vm._v(" "),
       _c(
-        "div",
-        { staticClass: "mt-5" },
+        "vs-alert",
+        {
+          staticClass: "mt-5",
+          attrs: { color: "primary", icon: "new_releases", active: "true" }
+        },
         [
-          _c(
-            "vs-collapse",
-            [
-              _c("vs-collapse-item", [
-                _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                  _vm._v("Collapse item")
-                ]),
-                _vm._v(
-                  "\n\n                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus eros tortor, non fringilla lectus cursus et. Fusce vel nisi ante. Aliquam sit amet lectus pharetra, luctus mi sed, aliquet felis. Mauris a tortor viverra, ornare tellus in, consectetur leo.\n                    "
-                ),
-                _c("br"),
-                _c("br"),
-                _vm._v(
-                  "\n                    Etiam nec nunc nec nisl luctus tincidunt efficitur vitae elit. Vestibulum iaculis nibh commodo neque ultrices lobortis. Cras magna massa, pretium vitae mattis varius, pharetra nec massa. Aliquam ac ex enim. Quisque consequat dui libero, vel blandit lorem porttitor sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam sed lobortis nisl, quis eleifend metus.\n                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("vs-collapse-item", [
-                _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                  _vm._v("Collapse item 2")
-                ]),
-                _vm._v(
-                  "\n\n                    Nunc auctor et leo vitae suscipit. Nullam aliquet purus scelerisque enim hendrerit tristique. Maecenas tincidunt dui arcu, a aliquet nisl venenatis vitae. Praesent mauris ligula, porta at maximus ac, rutrum vitae sapien. Donec a sapien id erat dapibus dignissim sodales in est. Donec gravida dapibus sapien at sollicitudin. Maecenas iaculis quam ex,\n                    "
-                ),
-                _c("br"),
-                _c("br"),
-                _vm._v(
-                  "\n                    eu aliquam erat sagittis eget. Suspendisse mollis felis nec ipsum vehicula, at posuere libero viverra. Nam hendrerit dapibus eleifend. Aliquam elit nulla, tincidunt pellentesque enim mollis, consectetur placerat enim. Integer condimentum tristique ante et ullamcorper. Mauris placerat pretium ex. Nam aliquam sed tortor sit amet\n                    "
-                ),
-                _c("br"),
-                _c("br"),
-                _vm._v(
-                  "\n                    efficitur. Mauris quis faucibus nulla. Pellentesque egestas non ipsum vel maximus.\n                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("vs-collapse-item", { attrs: { disabled: "" } }, [
-                _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                  _vm._v("Collapse item 3 - Disabled")
-                ]),
-                _vm._v(
-                  "\n\n                    Suspendisse aliquet condimentum diam, sed aliquam nisl dapibus et. Aliquam euismod ullamcorper dolor eu\n                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("vs-collapse-item", [
-                _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                  _vm._v("Collapse item 4")
-                ]),
-                _vm._v(
-                  "\n\n                    Suspendisse aliquet condimentum diam, sed aliquam nisl dapibus et. Aliquam euismod ullamcorper dolor eu imperdiet. Nullam eget odio at magna gravida suscipit sed vestibulum odio. Maecenas porta elit vel lectus molestie, eget aliquam enim feugiat. Vivamus nec faucibus nisl. Nunc venenatis tempus finibus.\n                "
-                )
-              ])
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("template", { slot: "codeContainer" }, [
-        _vm._v(
-          '\n<template>\n\n  <vs-collapse>\n\n    <vs-collapse-item>\n      <div slot="header">\n        Collapse item\n      </div>\n      Lorem....metus.\n    </vs-collapse-item>\n\n    <vs-collapse-item>\n      <div slot="header">\n        Collapse item 2\n      </div>\n      Nunc....maximus.\n    </vs-collapse-item>\n\n    <vs-collapse-item disabled>\n      <div slot="header">\n        Collapse item 3 - Disabled\n      </div>\n      Suspendisse....eu\n    </vs-collapse-item>\n\n    <vs-collapse-item>\n      <div slot="header">\n        Collapse item 4\n      </div>\n      Suspendisse....finibus.\n    </vs-collapse-item>\n  </vs-collapse>\n</template>\n        '
-        )
-      ])
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/CollapseOpenHover.vue?vue&type=template&id=4ca93e02&":
-/*!**********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/collapse/CollapseOpenHover.vue?vue&type=template&id=4ca93e02& ***!
-  \**********************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "vx-card",
-    { attrs: { title: "Open Hover", "code-toggler": "" } },
-    [
-      _c("p", [
-        _vm._v("If you want the items to open when you hover in, add the "),
-        _c("code", [_vm._v("open-hover")]),
-        _vm._v(" property in the component")
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "mt-5" },
-        [
-          _c(
-            "vs-collapse",
-            { attrs: { "open-hover": "" } },
-            [
-              _c("vs-collapse-item", [
-                _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                  _vm._v("Collapse item")
-                ]),
-                _vm._v(
-                  "\n                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus eros tortor, non fringilla lectus cursus et. Fusce vel nisi ante. Aliquam sit amet lectus pharetra, luctus mi sed, aliquet felis. Mauris a tortor viverra, ornare tellus in, consectetur leo.\n                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("vs-collapse-item", [
-                _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                  _vm._v("Collapse item 2")
-                ]),
-                _vm._v(
-                  "\n                    efficitur. Mauris quis faucibus nulla. Pellentesque egestas non ipsum vel maximus.\n                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("vs-collapse-item", { attrs: { disabled: "" } }, [
-                _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                  _vm._v("Collapse item 3 - Disabled")
-                ]),
-                _vm._v(
-                  "\n                    Suspendisse aliquet condimentum diam, sed aliquam nisl dapibus et. Aliquam euismod ullamcorper dolor eu\n                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("vs-collapse-item", [
-                _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                  _vm._v("Collapse item 4")
-                ]),
-                _vm._v(
-                  "\n\n                    Suspendisse aliquet condimentum diam, sed aliquam nisl dapibus et. Aliquam euismod ullamcorper dolor eu imperdiet. Nullam eget odio at magna gravida suscipit sed vestibulum odio. Maecenas porta elit vel lectus molestie, eget aliquam enim feugiat.\n                "
-                )
-              ])
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("template", { slot: "codeContainer" }, [
-        _vm._v(
-          '\n<template>\n\n  <vs-collapse open-hover>\n\n    <vs-collapse-item>\n      <div slot="header">\n        Collapse item\n      </div>\n      Lorem...metus.\n    </vs-collapse-item>\n\n    <vs-collapse-item>\n      <div slot="header">\n        Collapse item 2\n      </div>\n      Nunc...maximus.\n    </vs-collapse-item>\n\n    <vs-collapse-item disabled>\n      <div slot="header">\n        Collapse item 3 - Disabled\n      </div>\n      Suspendisse...eu\n    </vs-collapse-item>\n\n    <vs-collapse-item>\n      <div slot="header">\n        Collapse item 4\n      </div>\n      Suspendisse...finibus.\n    </vs-collapse-item>\n  </vs-collapse>\n</template>\n        '
-        )
-      ])
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/CollapseType.vue?vue&type=template&id=41f18546&":
-/*!*****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/collapse/CollapseType.vue?vue&type=template&id=41f18546& ***!
-  \*****************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "vx-card",
-    { attrs: { title: "Type", "code-toggler": "" } },
-    [
-      _c("p", [
-        _vm._v("You can easily change the style of the accordion with the "),
-        _c("code", [_vm._v("type")]),
-        _vm._v(" property, the supported styles are:")
-      ]),
-      _vm._v(" "),
-      _c("vs-list", { attrs: { list: ["shadow", "border", "margin"] } }),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "demo-alignment mb-5" },
-        [
-          _c(
-            "vs-radio",
-            {
-              attrs: { "vs-value": "default" },
-              model: {
-                value: _vm.type,
-                callback: function($$v) {
-                  _vm.type = $$v
-                },
-                expression: "type"
-              }
-            },
-            [_vm._v("Default")]
-          ),
-          _vm._v(" "),
-          _c(
-            "vs-radio",
-            {
-              attrs: { "vs-value": "shadow" },
-              model: {
-                value: _vm.type,
-                callback: function($$v) {
-                  _vm.type = $$v
-                },
-                expression: "type"
-              }
-            },
-            [_vm._v("Shadow")]
-          ),
-          _vm._v(" "),
-          _c(
-            "vs-radio",
-            {
-              attrs: { "vs-value": "border" },
-              model: {
-                value: _vm.type,
-                callback: function($$v) {
-                  _vm.type = $$v
-                },
-                expression: "type"
-              }
-            },
-            [_vm._v("Border")]
-          ),
-          _vm._v(" "),
-          _c(
-            "vs-radio",
-            {
-              attrs: { "vs-value": "margin" },
-              model: {
-                value: _vm.type,
-                callback: function($$v) {
-                  _vm.type = $$v
-                },
-                expression: "type"
-              }
-            },
-            [_vm._v("Margin")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "vs-collapse",
-        { attrs: { type: _vm.type, accordion: "" } },
-        [
-          _c("vs-collapse-item", [
-            _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-              _vm._v("Collapse item")
-            ]),
-            _vm._v(
-              "\n\n                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus eros tortor, non fringilla lectus cursus et. Fusce vel nisi ante. Aliquam sit amet lectus pharetra, luctus mi sed, aliquet felis. Mauris a tortor viverra, ornare tellus in, consectetur leo.\n                "
-            ),
-            _c("br"),
-            _c("br"),
-            _vm._v(
-              "\n                Etiam nec nunc nec nisl luctus tincidunt efficitur vitae elit. Vestibulum iaculis nibh commodo neque ultrices lobortis. Cras magna massa, pretium vitae mattis varius, pharetra nec massa. Aliquam ac ex enim. Quisque consequat dui libero, vel blandit lorem porttitor sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam sed lobortis nisl, quis eleifend metus.\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("vs-collapse-item", [
-            _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-              _vm._v("Collapse item 2")
-            ]),
-            _vm._v(
-              "\n\n                Nunc auctor et leo vitae suscipit. Nullam aliquet purus scelerisque enim hendrerit tristique. Maecenas tincidunt dui arcu, a aliquet nisl venenatis vitae. Praesent mauris ligula, porta at maximus ac, rutrum vitae sapien. Donec a sapien id erat dapibus dignissim sodales in est. Donec gravida dapibus sapien at sollicitudin. Maecenas iaculis quam ex,\n                "
-            ),
-            _c("br"),
-            _c("br"),
-            _vm._v(
-              "\n                eu aliquam erat sagittis eget. Suspendisse mollis felis nec ipsum vehicula, at posuere libero viverra. Nam hendrerit dapibus eleifend. Aliquam elit nulla, tincidunt pellentesque enim mollis, consectetur placerat enim. Integer condimentum tristique ante et ullamcorper. Mauris placerat pretium ex. Nam aliquam sed tortor sit amet\n                "
-            ),
-            _c("br"),
-            _c("br"),
-            _vm._v(
-              "\n                efficitur. Mauris quis faucibus nulla. Pellentesque egestas non ipsum vel maximus.\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("vs-collapse-item", { attrs: { disabled: "" } }, [
-            _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-              _vm._v("Collapse item 3 - Disabled")
-            ]),
-            _vm._v(
-              "\n\n                Suspendisse aliquet condimentum diam, sed aliquam nisl dapibus et. Aliquam euismod ullamcorper dolor eu\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("vs-collapse-item", [
-            _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-              _vm._v("Collapse item 4")
-            ]),
-            _vm._v(
-              "\n\n                Suspendisse aliquet condimentum diam, sed aliquam nisl dapibus et. Aliquam euismod ullamcorper dolor eu imperdiet. Nullam eget odio at magna gravida suscipit sed vestibulum odio. Maecenas porta elit vel lectus molestie, eget aliquam enim feugiat. Vivamus nec faucibus nisl. Nunc venenatis tempus finibus.\n            "
-            )
+          _c("p", [
+            _vm._v("For the title of each tab the "),
+            _c("code", [_vm._v("label")]),
+            _vm._v(" property is implemented in the "),
+            _c("code", [_vm._v("vs-tab")]),
+            _vm._v(" component")
           ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "mt-5" },
+        [
+          _c(
+            "vs-tabs",
+            [
+              _c("vs-tab", { attrs: { label: "Home" } }, [
+                _c("div", { staticClass: "tab-text" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Muffin cupcake candy chocolate cake gummi bears fruitcake donut dessert pie. Wafer toffee bonbon dragée. Jujubes cotton candy gummies chupa chups. Sweet fruitcake cheesecake biscuit cotton candy. Cookie powder marshmallow donut. Candy cookie sweet roll bear claw sweet roll. Cake tiramisu cotton candy gingerbread cheesecake toffee cake. Cookie liquorice dessert candy canes jelly."
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "mt-2" }, [
+                    _vm._v(
+                      "Sweet chocolate muffin fruitcake gummies jujubes pie lollipop. Brownie marshmallow caramels gingerbread jelly beans chocolate bar oat cake wafer. Chocolate bar danish icing sweet apple pie jelly-o carrot cake cookie cake. "
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("vs-tab", { attrs: { label: "Service" } }, [
+                _c("div", { staticClass: "tab-text" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Biscuit macaroon sugar plum sesame snaps oat cake halvah fruitcake pudding cotton candy. Cheesecake tart wafer soufflé. Chocolate marzipan donut pie soufflé dragée cheesecake. Gummi bears dessert croissant chocolate jujubes fruitcake. Pie cupcake halvah. "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "mt-2" }, [
+                    _vm._v(
+                      "Tiramisu carrot cake marzipan sugar plum powder marzipan sugar plum bonbon powder. Macaroon jujubes ice cream sugar plum lollipop wafer caramels. Cheesecake chocolate tart cake gingerbread fruitcake cake candy jelly-o. Candy cookie lollipop. Wafer lemon drops chocolate cake gummi bears."
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("vs-tab", { attrs: { label: "login" } }, [
+                _c("div", { staticClass: "tab-text" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Brownie ice cream biscuit candy biscuit jujubes. Dessert cake gummies fruitcake chocolate cake sweet roll pastry croissant danish. Pudding chocolate bar sweet roll muffin cake tootsie roll biscuit pastry. Chupa chups dessert donut. Pastry gummi bears tart cookie apple pie sugar plum bear claw."
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "mt-2" }, [
+                    _vm._v(
+                      "Pudding jelly chocolate powder jelly beans icing candy soufflé sweet. Cotton candy sugar plum fruitcake dessert dragée. Toffee chocolate cake chocolate cake oat cake topping macaroon caramels cotton candy. Ice cream lemon drops lollipop."
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("vs-tab", { attrs: { disabled: "", label: "Disabled" } }, [
+                _c("div", { staticClass: "tab-text" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Chocolate powder candy canes cake gummies tart donut. Gummi bears sesame snaps bonbon apple pie carrot cake croissant marzipan candy canes jelly-o. Marshmallow sweet cake gummies ice cream toffee. Jelly gingerbread jelly beans tart tart. Jelly-o bonbon jelly-o lemon drops sweet roll jujubes cake. Chocolate cake dessert sugar plum."
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "mt-2" }, [
+                    _vm._v(
+                      "Jelly beans brownie chocolate bar. Jujubes lemon drops apple pie chocolate cake bear claw cupcake chocolate sweet pastry. Pastry carrot cake liquorice. Sesame snaps sugar plum chupa chups tiramisu. Halvah cake chocolate bar jelly beans dragée chocolate halvah pudding pudding."
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("vs-tab", { attrs: { label: "Account" } }, [
+                _c("div", { staticClass: "tab-text" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Gingerbread tart marzipan sweet lemon drops wafer soufflé apple pie lemon drops. Cake pie apple pie icing fruitcake liquorice dessert sugar plum liquorice. Cake liquorice sugar plum cake croissant sweet. Jelly beans donut dessert. Cake jelly-o marzipan candy canes biscuit jelly toffee. Gummi bears jelly-o pastry macaroon gummies gingerbread liquorice bonbon chocolate cake."
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "mt-2" }, [
+                    _vm._v(
+                      "Dragée muffin lemon drops. Cake sweet tootsie roll cupcake cake sugar plum lemon drops. Pudding gingerbread sesame snaps sweet. Gummi bears gingerbread pastry cotton candy sesame snaps toffee. Cake chocolate bonbon marzipan jelly-o powder. Cupcake jujubes fruitcake oat cake powder caramels."
+                    )
+                  ])
+                ])
+              ])
+            ],
+            1
+          )
         ],
         1
       ),
       _vm._v(" "),
       _c("template", { slot: "codeContainer" }, [
         _vm._v(
-          '\n<template>\n\n  <div class="demo-alignment">\n    <vs-radio v-model="type" vs-value="default">Default</vs-radio>\n    <vs-radio v-model="type" vs-value="shadow">Shadow</vs-radio>\n    <vs-radio v-model="type" vs-value="border">Border</vs-radio>\n    <vs-radio v-model="type" vs-value="margin">Margin</vs-radio>\n  </div>\n\n  <vs-collapse>\n\n    <vs-collapse-item>\n      <div slot="header">\n        Collapse item\n      </div>\n      Lorem....metus.\n    </vs-collapse-item>\n\n    <vs-collapse-item>\n      <div slot="header">\n        Collapse item 2\n      </div>\n      Nunc....maximus.\n    </vs-collapse-item>\n\n    <vs-collapse-item disabled>\n      <div slot="header">\n        Collapse item 3 - Disabled\n      </div>\n      Suspendisse....eu\n    </vs-collapse-item>\n\n    <vs-collapse-item>\n      <div slot="header">\n        Collapse item 4\n      </div>\n      Suspendisse....finibus.\n    </vs-collapse-item>\n  </vs-collapse>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      type: \'shadow\',\n    }\n  }\n}\n</script>\n        '
+          '\n<vs-tabs>\n  <vs-tab label="Home">\n    <div class="tab-text">\n      <span>Jujubes ....</span>\n    </div>\n  </vs-tab>\n  <vs-tab label="Service">\n    <div class="tab-text">\n      <span>Halvah ...</span>\n    </div>\n  </vs-tab>\n  <vs-tab label="login">\n    <div class="tab-text">\n      <span>Chocolate ....</span>\n    </div>\n  </vs-tab>\n  <vs-tab disabled label="Disabled">\n    <div class="tab-text">\n      <span>Macaroon ....</span>\n    </div>\n  </vs-tab>\n  <vs-tab label="Account">\n    <div class="tab-text">\n      <span>Cupcake ....</span>\n    </div>\n  </vs-tab>\n</vs-tabs>\n        '
         )
       ])
     ],
@@ -869,29 +710,666 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/src/views/components/vuesax/collapse/Collapse.vue":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/TabsIcons.vue?vue&type=template&id=5ef57de7&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/tabs/TabsIcons.vue?vue&type=template&id=5ef57de7& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "vx-card",
+    { attrs: { title: "Icons", "code-toggler": "" } },
+    [
+      _c(
+        "vs-tabs",
+        [
+          _c("vs-tab", {
+            attrs: { label: "Home", "icon-pack": "feather", icon: "icon-home" }
+          }),
+          _vm._v(" "),
+          _c("vs-tab", {
+            attrs: { label: "Box", "icon-pack": "feather", icon: "icon-box" }
+          }),
+          _vm._v(" "),
+          _c("vs-tab", {
+            attrs: { label: "Mail", "icon-pack": "feather", icon: "icon-mail" }
+          }),
+          _vm._v(" "),
+          _c("vs-tab", {
+            attrs: {
+              label: "Heart",
+              "icon-pack": "feather",
+              icon: "icon-heart"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("template", { slot: "codeContainer" }, [
+        _vm._v(
+          '\n<template lang="html">\n  <vs-tabs>\n    <vs-tab label="Home" icon-pack="feather" icon="icon-home">\n    </vs-tab>\n    <vs-tab label="Box" icon-pack="feather" icon="icon-box">\n    </vs-tab>\n    <vs-tab label="Mail" icon-pack="feather" icon="icon-mail">\n    </vs-tab>\n    <vs-tab label="Heart" icon-pack="feather" icon="icon-heart">\n    </vs-tab>\n  </vs-tabs>\n</template>\n    '
+        )
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/TabsPosition.vue?vue&type=template&id=230ef1ec&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/components/vuesax/tabs/TabsPosition.vue?vue&type=template&id=230ef1ec& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "vx-card",
+    { attrs: { title: "Position", "code-toggler": "" } },
+    [
+      _c("p", [
+        _vm._v("You can change the position of the menu with the property "),
+        _c("code", [_vm._v("position")]),
+        _vm._v(" that as a value you can have: "),
+        _c("code", [_vm._v("top")]),
+        _vm._v(", "),
+        _c("code", [_vm._v("right")]),
+        _vm._v(", "),
+        _c("code", [_vm._v("bottom")]),
+        _vm._v(", "),
+        _c("code", [_vm._v("left")])
+      ]),
+      _vm._v(" "),
+      _c(
+        "vs-alert",
+        {
+          staticClass: "mt-5",
+          attrs: { color: "primary", icon: "new_releases", active: "true" }
+        },
+        [
+          _c("p", [
+            _vm._v("For the title of each tab the "),
+            _c("code", [_vm._v("label")]),
+            _vm._v(" property is implemented in the "),
+            _c("code", [_vm._v("vs-tab")]),
+            _vm._v(" component")
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "mt-5" },
+        [
+          _c(
+            "vs-tabs",
+            { attrs: { color: "rgb(32, 201, 192)" } },
+            [
+              _c(
+                "vs-tab",
+                { attrs: { label: "Top" } },
+                [
+                  _c(
+                    "vs-tabs",
+                    { attrs: { color: "rgb(201, 32, 178)" } },
+                    [
+                      _c("vs-tab", { attrs: { label: "Home" } }, [
+                        _c("span", [
+                          _vm._v(
+                            "Jujubes gingerbread cake pastry biscuit jelly-o marshmallow. Chocolate cake jelly marshmallow topping. Danish caramels gummies tootsie roll marshmallow sweet croissant."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-tab", { attrs: { label: "Service" } }, [
+                        _c("span", [
+                          _vm._v(
+                            "Halvah dessert fruitcake toffee oat cake tart oat cake topping jelly beans. Pudding sweet pie pastry lemon drops jujubes danish pie gingerbread. Liquorice powder wafer."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-tab", { attrs: { label: "login" } }, [
+                        _c("span", [
+                          _vm._v(
+                            "Chocolate icing pie danish gummies. Dragée gummies toffee muffin chocolate bar marshmallow. Marshmallow chupa chups muffin cake icing pastry wafer."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "vs-tab",
+                        { attrs: { disabled: "", label: "Disabled" } },
+                        [
+                          _c("span", [
+                            _vm._v(
+                              "Macaroon icing lemon drops jelly-o. Bonbon pie tart chocolate bar pastry. Sugar plum bonbon candy canes dragée toffee dragée toffee."
+                            )
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "vs-tab",
+                { attrs: { label: "Right" } },
+                [
+                  _c(
+                    "vs-tabs",
+                    { attrs: { position: "right", color: "rgb(29, 55, 194)" } },
+                    [
+                      _c("vs-tab", { attrs: { label: "Home" } }, [
+                        _c("span", [
+                          _vm._v(
+                            "Jujubes gingerbread cake pastry biscuit jelly-o marshmallow. Chocolate cake jelly marshmallow topping. Danish caramels gummies tootsie roll marshmallow sweet croissant."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-tab", { attrs: { label: "Service" } }, [
+                        _c("span", [
+                          _vm._v(
+                            "Halvah dessert fruitcake toffee oat cake tart oat cake topping jelly beans. Pudding sweet pie pastry lemon drops jujubes danish pie gingerbread. Liquorice powder wafer."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-tab", { attrs: { label: "login" } }, [
+                        _c("span", [
+                          _vm._v(
+                            "Chocolate icing pie danish gummies. Dragée gummies toffee muffin chocolate bar marshmallow. Marshmallow chupa chups muffin cake icing pastry wafer."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "vs-tab",
+                        { attrs: { disabled: "", label: "Disabled" } },
+                        [
+                          _c("span", [
+                            _vm._v(
+                              "Macaroon icing lemon drops jelly-o. Bonbon pie tart chocolate bar pastry. Sugar plum bonbon candy canes dragée toffee dragée toffee."
+                            )
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "vs-tab",
+                { attrs: { label: "Bottom" } },
+                [
+                  _c(
+                    "vs-tabs",
+                    {
+                      attrs: { position: "bottom", color: "rgb(29, 55, 194)" }
+                    },
+                    [
+                      _c("vs-tab", { attrs: { label: "Home" } }, [
+                        _c("span", [
+                          _vm._v(
+                            "Jujubes gingerbread cake pastry biscuit jelly-o marshmallow. Chocolate cake jelly marshmallow topping. Danish caramels gummies tootsie roll marshmallow sweet croissant."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-tab", { attrs: { label: "Service" } }, [
+                        _c("span", [
+                          _vm._v(
+                            "Halvah dessert fruitcake toffee oat cake tart oat cake topping jelly beans. Pudding sweet pie pastry lemon drops jujubes danish pie gingerbread. Liquorice powder wafer."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-tab", { attrs: { label: "login" } }, [
+                        _c("span", [
+                          _vm._v(
+                            "Chocolate icing pie danish gummies. Dragée gummies toffee muffin chocolate bar marshmallow. Marshmallow chupa chups muffin cake icing pastry wafer."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "vs-tab",
+                        { attrs: { disabled: true, label: "Disabled" } },
+                        [
+                          _c("span", [
+                            _vm._v(
+                              "Macaroon icing lemon drops jelly-o. Bonbon pie tart chocolate bar pastry. Sugar plum bonbon candy canes dragée toffee dragée toffee."
+                            )
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "vs-tab",
+                { attrs: { label: "Left" } },
+                [
+                  _c(
+                    "vs-tabs",
+                    { attrs: { position: "left", color: "danger" } },
+                    [
+                      _c("vs-tab", { attrs: { label: "Home" } }, [
+                        _c("span", [
+                          _vm._v(
+                            "Jujubes gingerbread cake pastry biscuit jelly-o marshmallow. Chocolate cake jelly marshmallow topping. Danish caramels gummies tootsie roll marshmallow sweet croissant."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-tab", { attrs: { label: "Service" } }, [
+                        _c("span", [
+                          _vm._v(
+                            "Halvah dessert fruitcake toffee oat cake tart oat cake topping jelly beans. Pudding sweet pie pastry lemon drops jujubes danish pie gingerbread. Liquorice powder wafer."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-tab", { attrs: { label: "login" } }, [
+                        _c("span", [
+                          _vm._v(
+                            "Chocolate icing pie danish gummies. Dragée gummies toffee muffin chocolate bar marshmallow. Marshmallow chupa chups muffin cake icing pastry wafer."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "vs-tab",
+                        { attrs: { disabled: true, label: "Disabled" } },
+                        [
+                          _c("span", [
+                            _vm._v(
+                              "Macaroon icing lemon drops jelly-o. Bonbon pie tart chocolate bar pastry. Sugar plum bonbon candy canes dragée toffee dragée toffee."
+                            )
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("template", { slot: "codeContainer" }, [
+        _vm._v(
+          '\n<template>\n  <div>\n    <vs-tabs color="rgb(32, 201, 192)">\n\n      <vs-tab label="Top">\n        <!-- top -->\n        <vs-tabs color="rgb(201, 32, 178)">\n          <vs-tab label="Home">\n            <span>Jujubes ....</span>\n          </vs-tab>\n          <vs-tab label="Service">\n            <span>Halvah ....</span>\n          </vs-tab>\n          <vs-tab label="login">\n            <span>Chocolate .....</span>\n          </vs-tab>\n          <vs-tab disabled label="Disabled">\n            <span>Macaroon ......</span>\n          </vs-tab>\n        </vs-tabs>\n      </vs-tab>\n\n      <vs-tab label="Right">\n        <!-- right -->\n        <vs-tabs position="right" color="rgb(29, 55, 194)">\n          <vs-tab label="Home">\n            <span>Jujubes ....</span>\n          </vs-tab>\n          <vs-tab label="Service">\n            <span>Halvah ....</span>\n          </vs-tab>\n          <vs-tab label="login">\n            <span>Chocolate .....</span>\n          </vs-tab>\n          <vs-tab disabled label="Disabled">\n            <span>Macaroon ......</span>\n          </vs-tab>\n        </vs-tabs>\n      </vs-tab>\n\n      <vs-tab label="Bottom">\n        <!-- bottom -->\n        <vs-tabs position="bottom" color="rgb(29, 55, 194)">\n          <vs-tab label="Home">\n            <span>Jujubes ....</span>\n          </vs-tab>\n          <vs-tab label="Service">\n            <span>Halvah ....</span>\n          </vs-tab>\n          <vs-tab label="login">\n            <span>Chocolate .....</span>\n          </vs-tab>\n          <vs-tab :disabled="true" label="Disabled">\n            <div>Macaroon .....</div>\n          </vs-tab>\n        </vs-tabs>\n      </vs-tab>\n\n      <vs-tab label="Left">\n        <!-- left -->\n        <vs-tabs position="left" color="danger">\n          <vs-tab label="Home">\n            <span>Jujubes ....</span>\n          </vs-tab>\n          <vs-tab label="Service">\n            <span>Halvah ....</span>\n          </vs-tab>\n          <vs-tab label="login">\n            <span>Chocolate .....</span>\n          </vs-tab>\n          <vs-tab :disabled="true" label="Disabled">\n            <div>Macaroon .....</div>\n          </vs-tab>\n        </vs-tabs>\n      </vs-tab>\n    </vs-tabs>\n  </div>\n</template>\n        '
+        )
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/views/components/vuesax/tabs/Tabs.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/src/views/components/vuesax/tabs/Tabs.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Tabs_vue_vue_type_template_id_28147c23___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Tabs.vue?vue&type=template&id=28147c23& */ "./resources/js/src/views/components/vuesax/tabs/Tabs.vue?vue&type=template&id=28147c23&");
+/* harmony import */ var _Tabs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Tabs.vue?vue&type=script&lang=js& */ "./resources/js/src/views/components/vuesax/tabs/Tabs.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Tabs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Tabs_vue_vue_type_template_id_28147c23___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Tabs_vue_vue_type_template_id_28147c23___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/src/views/components/vuesax/tabs/Tabs.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/views/components/vuesax/tabs/Tabs.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/src/views/components/vuesax/tabs/Tabs.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Tabs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Tabs.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/Tabs.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Tabs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/src/views/components/vuesax/tabs/Tabs.vue?vue&type=template&id=28147c23&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/src/views/components/vuesax/tabs/Tabs.vue?vue&type=template&id=28147c23& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Tabs_vue_vue_type_template_id_28147c23___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Tabs.vue?vue&type=template&id=28147c23& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/Tabs.vue?vue&type=template&id=28147c23&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Tabs_vue_vue_type_template_id_28147c23___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Tabs_vue_vue_type_template_id_28147c23___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/views/components/vuesax/tabs/TabsAlignments.vue":
+/*!**************************************************************************!*\
+  !*** ./resources/js/src/views/components/vuesax/tabs/TabsAlignments.vue ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TabsAlignments_vue_vue_type_template_id_1c8eb973___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TabsAlignments.vue?vue&type=template&id=1c8eb973& */ "./resources/js/src/views/components/vuesax/tabs/TabsAlignments.vue?vue&type=template&id=1c8eb973&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _TabsAlignments_vue_vue_type_template_id_1c8eb973___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TabsAlignments_vue_vue_type_template_id_1c8eb973___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/src/views/components/vuesax/tabs/TabsAlignments.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/views/components/vuesax/tabs/TabsAlignments.vue?vue&type=template&id=1c8eb973&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/src/views/components/vuesax/tabs/TabsAlignments.vue?vue&type=template&id=1c8eb973& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsAlignments_vue_vue_type_template_id_1c8eb973___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TabsAlignments.vue?vue&type=template&id=1c8eb973& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/TabsAlignments.vue?vue&type=template&id=1c8eb973&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsAlignments_vue_vue_type_template_id_1c8eb973___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsAlignments_vue_vue_type_template_id_1c8eb973___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/views/components/vuesax/tabs/TabsColor.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/src/views/components/vuesax/tabs/TabsColor.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TabsColor_vue_vue_type_template_id_26dd0db0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TabsColor.vue?vue&type=template&id=26dd0db0& */ "./resources/js/src/views/components/vuesax/tabs/TabsColor.vue?vue&type=template&id=26dd0db0&");
+/* harmony import */ var _TabsColor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TabsColor.vue?vue&type=script&lang=js& */ "./resources/js/src/views/components/vuesax/tabs/TabsColor.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TabsColor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TabsColor_vue_vue_type_template_id_26dd0db0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TabsColor_vue_vue_type_template_id_26dd0db0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/src/views/components/vuesax/tabs/TabsColor.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/views/components/vuesax/tabs/TabsColor.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/src/views/components/vuesax/tabs/TabsColor.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsColor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TabsColor.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/TabsColor.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsColor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/src/views/components/vuesax/tabs/TabsColor.vue?vue&type=template&id=26dd0db0&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/src/views/components/vuesax/tabs/TabsColor.vue?vue&type=template&id=26dd0db0& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsColor_vue_vue_type_template_id_26dd0db0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TabsColor.vue?vue&type=template&id=26dd0db0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/TabsColor.vue?vue&type=template&id=26dd0db0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsColor_vue_vue_type_template_id_26dd0db0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsColor_vue_vue_type_template_id_26dd0db0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/views/components/vuesax/tabs/TabsDefault.vue":
+/*!***********************************************************************!*\
+  !*** ./resources/js/src/views/components/vuesax/tabs/TabsDefault.vue ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TabsDefault_vue_vue_type_template_id_63a2c764___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TabsDefault.vue?vue&type=template&id=63a2c764& */ "./resources/js/src/views/components/vuesax/tabs/TabsDefault.vue?vue&type=template&id=63a2c764&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _TabsDefault_vue_vue_type_template_id_63a2c764___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TabsDefault_vue_vue_type_template_id_63a2c764___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/src/views/components/vuesax/tabs/TabsDefault.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/views/components/vuesax/tabs/TabsDefault.vue?vue&type=template&id=63a2c764&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/src/views/components/vuesax/tabs/TabsDefault.vue?vue&type=template&id=63a2c764& ***!
+  \******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsDefault_vue_vue_type_template_id_63a2c764___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TabsDefault.vue?vue&type=template&id=63a2c764& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/TabsDefault.vue?vue&type=template&id=63a2c764&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsDefault_vue_vue_type_template_id_63a2c764___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsDefault_vue_vue_type_template_id_63a2c764___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/views/components/vuesax/tabs/TabsIcons.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/src/views/components/vuesax/tabs/TabsIcons.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TabsIcons_vue_vue_type_template_id_5ef57de7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TabsIcons.vue?vue&type=template&id=5ef57de7& */ "./resources/js/src/views/components/vuesax/tabs/TabsIcons.vue?vue&type=template&id=5ef57de7&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _TabsIcons_vue_vue_type_template_id_5ef57de7___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TabsIcons_vue_vue_type_template_id_5ef57de7___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/src/views/components/vuesax/tabs/TabsIcons.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/views/components/vuesax/tabs/TabsIcons.vue?vue&type=template&id=5ef57de7&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/src/views/components/vuesax/tabs/TabsIcons.vue?vue&type=template&id=5ef57de7& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsIcons_vue_vue_type_template_id_5ef57de7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TabsIcons.vue?vue&type=template&id=5ef57de7& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/TabsIcons.vue?vue&type=template&id=5ef57de7&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsIcons_vue_vue_type_template_id_5ef57de7___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsIcons_vue_vue_type_template_id_5ef57de7___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/views/components/vuesax/tabs/TabsPosition.vue":
 /*!************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/Collapse.vue ***!
+  !*** ./resources/js/src/views/components/vuesax/tabs/TabsPosition.vue ***!
   \************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Collapse_vue_vue_type_template_id_17756483___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Collapse.vue?vue&type=template&id=17756483& */ "./resources/js/src/views/components/vuesax/collapse/Collapse.vue?vue&type=template&id=17756483&");
-/* harmony import */ var _Collapse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Collapse.vue?vue&type=script&lang=js& */ "./resources/js/src/views/components/vuesax/collapse/Collapse.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _TabsPosition_vue_vue_type_template_id_230ef1ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TabsPosition.vue?vue&type=template&id=230ef1ec& */ "./resources/js/src/views/components/vuesax/tabs/TabsPosition.vue?vue&type=template&id=230ef1ec&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-
-
+var script = {}
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Collapse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Collapse_vue_vue_type_template_id_17756483___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Collapse_vue_vue_type_template_id_17756483___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _TabsPosition_vue_vue_type_template_id_230ef1ec___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TabsPosition_vue_vue_type_template_id_230ef1ec___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -901,319 +1379,24 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/views/components/vuesax/collapse/Collapse.vue"
+component.options.__file = "resources/js/src/views/components/vuesax/tabs/TabsPosition.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/views/components/vuesax/collapse/Collapse.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/Collapse.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Collapse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Collapse.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/Collapse.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Collapse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/vuesax/collapse/Collapse.vue?vue&type=template&id=17756483&":
+/***/ "./resources/js/src/views/components/vuesax/tabs/TabsPosition.vue?vue&type=template&id=230ef1ec&":
 /*!*******************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/Collapse.vue?vue&type=template&id=17756483& ***!
+  !*** ./resources/js/src/views/components/vuesax/tabs/TabsPosition.vue?vue&type=template&id=230ef1ec& ***!
   \*******************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Collapse_vue_vue_type_template_id_17756483___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Collapse.vue?vue&type=template&id=17756483& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/Collapse.vue?vue&type=template&id=17756483&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Collapse_vue_vue_type_template_id_17756483___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsPosition_vue_vue_type_template_id_230ef1ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TabsPosition.vue?vue&type=template&id=230ef1ec& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/tabs/TabsPosition.vue?vue&type=template&id=230ef1ec&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsPosition_vue_vue_type_template_id_230ef1ec___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Collapse_vue_vue_type_template_id_17756483___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/vuesax/collapse/CollapseAccordion.vue":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/CollapseAccordion.vue ***!
-  \*********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CollapseAccordion_vue_vue_type_template_id_72b00a35___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CollapseAccordion.vue?vue&type=template&id=72b00a35& */ "./resources/js/src/views/components/vuesax/collapse/CollapseAccordion.vue?vue&type=template&id=72b00a35&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _CollapseAccordion_vue_vue_type_template_id_72b00a35___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CollapseAccordion_vue_vue_type_template_id_72b00a35___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/src/views/components/vuesax/collapse/CollapseAccordion.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/vuesax/collapse/CollapseAccordion.vue?vue&type=template&id=72b00a35&":
-/*!****************************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/CollapseAccordion.vue?vue&type=template&id=72b00a35& ***!
-  \****************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseAccordion_vue_vue_type_template_id_72b00a35___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CollapseAccordion.vue?vue&type=template&id=72b00a35& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/CollapseAccordion.vue?vue&type=template&id=72b00a35&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseAccordion_vue_vue_type_template_id_72b00a35___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseAccordion_vue_vue_type_template_id_72b00a35___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/vuesax/collapse/CollapseChangeArrowIcon.vue":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/CollapseChangeArrowIcon.vue ***!
-  \***************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CollapseChangeArrowIcon_vue_vue_type_template_id_54e9f302___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CollapseChangeArrowIcon.vue?vue&type=template&id=54e9f302& */ "./resources/js/src/views/components/vuesax/collapse/CollapseChangeArrowIcon.vue?vue&type=template&id=54e9f302&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _CollapseChangeArrowIcon_vue_vue_type_template_id_54e9f302___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CollapseChangeArrowIcon_vue_vue_type_template_id_54e9f302___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/src/views/components/vuesax/collapse/CollapseChangeArrowIcon.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/vuesax/collapse/CollapseChangeArrowIcon.vue?vue&type=template&id=54e9f302&":
-/*!**********************************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/CollapseChangeArrowIcon.vue?vue&type=template&id=54e9f302& ***!
-  \**********************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseChangeArrowIcon_vue_vue_type_template_id_54e9f302___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CollapseChangeArrowIcon.vue?vue&type=template&id=54e9f302& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/CollapseChangeArrowIcon.vue?vue&type=template&id=54e9f302&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseChangeArrowIcon_vue_vue_type_template_id_54e9f302___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseChangeArrowIcon_vue_vue_type_template_id_54e9f302___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/vuesax/collapse/CollapseDefault.vue":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/CollapseDefault.vue ***!
-  \*******************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CollapseDefault_vue_vue_type_template_id_502cf024___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CollapseDefault.vue?vue&type=template&id=502cf024& */ "./resources/js/src/views/components/vuesax/collapse/CollapseDefault.vue?vue&type=template&id=502cf024&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _CollapseDefault_vue_vue_type_template_id_502cf024___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CollapseDefault_vue_vue_type_template_id_502cf024___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/src/views/components/vuesax/collapse/CollapseDefault.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/vuesax/collapse/CollapseDefault.vue?vue&type=template&id=502cf024&":
-/*!**************************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/CollapseDefault.vue?vue&type=template&id=502cf024& ***!
-  \**************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseDefault_vue_vue_type_template_id_502cf024___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CollapseDefault.vue?vue&type=template&id=502cf024& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/CollapseDefault.vue?vue&type=template&id=502cf024&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseDefault_vue_vue_type_template_id_502cf024___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseDefault_vue_vue_type_template_id_502cf024___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/vuesax/collapse/CollapseOpenHover.vue":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/CollapseOpenHover.vue ***!
-  \*********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CollapseOpenHover_vue_vue_type_template_id_4ca93e02___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CollapseOpenHover.vue?vue&type=template&id=4ca93e02& */ "./resources/js/src/views/components/vuesax/collapse/CollapseOpenHover.vue?vue&type=template&id=4ca93e02&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _CollapseOpenHover_vue_vue_type_template_id_4ca93e02___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CollapseOpenHover_vue_vue_type_template_id_4ca93e02___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/src/views/components/vuesax/collapse/CollapseOpenHover.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/vuesax/collapse/CollapseOpenHover.vue?vue&type=template&id=4ca93e02&":
-/*!****************************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/CollapseOpenHover.vue?vue&type=template&id=4ca93e02& ***!
-  \****************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseOpenHover_vue_vue_type_template_id_4ca93e02___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CollapseOpenHover.vue?vue&type=template&id=4ca93e02& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/CollapseOpenHover.vue?vue&type=template&id=4ca93e02&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseOpenHover_vue_vue_type_template_id_4ca93e02___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseOpenHover_vue_vue_type_template_id_4ca93e02___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/vuesax/collapse/CollapseType.vue":
-/*!****************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/CollapseType.vue ***!
-  \****************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CollapseType_vue_vue_type_template_id_41f18546___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CollapseType.vue?vue&type=template&id=41f18546& */ "./resources/js/src/views/components/vuesax/collapse/CollapseType.vue?vue&type=template&id=41f18546&");
-/* harmony import */ var _CollapseType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CollapseType.vue?vue&type=script&lang=js& */ "./resources/js/src/views/components/vuesax/collapse/CollapseType.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _CollapseType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CollapseType_vue_vue_type_template_id_41f18546___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CollapseType_vue_vue_type_template_id_41f18546___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/src/views/components/vuesax/collapse/CollapseType.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/vuesax/collapse/CollapseType.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/CollapseType.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CollapseType.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/CollapseType.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/src/views/components/vuesax/collapse/CollapseType.vue?vue&type=template&id=41f18546&":
-/*!***********************************************************************************************************!*\
-  !*** ./resources/js/src/views/components/vuesax/collapse/CollapseType.vue?vue&type=template&id=41f18546& ***!
-  \***********************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseType_vue_vue_type_template_id_41f18546___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CollapseType.vue?vue&type=template&id=41f18546& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/components/vuesax/collapse/CollapseType.vue?vue&type=template&id=41f18546&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseType_vue_vue_type_template_id_41f18546___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseType_vue_vue_type_template_id_41f18546___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabsPosition_vue_vue_type_template_id_230ef1ec___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -50,8 +50,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      value1: ''
+      email: ''
     };
+  },
+  methods: {
+    checkLogin: function checkLogin() {
+      // If user is already logged in notify
+      if (this.$store.state.auth.isUserLoggedIn()) {
+        // Close animation if passed as payload
+        this.$vs.loading.close();
+        this.$vs.notify({
+          title: 'Login Attempt',
+          text: 'You are already logged in!',
+          iconPack: 'feather',
+          icon: 'icon-alert-circle',
+          color: 'warning'
+        });
+        return false;
+      }
+
+      return true;
+    },
+    forgotPassword: function forgotPassword() {
+      if (!this.checkLogin()) return; // Loading
+
+      this.$vs.loading();
+      var payload = {
+        email: this.email,
+        notify: this.$vs.notify,
+        closeAnimation: this.$vs.loading.close,
+        i18n: this.$i18n
+      };
+      this.$store.dispatch('auth/forgotPasswordJWT', payload);
+    }
+  },
+  computed: {
+    validateForm: function validateForm() {
+      return !this.errors.any() && this.email != '' && this.password != '';
+    }
   }
 });
 
@@ -120,28 +156,36 @@ var render = function() {
                       [
                         _c("div", { staticClass: "vx-card__title mb-8" }, [
                           _c("h4", { staticClass: "mb-4" }, [
-                            _vm._v("Recover your password")
+                            _vm._v(_vm._s(_vm.$t("recover_your_password")))
                           ]),
                           _vm._v(" "),
                           _c("p", [
-                            _vm._v(
-                              "Please enter your email address and we'll send you instructions on how to reset your password."
-                            )
+                            _vm._v(_vm._s(_vm.$t("recover_your_password_text")))
                           ])
                         ]),
                         _vm._v(" "),
                         _c("vs-input", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required|email|min:3",
+                              expression: "'required|email|min:3'"
+                            }
+                          ],
                           staticClass: "w-full mb-8",
                           attrs: {
                             type: "email",
-                            "label-placeholder": "Email"
+                            "data-vv-validate-on": "blur",
+                            "label-placeholder": _vm.$t("email"),
+                            "icon-no-border": ""
                           },
                           model: {
-                            value: _vm.value1,
+                            value: _vm.email,
                             callback: function($$v) {
-                              _vm.value1 = $$v
+                              _vm.email = $$v
                             },
-                            expression: "value1"
+                            expression: "email"
                           }
                         }),
                         _vm._v(" "),
@@ -149,18 +193,27 @@ var render = function() {
                           "vs-button",
                           {
                             staticClass: "px-4 w-full md:w-auto",
-                            attrs: { type: "border", to: "/pages/login" }
+                            attrs: {
+                              type: "border",
+                              to: { name: "admin-page-login" }
+                            }
                           },
-                          [_vm._v("Back To Login")]
+                          [_vm._v(_vm._s(_vm.$t("back_to_login")))]
                         ),
                         _vm._v(" "),
                         _c(
                           "vs-button",
                           {
                             staticClass:
-                              "float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0"
+                              "float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0",
+                            attrs: { disablde: !_vm.validateForm },
+                            on: {
+                              click: function($event) {
+                                return _vm.forgotPassword()
+                              }
+                            }
                           },
-                          [_vm._v("Recover Password")]
+                          [_vm._v(_vm._s(_vm.$t("recover_password")))]
                         )
                       ],
                       1
