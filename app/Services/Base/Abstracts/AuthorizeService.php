@@ -17,6 +17,7 @@ use App\Models\PasswordReset;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -117,7 +118,7 @@ abstract class AuthorizeService extends BaseModelService
         }
 
         if (isset($this->authUser->email_confirmed) && !$this->authUser->email_confirmed) {
-            throw new AccessDenyException(IErrorMessages::EMAIL_NOT_CONFIRMED);
+            throw new AccessDenyException(IErrorMessages::EMAIL_NOT_CONFIRMED, Response::HTTP_FORBIDDEN);
         }
 
         // if (isset($this->authUser->blocked) && $this->authUser->blocked) {
