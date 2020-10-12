@@ -38,7 +38,7 @@ const router = new Router({
     // MAIN LAYOUT ROUTES
     // =============================================================================
             path: '/admin',
-            // name: 'admin',
+            name: 'admin-index',
             component: () => import('./layouts/main/Main.vue'),
             children: [
         // =============================================================================

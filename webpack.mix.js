@@ -87,3 +87,13 @@ else{
         }
     });
 }
+
+// #region Client Resources
+mix.js('resources/js/client/main.js', 'public/js');
+mix.copyDirectory('resources/client/css', 'public/client/css');
+mix.copyDirectory('resources/client/js', 'public/client/js');
+mix.copyDirectory('resources/client/fonts', 'public/client/fonts');
+mix.copyDirectory('resources/client/ajax', 'public/client/ajax');
+mix.copyDirectory('resources/client/images', 'public/client/images');
+// #endregion
+

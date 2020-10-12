@@ -1911,27 +1911,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     i18n_locale_img: function i18n_locale_img() {
       var locale = this.$i18n.locale;
-      if (locale == "en") return __webpack_require__(/*! @assets/images/flags/en.png */ "./resources/assets/images/flags/en.png");else if (locale == "pt") return __webpack_require__(/*! @assets/images/flags/pt.png */ "./resources/assets/images/flags/pt.png");else if (locale == "fr") return __webpack_require__(/*! @assets/images/flags/fr.png */ "./resources/assets/images/flags/fr.png");else if (locale == "de") return __webpack_require__(/*! @assets/images/flags/de.png */ "./resources/assets/images/flags/de.png");else return __webpack_require__(/*! @assets/images/flags/en.png */ "./resources/assets/images/flags/en.png");
+      if (locale == "en") return __webpack_require__(/*! @assets/images/flags/en.png */ "./resources/assets/images/flags/en.png");else if (locale == "ru") return __webpack_require__(/*! @assets/images/flags/ru.png */ "./resources/assets/images/flags/ru.png"); // else if (locale == "pt") return require(`@assets/images/flags/pt.png`)
+      // else if (locale == "fr") return require(`@assets/images/flags/fr.png`)
+      // else if (locale == "de") return require(`@assets/images/flags/de.png`)
+      else return __webpack_require__(/*! @assets/images/flags/en.png */ "./resources/assets/images/flags/en.png");
     },
     getCurrentLocaleData: function getCurrentLocaleData() {
       var locale = this.$i18n.locale;
       if (locale == "en") return {
         flag: "us",
         lang: 'English'
-      };else if (locale == "pt") return {
-        flag: "br",
-        lang: 'Portuguese'
-      };else if (locale == "fr") return {
-        flag: "fr",
-        lang: 'French'
-      };else if (locale == "de") return {
-        flag: "de",
-        lang: 'German'
-      };
+      };else if (locale == "ru") return {
+        flag: "ru",
+        lang: 'Russian'
+      }; // else if (locale == "fr") return {
+      //     flag: "fr",
+      //     lang: 'French'
+      // }
+      // else if (locale == "de") return {
+      //     flag: "de",
+      //     lang: 'German'
+      // }
     }
   },
   methods: {
@@ -2118,9 +2133,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
+/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
 //
 //
 //
@@ -2174,8 +2187,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-
+// import firebase from 'firebase/app'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2188,30 +2200,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     logout: function logout() {
-      var _this = this;
-
       // if user is logged in via auth0
-      if (this.$auth.profile) this.$auth.logOut(); // if user is logged in via firebase
+      if (this.$auth.profile) this.$auth.logOut(); // If JWT login
 
-      var firebaseCurrentUser = firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.auth().currentUser;
-
-      if (firebaseCurrentUser) {
-        firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.auth().signOut().then(function () {
-          _this.$router.push('/pages/login')["catch"](function () {});
-        });
-      } // If JWT login
-
-
-      if (localStorage.getItem("accessToken")) {
-        localStorage.removeItem("accessToken");
-        this.$router.push('/pages/login')["catch"](function () {});
+      if (window.localStorage.getItem("accessToken")) {
+        window.localStorage.removeItem("accessToken");
+        window.localStorage.removeItem("userInfo");
+        this.$router.push({
+          name: 'admin-page-login'
+        })["catch"](function () {});
       } // Change role on logout. Same value as initialRole of acj.js
 
 
-      this.$acl.change('admin');
-      localStorage.removeItem('userInfo'); // This is just for demo Purpose. If user clicks on logout -> redirect
-
-      this.$router.push('/pages/login')["catch"](function () {});
+      this.$acl.change('admin'); // window.localStorage.removeItem('userInfo')
+      // This is just for demo Purpose. If user clicks on logout -> redirect
+      // this.$router.push({ name: 'admin-page-login' }).catch(() => {});
     }
   }
 });
@@ -3136,14 +3139,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layouts_components_TheFooter_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/layouts/components/TheFooter.vue */ "./resources/js/src/layouts/components/TheFooter.vue");
 /* harmony import */ var _themeConfig_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/../themeConfig.js */ "./resources/js/themeConfig.js");
 /* harmony import */ var _layouts_components_vertical_nav_menu_VerticalNavMenu_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/layouts/components/vertical-nav-menu/VerticalNavMenu.vue */ "./resources/js/src/layouts/components/vertical-nav-menu/VerticalNavMenu.vue");
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6577,7 +6572,7 @@ var render = function() {
                   alt: "en"
                 }
               }),
-              _vm._v("  English")
+              _vm._v("  English\n        ")
             ]
           ),
           _vm._v(" "),
@@ -6586,7 +6581,7 @@ var render = function() {
             {
               on: {
                 click: function($event) {
-                  return _vm.updateLocale("fr")
+                  return _vm.updateLocale("ru")
                 }
               }
             },
@@ -6594,53 +6589,11 @@ var render = function() {
               _c("img", {
                 staticClass: "h-4 w-5 mr-1",
                 attrs: {
-                  src: __webpack_require__(/*! @assets/images/flags/fr.png */ "./resources/assets/images/flags/fr.png"),
-                  alt: "fr"
+                  src: __webpack_require__(/*! @assets/images/flags/ru.png */ "./resources/assets/images/flags/ru.png"),
+                  alt: "ru"
                 }
               }),
-              _vm._v("  French")
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "vs-dropdown-item",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.updateLocale("de")
-                }
-              }
-            },
-            [
-              _c("img", {
-                staticClass: "h-4 w-5 mr-1",
-                attrs: {
-                  src: __webpack_require__(/*! @assets/images/flags/de.png */ "./resources/assets/images/flags/de.png"),
-                  alt: "de"
-                }
-              }),
-              _vm._v("  German")
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "vs-dropdown-item",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.updateLocale("pt")
-                }
-              }
-            },
-            [
-              _c("img", {
-                staticClass: "h-4 w-5 mr-1",
-                attrs: {
-                  src: __webpack_require__(/*! @assets/images/flags/pt.png */ "./resources/assets/images/flags/pt.png"),
-                  alt: "pt"
-                }
-              }),
-              _vm._v("  Portuguese")
+              _vm._v("  Russian\n        ")
             ]
           )
         ],
@@ -6808,7 +6761,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.activeUserInfo.displayName
+  return _vm.activeUserInfo.first_name
     ? _c(
         "div",
         { staticClass: "the-navbar__user-meta flex items-center" },
@@ -6818,7 +6771,7 @@ var render = function() {
             { staticClass: "text-right leading-tight hidden sm:block" },
             [
               _c("p", { staticClass: "font-semibold" }, [
-                _vm._v(_vm._s(_vm.activeUserInfo.displayName))
+                _vm._v(_vm._s(_vm.activeUserInfo.first_name))
               ]),
               _vm._v(" "),
               _c("small", [_vm._v("Available")])
@@ -6833,13 +6786,13 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "con-img ml-3" }, [
-                _vm.activeUserInfo.photoURL
+                _vm.activeUserInfo.avatar
                   ? _c("img", {
                       key: "onlineImg",
                       staticClass:
                         "rounded-full shadow-md cursor-pointer block",
                       attrs: {
-                        src: _vm.activeUserInfo.photoURL,
+                        src: _vm.activeUserInfo.avatar,
                         alt: "user-img",
                         width: "40",
                         height: "40"
@@ -8140,17 +8093,6 @@ module.exports = "/images/xls.png?cec7307e53ac24771d151806ae183144";
 
 /***/ }),
 
-/***/ "./resources/assets/images/flags/de.png":
-/*!**********************************************!*\
-  !*** ./resources/assets/images/flags/de.png ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/de.png?5d9561246523cf6183928756fd605e25";
-
-/***/ }),
-
 /***/ "./resources/assets/images/flags/en.png":
 /*!**********************************************!*\
   !*** ./resources/assets/images/flags/en.png ***!
@@ -8162,25 +8104,14 @@ module.exports = "/images/en.png?83b065848d14d33c0d10a13e01862f34";
 
 /***/ }),
 
-/***/ "./resources/assets/images/flags/fr.png":
+/***/ "./resources/assets/images/flags/ru.png":
 /*!**********************************************!*\
-  !*** ./resources/assets/images/flags/fr.png ***!
+  !*** ./resources/assets/images/flags/ru.png ***!
   \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/fr.png?134bee9f9d794dc5c0922d1b9bdbb710";
-
-/***/ }),
-
-/***/ "./resources/assets/images/flags/pt.png":
-/*!**********************************************!*\
-  !*** ./resources/assets/images/flags/pt.png ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/pt.png?eba93d33545c78cc67915d9be8323661";
+module.exports = "/images/ru.png?9e31b8fddbf8eaaabc5fd138e0af27e6";
 
 /***/ }),
 
@@ -9739,9 +9670,9 @@ __webpack_require__.r(__webpack_exports__);
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 /* harmony default export */ __webpack_exports__["default"] = ([// {
-//   url: "/apps/email",
+//   url: "/admin/apps/email",
 //   name: "Email",
-//   slug: "email",
+//   slug: "admin-email",
 //   icon: "MailIcon",
 //   i18n: "Email",
 // },
@@ -9753,14 +9684,14 @@ __webpack_require__.r(__webpack_exports__);
   icon: "HomeIcon",
   i18n: "Dashboard",
   submenu: [{
-    url: '/dashboard/analytics',
+    url: '/admin/dashboard/analytics',
     name: "Analytics",
-    slug: "dashboard-analytics",
+    slug: "admin-dashboard-analytics",
     i18n: "Analytics"
   }, {
-    url: '/dashboard/ecommerce',
+    url: '/admin/dashboard/ecommerce',
     name: "eCommerce",
-    slug: "dashboard-ecommerce",
+    slug: "admin-dashboard-ecommerce",
     i18n: "eCommerce"
   }]
 }, {
@@ -9770,25 +9701,25 @@ __webpack_require__.r(__webpack_exports__);
   items: [{
     url: "/apps/email",
     name: "Email",
-    slug: "email",
+    slug: "admin-email",
     icon: "MailIcon",
     i18n: "Email"
   }, {
     url: "/apps/chat",
     name: "Chat",
-    slug: "chat",
+    slug: "admin-chat",
     icon: "MessageSquareIcon",
     i18n: "Chat"
   }, {
     url: "/apps/todo",
     name: "Todo",
-    slug: "todo",
+    slug: "admin-todo",
     icon: "CheckSquareIcon",
     i18n: "Todo"
   }, {
     url: "/apps/calendar/vue-simple-calendar",
     name: "Calendar",
-    slug: "calendar-simple-calendar",
+    slug: "admin-calendar-simple-calendar",
     icon: "CalendarIcon",
     tagColor: "success",
     i18n: "Calendar"
@@ -9798,24 +9729,24 @@ __webpack_require__.r(__webpack_exports__);
     icon: "ShoppingCartIcon",
     i18n: "eCommerce",
     submenu: [{
-      url: '/apps/eCommerce/shop',
+      url: '/admin/apps/eCommerce/shop',
       name: "Shop",
-      slug: "ecommerce-shop",
+      slug: "admin-ecommerce-shop",
       i18n: "Shop"
     }, {
-      url: '/apps/eCommerce/item/',
+      url: '/admin/apps/eCommerce/item/',
       name: "Item Details",
-      slug: "ecommerce-item-detail-view",
+      slug: "admin-ecommerce-item-detail-view",
       i18n: "ItemDetails"
     }, {
-      url: '/apps/eCommerce/wish-list',
+      url: '/admin/apps/eCommerce/wish-list',
       name: "Wish List",
-      slug: "ecommerce-wish-list",
+      slug: "admin-ecommerce-wish-list",
       i18n: "WishList"
     }, {
-      url: '/apps/eCommerce/checkout',
+      url: '/admin/apps/eCommerce/checkout',
       name: "Checkout",
-      slug: "ecommerce-checkout",
+      slug: "admin-ecommerce-checkout",
       i18n: "Checkout"
     }]
   }, {
@@ -9824,19 +9755,19 @@ __webpack_require__.r(__webpack_exports__);
     icon: "UserIcon",
     i18n: "User",
     submenu: [{
-      url: '/apps/user/user-list',
+      url: '/admin/apps/user/user-list',
       name: "List",
-      slug: "app-user-list",
+      slug: "admin-app-user-list",
       i18n: "List"
     }, {
-      url: '/apps/user/user-view/268',
+      url: '/admin/apps/user/user-view/268',
       name: "View",
-      slug: "app-user-view",
+      slug: "admin-app-user-view",
       i18n: "View"
     }, {
-      url: '/apps/user/user-edit/268',
+      url: '/admin/apps/user/user-edit/268',
       name: "Edit",
-      slug: "app-user-edit",
+      slug: "admin-app-user-edit",
       i18n: "Edit"
     }]
   }]
@@ -9852,14 +9783,14 @@ __webpack_require__.r(__webpack_exports__);
     icon: "ListIcon",
     i18n: "DataList",
     submenu: [{
-      url: '/ui-elements/data-list/list-view',
+      url: '/admin/ui-elements/data-list/list-view',
       name: "List View",
-      slug: "data-list-list-view",
+      slug: "admin-data-list-list-view",
       i18n: "ListView"
     }, {
-      url: '/ui-elements/data-list/thumb-view',
+      url: '/admin/ui-elements/data-list/thumb-view',
       name: "Thumb View",
-      slug: "data-list-thumb-view",
+      slug: "admin-data-list-thumb-view",
       i18n: "ThumbView"
     }]
   }, {
@@ -9868,20 +9799,20 @@ __webpack_require__.r(__webpack_exports__);
     icon: "LayoutIcon",
     i18n: "Grid",
     submenu: [{
-      url: '/ui-elements/grid/vuesax',
+      url: '/admin/ui-elements/grid/vuesax',
       name: "Vuesax",
-      slug: "grid-vuesax",
+      slug: "admin-grid-vuesax",
       i18n: "Vuesax"
     }, {
-      url: '/ui-elements/grid/tailwind',
+      url: '/admin/ui-elements/grid/tailwind',
       name: "Tailwind",
-      slug: "grid-tailwind",
+      slug: "admin-grid-tailwind",
       i18n: "Tailwind"
     }]
   }, {
     url: "/ui-elements/colors",
     name: "Colors",
-    slug: "colors",
+    slug: "admin-colors",
     icon: "DropletIcon",
     i18n: "Colors"
   }, {
@@ -9890,29 +9821,29 @@ __webpack_require__.r(__webpack_exports__);
     icon: "CreditCardIcon",
     i18n: "Card",
     submenu: [{
-      url: '/ui-elements/card/basic',
+      url: '/admin/ui-elements/card/basic',
       name: "Basic",
-      slug: "basic-cards",
+      slug: "admin-basic-cards",
       i18n: "Basic"
     }, {
-      url: '/ui-elements/card/statistics',
+      url: '/admin/ui-elements/card/statistics',
       name: "Statistics",
-      slug: "statistics-cards",
+      slug: "admin-statistics-cards",
       i18n: "Statistics"
     }, {
-      url: '/ui-elements/card/analytics',
+      url: '/admin/ui-elements/card/analytics',
       name: "Analytics",
-      slug: "analytics-cards",
+      slug: "admin-analytics-cards",
       i18n: "Analytics"
     }, {
-      url: '/ui-elements/card/card-actions',
+      url: '/admin/ui-elements/card/card-actions',
       name: "Card Actions",
-      slug: "card-actions",
+      slug: "admin-card-actions",
       i18n: "CardActions"
     }, {
-      url: '/ui-elements/card/card-colors',
+      url: '/admin/ui-elements/card/card-colors',
       name: "Card Colors",
-      slug: "card-colors",
+      slug: "admin-card-colors",
       i18n: "CardColors"
     }]
   }, {
@@ -9921,114 +9852,114 @@ __webpack_require__.r(__webpack_exports__);
     icon: "ArchiveIcon",
     i18n: "Components",
     submenu: [{
-      url: '/components/alert',
+      url: '/admin/components/alert',
       name: "Alert",
-      slug: "component-alert",
+      slug: "admin-component-alert",
       i18n: "Alert"
     }, {
-      url: '/components/avatar',
+      url: '/admin/components/avatar',
       name: "Avatar",
-      slug: "component-avatar",
+      slug: "admin-component-avatar",
       i18n: "Avatar"
     }, {
-      url: '/components/breadcrumb',
+      url: '/admin/components/breadcrumb',
       name: "Breadcrumb",
-      slug: "component-breadcrumb",
+      slug: "admin-component-breadcrumb",
       i18n: "Breadcrumb"
     }, {
-      url: '/components/button',
+      url: '/admin/components/button',
       name: "Button",
-      slug: "component-button",
+      slug: "admin-component-button",
       i18n: "Button"
     }, {
-      url: '/components/button-group',
+      url: '/admin/components/button-group',
       name: "Button Group",
-      slug: "component-button-group",
+      slug: "admin-component-button-group",
       i18n: "ButtonGroup"
     }, {
-      url: '/components/chip',
+      url: '/admin/components/chip',
       name: "Chip",
-      slug: "component-chip",
+      slug: "admin-component-chip",
       i18n: "Chip"
     }, {
-      url: '/components/collapse',
+      url: '/admin/components/collapse',
       name: "Collapse",
-      slug: "component-collapse",
+      slug: "admin-component-collapse",
       i18n: "Collapse"
     }, {
-      url: '/components/dialogs',
+      url: '/admin/components/dialogs',
       name: "Dialogs",
-      slug: "component-dialog",
+      slug: "admin-component-dialog",
       i18n: "Dialogs"
     }, {
-      url: '/components/divider',
+      url: '/admin/components/divider',
       name: "Divider",
-      slug: "component-divider",
+      slug: "admin-component-divider",
       i18n: "Divider"
     }, {
-      url: '/components/dropdown',
+      url: '/admin/components/dropdown',
       name: "DropDown",
-      slug: "component-drop-down",
+      slug: "admin-component-drop-down",
       i18n: "DropDown"
     }, {
-      url: '/components/list',
+      url: '/admin/components/list',
       name: "List",
-      slug: "component-list",
+      slug: "admin-component-list",
       i18n: "List"
     }, {
-      url: '/components/loading',
+      url: '/admin/components/loading',
       name: "Loading",
-      slug: "component-loading",
+      slug: "admin-component-loading",
       i18n: "Loading"
     }, {
-      url: '/components/navbar',
+      url: '/admin/components/navbar',
       name: "Navbar",
-      slug: "component-navbar",
+      slug: "admin-component-navbar",
       i18n: "Navbar"
     }, {
-      url: '/components/notifications',
+      url: '/admin/components/notifications',
       name: "Notifications",
-      slug: "component-notifications",
+      slug: "admin-component-notifications",
       i18n: "Notifications"
     }, {
-      url: '/components/pagination',
+      url: '/admin/components/pagination',
       name: "Pagination",
-      slug: "component-pagination",
+      slug: "admin-component-pagination",
       i18n: "Pagination"
     }, {
-      url: '/components/popup',
+      url: '/admin/components/popup',
       name: "Popup",
-      slug: "component-popup",
+      slug: "admin-component-popup",
       i18n: "Popup"
     }, {
-      url: '/components/progress',
+      url: '/admin/components/progress',
       name: "Progress",
-      slug: "component-progress",
+      slug: "admin-component-progress",
       i18n: "Progress"
     }, {
-      url: '/components/sidebar',
+      url: '/admin/components/sidebar',
       name: "Sidebar",
-      slug: "component-sidebar",
+      slug: "admin-component-sidebar",
       i18n: "Sidebar"
     }, {
-      url: '/components/slider',
+      url: '/admin/components/slider',
       name: "Slider",
-      slug: "component-slider",
+      slug: "admin-component-slider",
       i18n: "Slider"
     }, {
-      url: '/components/tabs',
+      url: '/admin/components/tabs',
       name: "Tabs",
-      slug: "component-tabs",
+      slug: "admin-component-tabs",
       i18n: "Tabs"
     }, {
-      url: '/components/tooltip',
+      url: '/admin/components/tooltip',
       name: "Tooltip",
-      slug: "component-tooltip",
+      slug: "admin-component-tooltip",
       i18n: "Tooltip"
     }, {
-      url: '/components/upload',
+      url: '/admin/components/upload',
       name: "Upload",
-      slug: "component-upload",
+      slug: "admin-component-upload",
       i18n: "Upload"
     }]
   }, {
@@ -10037,80 +9968,80 @@ __webpack_require__.r(__webpack_exports__);
     icon: "PlusCircleIcon",
     i18n: "Extensions",
     submenu: [{
-      url: '/extensions/select',
+      url: '/admin/extensions/select',
       name: "Select",
       icon: "PocketIcon",
-      slug: "extra-component-select",
+      slug: "admin-extra-component-select",
       i18n: "Select"
     }, {
-      url: '/extensions/quill-editor',
+      url: '/admin/extensions/quill-editor',
       name: "Quill Editor",
       icon: "EditIcon",
-      slug: "extra-component-quill-editor",
+      slug: "admin-extra-component-quill-editor",
       i18n: "QuillEditor"
     }, {
-      url: '/extensions/drag-and-drop',
+      url: '/admin/extensions/drag-and-drop',
       name: "Drag & Drop",
       icon: "DropletIcon",
-      slug: "extra-component-drag-and-drop",
+      slug: "admin-extra-component-drag-and-drop",
       i18n: "DragAndDrop"
     }, {
-      url: '/extensions/datepicker',
+      url: '/admin/extensions/datepicker',
       name: "Datepicker",
       icon: "CalendarIcon",
-      slug: "extra-component-datepicker",
+      slug: "admin-extra-component-datepicker",
       i18n: "Datepicker"
     }, {
-      url: '/extensions/datetime-picker',
+      url: '/admin/extensions/datetime-picker',
       name: "Datetime Picker",
       icon: "ClockIcon",
-      slug: "extra-component-datetime-picker",
+      slug: "admin-extra-component-datetime-picker",
       i18n: "DatetimePicker"
     }, {
-      url: '/extensions/access-control',
+      url: '/admin/extensions/access-control',
       name: "Access Control",
-      slug: "extra-component-access-control",
+      slug: "admin-extra-component-access-control",
       i18n: "AccessControl"
     }, {
-      url: '/extensions/i18n',
+      url: '/admin/extensions/i18n',
       name: "I18n",
-      slug: "extra-component-i18n",
+      slug: "admin-extra-component-i18n",
       i18n: "I18n"
     }, {
-      url: '/extensions/carousel',
+      url: '/admin/extensions/carousel',
       name: "Carousel",
       icon: "LayersIcon",
-      slug: "extra-component-carousel",
+      slug: "admin-extra-component-carousel",
       i18n: "Carousel"
     }, {
-      url: '/extensions/clipboard',
+      url: '/admin/extensions/clipboard',
       name: "Clipboard",
       icon: "CopyIcon",
-      slug: "extra-component-clipboard",
+      slug: "admin-extra-component-clipboard",
       i18n: "Clipboard"
     }, {
-      url: '/extensions/context-menu',
+      url: '/admin/extensions/context-menu',
       name: "Context Menu",
       icon: "MoreHorizontalIcon",
-      slug: "extra-component-context-menu",
+      slug: "admin-extra-component-context-menu",
       i18n: "ContextMenu"
     }, {
-      url: '/extensions/star-ratings',
+      url: '/admin/extensions/star-ratings',
       name: "Star Ratings",
       icon: "StarIcon",
-      slug: "extra-component-star-ratings",
+      slug: "admin-extra-component-star-ratings",
       i18n: "StarRatings"
     }, {
-      url: '/extensions/autocomplete',
+      url: '/admin/extensions/autocomplete',
       name: "Autocomplete",
       icon: "Edit3Icon",
-      slug: "extra-component-autocomplete",
+      slug: "admin-extra-component-autocomplete",
       i18n: "Autocomplete"
     }, {
-      url: '/extensions/tree',
+      url: '/admin/extensions/tree',
       name: "Tree",
       icon: "GitPullRequestIcon",
-      slug: "extra-component-tree",
+      slug: "admin-extra-component-tree",
       i18n: "Tree"
     }, // {
     //   name: "Import/Export",
@@ -10122,19 +10053,19 @@ __webpack_require__.r(__webpack_exports__);
       url: "/import-export/import",
       name: "Import",
       icon: "HomeIcon",
-      slug: "import",
+      slug: "admin-import",
       i18n: "Import"
     }, {
       url: "/import-export/export",
       name: "Export",
       icon: "HomeIcon",
-      slug: "export",
+      slug: "admin-export",
       i18n: "Export"
     }, {
       url: "/import-export/export-selected",
       name: "Export Selected",
       icon: "HomeIcon",
-      slug: "export-selected",
+      slug: "admin-export-selected",
       i18n: "ExportSelected"
     }]
   }]
@@ -10148,76 +10079,76 @@ __webpack_require__.r(__webpack_exports__);
     icon: "CopyIcon",
     i18n: "FormElements",
     submenu: [// {
-    //  url: '/forms/form-elements/select',
+    //  url: '/admin/forms/form-elements/select',
     //  name: "Select",
-    //  slug: "form-element-select",
+    //  slug: "admin-form-element-select",
     //  i18n: "Select",
     // },
     {
-      url: '/forms/form-elements/switch',
+      url: '/admin/forms/form-elements/switch',
       name: "Switch",
-      slug: "form-element-switch",
+      slug: "admin-form-element-switch",
       i18n: "Switch"
     }, {
-      url: '/forms/form-elements/checkbox',
+      url: '/admin/forms/form-elements/checkbox',
       name: "Checkbox",
-      slug: "form-element-checkbox",
+      slug: "admin-form-element-checkbox",
       i18n: "Checkbox"
     }, {
-      url: '/forms/form-elements/radio',
+      url: '/admin/forms/form-elements/radio',
       name: "Radio",
-      slug: "form-element-radio",
+      slug: "admin-form-element-radio",
       i18n: "Radio"
     }, {
-      url: '/forms/form-elements/input',
+      url: '/admin/forms/form-elements/input',
       name: "Input",
-      slug: "form-element-input",
+      slug: "admin-form-element-input",
       i18n: "Input"
     }, {
-      url: '/forms/form-elements/number-input',
+      url: '/admin/forms/form-elements/number-input',
       name: "Number Input",
-      slug: "form-element-number-input",
+      slug: "admin-form-element-number-input",
       i18n: "NumberInput"
     }, {
-      url: '/forms/form-elements/textarea',
+      url: '/admin/forms/form-elements/textarea',
       name: "Textarea",
-      slug: "form-element-textarea",
+      slug: "admin-form-element-textarea",
       i18n: "Textarea"
     }]
   }, {
-    url: '/forms/form-layouts',
+    url: '/admin/forms/form-layouts',
     name: "Form Layouts",
     icon: "PackageIcon",
-    slug: "forms-form-layouts",
+    slug: "admin-forms-form-layouts",
     i18n: "FormLayouts"
   }, {
-    url: '/forms/form-wizard',
+    url: '/admin/forms/form-wizard',
     name: "Form Wizard",
     icon: "PackageIcon",
-    slug: "extra-component-form-wizard",
+    slug: "admin-extra-component-form-wizard",
     i18n: "FormWizard"
   }, {
-    url: '/forms/form-validation',
+    url: '/admin/forms/form-validation',
     name: "Form Validation",
     icon: "CheckCircleIcon",
-    slug: "extra-component-form-validation",
+    slug: "admin-extra-component-form-validation",
     i18n: "FormValidation"
   }, {
-    url: '/forms/form-input-group',
+    url: '/admin/forms/form-input-group',
     name: "Form Input Group",
     icon: "MenuIcon",
-    slug: "extra-component-form-input-group",
+    slug: "admin-extra-component-form-input-group",
     i18n: "FormInputGroup"
   }, {
     url: "/ui-elements/table",
     name: "Table",
-    slug: "table",
+    slug: "admin-table",
     icon: "GridIcon",
     i18n: "Table"
   }, {
     url: "/ui-elements/ag-grid-table",
     name: "agGrid Table",
-    slug: "ag-grid-table",
+    slug: "admin-ag-grid-table",
     icon: "GridIcon",
     i18n: "agGridTable"
   }]
@@ -10226,37 +10157,37 @@ __webpack_require__.r(__webpack_exports__);
   icon: "FileIcon",
   i18n: "Pages",
   items: [{
-    url: '/pages/profile',
+    url: '/admin/pages/profile',
     slug: 'page-profile',
     name: "Profile",
     icon: "UserIcon",
     i18n: "Profile"
   }, {
-    url: '/pages/user-settings',
+    url: '/admin/pages/user-settings',
     slug: 'page-user-settings',
     name: "User Settings",
     icon: "SettingsIcon",
     i18n: "UserSettings"
   }, {
-    url: '/pages/faq',
+    url: '/admin/pages/faq',
     slug: 'page-faq',
     name: "FAQ",
     icon: "HelpCircleIcon",
     i18n: "FAQ"
   }, {
-    url: '/pages/knowledge-base',
+    url: '/admin/pages/knowledge-base',
     slug: 'page-knowledge-base',
     name: "Knowledge Base",
     icon: "InfoIcon",
     i18n: "KnowledgeBase"
   }, {
-    url: '/pages/search',
+    url: '/admin/pages/search',
     slug: 'page-search',
     name: "Search",
     icon: "SearchIcon",
     i18n: "Search"
   }, {
-    url: '/pages/invoice',
+    url: '/admin/pages/invoice',
     slug: 'page-invoice',
     name: "Invoice",
     icon: "InfoIcon",
@@ -10267,33 +10198,33 @@ __webpack_require__.r(__webpack_exports__);
     icon: "PieChartIcon",
     i18n: "Authentication",
     submenu: [{
-      url: '/pages/login',
+      url: '/admin/pages/login',
       name: "Login",
-      slug: "pages-login",
+      slug: "admin-pages-login",
       i18n: "Login",
       target: '_blank'
     }, {
-      url: '/pages/register',
+      url: '/admin/pages/register',
       name: "Register",
-      slug: "pages-register",
+      slug: "admin-pages-register",
       i18n: "Register",
       target: '_blank'
     }, {
-      url: '/pages/forgot-password',
+      url: '/admin/pages/forgot-password',
       name: "Forgot Password",
-      slug: "pages-forgot-password",
+      slug: "admin-pages-forgot-password",
       i18n: "ForgotPassword",
       target: '_blank'
     }, {
-      url: '/pages/reset-password',
+      url: '/admin/pages/reset-password',
       name: "Reset Password",
-      slug: "pages-reset-password",
+      slug: "admin-pages-reset-password",
       i18n: "ResetPassword",
       target: '_blank'
     }, {
-      url: '/pages/lock-screen',
+      url: '/admin/pages/lock-screen',
       name: "Lock Screen",
-      slug: "pages-lock-screen",
+      slug: "admin-pages-lock-screen",
       i18n: "LockScreen",
       target: '_blank'
     }]
@@ -10303,36 +10234,36 @@ __webpack_require__.r(__webpack_exports__);
     icon: "CoffeeIcon",
     i18n: "Miscellaneous",
     submenu: [{
-      url: '/pages/not-authorized',
+      url: '/admin/pages/not-authorized',
       name: "Not Authorized",
-      slug: "page-not-authorized",
+      slug: "admin-page-not-authorized",
       icon: "XCircleIcon",
       i18n: "NotAuthorized",
       target: '_blank'
     }, {
-      url: '/pages/maintenance',
+      url: '/admin/pages/maintenance',
       name: "Maintenance",
-      slug: "page-maintenance",
+      slug: "admin-page-maintenance",
       icon: "AnchorIcon",
       i18n: "Maintenance",
       target: '_blank'
     }, {
-      url: '/pages/comingsoon',
+      url: '/admin/pages/comingsoon',
       slug: 'page-coming-soon',
       name: "Coming Soon",
       icon: "ClockIcon",
       i18n: "ComingSoon",
       target: '_blank'
     }, {
-      url: '/pages/error-404',
+      url: '/admin/pages/error-404',
       name: "404",
-      slug: "page-error-404",
+      slug: "admin-page-error-404",
       i18n: "404",
       target: '_blank'
     }, {
-      url: '/pages/error-500',
+      url: '/admin/pages/error-500',
       name: "500",
-      slug: "page-error-500",
+      slug: "admin-page-error-500",
       i18n: "500",
       target: '_blank'
     }]
@@ -10349,26 +10280,26 @@ __webpack_require__.r(__webpack_exports__);
     tagColor: 'success',
     i18n: "Charts",
     submenu: [{
-      url: '/charts-and-maps/charts/apex-charts',
+      url: '/admin/charts-and-maps/charts/apex-charts',
       name: "Apex Charts",
-      slug: "extra-component-charts-apex-charts",
+      slug: "admin-extra-component-charts-apex-charts",
       i18n: "ApexCharts"
     }, {
-      url: '/charts-and-maps/charts/chartjs',
+      url: '/admin/charts-and-maps/charts/chartjs',
       name: "chartjs",
-      slug: "extra-component-charts-chartjs",
+      slug: "admin-extra-component-charts-chartjs",
       i18n: "chartjs"
     }, {
-      url: '/charts-and-maps/charts/echarts',
+      url: '/admin/charts-and-maps/charts/echarts',
       name: "echarts",
-      slug: "extra-component-charts-echarts",
+      slug: "admin-extra-component-charts-echarts",
       i18n: "echarts"
     }]
   }, {
-    url: '/charts-and-maps/maps/google-map',
+    url: '/admin/charts-and-maps/maps/google-map',
     name: "Google Map",
     icon: "MapIcon",
-    slug: "extra-component-maps-google-map",
+    slug: "admin-extra-component-maps-google-map",
     i18n: "GoogleMap"
   }]
 }, {
@@ -10413,14 +10344,14 @@ __webpack_require__.r(__webpack_exports__);
       url: 'https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/documentation/',
       name: "Documentation",
       icon: "BookOpenIcon",
-      slug: "external",
+      slug: "admin-external",
       i18n: "Documentation",
       target: "_blank"
     }, {
       url: 'https://pixinvent.ticksy.com/',
       name: "Raise Support",
       icon: "LifeBuoyIcon",
-      slug: "external",
+      slug: "admin-external",
       i18n: "RaiseSupport",
       target: "_blank"
     }]

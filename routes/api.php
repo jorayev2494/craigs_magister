@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/', ['uses' => 'UserController@index', 'as' => 'index']);
 
-Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.'], static function() {
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.'], static function() : void {
     Route::post('/login', ['uses' => 'AuthController@login', 'as' => 'login']);
     Route::post('/register', ['uses' => 'AuthController@register', 'as' => 'register']);
     Route::post('/logout', ['uses' => 'AuthController@logout', 'as' => 'logout']) ;
