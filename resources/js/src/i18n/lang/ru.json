@@ -166,6 +166,10 @@
     "reset_password": "Сброс пароля",
     "please_enter_your_new_password": "Пожалуйста, введите ваш новый пароль.",
     "go_back_to_login": "Вернуться к логину",
-    "reset": "Сброс"
+    "reset": "Сброс",
+    "countries": {
+        "barbados": "Барбадос",
+        "turkmenistan": "Туркменистан"
+    }
 
 }

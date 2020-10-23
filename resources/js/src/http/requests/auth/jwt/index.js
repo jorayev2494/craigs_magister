@@ -16,7 +16,8 @@ function addSubscriber(callback) {
 export default {
     init() {
         axios.interceptors.response.use(function (response) {
-            return response
+            console.log('Axios: ', response);
+            return response;
         }, function (error) {
             // const { config, response: { status } } = error
             const { config, response } = error
@@ -26,8 +27,7 @@ export default {
             if (response && response.status === 401) {
                 if (!isAlreadyFetchingAccessToken) {
                     isAlreadyFetchingAccessToken = true
-                    store.dispatch("auth/fetchAccessToken")
-                        .then((access_token) => {
+                    store.dispatch("auth/fetchAccessToken").then((access_token) => {
                             isAlreadyFetchingAccessToken = false
                             onAccessTokenFetched(access_token)
                         })
@@ -65,7 +65,7 @@ export default {
 
     refreshToken() {
         return axios.post("/api/auth/refresh-token", {
-            accessToken: localStorage.getItem("accessToKen")
+            accessToken: window.localStorage.getItem("accessToKen")
         })
     },
 

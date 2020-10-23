@@ -21,7 +21,7 @@ import PT from '@/i18n/lang/pt.json';
 Vue.use(VueI18n)
 
 export default new VueI18n({
-  locale: 'ru', // set default locale
+  locale: 'en', // set default locale
   fallbackLocale: 'en',
   // messages: i18nData,
   messages: {

@@ -29,3 +29,9 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.'], stati
     });
 });
 
+Route::group(['prefix' => 'managements', 'middleware' => 'auth:admin', 'as' => 'management.'], static function() {
+    Route::apiResources([
+        '/announcements' => 'Managements\Announcements\AnnouncementController',
+        '/users' => 'Managements\UserController',
+    ]);
+});

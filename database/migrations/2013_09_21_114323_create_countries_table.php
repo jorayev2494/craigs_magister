@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CrateEmailConfirmationsTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CrateEmailConfirmationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('email_confirmations', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->id();
 
-            $table->string('email', 50)->unique()->index();
-            $table->string('token', 255);
+            $table->string('slug', 255);
+            $table->integer('code')->unsigned();
+            $table->string('iso_code', 50);
+            $table->dateTime('unblock_date')->nullable();
 
             $table->timestamps();
         });
@@ -30,6 +32,6 @@ class CrateEmailConfirmationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('email_confirmations');
+        Schema::dropIfExists('countries');
     }
 }

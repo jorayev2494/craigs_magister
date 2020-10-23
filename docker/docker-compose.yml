@@ -32,16 +32,16 @@ services:
             - laravel-${COMPOSE_PROJECT_NAME}
 
     # Node Service
-    node:
-        build: 
-            context: ./node
-            dockerfile: dockerfile
-        container_name: ${COMPOSE_PROJECT_NAME}_node
-        tty: true
-        volumes: 
-            - ../:/var/project
-        networks: 
-            - laravel-${COMPOSE_PROJECT_NAME}
+    # node:
+    #     build: 
+    #         context: ./node
+    #         dockerfile: dockerfile
+    #     container_name: ${COMPOSE_PROJECT_NAME}_node
+    #     tty: true
+    #     volumes: 
+    #         - ../:/var/project
+    #     networks: 
+    #         - laravel-${COMPOSE_PROJECT_NAME}
 
     # MySQL Service
     mysql:
@@ -56,11 +56,11 @@ services:
         environment: 
             - MYSQL_DATABASE=laravel-${COMPOSE_PROJECT_NAME}
             - MYSQL_ROOT_PASSWORD=laravel
-        # command: [
-        #         'mysqld', 
-        #         '--character-set-server=utf8mb4',
-        #         '--collation-server=utf8mb4_unicode_ci'
-        #     ]
+        command: [
+                'mysqld', 
+                '--character-set-server=utf8mb4',
+                '--collation-server=utf8mb4_unicode_ci'
+            ]
             # - mysqld \ 
             #   --character-set-server=utf8mb4 \ 
             #   --collation-server=utf8mb4_unicode_ci

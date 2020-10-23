@@ -40,6 +40,10 @@ const router = new Router({
             path: '/admin',
             name: 'admin-index',
             component: () => import('./layouts/main/Main.vue'),
+            meta: {
+                authRequired: true,
+                rule: 'editor',
+            },
             children: [
         // =============================================================================
         // Theme Routes
@@ -47,13 +51,18 @@ const router = new Router({
                 {
                     path: '/admin',
                     name: 'admin-dashboard',
-                    redirect: '/admin/dashboard/analytics'
+                    redirect: '/admin/dashboard/analytics',
+                    meta: {
+                        authRequired: true,
+                        rule: 'editor',
+                    }
                 },
                 {
                     path: '/admin/dashboard/analytics',
                     name: 'admin-dashboard-analytics',
                     component: () => import('./views/DashboardAnalytics.vue'),
                     meta: {
+                        authRequired: true,
                         rule: 'editor',
                     }
                 },
@@ -62,6 +71,7 @@ const router = new Router({
                     name: 'admin-dashboard-ecommerce',
                     component: () => import('./views/DashboardECommerce.vue'),
                     meta: {
+                        authRequired: true,
                         rule: 'admin'
                     }
                 },
@@ -79,6 +89,7 @@ const router = new Router({
                     path: '/admin/apps/todo/:filter',
                     component: () => import('./views/apps/todo/Todo.vue'),
                     meta: {
+                        authRequired: true,
                         rule: 'editor',
                         parent: "todo",
                         no_scroll: true,
@@ -89,6 +100,7 @@ const router = new Router({
                     name: 'admin-chat',
                     component: () => import('./views/apps/chat/Chat.vue'),
                     meta: {
+                        authRequired: true,
                         rule: 'editor',
                         no_scroll: true,
                     }
@@ -102,6 +114,7 @@ const router = new Router({
                     path: '/admin/apps/email/:filter',
                     component: () => import('./views/apps/email/Email.vue'),
                     meta: {
+                        authRequired: true,
                         rule: 'editor',
                         parent: 'email',
                         no_scroll: true,
@@ -112,6 +125,7 @@ const router = new Router({
                     name: 'admin-calendar-simple-calendar',
                     component: () => import('./views/apps/calendar/SimpleCalendar.vue'),
                     meta: {
+                        authRequired: true,
                         rule: 'editor',
                         no_scroll: true,
                     }
@@ -121,6 +135,7 @@ const router = new Router({
                     name: 'admin-ecommerce-shop',
                     component: () => import('./views/apps/eCommerce/ECommerceShop.vue'),
                     meta: {
+                        authRequired: true,
                         breadcrumb: [
                             { title: 'Home', url: '/' },
                             { title: 'eCommerce'},
@@ -135,6 +150,7 @@ const router = new Router({
                     name: 'admin-ecommerce-wish-list',
                     component: () => import('./views/apps/eCommerce/ECommerceWishList.vue'),
                     meta: {
+                        authRequired: true,
                         breadcrumb: [
                             { title: 'Home', url: '/' },
                             { title: 'eCommerce', url:'/apps/eCommerce/shop'},
@@ -149,6 +165,7 @@ const router = new Router({
                     name: 'admin-ecommerce-checkout',
                     component: () => import('./views/apps/eCommerce/ECommerceCheckout.vue'),
                     meta: {
+                        authRequired: true,
                         breadcrumb: [
                             { title: 'Home', url: '/' },
                             { title: 'eCommerce', url:'/apps/eCommerce/shop'},
@@ -1284,10 +1301,10 @@ const router = new Router({
         // =============================================================================
                 {
                     path: '/admin/callback',
-                    name: 'admin-auth-callback',
+                    name: 'admin-callback',        // admin-auth-callback
                     component: () => import('@/views/Callback.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
@@ -1295,7 +1312,7 @@ const router = new Router({
                     name: 'admin-page-login',
                     component: () => import('@/views/pages/login/Login.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
@@ -1303,7 +1320,7 @@ const router = new Router({
                     name: 'admin-page-register',
                     component: () => import('@/views/pages/register/Register.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
@@ -1311,7 +1328,7 @@ const router = new Router({
                     name: 'admin-page-forgot-password',
                     component: () => import('@/views/pages/ForgotPassword.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
@@ -1319,7 +1336,7 @@ const router = new Router({
                     name: 'admin-page-reset-password',
                     component: () => import('@/views/pages/ResetPassword.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
@@ -1327,7 +1344,7 @@ const router = new Router({
                     name: 'admin-page-lock-screen',
                     component: () => import('@/views/pages/LockScreen.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
@@ -1335,7 +1352,7 @@ const router = new Router({
                     name: 'admin-page-coming-soon',
                     component: () => import('@/views/pages/ComingSoon.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
@@ -1343,7 +1360,7 @@ const router = new Router({
                     name: 'admin-page-error-404',
                     component: () => import('@/views/pages/Error404.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
@@ -1351,7 +1368,7 @@ const router = new Router({
                     name: 'admin-page-error-500',
                     component: () => import('@/views/pages/Error500.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
@@ -1359,7 +1376,7 @@ const router = new Router({
                     name: 'admin-page-not-authorized',
                     component: () => import('@/views/pages/NotAuthorized.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
@@ -1367,7 +1384,7 @@ const router = new Router({
                     name: 'admin-page-maintenance',
                     component: () => import('@/views/pages/Maintenance.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
             ]
@@ -1389,37 +1406,57 @@ router.afterEach(() => {
 })
 
 router.beforeEach((to, from, next) => {
-    firebase.auth().onAuthStateChanged(() => {
+    console.log('IsAuth:', auth.isAuthenticated());
+    console.log('To route name:', to.name);
+
+    // firebase.auth().onAuthStateChanged(() => {
 
         // get firebase current user
-        const firebaseCurrentUser = firebase.auth().currentUser
+        // const firebaseCurrentUser = firebase.auth().currentUser
 
-        // if (
-        //     to.path === "/pages/login" ||
-        //     to.path === "/pages/forgot-password" ||
-        //     to.path === "/pages/error-404" ||
-        //     to.path === "/pages/error-500" ||
-        //     to.path === "/pages/register" ||
-        //     to.path === "/callback" ||
-        //     to.path === "/pages/comingsoon" ||
-        //     (auth.isAuthenticated() || firebaseCurrentUser)
-        // ) {
-        //     return next();
+        // if (!auth.isAuthenticated()) {
+        //     router.push({ name: 'admin-page-login', query: { to: to.path } })
         // }
 
         // If auth required, check login. If login fails redirect to login page
-        if(to.meta.authRequired) {
-          if (!(auth.isAuthenticated() || firebaseCurrentUser)) {
-            router.push({ path: '/admin/pages/login', query: { to: to.path } })
-          }
+        // if(to.meta.authRequired) {
+        //     if (!auth.isAuthenticated()) {
+        //         router.push({ name: 'admin-page-login', query: { to: to.path } })
+        //     }
+        // }
+
+        // if (auth.isAuthenticated()) {
+            
+        // }
+
+
+        if (
+            to.name === 'admin-page-login' ||
+            to.name === 'admin-page-register' ||
+            to.name === 'admin-page-forgot-password' ||
+            to.name === 'admin-page-reset-password' ||
+            to.name === 'admin-page-error-404' ||
+            to.name === 'admin-page-error-500' ||
+            to.name === 'admin-callback' ||
+            to.name === 'admin-page-coming-soon' ||
+            to.name === 'admin-page-not-authorized' // ||
+        ) {
+            if (auth.isAuthenticated()) {
+                router.push({ name: 'admin-dashboard' });
+            } else {
+                // router.push({ name: 'admin-page-login' });
+                // router.push({ name: 'admin-page-login' })
+            }
         }
 
-        return next()
+        
+
+        return next();
         // Specify the current path as the customState parameter, meaning it
         // will be returned to the application after auth
         // auth.login({ target: to.path });
 
-    });
+    // });
 
 });
 

@@ -35,7 +35,7 @@ require('dotenv').config();
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.js('resources/js/app.js', 'public/js/app.js')
     .webpackConfig({
         resolve: {
             alias: {
@@ -68,7 +68,6 @@ mix.js('resources/js/app.js', 'public/js')
 // Notifications
 // mix.disableNotifications();
 
-
 // Change below options according to your requirement
 if (mix.inProduction()) {
     mix.version();
@@ -88,12 +87,13 @@ else{
     });
 }
 
-// #region Client Resources
-mix.js('resources/js/client/main.js', 'public/js');
-mix.copyDirectory('resources/client/css', 'public/client/css');
-mix.copyDirectory('resources/client/js', 'public/client/js');
-mix.copyDirectory('resources/client/fonts', 'public/client/fonts');
-mix.copyDirectory('resources/client/ajax', 'public/client/ajax');
-// mix.copyDirectory('resources/client/images', 'public/client/images');
-// #endregion
+// // #region Client Resources
+// const clientMix = require('laravel-mix');
+// clientMix.js('resources/js/client/main.js', 'public/js/main.js');
+// clientMix.copyDirectory('resources/client/css', 'public/client/css');
+// clientMix.copyDirectory('resources/client/js', 'public/client/js');
+// clientMix.copyDirectory('resources/client/fonts', 'public/client/fonts');
+// clientMix.copyDirectory('resources/client/ajax', 'public/client/ajax');
+// clientMix.copyDirectory('resources/client/images', 'public/client/images');
+// // #endregion
 

@@ -9699,25 +9699,25 @@ __webpack_require__.r(__webpack_exports__);
   icon: "PackageIcon",
   i18n: "Apps",
   items: [{
-    url: "/apps/email",
+    url: "/admin/apps/email",
     name: "Email",
     slug: "admin-email",
     icon: "MailIcon",
     i18n: "Email"
   }, {
-    url: "/apps/chat",
+    url: "/admin/apps/chat",
     name: "Chat",
     slug: "admin-chat",
     icon: "MessageSquareIcon",
     i18n: "Chat"
   }, {
-    url: "/apps/todo",
+    url: "/admin/apps/todo",
     name: "Todo",
     slug: "admin-todo",
     icon: "CheckSquareIcon",
     i18n: "Todo"
   }, {
-    url: "/apps/calendar/vue-simple-calendar",
+    url: "/admin/apps/calendar/vue-simple-calendar",
     name: "Calendar",
     slug: "admin-calendar-simple-calendar",
     icon: "CalendarIcon",

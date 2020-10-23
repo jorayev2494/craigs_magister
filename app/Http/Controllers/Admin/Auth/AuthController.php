@@ -42,7 +42,7 @@ final class AuthController extends Controller
      */
     public function login(LoginRequest $request) : JsonResponse
     {
-        ['access_token' => $token, 'user_data' => $userData] = $this->adminService->auth($request->email, $request->password, 'email', $request->remember);
+        ['access_token' => $token, 'user_data' => $userData] = $this->adminService->auth($request->email, $request->password, 'email', $request->input('remember', false));
         return response()->json(array('access_token' => $token, 'user_data' => $userData));
     }
 

@@ -15,7 +15,7 @@ class FilesStorageSeeder extends Seeder
      */
     public function run()
     {
-        #region Copy Admin assets Files
+        #region Copy Admin asset Files
         $adminAssetDirImages = sprintf('%s/%s/%s/', resource_path(), 'assets', 'images');
         if (File::exists($adminAssetDirImages)) {
             
@@ -28,5 +28,16 @@ class FilesStorageSeeder extends Seeder
         }
         #endregion
 
+        #region Copy Client UI asset Files
+        $clientAssetDirImages = sprintf('%s/%s/%s/', resource_path(), 'client', 'images');
+        if (File::exists($clientAssetDirImages)) {
+            $clientStorageImagesDir = sprintf('%s/%s/%s/%s', storage_path(), 'app', 'public', 'images');
+            // if (Storage::disk('public')->exists('images')) {
+            //     Storage::disk('public')->deleteDirectory('images');
+            // }
+
+            File::copyDirectory($clientAssetDirImages, $clientStorageImagesDir);
+        }
+        #endregion
     }
 }

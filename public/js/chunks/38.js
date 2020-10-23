@@ -156,10 +156,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
  // Store Module
@@ -266,34 +262,56 @@ __webpack_require__.r(__webpack_exports__);
         headerCheckboxSelectionFilteredOnly: true,
         headerCheckboxSelection: true
       }, {
-        headerName: 'Username',
-        field: 'username',
+        headerName: 'Full name',
+        field: 'full_name',
         filter: true,
-        width: 210,
+        width: 270,
         cellRendererFramework: 'CellRendererLink'
-      }, {
+      }, // {
+      //     headerName: 'Full name',
+      //     field: 'full_name',
+      //     filter: true,
+      //     width: 225,
+      // },
+      {
         headerName: 'Email',
         field: 'email',
         filter: true,
         width: 225
       }, {
-        headerName: 'Name',
-        field: 'name',
+        headerName: 'Email confirmed',
+        field: 'email_confirmed',
         filter: true,
-        width: 200
+        width: 125,
+        cellRendererFramework: 'CellRendererVerified',
+        cellClass: "text-center"
       }, {
         headerName: 'Country',
-        field: 'country',
+        // field: this.$i18n.t(`countries.` + 'location.country'),
+        field: 'location.country',
         filter: true,
         width: 150
       }, {
-        headerName: 'Role',
-        field: 'role',
+        headerName: 'City',
+        field: 'location.city',
         filter: true,
         width: 150
-      }, {
-        headerName: 'Status',
-        field: 'status',
+      }, // {
+      //     headerName: 'Role',
+      //     field: 'role',
+      //     filter: true,
+      //     width: 150,
+      // },
+      // {
+      //     headerName: 'Status',
+      //     field: 'status',
+      //     filter: true,
+      //     width: 150,
+      //     cellRendererFramework: 'CellRendererStatus'
+      // },
+      {
+        headerName: 'Active',
+        field: 'active',
         filter: true,
         width: 150,
         cellRendererFramework: 'CellRendererStatus'
@@ -304,14 +322,15 @@ __webpack_require__.r(__webpack_exports__);
         width: 125,
         cellRendererFramework: 'CellRendererVerified',
         cellClass: "text-center"
-      }, {
-        headerName: 'Department',
-        field: 'department',
-        filter: true,
-        width: 150
-      }, {
+      }, // {
+      //     headerName: 'Department',
+      //     field: 'department',
+      //     filter: true,
+      //     width: 150,
+      // },
+      {
         headerName: 'Actions',
-        field: 'transactions',
+        field: 'id',
         width: 150,
         cellRendererFramework: 'CellRendererActions'
       }],
@@ -431,11 +450,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CellRendererActions',
+  props: {
+    id: {
+      type: Number,
+      required: true
+    }
+  },
   methods: {
     editRecord: function editRecord() {
-      this.$router.push("/apps/user/user-edit/" + 268)["catch"](function () {});
+      this.$router.push("/api/admin/managements/user/" + this.id)["catch"](function () {});
       /*
         Below line will be for actual product
         Currently it's commented due to demo purpose - Above url is for demo purpose
@@ -822,7 +849,7 @@ var render = function() {
                                 _vm.currentPage * _vm.paginationPageSize -
                                   (_vm.paginationPageSize - 1)
                               ) +
-                                " - " +
+                                " -\n                            " +
                                 _vm._s(
                                   _vm.usersData.length -
                                     _vm.currentPage * _vm.paginationPageSize >
@@ -830,7 +857,7 @@ var render = function() {
                                     ? _vm.currentPage * _vm.paginationPageSize
                                     : _vm.usersData.length
                                 ) +
-                                " of " +
+                                "\n                            of " +
                                 _vm._s(_vm.usersData.length)
                             )
                           ]),
@@ -1050,7 +1077,7 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("vs-pagination", {
-            attrs: { total: _vm.totalPages, max: 7 },
+            attrs: { total: _vm.totalPages, max: 15 },
             model: {
               value: _vm.currentPage,
               callback: function($$v) {
@@ -1097,7 +1124,11 @@ var render = function() {
           icon: "Edit3Icon",
           svgClasses: "h-5 w-5 mr-4 hover:text-primary cursor-pointer"
         },
-        on: { click: _vm.editRecord }
+        on: {
+          click: function($event) {
+            return _vm.editRecord()
+          }
+        }
       }),
       _vm._v(" "),
       _c("feather-icon", {
@@ -1105,7 +1136,11 @@ var render = function() {
           icon: "Trash2Icon",
           svgClasses: "h-5 w-5 hover:text-danger cursor-pointer"
         },
-        on: { click: _vm.confirmDeleteRecord }
+        on: {
+          click: function($event) {
+            return _vm.confirmDeleteRecord()
+          }
+        }
       })
     ],
     1
@@ -1303,7 +1338,8 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
   fetchUsers: function fetchUsers(_ref) {
     var commit = _ref.commit;
     return new Promise(function (resolve, reject) {
-      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/user-management/users").then(function (response) {
+      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/admin/managements/users").then(function (response) {
+        window.console.log('Users: ', response.data);
         commit('SET_USERS', response.data);
         resolve(response);
       })["catch"](function (error) {

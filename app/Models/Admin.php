@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Abstracts\JWTAuthModel;
+use App\Models\Interfaces\IBaseModel;
 use App\Models\Interfaces\IBaseUserModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +23,7 @@ class Admin extends JWTAuthModel implements IBaseUserModel
         'email',
         'password',
         'active',
+        'role_id',
         'remember_token',
         'last_login',
         'last_activity'
@@ -45,19 +47,12 @@ class Admin extends JWTAuthModel implements IBaseUserModel
     protected $casts = [
         'email_confirmed'   => 'boolean',
         'active'            => 'boolean',
-        'last_login'        => 'datetime:Y-m-d H:i:s',
-        'last_activity'     => 'datetime:Y-m-d H:i:s',
-        'created_at'        => 'datetime:Y-m-d H:i:s',
-        'updated_at'        => 'datetime:Y-m-d H:i:s',
-        'last_login'        => 'datetime:Y-m-d H:i:s',
+        'last_login'        => IBaseModel::FORMAT_DATETIME,
+        'last_activity'     => IBaseModel::FORMAT_DATETIME,
+        'created_at'        => IBaseModel::FORMAT_DATETIME,
+        'updated_at'        => IBaseModel::FORMAT_DATETIME,
+        'last_login'        => IBaseModel::FORMAT_DATETIME,
     ];
-
-     /**
-     * The storage format of the model's date columns.
-     *
-     * @var string
-     */
-    protected $dateFormat = 'Y-m-d H:i:s';
 
     /**
      * The attributes that should be mutated to dates.
@@ -71,5 +66,20 @@ class Admin extends JWTAuthModel implements IBaseUserModel
         'updated_at', 
         'deleted_at'
     ];
+
+    public function getAvatarPath(): string
+    {
+        return '/storage/images/portrait/small/';
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'location_country_id', 'id');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'location_city_id', 'id');
+    }
     
 }

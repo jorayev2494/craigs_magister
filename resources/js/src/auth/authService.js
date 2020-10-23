@@ -104,9 +104,13 @@ class AuthService extends EventEmitter {
     }
 
     isAuthenticated() {
-        return (
-            new Date(Date.now()) < new Date(window.localStorage.getItem(tokenExpiryKey)) &&
-            window.localStorage.getItem(localStorageKey) === 'true'
+        // return (
+        //     new Date(Date.now()) < new Date(window.localStorage.getItem(tokenExpiryKey)) &&
+            // window.localStorage.getItem(localStorageKey) === 'true'
+        // );
+
+        return !(
+            (window.localStorage.getItem('accessToken') === null) && (window.localStorage.getItem('userInfo') === null)
         );
     }
 }

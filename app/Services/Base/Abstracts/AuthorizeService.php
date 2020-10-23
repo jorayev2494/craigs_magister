@@ -105,7 +105,7 @@ abstract class AuthorizeService extends BaseModelService
      * @param boolean $remember
      * @return array
      */
-    public function auth(string $filedValue, string $password, string $searchField = 'email', bool $remember = false) : array
+    public function auth(string $filedValue, string $password, string $searchField = 'email', ?bool $remember = false) : array
     {
         $this->authUser = $this->getModelClone()->newQuery()->firstWhere($searchField, $filedValue);
 

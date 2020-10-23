@@ -122,7 +122,7 @@ abstract class BaseModelService implements IService
      */
     public function find(int $id, array $columns = ['*']): ?Model
     {
-        return $this->getModelClone()->newQuery()->findOrFail($columns);
+        return $this->getModelClone()->newQuery()->findOrFail($id, $columns);
     }
 
     /**

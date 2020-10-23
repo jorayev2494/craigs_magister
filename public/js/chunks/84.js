@@ -848,7 +848,8 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
   fetchUsers: function fetchUsers(_ref) {
     var commit = _ref.commit;
     return new Promise(function (resolve, reject) {
-      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/user-management/users").then(function (response) {
+      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/admin/managements/users").then(function (response) {
+        window.console.log('Users: ', response.data);
         commit('SET_USERS', response.data);
         resolve(response);
       })["catch"](function (error) {

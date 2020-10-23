@@ -2,11 +2,16 @@
 
 namespace App\Providers;
 
+use App\Policy\Gates\IRegisterGate;
+use App\Policy\Gates\RegisterGateClasses;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
+
+    private IRegisterGate $registerGate;
+
     /**
      * The policy mappings for the application.
      *
@@ -21,10 +26,11 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(RegisterGateClasses $registerGateClasses)
     {
+        $this->registerGate = $registerGateClasses;
+        
         $this->registerPolicies();
-
-        //
+        $this->registerGate->registerGates();
     }
 }

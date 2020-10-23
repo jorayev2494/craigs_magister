@@ -25563,7 +25563,7 @@ module.exports = videojs;
 
 /* WEBPACK VAR INJECTION */(function(global) {var topLevel = typeof global !== 'undefined' ? global :
     typeof window !== 'undefined' ? window : {}
-var minDoc = __webpack_require__(/*! min-document */ 17);
+var minDoc = __webpack_require__(/*! min-document */ 16);
 
 var doccy;
 

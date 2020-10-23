@@ -167,6 +167,10 @@
     "reset_password": "Reset Password",
     "please_enter_your_new_password": "Please enter your new password.",
     "go_back_to_login": "Go back to login",
-    "reset": "Reset"
+    "reset": "Reset",
+    "countries": {
+        "barbados": "Barbados",
+        "turkmenistan": "Turkmenistan"
+    }
 
 }

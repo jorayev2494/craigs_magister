@@ -178,6 +178,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
+        // Register My Providers
+        App\Providers\FileServiceProvider::class,
+
     ],
 
     /*
@@ -229,6 +232,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        // My Aliases
+        'FileService' => \App\Facades\fileService\FileServiceFacade::class,
 
     ],
 

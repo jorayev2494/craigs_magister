@@ -31,4 +31,16 @@ abstract class JWTAuthModel extends Authenticatable implements JWTSubject {
     {
         $this->attributes['password'] = Hash::make($password);
     }
+
+    abstract public function getAvatarPath(): string;
+
+    public function getAvatarAttribute(): string
+    {
+        return $this->getAvatarPath() . $this->attributes['avatar'];
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
 }
