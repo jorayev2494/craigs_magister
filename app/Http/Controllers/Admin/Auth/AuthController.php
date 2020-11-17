@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Auth\LoginRequest;
 use App\Http\Requests\Admin\Auth\RegisterRequest;
+use App\Http\Resources\Admin\AdminResource;
 use App\Services\AdminService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -43,7 +44,12 @@ final class AuthController extends Controller
     public function login(LoginRequest $request) : JsonResponse
     {
         ['access_token' => $token, 'user_data' => $userData] = $this->adminService->auth($request->email, $request->password, 'email', $request->input('remember', false));
-        return response()->json(array('access_token' => $token, 'user_data' => $userData));
+        return response()->json(
+            array(
+                'access_token' => $token, 
+                'user_data' => AdminResource::make($userData)
+            )
+        );
     }
 
     /**

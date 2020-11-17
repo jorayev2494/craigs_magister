@@ -8,6 +8,7 @@
 ==========================================================================================*/
 
 import axios from "@/axios.js"
+import { reject } from "core-js/fn/promise";
 
 export default {
     // addItem({ commit }, item) {
@@ -22,7 +23,7 @@ export default {
     // },
     fetchUsers({ commit }) {
         return new Promise((resolve, reject) => {
-            axios.get("/api/admin/managements/users").then((response) => {
+            axios.get('/api/admin/managements/users').then((response) => {
                     window.console.log('Users: ', response.data);
                     commit('SET_USERS', response.data);
                     resolve(response)
@@ -35,24 +36,49 @@ export default {
 
     fetchUser({}, userId) {
         return new Promise((resolve, reject) => {
-            axios.get(`/api/user-management/users/${userId}`).then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => {
-                    reject(error)
-                })
+            axios.get(`/api/admin/managements/users/${userId}`).then((response) => {
+                resolve(response)
+            }).catch((error) => {
+                reject(error)
+            })
         })
     },
 
     removeRecord({ commit }, userId) {
         return new Promise((resolve, reject) => {
-            axios.delete(`/api/user-management/users/${userId}`).then((response) => {
+            axios.delete(`/api/admin/managements/users/${userId}`).then((response) => {
                     commit('REMOVE_RECORD', userId)
                     resolve(response)
-                })
-                .catch((error) => {
+                }).catch((error) => {
                     reject(error)
                 })
         })
+    },
+
+    uploadAvatar({}, payload) {
+        return new Promise((resolve, reject) => {
+            var headersConfig = {'Content-Type': 'multipart/form-data'};
+            axios.post(`/api/admin/managements/users/update_avatar/${payload.userId}`, payload.formData, { headers: headersConfig }).then((response) => {
+                if (response.status == 202) {
+                    console.log('Response: ', response);
+                    resolve(response)
+                }
+            }).catch((error) => {
+                reject(error)
+            })
+        });
+    },
+
+    saveAccountChanges({}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.put(`/api/admin/managements/users/${payload.user_id}`, payload.user_data).then((response) => {
+                if (response.status == 202) {
+                    console.log('Response: ', response);
+                    resolve(response)
+                }
+            }).catch((error) => {
+                reject(error)
+            })
+        });
     }
 }

@@ -4,170 +4,75 @@ declare(strict_types = 1);
 
 namespace App\Services\Base\Abstracts;
 
+use App\Exceptions\BadRequestException;
 use App\Exceptions\ServiceException;
 use App\Models\Interfaces\IBaseUserModel;
+use App\Models\User;
+use App\Pipelines\QueryFilters\UnblockDate;
+use App\Repositories\Eloquent\Abstracts\BaseEloquentModelRepository;
+use App\Repositories\Eloquent\Interfaces\IEloquentRepositoryFactory;
 use App\Services\Base\Interfaces\IService;
 use App\Traits\Pagination;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Foundation\Application;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Str;
 
 abstract class BaseModelService implements IService 
 {
     use Pagination;
 
     /**
-     * @var Application $app
-     */
-    protected Application $app;
-    
+    * @var BaseEloquentModelRepository|Model|null $serviceEloquentModelRepository
+    */
+    protected BaseEloquentModelRepository $baseEloquentModelRepository;
 
-    /**
-     * @var Model $model
-     */
-    protected Model $model;
-
-    /**
-     * @return string
-     */
-    abstract public function getModel() : string;
-    
-    public function __construct(Application $app) {
-        $this->app = $app;
-        $this->makeModel();
-    }
-
-    /**
-     * @return Model|mixed|string
-     */
-    public function makeModel() : Model
+    public function instanceCallerEloquentRepository(): BaseEloquentModelRepository
     {
-        $model = $this->app->make($this->getModel());
-        
-        if (!$model instanceof Model) {
-            throw new ServiceException("Class {$this->getModel()} must be an instance of " . Model::class);
-        }
+        // dd(class_basename($this), str_replace(['ManagementService'], 'Repository', class_basename($this)));
+        // return $this->baseEloquentModelRepository = $eloquentModelRepository ?: app()->make(
+        //     '\App\Repositories\Eloquent\\' . str_replace(['ManagementService', 'Service'], 'Repository', class_basename($this))
+        // );
 
-        return $this->model = $model;
+        $eloquentRepositoryFactory = app()->make(IEloquentRepositoryFactory::class);
+        return $this->baseEloquentModelRepository = $eloquentRepositoryFactory->make($this);
+    }
+
+    protected function getInstancePipeline(): Pipeline
+    {
+        return app()->make(Pipeline::class);
     }
 
     /**
-     * Service All
+     * Handle dynamic method calls into the model.
      *
-     * @param array $columns
-     * @param array $relations
-     * @return Collection
-     */
-    public function all($columns = ['*'], $relations = ['*']): Collection
-    {
-        return $this->getModelClone()->with($relations)->get($columns);
-    }
-
-    #region Real Service Base methods
-    /**
-     * Get Model Clone
-     *
-     * @return Model
-     */
-    public function getModelClone() : Model
-    {
-        return clone $this->model;
-    }
-
-    /**
-     * Service Create
-     * @param array $data
+     * @param  string  $method
+     * @param  array  $parameters
      * @return mixed
      */
-    public function create(array $data) : Model
+    public function __call($method, $parameters)
     {
-        return $this->getModelClone()->newQuery()->create($data);
+
+        // if (!Str::contains($method, ['Repository', 'Delegate', 'Service'])) {
+        //     if (!method_exists($this, $method))
+        //         throw new BadRequestException("In the service not found this {$method}([...parameters]) method");
+        // }
+
+        $this->instanceCallerEloquentRepository();
+        $method = str_replace(['Repository', 'Delegate'], '',  $method);
+
+        if (!is_null($method) && is_array($parameters)) {
+            return $this->baseEloquentModelRepository->$method(...$parameters);
+        }
+        
+        if (!is_null($method) && !is_null($parameters)) {
+            return $this->baseEloquentModelRepository->$method($parameters);
+        }
+        
+        return $this->baseEloquentModelRepository->$method();
     }
-
-    /**
-     * Service Update
-     *
-     * @param integer $id
-     * @param array $data
-     * @return boolean
-     */
-    public function update(int $id, array $data) : bool
-    {
-        if (array_key_exists('id', $data)) 
-            unset($data['id']);
-
-        return $this->getModelClone()->newQuery()->findOrFail($id)->update($data);
-    }
-
-    /**
-     * Service Delete
-     *
-     * @param integer $id
-     * @return boolean
-     */
-    public function delete(int $id) : bool
-    {
-        $model = $this->getModelClone()->newQuery()->find($id);
-        return $model->delete();
-    }
-    #endregion
-
-    /**
-     * Service find
-     *
-     * @param integer $id
-     * @param array $columns
-     * @return Model|null
-     */
-    public function find(int $id, array $columns = ['*']): ?Model
-    {
-        return $this->getModelClone()->newQuery()->findOrFail($id, $columns);
-    }
-
-    /**
-     * Service FindBy
-     *
-     * @param string $field
-     * @param string $value
-     * @param string ...$params
-     * @return Collection
-     */
-    public function findBy(string $field, string $value, string ...$params): Collection
-    {
-        return $this->getModelClone()->newQuery()->where($field, $value)->get(...$params);
-    }
-
-    /**
-     * Service Paginate
-     *
-     * @param integer $perPage
-     * @param array $columns
-     * @param string ...$relations
-     * @return LengthAwarePaginator
-     */
-    public function paginate(int $perPage = 15, array $columns = ['*'], string ...$relations): LengthAwarePaginator
-    {
-        return $this->getModelClone()->with(...$relations)->paginate($perPage, $columns);
-    }
-
-    // /**
-    //  * Handle dynamic method calls into the model.
-    //  *
-    //  * @param  string  $method
-    //  * @param  array  $parameters
-    //  * @return mixed
-    //  */
-    // public function __call(string $method, $parameters)
-    // {
-    //     if (is_string($method) && count($parameters)) {
-    //         return $this->getModelClone()->$method($parameters[0]);
-    //     } else if (is_string($method) && !is_array($parameters)) {
-    //         return $this->getModelClone()->$method($parameters);
-    //     } else {
-    //         return $this->getModelClone()->$method();
-    //     }
-
-    //     return $this->getModelClone()->$method();
-    // }
 }

@@ -42,7 +42,7 @@ const router = new Router({
             component: () => import('./layouts/main/Main.vue'),
             meta: {
                 authRequired: true,
-                rule: 'editor',
+                rule: 'admin',
             },
             children: [
         // =============================================================================
@@ -54,7 +54,7 @@ const router = new Router({
                     redirect: '/admin/dashboard/analytics',
                     meta: {
                         authRequired: true,
-                        rule: 'editor',
+                        rule: 'admin',
                     }
                 },
                 {
@@ -63,7 +63,7 @@ const router = new Router({
                     component: () => import('./views/DashboardAnalytics.vue'),
                     meta: {
                         authRequired: true,
-                        rule: 'editor',
+                        rule: 'admin',
                     }
                 },
                 {
@@ -90,7 +90,7 @@ const router = new Router({
                     component: () => import('./views/apps/todo/Todo.vue'),
                     meta: {
                         authRequired: true,
-                        rule: 'editor',
+                        rule: 'admin',
                         parent: "todo",
                         no_scroll: true,
                     }
@@ -101,7 +101,7 @@ const router = new Router({
                     component: () => import('./views/apps/chat/Chat.vue'),
                     meta: {
                         authRequired: true,
-                        rule: 'editor',
+                        rule: 'admin',
                         no_scroll: true,
                     }
                 },
@@ -115,7 +115,7 @@ const router = new Router({
                     component: () => import('./views/apps/email/Email.vue'),
                     meta: {
                         authRequired: true,
-                        rule: 'editor',
+                        rule: 'admin',
                         parent: 'email',
                         no_scroll: true,
                     }
@@ -126,7 +126,7 @@ const router = new Router({
                     component: () => import('./views/apps/calendar/SimpleCalendar.vue'),
                     meta: {
                         authRequired: true,
-                        rule: 'editor',
+                        rule: 'admin',
                         no_scroll: true,
                     }
                 },
@@ -1430,24 +1430,24 @@ router.beforeEach((to, from, next) => {
         // }
 
 
-        if (
-            to.name === 'admin-page-login' ||
-            to.name === 'admin-page-register' ||
-            to.name === 'admin-page-forgot-password' ||
-            to.name === 'admin-page-reset-password' ||
-            to.name === 'admin-page-error-404' ||
-            to.name === 'admin-page-error-500' ||
-            to.name === 'admin-callback' ||
-            to.name === 'admin-page-coming-soon' ||
-            to.name === 'admin-page-not-authorized' // ||
-        ) {
-            if (auth.isAuthenticated()) {
-                router.push({ name: 'admin-dashboard' });
-            } else {
-                // router.push({ name: 'admin-page-login' });
-                // router.push({ name: 'admin-page-login' })
-            }
-        }
+        // if (
+        //     to.name === 'admin-page-login' ||
+        //     to.name === 'admin-page-register' ||
+        //     to.name === 'admin-page-forgot-password' ||
+        //     to.name === 'admin-page-reset-password' ||
+        //     to.name === 'admin-page-error-404' ||
+        //     to.name === 'admin-page-error-500' ||
+        //     to.name === 'admin-callback' ||
+        //     to.name === 'admin-page-coming-soon' ||
+        //     to.name === 'admin-page-not-authorized' // ||
+        // ) {
+        //     if (auth.isAuthenticated()) {
+        //         router.push({ name: 'admin-dashboard' });
+        //     } else {
+        //         // router.push({ name: 'admin-page-login' });
+        //         // router.push({ name: 'admin-page-login' })
+        //     }
+        // }
 
         
 

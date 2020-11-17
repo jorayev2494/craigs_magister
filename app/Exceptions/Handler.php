@@ -2,10 +2,13 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\Interfaces\IErrorMessages;
 use App\Traits\ErrorFormatResponse;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -48,6 +51,22 @@ class Handler extends ExceptionHandler
         if ($exception instanceof AlreadyCreatedException) {
             return response($this->errorResponse($exception->getMessage()), Response::HTTP_FORBIDDEN);
         }
+
+        if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+            $modelName = Arr::last(explode('\\', $exception->getModel()));
+
+            return response($this->errorResponse("${modelName} not found"), Response::HTTP_NOT_FOUND);
+        }
+
+        if ($exception instanceof NotFoundException) {
+            return response($this->errorResponse($exception->getMessage()), Response::HTTP_NOT_FOUND);
+        }
+
+        if ($exception instanceof NotFoundHttpException) {
+            return response($this->errorResponse(IErrorMessages::HTTP_NOT_FOUND), Response::HTTP_NOT_FOUND);
+        }
+
+        // dd($exception->getMessage());
 
         if ($exception instanceof Exception) {
             logger($exception->getTraceAsString());

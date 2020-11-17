@@ -7,6 +7,7 @@ use App\Models\Interfaces\IBaseModel;
 use App\Models\Interfaces\IBaseUserModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Admin extends JWTAuthModel implements IBaseUserModel
 {
@@ -69,17 +70,21 @@ class Admin extends JWTAuthModel implements IBaseUserModel
 
     public function getAvatarPath(): string
     {
-        return '/storage/images/portrait/small/';
+        return '/images/portrait/small/';
     }
 
-    public function country()
+    public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'location_country_id', 'id');
     }
 
-    public function city()
+    public function city(): BelongsTo
     {
         return $this->belongsTo(City::class, 'location_city_id', 'id');
     }
     
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(AdminRole::class, 'role_id', 'id');
+    }
 }

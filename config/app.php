@@ -234,7 +234,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         // My Aliases
-        'FileService' => \App\Facades\fileService\FileServiceFacade::class,
+        'FileService' => \App\Facades\FileServiceFacade::class,
 
     ],
 

@@ -42,6 +42,7 @@ final class User extends JWTAuthModel implements IBaseUserModel
         'last_name',
         'avatar',
         'email',
+        'phone',
         'password',
         'about',
         'location_country_id',
@@ -70,9 +71,12 @@ final class User extends JWTAuthModel implements IBaseUserModel
      * @var array
      */
     protected $casts = [
+        'email_confirmed' => 'boolean',
+        'active' => 'boolean',
+        'is_verified' => 'boolean',
         'email_verified_at' => 'datetime',
-        'created_at'        =>  IBaseModel::FORMAT_DATETIME,
-        'updated_at'        =>  IBaseModel::FORMAT_DATETIME,
+        'created_at' =>  IBaseModel::FORMAT_DATETIME,
+        'updated_at' =>  IBaseModel::FORMAT_DATETIME,
     ];
 
     /**
@@ -86,9 +90,10 @@ final class User extends JWTAuthModel implements IBaseUserModel
 
     public function getAvatarPath(): string
     {
-        return '/storage/images/portrait/small/';
+        return '/images/portrait/small/';
     }
 
+    #region Relationships
     public function announcements(): HasMany
     {
         return $this->hasMany(Announcement::class, 'creator_id', 'id');
@@ -123,4 +128,5 @@ final class User extends JWTAuthModel implements IBaseUserModel
     {
         return $this->belongsTo(City::class, 'location_city_id', 'id');
     }
+    #endregion
 }

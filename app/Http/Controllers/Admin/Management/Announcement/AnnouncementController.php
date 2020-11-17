@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Managements\Announcements;
+namespace App\Http\Controllers\Admin\Management\Announcement;
 
 use App\Http\Controllers\Controller;
 use App\Services\Announcements\Base\AnnouncementService;
+use App\Services\Base\Interfaces\IBaseAppGuards;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,7 +19,7 @@ class AnnouncementController extends Controller
 
     public function __construct(AnnouncementService $announcementService) {
         $this->announcementService = $announcementService;
-        $this->middleware(['auth:admin']);
+        $this->middleware(['auth:' . IBaseAppGuards::ADMIN]);
     }
 
     /**
@@ -26,9 +27,9 @@ class AnnouncementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
-        $announcements = $this->announcementService->getAnnouncements();
+        $announcements = $this->announcementService->announcementRepository->all();
         return response()->json($announcements);
     }
 

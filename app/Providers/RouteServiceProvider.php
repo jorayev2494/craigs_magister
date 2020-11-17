@@ -37,13 +37,17 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
-        $this->routes(function () {
+        $this->routes(function() {
             #region Admin Route and Controller
             $this->adminApiRoute();
             #endregion
 
             #region User Route and Controller
             $this->userApiRoute();
+            #endregion
+
+            #region User Route and Controller
+            $this->publicApiRoute();
             #endregion
 
             $this->webRoute();
@@ -74,9 +78,19 @@ class RouteServiceProvider extends ServiceProvider
     private function userApiRoute() : void
     {
         Route::prefix('api')
+                ->name('api.')
                 ->middleware('api')
                 ->namespace($this->namespace . '\User')
                 ->group(base_path('routes/api.php'));
+    }
+
+    private function publicApiRoute() : void
+    {
+        Route::prefix('api')
+                ->name('api.')
+                ->middleware('api')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/api.public.php'));
     }
 
     private function webRoute() : void

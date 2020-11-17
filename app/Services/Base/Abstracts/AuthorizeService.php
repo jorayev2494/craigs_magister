@@ -10,31 +10,37 @@ use App\Exceptions\Interfaces\IErrorMessages;
 use App\Exceptions\NotFoundException;
 use App\Mail\Auth\PasswordResetEmail;
 use App\Mail\Auth\RegistrationMail;
-use App\Models\EmailConfirm;
 use App\Models\EmailConfirmation;
 use App\Models\Interfaces\IBaseUserModel;
 use App\Models\PasswordReset;
+use App\Repositories\Eloquent\Abstracts\BaseEloquentModelRepository;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Str;
+use Illuminate\Support\Str;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use FileService;
 
-abstract class AuthorizeService extends BaseModelService 
+abstract class AuthorizeService extends BaseModelService
 {
 
     /**
      * @var Model|null
      */
     private ?Model $authUser;
+
+    public function __construct(BaseEloquentModelRepository $authRepository) {
+        $this->authRepository = $authRepository;
+    }
     
     /**
      * Set Model Base guard
@@ -56,7 +62,7 @@ abstract class AuthorizeService extends BaseModelService
          */
         $emailConfirmation = null;
 
-        if ($this->getModelClone()->newQuery()->where('email', $data['email'])->first()) {
+        if ($this->baseEloquentModelRepository->getModelClone()->newQuery()->where('email', $data['email'])->first()) {
             throw new AlreadyCreatedException('User already exist');
         }
 
@@ -176,7 +182,7 @@ abstract class AuthorizeService extends BaseModelService
             throw new BadRequestException(IErrorMessages::INVALID_TOKEN);
         }
 
-        $user = $this->getModelClone()->newQuery()->where('email', $emailConfirmation->email)->first();
+        $user = $this->baseEloquentModelRepository->getModelClone()->newQuery()->where('email', $emailConfirmation->email)->first();
 
         if (!$user) {
             throw new NotFoundException(IErrorMessages::USER_NOT_EXIST);
@@ -196,7 +202,7 @@ abstract class AuthorizeService extends BaseModelService
      */
     public function sendResetToken(string $email) : ?array
     {
-        $user = $this->getModelClone()->newQuery()->where('email', $email)->first();
+        $user = $this->baseEloquentModelRepository->getModelClone()->newQuery()->where('email', $email)->first();
 
         if (!$user) {
             throw new NotFoundException(IErrorMessages::USER_NOT_EXIST);
@@ -211,8 +217,8 @@ abstract class AuthorizeService extends BaseModelService
         PasswordReset::query()->where('email', $user->email)->delete();
         PasswordReset::query()->insert(['email' => $user->email, 'token' => $token]);
 
-        if ($this->model instanceof IBaseUserModel) {
-            Mail::to($user->email)->locale($this->model::DEFAULT_LANGUE)->queue(new PasswordResetEmail($user->email, $token, $this->getGuard()));
+        if ($this->baseEloquentModelRepository->model instanceof IBaseUserModel) {
+            Mail::to($user->email)->locale($this->baseEloquentModelRepository->model::DEFAULT_LANGUE)->queue(new PasswordResetEmail($user->email, $token, $this->getGuard()));
         }
 
         return config('app.debug') ? ['password_reset_token' => $token] : null;        
@@ -236,7 +242,7 @@ abstract class AuthorizeService extends BaseModelService
         /**
          * @var \App\Models\Abstracts\JWTAuthModel $user
          */
-        $user = $this->getModelClone()->newQuery()->firstWhere('email', $resetPassword->email);
+        $user = $this->baseEloquentModelRepository->getModelClone()->newQuery()->firstWhere('email', $resetPassword->email);
 
         if (!$user) {
             throw new NotFoundException(IErrorMessages::USER_NOT_EXIST);
@@ -244,7 +250,6 @@ abstract class AuthorizeService extends BaseModelService
 
         $user->password = $newPassword;
         $user->active   = false;
-        // $user->save();
         $user->invalidateToken();
 
         return PasswordReset::query()->where('token', $token)->delete();
@@ -279,6 +284,17 @@ abstract class AuthorizeService extends BaseModelService
         }
 
         return ['token' => JWTAuth::getToken()->get()];
+    }
+
+    public function updateAvatar(int $userId, UploadedFile $avatar): void
+    {
+        $foundUser = $this->findRepository($userId);
+
+        if ($foundUser && $avatar->isValid()) {
+            $uploadedAvatar = FileService::updateFile($foundUser->getAvatarPath(), $foundUser->avatar, $avatar);
+            $foundUser->avatar = $uploadedAvatar;
+            $foundUser->save();
+        }
     }
 
     protected function sendEmail(EmailConfirmation $emailConfirmation, Model $user) : void

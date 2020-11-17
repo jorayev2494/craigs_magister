@@ -24,6 +24,8 @@ Vue.use(Vuex)
 // import moduleEmail from './email/moduleEmail.js'
 import moduleAuth from './auth/moduleAuth.js'
 import moduleECommerce from './eCommerce/moduleECommerce.js'
+import moduleCountry from './country/moduleCountry.js';
+import moduleCity from './city/moduleCity.js'
 
 
 export default new Vuex.Store({
@@ -38,6 +40,8 @@ export default new Vuex.Store({
         // email: moduleEmail,
         auth: moduleAuth,
         eCommerce: moduleECommerce,
+        country: moduleCountry,
+        city: moduleCity,
     },
     strict: process.env.NODE_ENV !== 'production'
 })

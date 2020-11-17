@@ -24,8 +24,8 @@ export default new AclCreate({
     acceptLocalRules: true,
     globalRules: {
         admin: new AclRule("admin").generate(),
-        editor: new AclRule("editor").or("admin").generate(),
+        editor: new AclRule("admin").or("editor").generate(),
         // public: new AclRule("public").or("admin").or("editor").generate(),
-        guest: new AclRule("guest").generate(),
+        guest: new AclRule("guest").or("editor").or("admin").generate(),
     }
 })

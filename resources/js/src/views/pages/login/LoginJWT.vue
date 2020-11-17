@@ -1,28 +1,28 @@
 <template>
-    <div class="mt-12">
-        <vs-input v-validate="'required|email|min:3'" data-vv-validate-on="blur" name="email" icon-no-border icon="icon icon-user" icon-pack="feather" :label-placeholder="$t('email')" v-model="email" class="w-full" />
-        <span class="text-danger text-sm">{{ errors.first('email') }}</span>
+<div class="mt-12">
+    <vs-input v-validate="'required|email|min:3'" data-vv-validate-on="blur" name="email" icon-no-border icon="icon icon-user" icon-pack="feather" :label-placeholder="$t('email')" v-model="email" class="w-full" />
+    <span class="text-danger text-sm">{{ errors.first('email') }}</span>
 
-        <vs-input data-vv-validate-on="blur" v-validate="'required|min:6|max:50'" type="password" name="password" icon-no-border icon="icon icon-lock" icon-pack="feather" :label-placeholder="$t('password')" v-model="password" class="w-full mt-6" />
-        <span class="text-danger text-sm">{{ errors.first('password') }}</span>
+    <vs-input data-vv-validate-on="blur" v-validate="'required|min:6|max:50'" type="password" name="password" icon-no-border icon="icon icon-lock" icon-pack="feather" :label-placeholder="$t('password')" v-model="password" class="w-full mt-6" />
+    <span class="text-danger text-sm">{{ errors.first('password') }}</span>
 
-        <div class="flex flex-wrap justify-between my-5">
-            <vs-checkbox v-model="checkbox_remember_me" class="mb-3">{{ $t('remember_me') }}</vs-checkbox>
-            <router-link :to="{ name: 'admin-page-forgot-password' }">{{ $t('forgot_password') }}</router-link>
-        </div>
-        <div class="flex flex-wrap justify-between mb-3">
-            <vs-button type="border" @click="registerUser()">{{ $t('register') }}</vs-button>
-            <vs-button :disabled="!validateForm" @click="loginJWT()">{{ $t('login') }}</vs-button>
-        </div>
+    <div class="flex flex-wrap justify-between my-5">
+        <vs-checkbox v-model="checkbox_remember_me" class="mb-3">{{ $t('remember_me') }}</vs-checkbox>
+        <router-link :to="{ name: 'admin-page-forgot-password' }">{{ $t('forgot_password') }}</router-link>
     </div>
+    <div class="flex flex-wrap justify-between mb-3">
+        <vs-button type="border" @click="registerUser()">{{ $t('register') }}</vs-button>
+        <vs-button :disabled="!validateForm" @click="loginJWT()">{{ $t('login') }}</vs-button>
+    </div>
+</div>
 </template>
 
 <script>
 export default {
     data() {
         return {
-            email: '',
-            password: '',
+            email: 'admin@gmail.com',
+            password: '476674',
             checkbox_remember_me: false
         }
     },
@@ -57,7 +57,7 @@ export default {
             if (!this.checkLogin()) return
 
             // Loading
-            this.$vs.loading()
+            this.$vs.loading();
 
             const payload = {
                 checkbox_remember_me: this.checkbox_remember_me,
@@ -87,7 +87,9 @@ export default {
         },
         registerUser() {
             if (!this.checkLogin()) return;
-            this.$router.push({ name: 'admin-page-register' }).catch(() => {})
+            this.$router.push({
+                name: 'admin-page-register'
+            }).catch(() => {})
         }
     }
 }

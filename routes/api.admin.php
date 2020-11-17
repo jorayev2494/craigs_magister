@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,8 +29,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.'], stati
 });
 
 Route::group(['prefix' => 'managements', 'middleware' => 'auth:admin', 'as' => 'management.'], static function() {
-    Route::apiResources([
-        '/announcements' => 'Managements\Announcements\AnnouncementController',
-        '/users' => 'Managements\UserController',
-    ]);
+    Route::apiResource('/announcements', 'Management\Announcement\AnnouncementController', ['except' => ['update']]);
+    Route::apiResource('/users', 'Management\UserController', ['except' => ['store']]);
+    Route::post('/users/update_avatar/{id}', ['uses' => 'Management\UserController@updateUserAvatar', 'as' => 'users.update.user.avatar']);
 });

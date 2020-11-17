@@ -18,15 +18,16 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
-            'avatar' => $this->avatar,
+            'full_name' => $this->full_name,
+            'avatar' => '/storage' . $this->avatar,
             'email' => $this->email,
             'phone' => $this->phone,
             'rate' => $this->rate,
             'email_confirmed' => $this->email_confirmed,
             'active' => $this->active,
             'location' => [
-                'country' => $this->country->slug,
-                'city' => $this->city->slug,
+                'country' => $this->country->slug ?? null,
+                'city' => $this->city->slug ?? null,
             ],
             'unblock_date' => $this->unblock_date,
             'is_verified' => $this->is_verified,
@@ -34,7 +35,7 @@ class UserResource extends JsonResource
             'last_login' => $this->last_login,
             'last_activity' => $this->last_activity,
             'created_at' => $this->created_at,
-            'full_name' => $this->full_name
+            'updated_at' => $this->updated_at,
         ];
     }
 }

@@ -1,27 +1,36 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Managements;
+namespace App\Http\Controllers\User\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\Profile\ProfileUpdateRequest;
+use App\Http\Requests\User\Profile\UserUpdateRequest;
 use App\Http\Resources\UserResource;
-use App\Services\Admin\Management\UserManagementService;
+use App\Models\User;
 use App\Services\Base\Interfaces\IBaseAppGuards;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+final class ProfileController extends Controller
 {
 
     /**
-    * @var UserManagementService $userManagementService
+    * @var UserService $userService
     */
-    private UserManagementService $userManagementService;
+    private UserService $userService;
 
-    public function __construct(UserManagementService $userManagementService) {
-        $this->userManagementService = $userManagementService;
-        $this->middleware('auth:' . IBaseAppGuards::ADMIN);
+    /**
+    * @var User $authUser
+    */
+    private ?User $authUser;
+
+    public function __construct(UserService $userService) {
+        $this->userService = $userService;
+        $this->middleware('auth:' . IBaseAppGuards::USER);
+        $this->authUser = Auth::guard(IBaseAppGuards::USER)->user();
     }
 
     /**
@@ -29,11 +38,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): JsonResponse
-    {
-        $users = $this->userManagementService->all(['*'], []);
-        return response()->json(UserResource::collection($users));
-    }
+    // public function index(): JsonResponse
+    // {
+    //     return response()->json(UserResource::make($this->authUser));
+    // }
 
     // /**
     //  * Store a newly created resource in storage.
@@ -54,8 +62,7 @@ class UserController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        $user = $this->userManagementService->find($id);
-        return response()->json(UserResource::make($user));
+        return response()->json(UserResource::make($this->authUser));
     }
 
     /**
@@ -65,10 +72,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $id): JsonResponse
+    public function update(ProfileUpdateRequest $request, int $id): JsonResponse
     {
-        $user = $this->userManagementService->update($id, $request->all());
-        return response()->json(UserResource::make($user));
+        dd($request->validated());
+        $updatedUser = $this->userService->updateProfile($id, $request->validated());
+        return response()->json($updatedUser);
+
     }
 
     /**
@@ -79,7 +88,7 @@ class UserController extends Controller
      */
     public function destroy(int $id): Response
     {
-        $this->userManagementService->deleteProfile($id);
-        return response()->noContent(Response::HTTP_NO_CONTENT);
+        $this->userService->deleteProfile($id);
+        return response()->noContent();
     }
 }

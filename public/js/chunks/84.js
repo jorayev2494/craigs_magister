@@ -191,6 +191,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -216,7 +225,7 @@ __webpack_require__.r(__webpack_exports__);
         type: 'confirm',
         color: 'danger',
         title: "Confirm Delete",
-        text: "You are about to delete \"".concat(this.user_data.username, "\""),
+        text: "You are about to delete \"".concat(this.user_data.full_name, "\""),
         accept: this.deleteRecord,
         acceptText: "Delete"
       });
@@ -250,8 +259,8 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     var userId = this.$route.params.userId;
-    this.$store.dispatch("userManagement/fetchUser", userId).then(function (res) {
-      _this.user_data = res.data;
+    this.$store.dispatch("userManagement/fetchUser", userId).then(function (respose) {
+      _this.user_data = respose.data;
     })["catch"](function (err) {
       if (err.response.status === 404) {
         _this.user_not_found = true;
@@ -360,6 +369,7 @@ var render = function() {
             "span",
             [
               _c("span", [_vm._v("Check ")]),
+              _vm._v(" "),
               _c(
                 "router-link",
                 {
@@ -410,15 +420,23 @@ var render = function() {
                               _vm._v("Username")
                             ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.user_data.username))])
+                            _c("td", [_vm._v(_vm._s(_vm.user_data.full_name))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
                             _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Name")
+                              _vm._v("First name")
                             ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.user_data.name))])
+                            _c("td", [_vm._v(_vm._s(_vm.user_data.first_name))])
+                          ]),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c("td", { staticClass: "font-semibold" }, [
+                              _vm._v("Last name")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(_vm.user_data.last_name))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
@@ -442,10 +460,10 @@ var render = function() {
                         _c("table", [
                           _c("tr", [
                             _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Status")
+                              _vm._v("Actived")
                             ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.user_data.status))])
+                            _c("td", [_vm._v(_vm._s(_vm.user_data.active))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
@@ -482,7 +500,7 @@ var render = function() {
                               "icon-pack": "feather",
                               icon: "icon-edit",
                               to: {
-                                name: "app-user-edit",
+                                name: "admin-app-user-edit",
                                 params: { userId: _vm.$route.params.userId }
                               }
                             }
@@ -499,7 +517,11 @@ var render = function() {
                               "icon-pack": "feather",
                               icon: "icon-trash"
                             },
-                            on: { click: _vm.confirmDeleteRecord }
+                            on: {
+                              click: function($event) {
+                                return _vm.confirmDeleteRecord()
+                              }
+                            }
                           },
                           [_vm._v("Delete")]
                         )
@@ -549,34 +571,10 @@ var render = function() {
                           _vm._v(" "),
                           _c("tr", [
                             _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Languages")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(_vm.user_data.languages_known.join(", "))
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
                               _vm._v("Gender")
                             ]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(_vm.user_data.gender))])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Contact")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(_vm.user_data.contact_options.join(", "))
-                              )
-                            ])
                           ])
                         ])
                       ]
@@ -589,80 +587,10 @@ var render = function() {
                   "div",
                   { staticClass: "vx-col lg:w-1/2 w-full" },
                   [
-                    _c(
-                      "vx-card",
-                      {
-                        staticClass: "mb-base",
-                        attrs: { title: "Social Links" }
-                      },
-                      [
-                        _c("table", [
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Twitter")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.user_data.social_links.twitter))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Facebook")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(_vm.user_data.social_links.facebook)
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Instagram")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(_vm.user_data.social_links.instagram)
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Github")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.user_data.social_links.github))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("CodePen")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.user_data.social_links.codepen))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Slack")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.user_data.social_links.slack))
-                            ])
-                          ])
-                        ])
-                      ]
-                    )
+                    _c("vx-card", {
+                      staticClass: "mb-base",
+                      attrs: { title: "Social Links" }
+                    })
                   ],
                   1
                 )
@@ -715,7 +643,12 @@ var render = function() {
                                 staticClass:
                                   "font-semibold text-base text-left px-3 py-2"
                               },
-                              [_vm._v(_vm._s(heading))]
+                              [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(heading)
+                                )
+                              ]
                             )
                           }
                         ),
@@ -818,68 +751,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./resources/js/src/store/user-management/moduleUserManagementActions.js ***!
   \*******************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _axios_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/axios.js */ "./resources/js/src/axios.js");
-function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
-
-/*=========================================================================================
-  File Name: moduleCalendarActions.js
-  Description: Calendar Module Actions
-  ----------------------------------------------------------------------------------------
-  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-  Author: Pixinvent
-  Author URL: http://www.themeforest.net/user/pixinvent
-==========================================================================================*/
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  // addItem({ commit }, item) {
-  //   return new Promise((resolve, reject) => {
-  //     axios.post("/api/data-list/products/", {item: item})
-  //       .then((response) => {
-  //         commit('ADD_ITEM', Object.assign(item, {id: response.data.id}))
-  //         resolve(response)
-  //       })
-  //       .catch((error) => { reject(error) })
-  //   })
-  // },
-  fetchUsers: function fetchUsers(_ref) {
-    var commit = _ref.commit;
-    return new Promise(function (resolve, reject) {
-      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/admin/managements/users").then(function (response) {
-        window.console.log('Users: ', response.data);
-        commit('SET_USERS', response.data);
-        resolve(response);
-      })["catch"](function (error) {
-        reject(error);
-      });
-    });
-  },
-  fetchUser: function fetchUser(_ref2, userId) {
-    _objectDestructuringEmpty(_ref2);
-
-    return new Promise(function (resolve, reject) {
-      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/user-management/users/".concat(userId)).then(function (response) {
-        resolve(response);
-      })["catch"](function (error) {
-        reject(error);
-      });
-    });
-  },
-  removeRecord: function removeRecord(_ref3, userId) {
-    var commit = _ref3.commit;
-    return new Promise(function (resolve, reject) {
-      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/user-management/users/".concat(userId)).then(function (response) {
-        commit('REMOVE_RECORD', userId);
-        resolve(response);
-      })["catch"](function (error) {
-        reject(error);
-      });
-    });
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /home/jorayev2494/Рабочий стол/Diplom/Craigs/resources/js/src/store/user-management/moduleUserManagementActions.js: Unexpected token, expected \",\" (65:12)\n\n\u001b[0m \u001b[90m 63 | \u001b[39m                    resolve(response)\u001b[0m\n\u001b[0m \u001b[90m 64 | \u001b[39m                }\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 65 | \u001b[39m            })\u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m((error) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 66 | \u001b[39m                reject(error)\u001b[0m\n\u001b[0m \u001b[90m 67 | \u001b[39m            })\u001b[0m\n\u001b[0m \u001b[90m 68 | \u001b[39m        })\u001b[33m;\u001b[39m\u001b[0m\n    at Object._raise (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:766:17)\n    at Object.raiseWithData (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:759:17)\n    at Object.raise (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:753:17)\n    at Object.unexpected (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:8966:16)\n    at Object.expect (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:8952:28)\n    at Object.parseCallExpressionArguments (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:10033:14)\n    at Object.parseCoverCallAndAsyncArrowHead (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9960:29)\n    at Object.parseSubscript (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9896:19)\n    at Object.parseSubscripts (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9867:19)\n    at Object.parseExprSubscripts (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9850:17)\n    at Object.parseUpdate (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9824:21)\n    at Object.parseMaybeUnary (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9813:17)\n    at Object.parseExprOps (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9683:23)\n    at Object.parseMaybeConditional (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9657:23)\n    at Object.parseMaybeAssign (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9620:21)\n    at Object.parseExpressionBase (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9564:23)\n    at allowInAnd (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9558:39)\n    at Object.allowInAnd (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:11303:12)\n    at Object.parseExpression (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9558:17)\n    at Object.parseStatementContent (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:11562:23)\n    at Object.parseStatement (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:11431:17)\n    at Object.parseBlockOrModuleBlockBody (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:12013:25)\n    at Object.parseBlockBody (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:11999:10)\n    at Object.parseBlock (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:11983:10)\n    at Object.parseFunctionBody (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:10963:24)\n    at Object.parseArrowExpression (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:10932:10)\n    at Object.parseParenAndDistinguishExpression (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:10501:12)\n    at Object.parseExprAtom (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:10177:21)\n    at Object.parseExprAtom (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:4718:20)\n    at Object.parseExprSubscripts (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9844:23)\n    at Object.parseUpdate (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9824:21)\n    at Object.parseMaybeUnary (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9813:17)\n    at Object.parseExprOps (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9683:23)\n    at Object.parseMaybeConditional (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9657:23)\n    at Object.parseMaybeAssign (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9620:21)\n    at allowInAnd (/home/jorayev2494/Рабочий стол/Diplom/Craigs/node_modules/@babel/parser/lib/index.js:9586:39)");
 
 /***/ }),
 

@@ -28,3 +28,10 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.'], stati
     });
 });
 
+Route::group(['middleware' => 'auth:user', 'as' => 'user.'], static function(): void {
+    Route::group(['prefix' => 'profile', 'namespace' => 'Profile'], static function(): void {
+        Route::resource('/', 'ProfileController', ['exists' => ['store']]);
+        Route::post('/profiles/update_avatar/{id}', ['uses' => 'ProfileController@updateUserAvatar', 'as' => 'users.update.user.avatar']);
+    });
+});
+
