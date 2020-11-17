@@ -10,6 +10,8 @@ services:
         tty: true
         volumes: 
             - ../:/var/project
+        depends_on: 
+            - php
         links: 
             - php
         ports: 
@@ -26,6 +28,8 @@ services:
         tty: true
         volumes: 
             - ../:/var/project
+        depends_on: 
+            - mysql
         links: 
             - mysql
         networks: 
@@ -76,6 +80,20 @@ services:
             - ${REDIS_PORT}:6379
         networks: 
             - laravel-${COMPOSE_PROJECT_NAME}
+
+    # CRON Service
+    cron:
+        build:
+            context: ./cron
+            dockerfile: dockerfile
+        container_name: ${COMPOSE_PROJECT_NAME}_cron
+        restart: unless-stopped
+        volumes: 
+            - ../:/var/project
+        working_dir: /var/project
+        networks: 
+            - laravel-${COMPOSE_PROJECT_NAME}
+        
 
 networks: 
     laravel-craigs:

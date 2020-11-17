@@ -1,0 +1,22 @@
+FROM phpdockerio/php74-cli:latest
+WORKDIR /application
+
+# Fix debconf warnings upon build
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Install selected extensions and other stuff
+RUN apt-get update && apt-get install -y libmcrypt-dev php-pear php-dev
+RUN pecl install mcrypt-1.0.3
+RUN echo extension=mcrypt.so >> /etc/php/7.4/cli/conf.d/mcrypt.ini
+RUN apt-get update \
+    && apt-get -y --no-install-recommends install imagemagick php7.4-imagick php7.4-mysql php7.4-pgsql nano php7.4-gd php7.4-redis php7.4-bcmath php7.4-zmq cron \
+    && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+
+
+COPY ./ /var/project
+# RUN rm -rf /var/project/docker && chmod -R 777 /var/project/bootstrap && chmod -R 777 /var/project/storage
+
+COPY crontab-schedule /etc/cron.d/crontab-schedule
+RUN chmod 0644 /etc/cron.d/crontab-schedule
+RUN crontab /etc/cron.d/crontab-schedule
+CMD ["cron", "-f"]

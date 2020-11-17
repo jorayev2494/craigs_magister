@@ -1,0 +1,1 @@
+* * * * * php /var/project/artisan schedule:run >> /var/project/storage/logs/cron_schedule.log 2>&1
