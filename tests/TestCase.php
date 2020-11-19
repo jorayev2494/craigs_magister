@@ -3,10 +3,10 @@
 namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Test\Unit\Traits\AttachJwtToken;
+use Tests\Traits\AttachJwtToken;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
-    // use AttachJwtToken;
+    use AttachJwtToken;
 }

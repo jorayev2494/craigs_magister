@@ -36,6 +36,6 @@ class EmailConfirmationController extends Controller
 
         $this->adminService->confirmEmail($request->get('token', null));
         
-        return response()->noContent();        
+        return response()->noContent(Response::HTTP_ACCEPTED);        
     }
 }

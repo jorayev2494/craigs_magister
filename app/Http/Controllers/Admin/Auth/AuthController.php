@@ -32,7 +32,10 @@ final class AuthController extends Controller
      */
     public function register(RegisterRequest $request) : JsonResponse
     {
-        return response()->json($this->adminService->register($request->validated()));
+        return response()->json(
+            $this->adminService->register($request->validated()),
+            Response::HTTP_CREATED
+        );
     }
 
     /**

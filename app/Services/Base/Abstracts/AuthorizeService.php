@@ -57,6 +57,7 @@ abstract class AuthorizeService extends BaseModelService
      */
     public function register(array $data) : ?array
     {
+
         /**
          * @var object $emailConfirmation
          */
@@ -68,8 +69,8 @@ abstract class AuthorizeService extends BaseModelService
 
         DB::beginTransaction();
         try {
-            if ($this->model instanceof IBaseUserModel) {
-                $user = new $this->model($data);
+            if ($this->baseEloquentModelRepository->model instanceof IBaseUserModel) {
+                $user = new $this->baseEloquentModelRepository->model($data);
                 $user->save();
                 
                 if (!empty($user->email) && filter_var($user->email, FILTER_VALIDATE_EMAIL)) {
@@ -79,7 +80,7 @@ abstract class AuthorizeService extends BaseModelService
                         $emailConfirmation->delete();
                     }
 
-                    $confirmToken = Str::random($this->model::CONFIRM_TOKEN);
+                    $confirmToken = Str::random($this->baseEloquentModelRepository->model::CONFIRM_TOKEN);
                     $emailConfirmation = EmailConfirmation::query()->create([
                                                                                 'email' => $user->email,
                                                                                 'token' => $confirmToken
@@ -299,8 +300,8 @@ abstract class AuthorizeService extends BaseModelService
 
     protected function sendEmail(EmailConfirmation $emailConfirmation, Model $user) : void
     {
-        if ($this->model instanceof IBaseUserModel) {
-            Mail::to($user->email)->locale($this->model::DEFAULT_LANGUE)->queue(new RegistrationMail($emailConfirmation, $user, $this->getGuard()));
+        if ($this->baseEloquentModelRepository->model instanceof IBaseUserModel) {
+            Mail::to($user->email)->locale($this->baseEloquentModelRepository->model::DEFAULT_LANGUE)->queue(new RegistrationMail($emailConfirmation, $user, $this->getGuard()));
         } else {
             throw new ApplicationException('Base model must be implement ' . IBaseUserModel::class);
         }

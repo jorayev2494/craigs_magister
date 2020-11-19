@@ -41,7 +41,7 @@ class ForgotPasswordController extends Controller
     public function resetPassword(ResetPasswordRequest $request) : Response
     {
         $this->adminService->resetPassword($request->input('token', ''), $request->input('password', ''));
-        return response()->noContent();
+        return response()->noContent(Response::HTTP_ACCEPTED);
     }
 
 }

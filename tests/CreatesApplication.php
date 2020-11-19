@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Support\Facades\Artisan;
 
 trait CreatesApplication
 {
@@ -17,6 +18,10 @@ trait CreatesApplication
 
         $app->make(Kernel::class)->bootstrap();
 
+        Artisan::call('config:clear');
+        Artisan::call('cache:clear');
+
+        Artisan::call('migrate --seed');
         
 
         return $app;

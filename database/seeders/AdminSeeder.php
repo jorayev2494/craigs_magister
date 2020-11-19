@@ -23,7 +23,7 @@ class AdminSeeder extends Seeder
                 // 'phone' => 48648646846,
                 'avatar' => "avatar-s-{$key}.jpg",
                 'role_id' => $role->id,
-            ],)->create();
+            ])->create();
         }
     }
 }

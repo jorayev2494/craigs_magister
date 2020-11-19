@@ -15,20 +15,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', ['uses' => 'AdminController@admin', 'as' => 'index']);
 
-Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.'], static function() : void {
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.'], static function(): void {
     Route::post('/login', ['uses' => 'AuthController@login', 'as' => 'login']);
     Route::post('/register', ['uses' => 'AuthController@register', 'as' => 'register']);
     Route::post('/logout', ['uses' => 'AuthController@logout', 'as' => 'logout']);
     Route::get('/token/refresh', ['uses' => 'AuthController@refreshToken', 'as' => 'token_refresh']);
     Route::put('/email_confirmation', ['uses' => 'EmailConfirmationController', 'as' => 'email_confirmation']);
 
-    Route::group(['prefix' => 'forgot_password', 'middleware' => 'guest', 'as' => 'forgot_password.'], static function() : void {
+    Route::group(['prefix' => 'forgot_password', 'middleware' => 'guest', 'as' => 'forgot_password.'], static function(): void {
         Route::post('/email', ['uses' => 'ForgotPasswordController@sendResetTokenEmail', 'as' => 'send_reset_token_email']);
         Route::put('/reset', ['uses' => 'ForgotPasswordController@resetPassword', 'as' => 'reset_password']);
     });
 });
 
-Route::group(['prefix' => 'managements', 'middleware' => 'auth:admin', 'as' => 'management.'], static function() {
+Route::group(['prefix' => 'managements', 'middleware' => 'auth:admin', 'as' => 'management.'], static function(): void {
     Route::apiResource('/announcements', 'Management\Announcement\AnnouncementController', ['except' => ['update']]);
     Route::apiResource('/users', 'Management\UserController', ['except' => ['store']]);
     Route::post('/users/update_avatar/{id}', ['uses' => 'Management\UserController@updateUserAvatar', 'as' => 'users.update.user.avatar']);
