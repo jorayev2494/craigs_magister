@@ -1,5 +1,5 @@
 <template>
-    <h1>This is Index Component</h1>
+    <h1>This is Index Component daw</h1>
 </template>
 
 <script>

@@ -10,24 +10,17 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
-use Tests\Traits\AttachJwtToken;
 use Tests\TestCase;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthenticateTest extends TestCase
 {
     use RefreshDatabase;
-    // use AttachJwtToken;
 
     /**
     * @var string $email
     */
     private string $email = 'admin@gmail.com';
 
-    /**
-    * @var string $password
-    */
-    private string $password = '476674';
 
     /**
     * @var string $emailConfirmationToken
@@ -179,8 +172,5 @@ class AuthenticateTest extends TestCase
             'email' => $this->email,
             'token' => $this->passwordResetToken
         ]);
-    }
-    
-    
-    
+    }   
 }

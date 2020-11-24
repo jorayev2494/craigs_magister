@@ -13,7 +13,7 @@ use Illuminate\Pipeline\Pipeline;
 
 abstract class BaseEloquentModelRepository implements BaseRepositoryInterface
 {
-    use EloquentCRUDTrait;
+    // use EloquentCRUDTrait;
     use EloquentBasicMethodsTrait;
 
     /**
@@ -63,4 +63,63 @@ abstract class BaseEloquentModelRepository implements BaseRepositoryInterface
 
         return clone $this->model;
     }
+
+    #region CRUD
+    /**
+     * Service Create
+     * @param array $data
+     * @return mixed
+     */
+    public function create(array $data): Model
+    {
+        // return $this->getModelClone()->newQuery()->create($data);
+        
+        // $model = $this->getModelClone()->newInstance();
+        // $model->fill($data)->save();
+        // return $model;
+
+        return tap(
+            $this->getModelClone()->newInstance(), 
+            fn(Model $instancedModel) => $instancedModel->fill($data)->save()
+        );
+    }
+
+    /**
+     * Service Update
+     *
+     * @param integer $id
+     * @param array $data
+     * @return boolean
+     */
+    public function update(int $id, array $data): Model
+    {
+        if (array_key_exists('id', $data)) 
+            unset($data['id']);
+
+        // /**
+        //  * @var Model $foundModel
+        //  */
+        // $foundModel = $this->getModelClone()->newQuery()->findOrFail($id);
+        // // $foundModel->update($data);
+        // $foundModel->fill($data)->save();
+        // return $foundModel;
+
+        return tap(
+            $this->getModelClone()->newQuery()->findOrFail($id), 
+            fn(Model $foundModel) => $foundModel->fill($data)->save()
+        );
+    }
+
+    /**
+     * Service Delete
+     *
+     * @param integer $id
+     * @return boolean
+     */
+    public function delete(int $id): bool
+    {
+        $model = $this->getModelClone()->newQuery()->findOrFail($id);
+        return $model->delete();
+    }
+    #endregion
 }

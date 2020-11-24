@@ -7,7 +7,31 @@
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+
+        "client-dev": "npm run client-development",
+        "client-development": "cross-env process.env.section=client NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+
+        "client-watch": "npm run client-development -- --watch",
+        "client-watch-poll": "npm run client-watch -- --watch-poll",
+
+        "client-hot": "cross-env process.env.section=client NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+
+        "client-prod": "npm run client-production",
+        "client-production": "cross-env process.env.section=client NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        
+
+
+        "admin-dev": "npm run admin-development",
+        "admin-development": "cross-env process.env.section=admin NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+
+        "admin-watch": "npm run admin-development -- --watch",
+        "admin-watch-poll": "npm run admin-watch -- --watch-poll",
+
+        "admin-hot": "cross-env process.env.section=admin NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+
+        "admin-prod": "npm run admin-production",
+        "admin-production": "cross-env process.env.section=admin NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "babel": {
         "presets": [

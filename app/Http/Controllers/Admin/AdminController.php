@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 
 class AdminController extends Controller
 {
-    public function admin() : JsonResponse
+    public function admin(): JsonResponse
     {
         return response()->json([
             'users' => User::all(),

@@ -21,8 +21,7 @@ class UserService extends AuthorizeService
     public UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository) {
-        parent::__construct($userRepository);
-        $this->userRepository = $userRepository;
+        $this->userRepository = $this->instanceCallerEloquentRepository($userRepository);
     }
 
     public function getGuard(): string

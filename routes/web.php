@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+// https://github.com/JeffreyWay/laravel-mix/issues/1783
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

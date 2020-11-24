@@ -20,18 +20,20 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.'], stati
     Route::post('/register', ['uses' => 'AuthController@register', 'as' => 'register']);
     Route::post('/logout', ['uses' => 'AuthController@logout', 'as' => 'logout']) ;
     Route::get('/token/refresh', ['uses' => 'AuthController@refreshToken', 'as' => 'token_refresh']);
-    Route::put('email_confirmation', ['uses' => 'EmailConfirmationController', 'as' => 'email_confirmation']);
+    Route::put('/email_confirmation', ['uses' => 'EmailConfirmationController', 'as' => 'email_confirmation']);
 
-    Route::group(['prefix' => 'forgot_password', 'middleware' => 'guest', 'as' => 'forgot_password'], static function() : void {
+    Route::group(['prefix' => 'forgot_password', 'middleware' => 'guest', 'as' => 'forgot_password.'], static function() : void {
         Route::post('/email', ['uses' => 'ForgotPasswordController@sendResetTokenEmail', 'as' => 'send_reset_token_email']);
         Route::put('/reset', ['uses' => 'ForgotPasswordController@resetPassword', 'as' => 'reset_password']);
     });
 });
 
-Route::group(['middleware' => 'auth:user', 'as' => 'user.'], static function(): void {
-    Route::group(['prefix' => 'profile', 'namespace' => 'Profile'], static function(): void {
-        Route::resource('/', 'ProfileController', ['exists' => ['store']]);
-        Route::post('/profiles/update_avatar/{id}', ['uses' => 'ProfileController@updateUserAvatar', 'as' => 'users.update.user.avatar']);
+Route::group(['middleware' => 'auth:user'], static function(): void {
+    Route::group(['prefix' => 'profile', 'namespace' => 'Profile', 'as' => 'profile.'], static function(): void {
+        Route::get('/', ['uses' => 'ProfileController@profileShow', 'as' => 'show']);
+        Route::put('/', ['uses' => 'ProfileController@profileUpdate', 'as' => 'update']);
+        Route::delete('/', ['uses' => 'ProfileController@profileDestroy', 'as' => 'delete']);
+        Route::post('/', ['uses' => 'ProfileController@updateUserAvatar', 'as' => 'update.avatar']);
     });
 });
 

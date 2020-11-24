@@ -17,7 +17,7 @@ class ProfileUpdateRequest extends APIFormRequest
      */
     public function authorize(): bool
     {
-        return true;    //  Auth::guard(IBaseAppGuards::USER)->check();
+        return Auth::guard(IBaseAppGuards::USER)->check();
     }
 
     /**
@@ -27,11 +27,10 @@ class ProfileUpdateRequest extends APIFormRequest
      */
     public function rules(): array
     {
-        dd($this->all());
         return [
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
-            'email' => 'exclude_if:email,|email|unique:users,email,' . $this->user()->id(),
+            // 'email' => 'exclude_if:email,|email|unique:users,email,' . auth()->guard(IBaseAppGuards::USER)->id(),
             'phone' => 'regex:' . IBaseUserModel::REGEX_PHONE,
             'email_confirmed' => 'exclude_if:email_confirmed,|boolean',
             'active' => 'boolean',

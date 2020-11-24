@@ -1,4 +1,14 @@
 version: "3.7"
+
+x-php_cli: &queue_worker_cli
+    build: 
+        context: ./queue_worker
+        dockerfile: dockerfile
+    restart: unless-stopped    
+    working_dir: /var/project
+    volumes: 
+        - ../../:/var/project
+
 services: 
     # Nginx Service
     ngx:
@@ -93,7 +103,30 @@ services:
         working_dir: /var/project
         networks: 
             - laravel-${COMPOSE_PROJECT_NAME}
-        
+    
+    # Queue Worker
+    queue_worker:
+        <<: *queue_worker_cli
+        container_name: ${COMPOSE_PROJECT_NAME}_queue_worker
+        command: ['php', 'artisan', 'queue:work', '--sleep=1', '--queue=default']
+        networks: 
+            - laravel-${COMPOSE_PROJECT_NAME}
+    
+    # Queue Worker Emails
+    queue_worker_email:
+        <<: *queue_worker_cli
+        container_name: ${COMPOSE_PROJECT_NAME}_queue_worker_email
+        command: ['php', 'artisan', 'queue:work', '--sleep=2', '--queue=emails']
+        networks: 
+            - laravel-${COMPOSE_PROJECT_NAME}
+
+    # Queue Worker Jobs
+    queue_worker_job:
+        <<: *queue_worker_cli
+        container_name: ${COMPOSE_PROJECT_NAME}_queue_worker_job
+        command: ['php', 'artisan', 'queue:work', '--sleep=3', '--queue=jobs']
+        networks: 
+            - laravel-${COMPOSE_PROJECT_NAME}
 
 networks: 
     laravel-craigs:

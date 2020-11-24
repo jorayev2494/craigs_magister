@@ -16,7 +16,10 @@ trait EloquentCRUDTrait
      */
     public function create(array $data): Model
     {
-        return $this->getModelClone()->newQuery()->create($data);
+        // return $this->getModelClone()->newQuery()->create($data);
+        $model = $this->getModelClone()->newInstance();
+        $model->fill($data)->save();
+        return $model;
     }
 
     /**
@@ -35,7 +38,8 @@ trait EloquentCRUDTrait
          * @var Model $foundModel
          */
         $foundModel = $this->getModelClone()->newQuery()->findOrFail($id);
-        $foundModel->update($data);
+        // $foundModel->update($data);
+        $foundModel->fill($data)->save();
         return $foundModel;
     }
 
@@ -47,7 +51,7 @@ trait EloquentCRUDTrait
      */
     public function delete(int $id): bool
     {
-        $model = $this->getModelClone()->newQuery()->find($id);
+        $model = $this->getModelClone()->newQuery()->findOrFail($id);
         return $model->delete();
     }
 }

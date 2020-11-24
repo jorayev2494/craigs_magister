@@ -2043,7 +2043,7 @@
             </section>
             <a class="scrollToHome text-thm3" href="#"><i class="flaticon-arrows"></i></a>
         </div>
-        <script src="{{ asset(mix('js/app.js')) }}"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
         <!-- Wrapper End -->
         {{--  <script data-cfasync="false" src="{{ asset('client') }}/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>  --}}
         <script type="text/javascript" src="{{ asset('client') }}/js/jquery-3.3.1.js"></script>

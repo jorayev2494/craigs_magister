@@ -24,6 +24,21 @@ trait AttachJwtToken
     protected ?User $loginUser;
 
     /**
+    * @var string $adminEmail
+    */
+    protected string $adminEmail = 'adminTF@gmail.com';
+
+    /**
+    * @var string $userEmail
+    */
+    protected string $userEmail = 'userTF@gmail.com';
+
+    /**
+    * @var string $password
+    */
+    protected string $password = '476674';
+
+    /**
     * @var array $data
     */
     private array $data = [];
@@ -36,15 +51,15 @@ trait AttachJwtToken
 
     public function get(): Model
     {
-        return $this->loginUser ? $this->loginUser : $this->loginAdmin;
+        return $this->loginUser ?? $this->loginAdmin;
     }
 
     public function actingAsAdmin(Admin $admin = null, array $data = []): self
     {
-        $this->loginUser = null;
+        $this->freshAuth();
         $this->loginAdmin = $admin ?: Admin::factory(
                                         array_merge([
-                                                'email' => "adminTF@gmail.com", 
+                                                'email' => $this->adminEmail, 
                                                 'password' => '476674', 
                                                 // 'phone' => 48648646846,
                                                 'avatar' => "avatar-s-3.jpg",
@@ -56,11 +71,11 @@ trait AttachJwtToken
 
     public function actingAsUser(User $user = null, array $data = []): self
     {
-        $this->loginAdmin = null;
+        $this->freshAuth();
         $this->loginUser = $user ?: User::factory(
                                         array_merge([
-                                                'email' => "userTF@gmail.com",
-                                                'password' => '476674',
+                                                'email' => $this->userEmail,
+                                                'password' => $this->password,
                                                 'avatar' => "avatar-s-3.jpg",
                                             ], $data
                                         ))->create();
@@ -69,15 +84,31 @@ trait AttachJwtToken
 
     protected function getJwtToken(): string
     {
-        $authUser = $this->loginUser ? $this->loginUser : $this->loginAdmin;
-        return JWTAuth::fromUser($authUser);
+        // $authUser = $this->loginUser ? $this->loginUser : $this->loginAdmin;
+        return JWTAuth::fromUser($this->get());
     }
 
-    protected function getHeaderJwtToken(string $loginAs = null): array
+    protected function getHeaderJwtToken(bool $withAuthData = false): array
     {
-        return $this->transformHeadersToServerVars([
-            'Authorization' => 'Bearer ' . $this->getJwtToken($loginAs),
-        ]);
+        $authData = [];
+
+        if ($withAuthData) {
+            $authData = [
+                'data' => $this->get()
+            ];
+        }
+
+        return array_merge(
+                $this->transformHeadersToServerVars([
+                    'Authorization' => 'Bearer ' . $this->getJwtToken(),
+                ]),
+                $authData
+            );
+    }
+
+    private function freshAuth(): void
+    {
+        $this->loginUser = $this->loginAdmin = null;
     }
 
 }

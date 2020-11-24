@@ -60,7 +60,7 @@ final class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id): JsonResponse
+    public function profileShow(): JsonResponse
     {
         return response()->json(UserResource::make($this->authUser));
     }
@@ -72,12 +72,10 @@ final class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfileUpdateRequest $request, int $id): JsonResponse
+    public function profileUpdate(ProfileUpdateRequest $request): JsonResponse
     {
-        dd($request->validated());
-        $updatedUser = $this->userService->updateProfile($id, $request->validated());
+        $updatedUser = $this->userService->userRepository->update($this->authUser->id, $request->validated());
         return response()->json($updatedUser);
-
     }
 
     /**
@@ -86,9 +84,9 @@ final class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id): Response
+    public function profileDestroy(): Response
     {
-        $this->userService->deleteProfile($id);
+        $this->userService->deleteProfile($this->authUser->id);
         return response()->noContent();
     }
 }
