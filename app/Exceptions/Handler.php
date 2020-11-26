@@ -48,6 +48,8 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
 
+        // dd($exception->getMessage());
+
         if ($exception instanceof AlreadyCreatedException) {
             return response($this->errorResponse($exception->getMessage()), Response::HTTP_FORBIDDEN);
         }

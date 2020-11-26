@@ -133,6 +133,9 @@
     "user_already_exist_is_already_created": "Пользователь уже существует, уже создан",
     "reset_link_sent_email": "Сбросить ссылку отправлено письмо",
 
+    "managements": "Управления",
+    "users": "Пользователи",
+
     "server_validation": {
         "email_not_exist": "Электронная почта не существует",
         "the_email_field_is_required": "Поле электронной почты обязательно для заполнения",

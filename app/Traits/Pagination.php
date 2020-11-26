@@ -3,7 +3,9 @@
 namespace App\Traits;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 
 /**
  * Trait Pagination
@@ -53,5 +55,16 @@ trait Pagination
         Paginator::currentPageResolver(function() {
             return $this->currentPage;
         });
+
     }    
+
+    protected function getDataForResponse(Collection $collection): LengthAwarePaginator
+    {
+        return new LengthAwarePaginator(
+            $collection->forPage($this->currentPage, $this->perPage)->values(),
+            $collection->count(),
+            $this->perPage,
+            $this->currentPage
+        );
+    }
 }

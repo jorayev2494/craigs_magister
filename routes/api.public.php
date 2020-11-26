@@ -17,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'server', 'namespace' => 'Server'], static function() {
     Route::get('/countries', ['uses' => 'ServerPublicDataController@countries']);
     Route::get('/cities', ['uses' => 'ServerPublicDataController@cities']);
+    Route::get('/categories', ['uses' => 'ServerPublicDataController@categories']);
 });
+
+Route::get('/announcements', ['uses' => 'AnnouncementController@index', 'as' => 'announcements']);

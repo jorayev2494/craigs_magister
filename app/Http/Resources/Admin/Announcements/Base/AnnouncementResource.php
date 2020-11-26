@@ -14,7 +14,6 @@ class AnnouncementResource extends JsonResource
      */
     public function toArray($request)
     {
-        // dd($this);
         return [
             'title'             => $this->title,
         ];

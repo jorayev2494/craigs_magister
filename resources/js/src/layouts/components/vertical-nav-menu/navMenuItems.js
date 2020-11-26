@@ -114,27 +114,27 @@ export default [
             },
             {
                 url: null,
-                name: "User",
+                name: "Managements",
                 icon: "UserIcon",
-                i18n: "User",
+                i18n: "managements",
                 submenu: [{
                         url: '/admin/apps/user/user-list',
-                        name: "List",
+                        name: "Users",
                         slug: "admin-app-user-list",
-                        i18n: "List",
+                        i18n: "users",
                     },
-                    {
-                        url: '/admin/apps/user/user-view/268',
-                        name: "View",
-                        slug: "admin-app-user-view",
-                        i18n: "View",
-                    },
-                    {
-                        url: '/admin/apps/user/user-edit/268',
-                        name: "Edit",
-                        slug: "admin-app-user-edit",
-                        i18n: "Edit",
-                    },
+                    // {
+                    //     url: '/admin/apps/user/user-view/268',
+                    //     name: "View",
+                    //     slug: "admin-app-user-view",
+                    //     i18n: "View",
+                    // },
+                    // {
+                    //     url: '/admin/apps/user/user-edit/268',
+                    //     name: "Edit",
+                    //     slug: "admin-app-user-edit",
+                    //     i18n: "Edit",
+                    // },
                 ]
             },
         ]

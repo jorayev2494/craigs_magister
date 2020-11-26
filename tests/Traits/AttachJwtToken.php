@@ -90,25 +90,25 @@ trait AttachJwtToken
 
     protected function getHeaderJwtToken(bool $withAuthData = false): array
     {
-        $authData = [];
+        $authBearerToken = $this->transformHeadersToServerVars(
+            ['Authorization' => 'Bearer ' . $this->getJwtToken()]
+        );
 
         if ($withAuthData) {
-            $authData = [
-                'data' => $this->get()
-            ];
+            $authBearerToken = array_merge(
+                $authBearerToken, 
+                [
+                    'header_access_token' => $authBearerToken,
+                    'data' => $this->get()
+                ]
+            );
         }
 
-        return array_merge(
-                $this->transformHeadersToServerVars([
-                    'Authorization' => 'Bearer ' . $this->getJwtToken(),
-                ]),
-                $authData
-            );
+        return $authBearerToken;
     }
 
     private function freshAuth(): void
     {
         $this->loginUser = $this->loginAdmin = null;
     }
-
 }

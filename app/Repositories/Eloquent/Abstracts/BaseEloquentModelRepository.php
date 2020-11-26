@@ -6,9 +6,9 @@ use App\Exceptions\ServiceException;
 use App\Repositories\BaseRepositoryInterface;
 use App\Repositories\Eloquent\Traits\EloquentBasicMethodsTrait;
 use App\Repositories\Eloquent\Traits\EloquentCRUDTrait;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Application;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pipeline\Pipeline;
 
 abstract class BaseEloquentModelRepository implements BaseRepositoryInterface
@@ -122,4 +122,18 @@ abstract class BaseEloquentModelRepository implements BaseRepositoryInterface
         return $model->delete();
     }
     #endregion
+
+    // /**
+    //  * @param int $perPage
+    //  * @param string[] $columns
+    //  * @param array $relations
+    //  * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|mixed
+    //  * @throws \ReflectionException
+    //  */
+    // public function paginate($perPage = 15, $columns = ['*'], $relations = ['*']): LengthAwarePaginator
+    // {
+    //     // $relations = $this->checkRelations($relations);
+
+    //     return $this->getModelClone()->newQuery()->paginate($perPage, $columns);
+    // }
 }

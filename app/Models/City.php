@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Announcements\Base\Announcement;
 use App\Models\Interfaces\IBaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -51,5 +52,10 @@ class City extends Model
     public function users(): HasMany
     {
         return $this->hasMany(User::class, 'location_city_id', 'id');
+    }
+
+    public function announcements(): HasMany
+    {
+        return $this->hasMany(Announcement::class, 'location_city_id', 'id');
     }
 }

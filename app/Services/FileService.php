@@ -25,6 +25,10 @@ class FileService
 
     public function updateFile(string $path, string $deleteFileName, UploadedFile $file, string $disc = self::DISK_PUBLIC): string
     {
+        if (Str::contains($deleteFileName, $path)) {
+            $deleteFileName = str_replace($path, null, $deleteFileName);
+        }
+
         $this->deleteFile($path, $deleteFileName, $disc);
         return $this->uploadFile($path, $file, $disc);
     }
@@ -32,7 +36,7 @@ class FileService
     public function deleteFile(string $path, string $fileName, string $disc = self::DISK_PUBLIC): bool
     {
         if (!Str::contains($fileName, '/default.') && Storage::disk($disc)->exists($path)) {
-            return Storage::disk(self::DISK_PUBLIC)->delete($fileName);
+            return Storage::disk(self::DISK_PUBLIC)->delete($path . $fileName);
         }
 
         return true;

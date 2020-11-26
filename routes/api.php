@@ -29,6 +29,10 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.'], stati
 });
 
 Route::group(['middleware' => 'auth:user'], static function(): void {
+    Route::group(['prefix' => 'my', 'as' => 'my.'], static function(): void {
+        Route::apiResource('/announcements', 'Announcements\AnnouncementController');
+    });
+    
     Route::group(['prefix' => 'profile', 'namespace' => 'Profile', 'as' => 'profile.'], static function(): void {
         Route::get('/', ['uses' => 'ProfileController@profileShow', 'as' => 'show']);
         Route::put('/', ['uses' => 'ProfileController@profileUpdate', 'as' => 'update']);

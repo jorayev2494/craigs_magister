@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Server;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\CountryResource;
+use App\Services\CategoryService;
 use App\Services\CityService;
 use App\Services\CountryService;
 use Illuminate\Http\JsonResponse;
@@ -21,5 +23,11 @@ class ServerPublicDataController extends Controller
     {
         $cities = $cityService->cityEloquentRepository->getNotBlocked();
         return response()->json(CityResource::collection($cities));
+    }
+
+    public function categories(CategoryService $categoryService): JsonResponse
+    {
+        $categories = $categoryService->categoryEloquentRepository->getNotBlocked();
+        return response()->json(CategoryResource::collection($categories));
     }
 }

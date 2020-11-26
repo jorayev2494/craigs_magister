@@ -3,6 +3,7 @@
 namespace App\Pipelines\Database\QueryFilters\Abstracts;
 
 use Closure;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -14,6 +15,11 @@ abstract class FilterAbstract
     */
     protected ?Request $request;
 
+    /**
+    * @var string $field
+    */
+    protected ?string $field;
+
     public function __construct(Request $request) {
         $this->request = $request;
     }
@@ -22,7 +28,13 @@ abstract class FilterAbstract
 
     public function handle(Builder $qb, Closure $next): Builder
     {
-        $this->request->whenFilled($this->filterName(), fn() => $this->applyFilter($qb));
+        $this->field = $this->request->query($this->filterName(), 'id');
+
+        if ($this->field == 'id' || $qb->getModel()->isFillable($this->field)) {
+            $this->request->whenFilled($this->filterName(), fn() => $this->applyFilter($qb));
+        } else {
+            throw new Exception("Field {$this->field} not fount");
+        }
         return $next($qb);
     }
 

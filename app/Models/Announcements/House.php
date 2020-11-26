@@ -26,6 +26,15 @@ class House extends Model
         'quantity_rooms'
     ];
 
+    public const VALIDATION_RULES = [
+        'total_area' => 'required|string',
+        'exchange_possibility' => 'required|string',
+        'property_type' => 'required|string',
+        'number_of_storeys' => 'required|integer',
+        'floor' => 'required|integer',
+        'quantity_rooms' => 'required|integer',
+    ];
+
     public function announcement(): BelongsTo 
     {
         return $this->belongsTo(Concrete::class, 'body_id', 'id');

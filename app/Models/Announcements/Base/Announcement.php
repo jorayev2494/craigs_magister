@@ -2,7 +2,10 @@
 
 namespace App\Models\Announcements\Base;
 
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Interfaces\IBaseModel;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,6 +25,22 @@ class Announcement extends Model
     public const PRICE_PER_DAY = 'day';
     public const PRICE_PER_MONTH = 'month';
     public const PRICE_PER_YEAR = 'year';
+
+    public const CONCRETE_PREFIX = 'concrete';
+
+    public const IMAGE_MIMES = [
+        'jpg',
+        'jpeg',
+        'png',
+        'gif'
+    ];
+
+    public const PRICE_PERMISSIONS = [
+        self::PRICE_PER_HOUR,
+        self::PRICE_PER_DAY,
+        self::PRICE_PER_MONTH,
+        self::PRICE_PER_YEAR,
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -65,6 +84,18 @@ class Announcement extends Model
         // 'concrete'
     ];
 
+    public function getImagePath(): string
+    {
+        $className = $this->category->getConcreteModel();
+        return '/images/announcement/' . strtolower(class_basename($className)) . '/';
+    }
+
+    public function getRateAttribute(): float
+    {
+        $rate = $this->attributes['rate'] ?: 0;
+        return number_format($rate, 1, '.', ',') ;
+    }
+
     public function setImagesAttribute(array $images): void
     {
         $value = json_encode($images, JSON_FORCE_OBJECT);
@@ -73,7 +104,7 @@ class Announcement extends Model
 
     public function getImagesAttribute()
     {
-        return json_decode($this->attributes['images'], !true);
+        return json_decode($this->attributes['images'], true);
     }
 
     public function creator(): BelongsTo
@@ -89,6 +120,16 @@ class Announcement extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'location_country_id', 'id');
+    }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class, 'location_city_id', 'id');
     }
 
 }
