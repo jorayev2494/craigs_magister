@@ -30,8 +30,8 @@ class AnnouncementsSeeder extends Seeder
             $user->announcements()->saveMany(
                 Announcement::factory()->count(rand(1, 15))->make([
                                                                     'category_id' => $categories->random()->id,
-                                                                    'location_country_id' => $countries->random()->id,
-                                                                    'location_city_id' => $cities->random()->id
+                                                                    'country_id' => $countries->random()->id,
+                                                                    'city_id' => $cities->random()->id
                                                                 ])
             );
         });

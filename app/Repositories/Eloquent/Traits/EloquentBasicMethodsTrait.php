@@ -82,4 +82,17 @@ trait EloquentBasicMethodsTrait
 
         return $pipeline;
     }
+
+    public function getBySortedQuery(): Collection
+    {
+        $pipeline = $this->getInstancePipeline()
+                    ->send($this->getModelClone()->newQuery())
+                    ->through(
+                        \App\Pipelines\Database\QueryFilters\Sort::class
+                    )
+                    ->thenReturn()
+                    ->get();
+
+        return $pipeline;
+    }
 }

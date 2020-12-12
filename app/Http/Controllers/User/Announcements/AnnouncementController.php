@@ -9,11 +9,15 @@ use App\Http\Resources\Announcements\AnnouncementResource;
 use App\Models\Announcements\Base\Announcement;
 use App\Models\User;
 use App\Services\Announcements\Base\AnnouncementService;
+use App\Traits\Pagination;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class AnnouncementController extends Controller
 {
+
+    use Pagination;
 
     /**
     * @var User $authUser
@@ -36,13 +40,13 @@ class AnnouncementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         $this->authorize('viewAny', Announcement::class);
+        $this->resolvePaginate($request);
         $announcements = $this->authUser->announcements;
-        return response()->json(
-            AnnouncementResource::collection($announcements)
-        );
+        $announcementsPaginate = $this->getDataForResponse(AnnouncementResource::collection($announcements->sortByDesc('created_at')));
+        return response()->json($announcementsPaginate);
     }
 
     /**

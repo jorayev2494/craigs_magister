@@ -123,6 +123,12 @@ export default [
                         slug: "admin-app-user-list",
                         i18n: "users",
                     },
+                    {
+                        url: '/admin/announcements',
+                        name: "announcements",
+                        slug: "admin-announcements",
+                        i18n: "announcements",
+                    }
                     // {
                     //     url: '/admin/apps/user/user-view/268',
                     //     name: "View",

@@ -28,7 +28,7 @@ class House extends Model
 
     public const VALIDATION_RULES = [
         'total_area' => 'required|string',
-        'exchange_possibility' => 'required|string',
+        'exchange_possibility' => 'nullable|boolean',
         'property_type' => 'required|string',
         'number_of_storeys' => 'required|integer',
         'floor' => 'required|integer',
@@ -40,4 +40,8 @@ class House extends Model
         return $this->belongsTo(Concrete::class, 'body_id', 'id');
     }
 
+    public function getExchangePossibilityAttribute(): string
+    {
+        return $this->attributes['exchange_possibility'] == true ? 'yes' : 'no';
+    }
 }

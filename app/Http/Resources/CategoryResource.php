@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Interfaces\IBaseModel;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
@@ -14,6 +15,11 @@ class CategoryResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'created_at' => $this->created_at->format(IBaseModel::FORMAT_VALIDATE),
+            'updated_at' => $this->updated_at->format(IBaseModel::FORMAT_VALIDATE),
+        ];
     }
 }

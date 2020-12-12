@@ -28,8 +28,14 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.'], stati
     });
 });
 
-Route::group(['prefix' => 'managements', 'middleware' => 'auth:admin', 'as' => 'management.'], static function(): void {
-    Route::apiResource('/announcements', 'Management\Announcement\AnnouncementController', ['except' => ['update']]);
-    Route::apiResource('/users', 'Management\UserController', ['except' => ['store']]);
-    Route::post('/users/update_avatar/{id}', ['uses' => 'Management\UserController@updateUserAvatar', 'as' => 'users.update.user_avatar']);
+
+Route::group(['middleware' => 'auth:admin'], static function(): void {    
+    Route::group(['prefix' => 'managements', 'namespace' => 'Management', 'as' => 'management.'], static function(): void {
+        Route::apiResource('/announcements', 'Announcement\AnnouncementController', ['except' => ['store']]);
+        Route::put('/announcements/change_status/{id}', ['uses' => 'Announcement\AnnouncementChangeStatusController', 'as' => 'change_status']);
+        Route::apiResource('/users', 'UserController', ['except' => ['store']]);
+        Route::post('/users/update_avatar/{id}', ['uses' => 'UserController@updateUserAvatar', 'as' => 'users.update.user_avatar']);
+    });
+
+    Route::apiResource('/blogs', 'BlogController');
 });

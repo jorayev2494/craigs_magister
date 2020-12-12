@@ -9,6 +9,19 @@ x-php_cli: &queue_worker_cli
     volumes: 
         - ../../:/var/project
 
+x-ngx_proxy: &proxy_server
+    build: 
+        context: ./nginx_proxy
+        dockerfile: dockerfile
+    container_name: ${COMPOSE_PROJECT_NAME}_ngx_proxy
+    restart: unless-stopped
+    volumes: 
+        - ../:/var/project
+    depends_on: 
+        - ngx
+    links: 
+        - ngx
+
 services: 
     # Nginx Service
     ngx:
@@ -26,6 +39,14 @@ services:
             - php
         ports: 
             - ${NGX_PORT}:80
+            # - 8888:8888
+        networks: 
+            - laravel-${COMPOSE_PROJECT_NAME}
+
+    ngx_proxy_imgs:
+        <<: *proxy_server
+        ports: 
+            - 9999:8888
         networks: 
             - laravel-${COMPOSE_PROJECT_NAME}
 

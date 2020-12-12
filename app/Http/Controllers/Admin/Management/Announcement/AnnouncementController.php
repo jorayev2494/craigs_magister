@@ -3,22 +3,25 @@
 namespace App\Http\Controllers\Admin\Management\Announcement;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Management\Announcements\AnnouncementManagementUpdateRequest;
+use App\Http\Resources\Announcements\AnnouncementResource;
+use App\Services\Admin\Management\AnnouncementManagementService;
 use App\Services\Announcements\Base\AnnouncementService;
 use App\Services\Base\Interfaces\IBaseAppGuards;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class AnnouncementController extends Controller
+final class AnnouncementController extends Controller
 {
 
     /**
-    * @var AnnouncementService $announcementService
+    * @var AnnouncementManagementService $announcementManagementService
     */
-    private AnnouncementService $announcementService;
+    private AnnouncementManagementService $announcementManagementService;
 
-    public function __construct(AnnouncementService $announcementService) {
-        $this->announcementService = $announcementService;
+    public function __construct(AnnouncementManagementService $announcementManagementService) {
+        $this->announcementManagementService = $announcementManagementService;
         $this->middleware(['auth:' . IBaseAppGuards::ADMIN]);
     }
 
@@ -29,19 +32,9 @@ class AnnouncementController extends Controller
      */
     public function index(): JsonResponse
     {
-        $announcements = $this->announcementService->announcementRepository->all();
-        return response()->json($announcements);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $announcements = $this->announcementManagementService->announcementEloquentRepository->getBySortedQuery()->sortByDesc('created_at');
+        // $this->authorize('viewAny');
+        return response()->json(AnnouncementResource::collection($announcements));
     }
 
     /**
@@ -50,9 +43,11 @@ class AnnouncementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id): JsonResponse
     {
-        //
+        $foundAnnouncement = $this->announcementManagementService->announcementEloquentRepository->find($id);
+        $this->authorize('view', $foundAnnouncement);
+        return response()->json(AnnouncementResource::make($foundAnnouncement));
     }
 
     /**
@@ -62,9 +57,16 @@ class AnnouncementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AnnouncementManagementUpdateRequest $request, int $id): Response
     {
-        //
+        $foundAnnouncement = $this->announcementManagementService->announcementEloquentRepository->find($id);
+        $this->authorize('update', $foundAnnouncement);
+        $this->announcementManagementService->update(
+            $foundAnnouncement->creator, 
+            $foundAnnouncement->id, 
+            $request->validated()
+        );
+        return response()->noContent();
     }
 
     /**
@@ -73,8 +75,14 @@ class AnnouncementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id): Response
     {
-        //
+        $foundAnnouncement = $this->announcementManagementService->announcementEloquentRepository->find($id);
+        $this->authorize('delete', $foundAnnouncement);
+        $this->announcementManagementService->destroyByAuthorAnnouncement(
+            $foundAnnouncement->creator, 
+            $foundAnnouncement->id
+        );
+        return response()->noContent();
     }
 }

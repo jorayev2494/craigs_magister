@@ -34,8 +34,8 @@ class ProfileUpdateRequest extends APIFormRequest
             'phone' => 'regex:' . IBaseUserModel::REGEX_PHONE,
             'email_confirmed' => 'exclude_if:email_confirmed,|boolean',
             'active' => 'boolean',
-            'location_country_id' => 'required|integer|exists:countries,id',
-            'location_city_id' => 'required|integer|exists:cities,id',
+            'location_country_id' => 'nullable|integer|exists:countries,id',
+            'location_city_id' => 'nullable|integer|exists:cities,id',
             'unblock_date'  => 'nullable|date:y-m-d_h:i:s',
             'is_verified' => 'required|boolean',
             'about' => 'nullable|string|max:1000'

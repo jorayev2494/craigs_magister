@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        $user = $this->userManagementService->userRepository->find($id);
+        $user = $this->userManagementService->userEloquentRepository->find($id);
         return response()->json(UserResource::make($user));
     }
 
@@ -55,7 +55,7 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, int $userId): JsonResponse
     {
-        $user = $this->userManagementService->userRepository->update($userId, $request->validated());
+        $user = $this->userManagementService->userEloquentRepository->update($userId, $request->validated());
         return response()->json(UserResource::make($user), Response::HTTP_ACCEPTED);        
     }
 
@@ -73,7 +73,7 @@ class UserController extends Controller
 
     public function updateUserAvatar(UpdateAvatarRequest $request, int $id): Response
     {
-        $this->userManagementService->updateAvatar($id, $request->file('uploaded_avatar'));
+        $this->userManagementService->updateUserAvatar($id, $request->file('uploaded_avatar'));
         return response()->noContent(Response::HTTP_ACCEPTED);
     }
 }

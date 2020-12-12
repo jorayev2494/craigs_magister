@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use App\Exceptions\Interfaces\IErrorMessages;
 use App\Traits\ErrorFormatResponse;
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
@@ -49,6 +50,19 @@ class Handler extends ExceptionHandler
     {
 
         // dd($exception->getMessage());
+
+        if ($exception instanceof AuthorizationException) {
+            $trace = $exception->getTrace();
+            $action = $trace[1]['args'][0];
+            $argModel = $trace[1]['args'][1];
+            
+            $modelText = !empty($argModel) ? 'that ' . class_basename($argModel) : null;
+
+            return response(
+                $this->errorResponse("You do not have permission to {$action} {$modelText}"), 
+                Response::HTTP_UNAUTHORIZED
+            );
+        }
 
         if ($exception instanceof AlreadyCreatedException) {
             return response($this->errorResponse($exception->getMessage()), Response::HTTP_FORBIDDEN);

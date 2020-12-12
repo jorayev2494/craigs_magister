@@ -14,10 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'server', 'namespace' => 'Server'], static function() {
+Route::group(['prefix' => 'server', 'namespace' => 'Server'], static function(): void {
     Route::get('/countries', ['uses' => 'ServerPublicDataController@countries']);
     Route::get('/cities', ['uses' => 'ServerPublicDataController@cities']);
     Route::get('/categories', ['uses' => 'ServerPublicDataController@categories']);
+    Route::get('/announcements/price_permissions', ['uses' => 'ServerPublicDataController@pricePer']);
 });
 
 Route::get('/announcements', ['uses' => 'AnnouncementController@index', 'as' => 'announcements']);
+Route::get('/announcements/{id}', ['uses' => 'AnnouncementController@show', 'as' => 'announcements.show']);
+
+Route::get('/blogs', ['uses' => 'BlogController@index', 'as' => 'blogs']);
+Route::get('/blogs/{id}', ['uses' => 'BlogController@show', 'as' => 'blogs.show']);

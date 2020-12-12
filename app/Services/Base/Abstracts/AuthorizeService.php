@@ -47,7 +47,7 @@ abstract class AuthorizeService extends BaseModelService
      *
      * @return string
      */
-    abstract public function getGuard() : string;
+    abstract public function getGuard(): string;
     
     /**
      * Authorize Service register
@@ -55,7 +55,7 @@ abstract class AuthorizeService extends BaseModelService
      * @param array $data
      * @return array|null
      */
-    public function register(array $data) : ?array
+    public function register(array $data): ?array
     {
 
         /**
@@ -287,14 +287,22 @@ abstract class AuthorizeService extends BaseModelService
         return ['token' => JWTAuth::getToken()->get()];
     }
 
-    public function updateAvatar(int $userId, UploadedFile $avatar): void
+    public function updateAvatar(Model $model, UploadedFile $avatar): void
     {
-        $foundUser = $this->findRepository($userId);
+        if ($model && $avatar->isValid()) {
+            $uploadedAvatar = FileService::updateFile($model->getAvatarPath(), $model->avatar, $avatar);
+            $model->setAttribute('avatar', $uploadedAvatar);
+            $model->save();
+        }
+    }
 
-        if ($foundUser && $avatar->isValid()) {
-            $uploadedAvatar = FileService::updateFile($foundUser->getAvatarPath(), $foundUser->avatar, $avatar);
-            $foundUser->avatar = $uploadedAvatar;
-            $foundUser->save();
+    public function changePassword(Model $model, array $data): void
+    {
+        if (Hash::check($data['current_password'], $model->password)) {
+            $model->setAttribute('password', $data['password']);
+            $model->save();
+        } else {
+            throw new \Exception('your current password not correct', Response::HTTP_BAD_REQUEST);
         }
     }
 

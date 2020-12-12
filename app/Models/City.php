@@ -56,6 +56,6 @@ class City extends Model
 
     public function announcements(): HasMany
     {
-        return $this->hasMany(Announcement::class, 'location_city_id', 'id');
+        return $this->hasMany(Announcement::class, 'city_id', 'id');
     }
 }

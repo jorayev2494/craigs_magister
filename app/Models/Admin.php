@@ -8,6 +8,7 @@ use App\Models\Interfaces\IBaseUserModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Admin extends JWTAuthModel implements IBaseUserModel
 {
@@ -86,5 +87,10 @@ class Admin extends JWTAuthModel implements IBaseUserModel
     public function role(): BelongsTo
     {
         return $this->belongsTo(AdminRole::class, 'role_id', 'id');
+    }
+
+    public function blogs(): HasMany
+    {
+        return $this->hasMany(Blog::class, 'admin_id', 'id');
     }
 }

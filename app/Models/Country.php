@@ -57,6 +57,6 @@ class Country extends Model
 
     public function announcements(): HasMany
     {
-        return $this->hasMany(Announcement::class, 'location_country_id', 'id');
+        return $this->hasMany(Announcement::class, 'country_id', 'id');
     }
 }

@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use App\Models\Announcements\Base\Announcement;
 use App\Policies\AnnouncementPolicy;
-use App\Policy\Gates\IRegisterGate;
-use App\Policy\Gates\RegisterGateClasses;
+use App\Policies\Gates\IRegisterGate;
+use App\Policies\Gates\RegisterGateClasses;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 

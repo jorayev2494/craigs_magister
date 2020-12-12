@@ -51,7 +51,7 @@ class AnnouncementTest extends TestCase
         $arrayOnlyColumns = ['id', 'first_name', 'last_name', 'email', 'rate', 'email_confirmed', 'active'];
         foreach ($response->decodeResponseJson() as $announcement) {
             $announcement = json_decode($announcement, true);
-            $ann = array_shift($announcement);
+            $ann = array_shift($announcement['data']);
 
             $this->assertDatabaseHas(
                 'announcements', 
@@ -91,6 +91,9 @@ class AnnouncementTest extends TestCase
     /** @test */
     public function test_create_my_announcements(): void
     {
+        $this->withExceptionHandling();
+
+        $categories = Category::all();
         $countries = Country::all();
         $cities = City::all();
 
@@ -99,7 +102,11 @@ class AnnouncementTest extends TestCase
         foreach (Category::all() as $category) {
             $data = $images = [];
 
-            $fakeAnnouncement = Announcement::factory()->makeOne();
+            $fakeAnnouncement = Announcement::factory()->makeOne([
+                'category_id' => $categories->random()->id,
+                'country_id' => $countries->random()->id,
+                'city_id' => $cities->random()->id
+            ]);
 
             for ($i=0; $i < random_int(1, 5); $i++) { 
                 $images[] = UploadedFile::fake()->image("fake-img{$i}.jpg");
@@ -118,7 +125,7 @@ class AnnouncementTest extends TestCase
                 ]
             );
 
-            $this->json('POST', route('api.my.announcements.store'), $data, $this->headerAccessToken)->assertStatus(Response::HTTP_ACCEPTED);
+            $response = $this->json('POST', route('api.my.announcements.store'), $data, $this->headerAccessToken)->assertStatus(Response::HTTP_ACCEPTED);
 
             $this->assertFileExists(storage_path() . "/app/public/images/announcement/{$category->slug}/");
         }

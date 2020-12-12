@@ -14649,7 +14649,7 @@ legend span {
     opacity: 0;
 }
 
-.wrap-custom-file label {
+/* .wrap-custom-file label {
     z-index: 1;
     position: absolute;
     left: 0;
@@ -14660,6 +14660,24 @@ legend span {
     overflow: hidden;
     cursor: pointer;
     background-image: url(../images/team/upload_photo.jpg);
+    border-radius: 5px;
+    -webkit-transition: -webkit-transform 0.4s;
+    transition: -webkit-transform 0.4s;
+    transition: transform 0.4s;
+    transition: transform 0.4s, -webkit-transform 0.4s;
+} */
+
+.wrap-custom-file img {
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    /* background-image: url(../images/team/upload_photo.jpg); */
     border-radius: 5px;
     -webkit-transition: -webkit-transform 0.4s;
     transition: -webkit-transform 0.4s;

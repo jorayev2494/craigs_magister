@@ -29,4 +29,10 @@ class AnnouncementController extends Controller
             AnnouncementResource::collection($announcements)
         );
     }
+
+    public function show(int $id): JsonResponse
+    {
+        $foundAnnouncement = $this->announcementService->announcementEloquentRepository->find($id);
+        return response()->json(AnnouncementResource::make($foundAnnouncement));
+    }
 }

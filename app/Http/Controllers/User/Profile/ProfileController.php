@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Management\User\UpdateAvatarRequest;
+use App\Http\Requests\User\Profile\ChangePasswordRequest;
 use App\Http\Requests\User\Profile\ProfileUpdateRequest;
 use App\Http\Requests\User\Profile\UserUpdateRequest;
 use App\Http\Resources\UserResource;
@@ -74,8 +76,8 @@ final class ProfileController extends Controller
      */
     public function profileUpdate(ProfileUpdateRequest $request): JsonResponse
     {
-        $updatedUser = $this->userService->userRepository->update($this->authUser->id, $request->validated());
-        return response()->json($updatedUser);
+        $updatedUser = $this->userService->userEloquentRepository->update($this->authUser->id, $request->validated());
+        return response()->json(UserResource::make($updatedUser->refresh()));
     }
 
     /**
@@ -88,5 +90,19 @@ final class ProfileController extends Controller
     {
         $this->userService->deleteProfile($this->authUser->id);
         return response()->noContent();
+    }
+
+    public function updateAvatar(UpdateAvatarRequest $request): JsonResponse
+    {
+        $this->userService->updateAvatar($this->authUser, $request->file('uploaded_avatar'));
+        // $avatar = $this->authUser->fresh();
+        return response()->json(['user_data' => UserResource::make($this->authUser->fresh())], Response::HTTP_ACCEPTED);
+    }
+
+    public function changePassword(ChangePasswordRequest $request): Response
+    {
+        // dd($request->validated());
+        $this->userService->changePassword($this->authUser, $request->validated());
+        return response()->noContent(Response::HTTP_ACCEPTED);
     }
 }

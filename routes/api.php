@@ -37,7 +37,10 @@ Route::group(['middleware' => 'auth:user'], static function(): void {
         Route::get('/', ['uses' => 'ProfileController@profileShow', 'as' => 'show']);
         Route::put('/', ['uses' => 'ProfileController@profileUpdate', 'as' => 'update']);
         Route::delete('/', ['uses' => 'ProfileController@profileDestroy', 'as' => 'delete']);
-        Route::post('/', ['uses' => 'ProfileController@updateUserAvatar', 'as' => 'update.avatar']);
+        Route::post('/', ['uses' => 'ProfileController@updateAvatar', 'as' => 'update.avatar']);
+        Route::put('/change_password', ['uses' => 'ProfileController@changePassword', 'as' => 'change.password']);
     });
+
+    Route::post('/review/{id}', ['uses' => 'ReviewController', 'as' => 'review']);
 });
 

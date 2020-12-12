@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Auth\LoginRequest;
 use App\Http\Requests\Admin\Auth\RegisterRequest;
+use App\Http\Resources\UserResource;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ final class AuthController extends Controller
      * @param RegisterRequest $request
      * @return JsonResponse
      */
-    public function register(RegisterRequest $request) : JsonResponse
+    public function register(RegisterRequest $request): JsonResponse
     {
         return response()->json(
             $this->userService->register($request->validated()), 
@@ -45,10 +46,10 @@ final class AuthController extends Controller
      * @param LoginRequest $request
      * @return JsonResponse
      */
-    public function login(LoginRequest $request) : JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
         ['access_token' => $token, 'user_data' => $userData] = $this->userService->auth($request->email, $request->password);
-        return response()->json(['access_token' => $token, 'user_data' => $userData]);
+        return response()->json(['access_token' => $token, 'user_data' => UserResource::make($userData)]);
     }
 
     /**
@@ -56,7 +57,7 @@ final class AuthController extends Controller
      *
      * @return Response
      */
-    public function logout() : Response
+    public function logout(): Response
     {
         $this->userService->logout();
         return response()->noContent();
@@ -68,7 +69,7 @@ final class AuthController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function refreshToken(Request $request) : JsonResponse
+    public function refreshToken(Request $request): JsonResponse
     {
         return response()->json($this->userService->tokenRefresh($request));
     }

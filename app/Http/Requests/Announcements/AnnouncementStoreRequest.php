@@ -6,6 +6,7 @@ use App\Http\Requests\Abstracts\APIFormRequest;
 use App\Models\Announcements\Base\Announcement;
 use App\Services\Base\Interfaces\IBaseAppGuards;
 use App\Services\CategoryService;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
 class AnnouncementStoreRequest extends APIFormRequest
@@ -63,12 +64,11 @@ class AnnouncementStoreRequest extends APIFormRequest
             'price' => 'required|integer',
             'price_per' => 'required|string|in:' . implode(',', Announcement::PRICE_PERMISSIONS),
             'is_price_contractual' => 'required|boolean',
-            // 'location' => 'required|array',
             'country_id' => 'required|integer|exists:countries,id',
             'city_id' => 'required|integer|exists:cities,id',
             'location_google_latitude' => 'required|integer',
             'location_google_longitude' => 'required|integer',
-            'images' => 'required|array|max:10',
+            'images' => 'required|array',   // |max:10
             'images.*' => 'required|file|mimes:' . implode(',', Announcement::IMAGE_MIMES) . '|max:20000',
             'video' => 'nullable|file',
             $this->concretePrefix => 'required|array',
@@ -82,5 +82,25 @@ class AnnouncementStoreRequest extends APIFormRequest
             'images.*.mimes' => 'Only ' . implode(',', Announcement::IMAGE_MIMES) . ' and bmp images are allowed',
             'images.*.max' => 'Sorry! Maximum allowed size for an image is 2MB',
         ];
+    }
+
+    public function all($keys = null): array
+    {
+        $data = parent::all();
+        $this->changeBoolProperties($data);
+        return array_merge($data, $this->route()->parameters);
+    }
+
+    private function changeBoolProperties(&$array): void 
+    {
+        foreach ($array as &$value) {
+            if (is_array($value)) {
+                $this->changeBoolProperties($value);
+            } else {
+                if ($value == 'true' || $value == 'false') {
+                    $value = $value == 'true';
+                }
+            }
+        }
     }
 }

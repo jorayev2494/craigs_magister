@@ -33,6 +33,7 @@ class AnnouncementUpdateRequest extends APIFormRequest
 
     protected function prepareForValidation(): void
     {
+        // dd($this->images, $this->all());
         $foundCategory = $this->categoryService->categoryEloquentRepository->find($this->category_id);
 
         foreach ($foundCategory->getConcreteModel()::VALIDATION_RULES as $property => $rule) {
@@ -40,13 +41,15 @@ class AnnouncementUpdateRequest extends APIFormRequest
         }
 
         $uploadedImages = [];
-        foreach ($this->images as $key => $image) {
-            if (is_file($image)) {
-                $uploadedImages[$key] = $image;
+        if ($this->images) {
+            foreach ($this->images as $key => $image) {
+                if (is_file($image)) {
+                    $uploadedImages[$key] = $image;
+                }
             }
         }
 
-        $this->merge(!empty($images) ? ['images' => $uploadedImages] : ['images' => null]);
+        $this->merge(!empty($this->images) ? ['images' => $uploadedImages] : ['images' => null]);
     }
     
     /**
@@ -74,8 +77,8 @@ class AnnouncementUpdateRequest extends APIFormRequest
             'price_per' => 'required|string|in:' . implode(',', Announcement::PRICE_PERMISSIONS),
             'is_price_contractual' => 'required|boolean',
             // 'location' => 'required|array',
-            'country_id' => 'required|integer|exists:countries,id',
-            'city_id' => 'required|integer|exists:cities,id',
+            'country_id' => 'nullable|integer|exists:countries,id',
+            'city_id' => 'nullable|integer|exists:cities,id',
             'location_google_latitude' => 'required|integer',
             'location_google_longitude' => 'required|integer',
             'images' => 'exclude_if:images,null|nullable|array|max:10',
@@ -92,5 +95,25 @@ class AnnouncementUpdateRequest extends APIFormRequest
             'images.*.mimes' => 'Only ' . implode(',', Announcement::IMAGE_MIMES) . ' and bmp images are allowed',
             'images.*.max' => 'Sorry! Maximum allowed size for an image is 2MB',
         ];
+    }
+
+    public function all($keys = null): array
+    {
+        $data = parent::all();
+        $this->changeBoolProperties($data);
+        return array_merge($data, $this->route()->parameters);
+    }
+
+    private function changeBoolProperties(&$array): void 
+    {
+        foreach ($array as &$value) {
+            if (is_array($value)) {
+                $this->changeBoolProperties($value);
+            } else {
+                if ($value == 'true' || $value == 'false') {
+                    $value = $value == 'true';
+                }
+            }
+        }
     }
 }

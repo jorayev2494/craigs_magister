@@ -98,22 +98,19 @@ class UserManagementTest extends TestCase
     public function test_update_avatar(): void
     {
         Storage::fake('fake-avatar');
-        User::all()->each(function($user): void { 
+        User::all()->each(function(User $user): void { 
             $oldAvatar = $user->avatar;
             $this->json('POST', 
                         route('api.admin.management.users.update.user_avatar', ['id' => $user->id]),
                         [
                             'uploaded_avatar' => UploadedFile::fake()->image('avatar.jpg')
                         ],
-                        array_merge($this->loginHeadAdminToken, [
-                                'Content-Type' => 'multipart/from-data',
-                                // 'Content-Type' => 'application/json',
-                            ])
+                        array_merge($this->loginHeadAdminToken, ['Content-Type' => 'multipart/from-data'])
                     )->assertStatus(Response::HTTP_ACCEPTED);
 
             $user->refresh();
-            $getUploadedAvatarName = str_replace('/images/portrait/small/', null, $user->avatar);
-            $this->assertFileExists(storage_path() . '/app/public/images/portrait/small/' . $getUploadedAvatarName);
+            $getUploadedAvatarName = str_replace('/images/avatar/45/', null, $user->avatar);
+            $this->assertFileExists(storage_path('/app/public') . $user->getAvatarPath() . $getUploadedAvatarName);
             $this->assertNotEquals($oldAvatar, $user->avatar);
         });
     }

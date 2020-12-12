@@ -33,7 +33,7 @@ class AnnouncementFactory extends Factory
         return [
             'title'                 => $this->faker->title,
             'description'           => $this->faker->realText(200, 4),
-            'price'                 => $this->faker->numberBetween(100, 10000),
+            'price'                 => random_int(60, 255),
             'price_per'             => Announcement::PRICE_PER_MONTH,
             'is_price_contractual'  => false,
             'status'                => Announcement::STATUS_APPROVED,

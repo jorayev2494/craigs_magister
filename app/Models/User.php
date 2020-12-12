@@ -93,6 +93,11 @@ final class User extends JWTAuthModel implements IBaseUserModel
         return '/images/portrait/small/';
     }
 
+    // private function getAvatarUrl(): string
+    // {
+    //     return '/images/avatar/';
+    // }
+
     #region Relationships
     public function announcements(): HasMany
     {
@@ -128,5 +133,11 @@ final class User extends JWTAuthModel implements IBaseUserModel
     {
         return $this->belongsTo(City::class, 'location_city_id', 'id');
     }
+
+    public function blogs(): HasMany
+    {
+        return $this->hasMany(Blog::class, 'user_id', 'id');
+    }
+
     #endregion
 }

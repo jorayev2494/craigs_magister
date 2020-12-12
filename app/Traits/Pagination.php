@@ -58,7 +58,7 @@ trait Pagination
 
     }    
 
-    protected function getDataForResponse(Collection $collection): LengthAwarePaginator
+    protected function getDataForResponse($collection): LengthAwarePaginator
     {
         return new LengthAwarePaginator(
             $collection->forPage($this->currentPage, $this->perPage)->values(),

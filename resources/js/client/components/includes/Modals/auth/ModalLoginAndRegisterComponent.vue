@@ -9,7 +9,6 @@
                 </div>
 
                 <div class="modal-body container pb20">
-
                     <div class="row">
                         <div class="col-lg-12">
                             <ul class="sign_up_tab nav nav-tabs" id="myTab" role="tablist">
@@ -27,7 +26,7 @@
 
                     <div class="tab-content container" id="myTabContent">                        
                         <register-component @is-registered="clickRegister($event)"></register-component>
-                        <login-component @is-logined="clickLogined($event)"></login-component>                        
+                        <login-component @colse-auth-modal="colseAuthModal($event)"></login-component>                        
                     </div>
                 </div>
             </div>
@@ -39,7 +38,7 @@
     export default {
         methods: {
             clickRegister(event) { this.$refs['login'].click(); },
-            clickLogined(event) { this.$refs['btnClose'].click(); },
+            colseAuthModal(event) { this.$refs['btnClose'].click(); },
         },
         components: {
             RegisterComponent: () => import('./RegisterComponent.vue'),

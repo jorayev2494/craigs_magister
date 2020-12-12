@@ -3,30 +3,26 @@
 namespace App\Services;
 
 use App\Models\Document;
+use App\Repositories\Eloquent\DocumentRepository;
 use App\Services\Base\Abstracts\BaseModelService;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Str;
+use Illuminate\Support\Str;
 
 class DocumentService extends BaseModelService
 {
 
+    private const DEFAULT_DISK = 'public';
     private const STR_RANDOM_LENGTH = 32;
 
-    public function getModel(): string
-    {
-        return Document::class;
-    }
-
     /**
-     * Set base model file storage folder
-     *
-     * @return string
-     */
-    // protected function baseFolder(): string
-    // {
-    //     return '';
-    // }
+    * @var DocumentRepository $documentEloquentRepository
+    */
+    private DocumentRepository $documentEloquentRepository;
+
+    public function __construct(DocumentRepository $documentEloquentRepository) {
+        $this->documentEloquentRepository = $documentEloquentRepository;
+    }
 
     /**
      * File Store
@@ -35,18 +31,18 @@ class DocumentService extends BaseModelService
      * @param UploadedFile $file
      * @return Documents
      */
-    public function storeFile(string $path, UploadedFile $file): Document
+    public function uploadFile(string $path, UploadedFile $file, string $disk = self::DEFAULT_DISK): Document
     {
         $documentData['user_file_name'] = $file->getClientOriginalName();
         $documentData['type'] = $extension = $file->getClientOriginalExtension();
         $documentData['size'] = $file->getSize();
         $documentData['mime_type'] = $file->getClientMimeType();
         $documentData['name'] = $name = Str::random(self::STR_RANDOM_LENGTH) . '.' . $extension;
-        $documentData['path'] = sprintf('%s/%s', $path, $name);
+        $documentData['path'] = sprintf('%s%s', $path, $name);
 
-        $file->storeAs($path, $documentData['name']);
+        $file->storeAs($path, $documentData['name'], $disk);
 
-        return $this->create($documentData);
+        return $this->documentEloquentRepository->create($documentData);
     }
 
     /**
@@ -55,10 +51,10 @@ class DocumentService extends BaseModelService
      * @param string $pathFile
      * @return boolean
      */
-    public function deleteFile(Document $document): bool
+    public function deleteFile(Document $document, string $disk = self::DEFAULT_DISK): bool
     {
-        if (Storage::exists($document->path)) {
-            Storage::delete($document->path);
+        if (Storage::disk($disk)->exists($document->path)) {
+            Storage::disk($disk)->delete($document->path);
             return $document->delete();
         }
 
@@ -71,10 +67,10 @@ class DocumentService extends BaseModelService
      * @param string $path
      * @return boolean
      */
-    public function deleteDir(string $path): bool
+    public function deleteDir(string $path, string $disk = self::DEFAULT_DISK): bool
     {
-        if (Storage::exists($path)) {
-            Storage::deleteDirectory($path);
+        if (Storage::disk($disk)->exists($path)) {
+            Storage::disk($disk)->deleteDirectory($path);
             return true;
         }
 

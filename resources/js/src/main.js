@@ -10,6 +10,7 @@
 
 import Vue from 'vue'
 import App from './App.vue'
+import * as func from './helpers/func.js'
 
 // Vuesax Component Framework
 import Vuesax from 'vuesax'
@@ -19,6 +20,17 @@ Vue.use(Vuesax)
 // axios
 import axios from "./axios.js"
 Vue.prototype.$http = axios
+
+// func
+Vue.prototype.$func = func;
+
+// Vue.prototype.$func = function serverImage(size, imageUrl) {
+//     // var imageUrl = binding.value;
+//     // var size = binding.arg;
+
+//     const regex = /\/\d{2,4}\//;
+//     return imageUrl.replace(regex, `/${size}/`);
+// };
 
 // API Calls
 import "./http/requests"
@@ -83,12 +95,47 @@ Vue.use(VeeValidate);
 // })
 
 // Vuejs - Vue wrapper for hammerjs
-import { VueHammer } from 'vue2-hammer'
+import {
+    VueHammer
+} from 'vue2-hammer'
 Vue.use(VueHammer)
+
+Vue.component('admin-carousel-component', require('./views/includes/carousels/AdminCarouselComponent.vue').default);
 
 // PrismJS
 import 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'
+
+Vue.directive('serverImage', {
+    bind(el, binding, vnode) {
+        var imageUrl = binding.value;
+        var size = binding.arg;
+
+        const regex = /\/\d{2,4}\//;
+        var attributeValue = imageUrl.replace(regex, `/${size}/`);
+        el.setAttribute('src', attributeValue);
+
+        if (size > 50)
+            el.setAttribute('alt', attributeValue);
+    }
+});
+
+Vue.directive('subText', {
+    bind(el, binding, vnode) {
+        var text = binding.value;
+        var length = text.length;
+        var endPrefix = '';
+
+        if (binding.arg < length) {
+            length = binding.arg;
+            endPrefix = '...';
+        }
+
+        var result = text.substring(0, length);
+        result += endPrefix;
+        el.innerText = result;
+    }
+});
 
 // Feather font icon
 require('@assets/css/iconfont.css')
@@ -100,5 +147,14 @@ new Vue({
     store,
     i18n,
     acl,
-    render: h => h(App)
+    render: h => h(App),
+    methods: {
+        serverImage(size, imageUrl) {
+            var imageUrl = binding.value;
+            var size = binding.arg;
+
+            const regex = /\/\d{2,4}\//;
+            return imageUrl.replace(regex, `/${size}/`);
+        }
+    },
 }).$mount('#app')

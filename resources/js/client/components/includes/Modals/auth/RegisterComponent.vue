@@ -113,12 +113,14 @@
                     return;
                 }
 
-                const result = await this.$store.dispatch('auth/jwtRegister', {
+                await this.$store.dispatch('auth/jwtRegister', {
                     first_name: this.first_name,
                     last_name: this.last_name,
                     email: this.email,
                     password: this.password,
                     password_confirmation: this.password_confirmation,
+                }).then((result) => {
+                    this.$emit('colse-auth-modal', result);
                 });
             }
         },
@@ -131,14 +133,14 @@
                         && this.password_confirmation == '';
             }
         },
-        created() {
-            this.$store.watch(
-                (state, getters) => this.$store.getters['auth/GET_REGISTERED'],
-                (newValue, oldValue) => {
-                    if (newValue == true) this.$emit('is-registered', newValue);
-                }
-            );
-        },
+        // created() {
+        //     this.$store.watch(
+        //         (state, getters) => this.$store.getters['auth/SET_USER_REGISTERED'],
+        //         (newValue, oldValue) => {
+        //             if (newValue == true) this.$emit('is-registered', newValue);
+        //         }
+        //     );
+        // },
     }
 </script>
 

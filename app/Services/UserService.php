@@ -16,12 +16,12 @@ use Illuminate\Http\UploadedFile;
 class UserService extends AuthorizeService
 {
     /**
-    * @var UserRepository $userRepository
+    * @var UserRepository $userEloquentRepository
     */
-    public UserRepository $userRepository;
+    public UserRepository $userEloquentRepository;
 
-    public function __construct(UserRepository $userRepository) {
-        $this->userRepository = $this->instanceCallerEloquentRepository($userRepository);
+    public function __construct(UserRepository $userEloquentRepository) {
+        $this->userEloquentRepository = $this->instanceCallerEloquentRepository($userEloquentRepository);
     }
 
     public function getGuard(): string

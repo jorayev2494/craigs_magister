@@ -57,7 +57,7 @@ class AnnouncementService extends BaseModelService
     public function getByRequestQuerySort(): Collection
     {
         $result = $this->getInstancePipeline()
-            ->send($this->announcementRepository->getModelClone()->newQuery())
+            ->send($this->announcementEloquentRepository->getModelClone()->newQuery())
             ->through(
                 \App\Pipelines\Database\QueryFilters\Sort::class
             )
@@ -91,12 +91,15 @@ class AnnouncementService extends BaseModelService
             $this->uploadImages($makeAnnouncementCategory, $data);
 
             $makeAnnouncementCategory->setImagesAttribute($data['images']);
+            
             $makeAnnouncementCountry = $foundCountry->announcements()->make($makeAnnouncementCategory->attributesToArray());
             $makeAnnouncementCity = $foundCity->announcements()->make($makeAnnouncementCountry->attributesToArray());
 
             $createdAnnouncement = $creatorUser->announcements()->create(
                 array_merge($makeAnnouncementCity->attributesToArray(), [
                     'status' => $this->announcementEloquentRepository->model::STATUS_WAITING,
+                    'price' => $data['price'],
+                    'images' => $data['images'],
                 ])
             );
 
@@ -115,14 +118,14 @@ class AnnouncementService extends BaseModelService
 
         try {
             DB::beginTransaction();
-            
+
             $this->updateImages($foundAnnouncements, $data);
+
+            $this->adminChangeStatus($data);
 
             $foundAnnouncements->update(
                 array_merge($data, 
-                            [
-                                'status' => $this->announcementEloquentRepository->model::STATUS_WAITING
-                            ]
+                    ['status' => $data['status'] ?? $this->announcementEloquentRepository->model::STATUS_WAITING]
                 )
             );
             
@@ -186,6 +189,23 @@ class AnnouncementService extends BaseModelService
             foreach ($data['images'] as $key => &$image) {
                 $data['images'][$key] = FileService::uploadFile($makeAnnouncementCategory->getImagePath(), $image);
             }
+        }
+    }
+
+    protected function adminChangeStatus(array &$data): void
+    {
+        if (array_key_exists('status', $data)) {
+            $data['status'] = array_key_exists('unblock_date', $data) && !is_null($data['unblock_date']) 
+                        ? $this->announcementEloquentRepository->model::STATUS_BLOCKED 
+                        : $data['status'];
+
+            $data['status_cancelled_description'] = $data['status'] == $this->announcementEloquentRepository->model::STATUS_APPROVED
+                            ? null
+                            : $data['status_cancelled_description'];
+
+            $data['unblock_date'] = $data['status'] == $this->announcementEloquentRepository->model::STATUS_APPROVED
+                            ? null
+                            : $data['unblock_date'];
         }
     }
 }

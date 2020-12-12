@@ -24,7 +24,8 @@ class CreateAnnouncementsTable extends Migration
             $table->boolean('is_price_contractual')->default(false);
             
             $table->string('status', 255);
-            $table->longText('status_cancelled_description')->nullable();
+            $table->longText('status_cancelled_description')->nullable();   
+            $table->longText('status_blocked_description')->nullable(); 
             $table->string('rate')->nullable();
             
             $table->bigInteger('category_id')->unsigned();
@@ -40,11 +41,11 @@ class CreateAnnouncementsTable extends Migration
 
             $table->string('location', 255)->nullable();
 
-            $table->bigInteger('location_country_id')->unsigned();
-            $table->foreign('location_country_id')->references('id')->on('countries')->onDelete('cascade');
+            $table->bigInteger('country_id')->unsigned();
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             
-            $table->bigInteger('location_city_id')->unsigned();
-            $table->foreign('location_city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->bigInteger('city_id')->unsigned();
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
 
             $table->string('location_google_latitude', 255)->nullable();
             $table->string('location_google_longitude', 255)->nullable();

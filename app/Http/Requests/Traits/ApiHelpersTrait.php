@@ -8,7 +8,7 @@ namespace App\Http\Requests\Traits;
  */
 trait ApiHelpersTrait
 {
-    public function all($keys = null)
+    public function all($keys = null): array
     {
         return array_merge(parent::all(), $this->route()->parameters);
     }

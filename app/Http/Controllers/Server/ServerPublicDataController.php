@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\CountryResource;
+use App\Models\Announcements\Base\Announcement;
 use App\Services\CategoryService;
 use App\Services\CityService;
 use App\Services\CountryService;
@@ -29,5 +30,10 @@ class ServerPublicDataController extends Controller
     {
         $categories = $categoryService->categoryEloquentRepository->getNotBlocked();
         return response()->json(CategoryResource::collection($categories));
+    }
+
+    public function pricePer(): JsonResponse
+    {
+        return response()->json(Announcement::PRICE_PERMISSIONS);
     }
 }

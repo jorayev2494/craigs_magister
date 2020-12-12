@@ -3,9 +3,9 @@
 namespace App\Policies;
 
 use App\Models\Announcements\Base\Announcement;
-use App\Models\User;
 use App\Services\Base\Interfaces\IBaseAppGuards;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class AnnouncementPolicy
@@ -13,95 +13,95 @@ class AnnouncementPolicy
     use HandlesAuthorization;
 
     /**
-    * @var User $authUser
+    * @var Model $authModel
     */
-    private User $authUser;
+    private Model $authModel;
 
     public function __construct() {
-        $this->authUser = Auth::guard(IBaseAppGuards::USER)->user();
+        $this->authModel = Auth::guard(IBaseAppGuards::USER)->user() ?? Auth::guard(IBaseAppGuards::ADMIN)->user();
     }
 
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the model can view any models.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Model  $model
      * @return mixed
      */
-    public function viewAny(User $user): bool
+    public function viewAny(Model $model): bool
     {
-        return  $user->id == $this->authUser->id;
+        return  $model->id == $this->authModel->id;
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the model can view the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Model  $model
      * @param  \App\Models\Models\Announcements\Base\Announcement  $announcement
      * @return mixed
      */
-    public function view(User $user, Announcement $announcement): bool
+    public function view(Model $model, Announcement $announcement): bool
     {
-        return  $user->id == $announcement->creator_id &&
-                $user->announcements->contains($announcement->id);
+        return  $model->id == $announcement->creator_id &&
+                $model->announcements->contains($announcement->id);
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the model can create models.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Model  $model
      * @return mixed
      */
-    public function create(User $user)
+    public function create(Model $model)
     {
-        return  $user->id == $this->authUser->id;
+        return  $model->id == $this->authModel->id;
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determine whether the model can update the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Model  $model
      * @param  \App\Models\Models\Announcements\Base\Announcement  $announcement
      * @return mixed
      */
-    public function update(User $user, Announcement $announcement)
+    public function update(Model $model, Announcement $announcement)
     {
-        return  $user->id == $announcement->creator_id &&
-                $user->announcements->contains($announcement->id);
+        return  $model->id == $announcement->creator_id &&
+                $model->announcements->contains($announcement->id);
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the model can delete the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Model  $model
      * @param  \App\Models\Models\Announcements\Base\Announcement  $announcement
      * @return mixed
      */
-    public function delete(User $user, Announcement $announcement)
+    public function delete(Model $model, Announcement $announcement)
     {
-        return  $user->id == $announcement->creator_id &&
-                $user->announcements->contains($announcement->id);
+        return  $model->id == $announcement->creator_id &&
+                $model->announcements->contains($announcement->id);
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the model can restore the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Model  $model
      * @param  \App\Models\Models\Announcements\Base\Announcement  $announcement
      * @return mixed
      */
-    public function restore(User $user, Announcement $announcement)
+    public function restore(Model $model, Announcement $announcement)
     {
         dd(__METHOD__);
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the model can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Model  $model
      * @param  \App\Models\Models\Announcements\Base\Announcement  $announcement
      * @return mixed
      */
-    public function forceDelete(User $user, Announcement $announcement)
+    public function forceDelete(Model $model, Announcement $announcement)
     {
         dd(__METHOD__);
     }

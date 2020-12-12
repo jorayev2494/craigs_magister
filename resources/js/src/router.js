@@ -37,8 +37,9 @@ const router = new Router({
     // =============================================================================
     // MAIN LAYOUT ROUTES
     // =============================================================================
-            path: '/admin',
+            path: '/',
             name: 'admin-index',
+            // redirect: '/admin/dashboard/analytics',
             component: () => import('./layouts/main/Main.vue'),
             meta: {
                 authRequired: true,
@@ -49,9 +50,9 @@ const router = new Router({
         // Theme Routes
         // =============================================================================
                 {
-                    path: '/admin',
+                    path: '/admin/dashboard',
                     name: 'admin-dashboard',
-                    redirect: '/admin/dashboard/analytics',
+                    redirect: { name: 'admin-dashboard-analytics' },
                     meta: {
                         authRequired: true,
                         rule: 'admin',
@@ -138,10 +139,41 @@ const router = new Router({
                         authRequired: true,
                         breadcrumb: [
                             { title: 'Home', url: '/' },
-                            { title: 'eCommerce'},
+                            { title: 'eCommerce' },
                             { title: 'Shop', active: true },
                         ],
                         pageTitle: 'Shop',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/admin/announcements',
+                    name: 'admin-announcements',
+                    component: () => import('./views/apps/announcement/ListAnnouncements.vue'),
+                    meta: {
+                        authRequired: true,
+                        breadcrumb: [
+                            { title: 'Home', url: '/' },
+                            { title: 'eCommerce' },
+                            { title: 'Test' },
+                            { title: 'Announcements', active: true },
+                        ],
+                        pageTitle: 'Announcements',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/admin/announcements/show/:id',
+                    name: 'admin-announcement-show',
+                    component: () => import('./views/apps/announcement/AnnouncementItemDetailView.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { title: 'Home', url: { name: 'admin-dashboard' } },
+                            { title: 'Announcements', url: { name: 'admin-announcements'} },
+                            { title: 'Announcement Details', active: true },
+                        ],
+                        parent: "ecommerce-item-detail-view",
+                        pageTitle: 'Announcement Details',
                         rule: 'editor'
                     }
                 },
@@ -153,7 +185,7 @@ const router = new Router({
                         authRequired: true,
                         breadcrumb: [
                             { title: 'Home', url: '/' },
-                            { title: 'eCommerce', url:'/apps/eCommerce/shop'},
+                            { title: 'eCommerce', url:'/apps/eCommerce/shop' },
                             { title: 'Wish List', active: true },
                         ],
                         pageTitle: 'Wish List',

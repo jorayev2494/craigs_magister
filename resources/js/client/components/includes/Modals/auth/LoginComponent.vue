@@ -52,7 +52,7 @@
                         <label class="custom-control-label" for="exampleCheck1">
                             Remember me
                         </label>
-                        <a class="btn-fpswd float-right" href="#">Lost your password?</a>
+                        <a class="btn-fpswd float-right" href="#" @click.prevent="forgotPassword($event)">Lost your password?</a>
                     </div>
 
                     <button type="submit" :disabled="btnLoginEnableComp" class="btn btn-log btn-block btn-thm">Log In</button>
@@ -80,14 +80,21 @@
             }
         },
         methods: {
-            register() {
+           register() {
                 this.$store.dispatch('auth/jwtLogin', {
                     first_name: this.first_name,
                     last_name: this.last_name,
                     email: this.email,
                     password: this.password,
                     password_confirmation: this.password_confirmation,
+                }).then((result) => {
+                    this.$emit('colse-auth-modal', result);
+                    window.console.clear();
                 });
+            },
+            forgotPassword(event) {
+                this.$router.push({ name: 'auth.forgot_password.send_reset_token_email' });
+                this.$emit('colse-auth-modal', true);
             }
         },
         computed: {
@@ -95,14 +102,14 @@
                 return this.email == '' && this.password == '' && this.password.length <= 6;
             }
         },
-        created() {
-            this.$store.subscribe((mutation, state) => {
-                console.log('mutation.type', mutation.type);
-                if (mutation.type == 'auth/SET_BEARER_TOKEN') {
-                    this.$emit('is-logined', true);
-                }
-            });
-        },
+        // created() {
+        //     this.$store.subscribe((mutation, state) => {
+        //         console.log('mutation.type', mutation.type);
+        //         if (mutation.type == 'auth/SET_USER_LOGINED') {
+        //             this.$emit('is-logined', this.$store.getters['auth/GET_USER_LOGINED']);
+        //         }
+        //     });
+        // },
     }
 </script>
 

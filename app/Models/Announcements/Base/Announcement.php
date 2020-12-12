@@ -2,6 +2,7 @@
 
 namespace App\Models\Announcements\Base;
 
+use App\Models\AnnouncementReview;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Interfaces\IBaseModel;
@@ -9,6 +10,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Psy\Util\Json;
 
@@ -16,9 +18,12 @@ class Announcement extends Model
 {
     use HasFactory;
 
-    public const STATUS_WAITING = 'waiting';
+    public const IMAGE_DEFAULT_WITH = "150"; // widths, 640px or 320px
+
     public const STATUS_APPROVED = 'approved';
+    public const STATUS_WAITING = 'waiting';
     public const STATUS_CANCELLED = 'cancelled';
+    public const STATUS_BLOCKED = 'blocked';
     public const STATUS_WAS_APPEALED = 'was_appealed';
 
     public const PRICE_PER_HOUR = 'hour';
@@ -28,11 +33,18 @@ class Announcement extends Model
 
     public const CONCRETE_PREFIX = 'concrete';
 
-    public const IMAGE_MIMES = [
-        'jpg',
-        'jpeg',
-        'png',
-        'gif'
+    public const STATUSES = [
+        self::STATUS_WAITING,
+        self::STATUS_APPROVED,
+        self::STATUS_CANCELLED,
+        self::STATUS_WAS_APPEALED,
+        self::STATUS_BLOCKED
+    ];
+
+    public const STATUS_CANCELS = [
+        self::STATUS_CANCELLED,
+        // self::STATUS_WAS_APPEALED,
+        self::STATUS_BLOCKED
     ];
 
     public const PRICE_PERMISSIONS = [
@@ -40,6 +52,13 @@ class Announcement extends Model
         self::PRICE_PER_DAY,
         self::PRICE_PER_MONTH,
         self::PRICE_PER_YEAR,
+    ];
+
+    public const IMAGE_MIMES = [
+        'jpg',
+        'jpeg',
+        'png',
+        'gif'
     ];
 
     /**
@@ -55,10 +74,11 @@ class Announcement extends Model
         'is_price_contractual',
         'status',
         'status_cancelled_description',
+        'status_blocked_description',
         'category_id',
         'location',
-        'location_country_id',
-        'location_city_id',
+        'country_id',
+        'city_id',
         'location_google_latitude',
         'location_google_longitude',
         'images',
@@ -84,10 +104,24 @@ class Announcement extends Model
         // 'concrete'
     ];
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'front_end_price'
+    ];
+
     public function getImagePath(): string
     {
         $className = $this->category->getConcreteModel();
         return '/images/announcement/' . strtolower(class_basename($className)) . '/';
+    }
+
+    public function getImageUrl(): string
+    {
+        return $this->getImagePath() . self::IMAGE_DEFAULT_WITH . '/';
     }
 
     public function getRateAttribute(): float
@@ -104,7 +138,34 @@ class Announcement extends Model
 
     public function getImagesAttribute()
     {
-        return json_decode($this->attributes['images'], true);
+        $responseImgs = [];
+        foreach (json_decode($this->attributes['images'], true) as $key => $image) {
+            $responseImgs[$key] = "/storage{$this->getImageUrl()}" . $image;
+        };
+
+        return $responseImgs;
+    }
+
+    public function getFrontEndPriceAttribute(): string
+    {
+        return $this->attributes['price'] . ' TM';
+    }
+
+    public function getIsPriceContractualAttribute(): string
+    {
+        return $this->attributes['is_price_contractual'] == true ? 'yes' : 'no';
+    }
+
+    public function setIsPriceContractualAttribute($value): void
+    {
+        $this->attributes['is_price_contractual'] = $value == true || $value == 'yes';
+    }
+
+    public function getUnblockDateAttribute(): string
+    {
+        return $this->attributes['unblock_date'] == null 
+                                                ? 'no blocked'
+                                                : $this->attributes['unblock_date'];    // ->format(IBaseModel::FORMAT_VALIDATE);
     }
 
     public function creator(): BelongsTo
@@ -124,12 +185,17 @@ class Announcement extends Model
 
     public function country(): BelongsTo
     {
-        return $this->belongsTo(Country::class, 'location_country_id', 'id');
+        return $this->belongsTo(Country::class, 'country_id', 'id');
     }
 
     public function city(): BelongsTo
     {
-        return $this->belongsTo(City::class, 'location_city_id', 'id');
+        return $this->belongsTo(City::class, 'city_id', 'id');
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(AnnouncementReview::class, 'announcement_id', 'id');
     }
 
 }

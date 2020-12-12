@@ -11,6 +11,8 @@ abstract class JWTAuthModel extends Authenticatable implements JWTSubject {
 
     use Notifiable;
 
+    public const AVATAR_DEFAULT_WITH = "45"; // widths, 640px or 320px
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -34,9 +36,14 @@ abstract class JWTAuthModel extends Authenticatable implements JWTSubject {
 
     // abstract public function getAvatarPath(): string;
 
+    private function getAvatarUrl(): string
+    {
+        return '/images/avatar/';
+    }
+
     public function getAvatarAttribute(): string
     {
-        return $this->getAvatarPath() . $this->attributes['avatar'];
+        return $this->getAvatarUrl() . self::AVATAR_DEFAULT_WITH . '/' . $this->attributes['avatar'];
     }
 
     public function getFullNameAttribute(): string
