@@ -1,15 +1,15 @@
 version: "3.7"
 
-x-php_cli: &queue_worker_cli
+x-php_cli: &php_cli
     build: 
-        context: ./queue_worker
+        context: ./php_cli
         dockerfile: dockerfile
     restart: unless-stopped    
     working_dir: /var/project
     volumes: 
-        - ../../:/var/project
+        - ../:/var/project
 
-x-ngx_proxy: &proxy_server
+x-ngx_proxy: &ngx_proxy_server
     build: 
         context: ./nginx_proxy
         dockerfile: dockerfile
@@ -44,7 +44,7 @@ services:
             - laravel-${COMPOSE_PROJECT_NAME}
 
     ngx_proxy_imgs:
-        <<: *proxy_server
+        <<: *ngx_proxy_server
         ports: 
             - 9999:8888
         networks: 
@@ -59,8 +59,8 @@ services:
         tty: true
         volumes: 
             - ../:/var/project
-        ports: 
-            - 6001:6001
+        # ports: 
+        #     - ${WEB_SOCKET_PORT}:${WEB_SOCKET_PORT}
         depends_on: 
             - mysql
         links: 
@@ -114,6 +114,16 @@ services:
         networks: 
             - laravel-${COMPOSE_PROJECT_NAME}
 
+    # Web Socket Service
+    web_socket:
+        <<: *php_cli
+        container_name: ${COMPOSE_PROJECT_NAME}_web_socket
+        command: ['php', 'artisan', 'websockets:serve']
+        ports: 
+            - ${WEB_SOCKET_PORT}:${WEB_SOCKET_PORT}
+        networks: 
+            - laravel-${COMPOSE_PROJECT_NAME}
+
     # CRON Service
     cron:
         build:
@@ -129,7 +139,7 @@ services:
     
     # Queue Worker
     queue_worker:
-        <<: *queue_worker_cli
+        <<: *php_cli
         container_name: ${COMPOSE_PROJECT_NAME}_queue_worker
         command: ['php', 'artisan', 'queue:work', '--sleep=1', '--queue=default']
         networks: 
@@ -137,7 +147,7 @@ services:
     
     # Queue Worker Emails
     queue_worker_email:
-        <<: *queue_worker_cli
+        <<: *php_cli
         container_name: ${COMPOSE_PROJECT_NAME}_queue_worker_email
         command: ['php', 'artisan', 'queue:work', '--sleep=2', '--queue=emails']
         networks: 
@@ -145,7 +155,7 @@ services:
 
     # Queue Worker Jobs
     queue_worker_job:
-        <<: *queue_worker_cli
+        <<: *php_cli
         container_name: ${COMPOSE_PROJECT_NAME}_queue_worker_job
         command: ['php', 'artisan', 'queue:work', '--sleep=3', '--queue=jobs']
         networks: 
