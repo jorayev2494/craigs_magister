@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'debug', 'namespace' => 'Debug', 'as' => 'debug.'], static function(): void {
     Route::get('/web_socket', ['uses' => 'WebSocketController', 'as' => 'web_socket']);
-    Route::get('/web_socket/test/{ws_text}', ['uses' => 'WebSocketController@test', 'as' => 'web_socket.test']);
+    Route::get('/web_socket/test/{ws_text?}', ['uses' => 'WebSocketController@test', 'as' => 'web_socket.test']);
 });
 Route::get('/admin/{any}', 'ApplicationController')->where('any', '.*');
 Route::get('/{any}', 'ApplicationController@index')->where('any', '.*');
