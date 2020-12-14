@@ -3,7 +3,8 @@
         <!-- <div class="preloader"></div> -->
         <!-- Main Header Nav -->
         <header-navigation-component></header-navigation-component>
-
+        <ws-debug-component></ws-debug-component>
+        
         <!-- #region Modals -->
         <modal-login-and-register-component></modal-login-and-register-component>
         <!-- #endregion End Modals -->

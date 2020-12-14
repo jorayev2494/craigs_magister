@@ -16,6 +16,8 @@ import VuejsDialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js'; // o
 // include the default style
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 
+require('../bootstrap');
+
 // Tell Vue to install the plugin.
 Vue.use(VuejsDialog);
 // #endregion
@@ -62,6 +64,8 @@ window.Vue.prototype.$httpClient = axios;
 
 import './styles/global.css';
 import App from './components/App.vue';
+
+Vue.component('ws-debug-component', require('./components/WSDebugComponent.vue').default);
 
 new Vue({
     store,
