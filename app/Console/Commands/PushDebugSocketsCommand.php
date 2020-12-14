@@ -13,14 +13,14 @@ class PushDebugSocketsCommand extends Command
      *
      * @var string
      */
-    protected $signature = ICommands::SEND_TEST_SOCKETS;
+    protected $signature = ICommands::SEND_TEST_SOCKETS_COMMAND;
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Send Test Socket command';
 
     /**
      * Create a new command instance.
@@ -40,8 +40,8 @@ class PushDebugSocketsCommand extends Command
     public function handle()
     {
         info('PushDebugSocketsCommand: ', [__METHOD__]);
-        // TestEvent::broadcast();
-        broadcast(new TestEvent('schedule-command'));
+        TestEvent::broadcast('schedule-command');
+        // broadcast(new TestEvent('schedule-command'));
         return 0;
     }
 }
