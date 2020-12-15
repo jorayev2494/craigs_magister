@@ -27,7 +27,7 @@ class ReviewStoreRequest extends APIFormRequest
     public function rules(): array
     {
         return [
-            'type' => 'required|in:' . implode(',', ['announcement']),
+            'type' => 'required|in:' . implode(',', ['announcement', 'user']),
             'rating' => 'required|integer|min:1|max:5',
             'description' => 'required|string|min:2|max:1000',
         ];

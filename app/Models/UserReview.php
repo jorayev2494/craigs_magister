@@ -17,8 +17,9 @@ class UserReview extends Model
      */
     protected $fillable = [
         'rating',
+        'description',
         'user_id',
-        'client_id',
+        'creator_id',
     ];
 
     public function user(): BelongsTo
@@ -26,7 +27,7 @@ class UserReview extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function creatorReview(): BelongsTo
+    public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'creator_id', 'id');
     }

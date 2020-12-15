@@ -8,6 +8,7 @@ use App\Http\Requests\Review\ReviewStoreRequest;
 use App\Http\Resources\ReviewResource;
 use App\Services\AnnouncementReviewService;
 use App\Services\Base\Interfaces\IBaseAppGuards;
+use App\Services\User\UserReviewService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -19,14 +20,8 @@ class ReviewController extends Controller
     */
     private string $type;
 
-    /**
-    * @var AnnouncementReviewService $announcementReviewService
-    */
-    private AnnouncementReviewService $announcementReviewService;
-
-    public function __construct(AnnouncementReviewService $announcementReviewService) {
+    public function __construct() {
         $this->middleware('auth:' . IBaseAppGuards::USER);
-        $this->announcementReviewService = $announcementReviewService;
     }
 
     public function __invoke(ReviewStoreRequest $request, int $id): JsonResponse
@@ -34,13 +29,16 @@ class ReviewController extends Controller
 
         $this->type = $request->query('type');
 
-        // if (Gate::allows('review-store', [$this->type, $id])) {
-        //     throw new BadRequestException('you dont have store review');
-        // }
+        if (Gate::allows('review-store', [$this->type, $id])) {
+            throw new BadRequestException('you dont have store review');
+        }
 
         switch ($this->type) {
             case 'announcement':
-                $result = $this->announcementReviewService->storeReview($id, $request->validated());
+                $result = resolve(AnnouncementReviewService::class)->storeReview($id, $request->validated());
+                break;
+            case 'user':
+                $result = resolve(UserReviewService::class)->storeReview($id, $request->validated());
                 break;
             
             default:
