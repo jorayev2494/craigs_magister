@@ -139,5 +139,16 @@ final class User extends JWTAuthModel implements IBaseUserModel
         return $this->hasMany(Blog::class, 'user_id', 'id');
     }
 
+    public function recentActivities(): HasMany
+    {
+        return $this->hasMany(RecentActivity::class, 'user_id', 'id');
+    }
+
+    public function fromRecentActivities(): HasMany
+    {
+        return $this->hasMany(RecentActivity::class, 'from_user_id', 'id');
+    }
+
+
     #endregion
 }

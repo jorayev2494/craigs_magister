@@ -6,6 +6,7 @@ use App\Models\AnnouncementReview;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Interfaces\IBaseModel;
+use App\Models\RecentActivity;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -198,4 +199,8 @@ class Announcement extends Model
         return $this->hasMany(AnnouncementReview::class, 'announcement_id', 'id');
     }
 
+    public function recentActivities(): HasMany
+    {
+        return $this->hasMany(RecentActivity::class, 'announcement_id', 'id');
+    }
 }

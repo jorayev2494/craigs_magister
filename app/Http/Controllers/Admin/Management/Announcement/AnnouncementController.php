@@ -45,8 +45,12 @@ final class AnnouncementController extends Controller
      */
     public function show(int $id): JsonResponse
     {
+        /**
+         * @var AnnouncementResource $foundAnnouncement
+         */
         $foundAnnouncement = $this->announcementManagementService->announcementEloquentRepository->find($id);
         $this->authorize('view', $foundAnnouncement);
+        // dd($foundAnnouncement->recentActivities);
         return response()->json(AnnouncementResource::make($foundAnnouncement));
     }
 

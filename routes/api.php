@@ -31,6 +31,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.'], stati
 Route::group(['middleware' => 'auth:user'], static function(): void {
     Route::group(['prefix' => 'my', 'as' => 'my.'], static function(): void {
         Route::apiResource('/announcements', 'Announcements\AnnouncementController');
+        Route::apiResource('recent_activities', 'RecentActivityController', ['only' => ['index', 'show']]);
     });
     
     Route::group(['prefix' => 'profile', 'namespace' => 'Profile', 'as' => 'profile.'], static function(): void {

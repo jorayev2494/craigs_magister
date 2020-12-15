@@ -4,6 +4,7 @@ namespace App\Http\Resources\Announcements;
 
 use App\Http\Resources\CityResource;
 use App\Http\Resources\CountryResource;
+use App\Http\Resources\RecentActivityResource;
 use App\Http\Resources\ReviewResource;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -17,7 +18,7 @@ class AnnouncementResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'id' => $this->id,
@@ -53,6 +54,7 @@ class AnnouncementResource extends JsonResource
             'reviews' => $this->whenLoaded('reviews', ReviewResource::collection($this->reviews)),
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
+            // 'recent_activities' => $this->whenLoaded('recentActivities', RecentActivityResource::collection($this->recentActivities)),
         ];
     }
 }

@@ -37,5 +37,7 @@ Route::group(['middleware' => 'auth:admin'], static function(): void {
         Route::post('/users/update_avatar/{id}', ['uses' => 'UserController@updateUserAvatar', 'as' => 'users.update.user_avatar']);
     });
 
+    Route::apiResource('recent_activities', 'RecentActivityController', ['only' => ['index', 'show']]);
+
     Route::apiResource('/blogs', 'BlogController');
 });

@@ -93,4 +93,9 @@ class Admin extends JWTAuthModel implements IBaseUserModel
     {
         return $this->hasMany(Blog::class, 'admin_id', 'id');
     }
+
+    public function fromRecentActivities(): HasMany
+    {
+        return $this->hasMany(RecentActivity::class, 'admin_id', 'id');
+    }
 }

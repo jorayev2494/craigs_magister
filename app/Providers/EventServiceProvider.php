@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Announcements\Base\Announcement;
+use App\Observers\Announcement\AnnouncementChangeStatusObserver;
+use App\Observers\Announcement\AnnouncementObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -27,6 +30,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Announcement::observe(AnnouncementObserver::class);
+        // Announcement::observe(AnnouncementChangeStatusObserver::class);
     }
 }
