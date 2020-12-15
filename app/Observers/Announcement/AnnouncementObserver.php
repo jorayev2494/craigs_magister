@@ -35,7 +35,7 @@ class AnnouncementObserver
      */
     public function created(Announcement $announcement): void
     {
-        dd(__METHOD__);
+        // dd(__METHOD__);
     }
 
     /**
@@ -90,7 +90,7 @@ class AnnouncementObserver
      */
     public function restored(Announcement $announcement): void
     {
-        dd(__METHOD__);
+        // dd(__METHOD__);
     }
 
     /**
@@ -101,6 +101,6 @@ class AnnouncementObserver
      */
     public function forceDeleted(Announcement $announcement): void
     {
-        dd(__METHOD__);
+        // dd(__METHOD__);
     }
 }

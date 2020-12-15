@@ -31,10 +31,13 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.'], stati
 
 Route::group(['middleware' => 'auth:admin'], static function(): void {    
     Route::group(['prefix' => 'managements', 'namespace' => 'Management', 'as' => 'management.'], static function(): void {
+        #region Announcements
         Route::apiResource('/announcements', 'Announcement\AnnouncementController', ['except' => ['store']]);
         Route::put('/announcements/change_status/{id}', ['uses' => 'Announcement\AnnouncementChangeStatusController', 'as' => 'change_status']);
         Route::apiResource('/users', 'UserController', ['except' => ['store']]);
         Route::post('/users/update_avatar/{id}', ['uses' => 'UserController@updateUserAvatar', 'as' => 'users.update.user_avatar']);
+        #endregion
+        Route::apiResource('categories', 'Announcement\CategoryController');
     });
 
     Route::apiResource('recent_activities', 'RecentActivityController', ['only' => ['index', 'show']]);
