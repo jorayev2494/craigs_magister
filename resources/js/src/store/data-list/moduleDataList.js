@@ -14,11 +14,11 @@ import actions from './moduleDataListActions.js'
 import getters from './moduleDataListGetters.js'
 
 export default {
-  isRegistered: false,
-  namespaced: true,
-  state: state,
-  mutations: mutations,
-  actions: actions,
-  getters: getters
+    isRegistered: false,
+    namespaced: true,
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
 }
 

@@ -1,2077 +1,4558 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
-/***/ "./node_modules/core-js/fn/promise.js":
-/*!********************************************!*\
-  !*** ./node_modules/core-js/fn/promise.js ***!
-  \********************************************/
+/***/ "./node_modules/algoliasearch/node_modules/debug/src/browser.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/algoliasearch/node_modules/debug/src/browser.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ../modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
-__webpack_require__(/*! ../modules/es6.string.iterator */ "./node_modules/core-js/modules/es6.string.iterator.js");
-__webpack_require__(/*! ../modules/web.dom.iterable */ "./node_modules/core-js/modules/web.dom.iterable.js");
-__webpack_require__(/*! ../modules/es6.promise */ "./node_modules/core-js/modules/es6.promise.js");
-__webpack_require__(/*! ../modules/es7.promise.finally */ "./node_modules/core-js/modules/es7.promise.finally.js");
-__webpack_require__(/*! ../modules/es7.promise.try */ "./node_modules/core-js/modules/es7.promise.try.js");
-module.exports = __webpack_require__(/*! ../modules/_core */ "./node_modules/core-js/modules/_core.js").Promise;
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * This is the web browser implementation of `debug()`.
+ *
+ * Expose `debug()` as the module.
+ */
 
+exports = module.exports = __webpack_require__(/*! ./debug */ "./node_modules/algoliasearch/node_modules/debug/src/debug.js");
+exports.log = log;
+exports.formatArgs = formatArgs;
+exports.save = save;
+exports.load = load;
+exports.useColors = useColors;
+exports.storage = 'undefined' != typeof chrome
+               && 'undefined' != typeof chrome.storage
+                  ? chrome.storage.local
+                  : localstorage();
 
-/***/ }),
+/**
+ * Colors.
+ */
 
-/***/ "./node_modules/core-js/modules/_a-function.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/core-js/modules/_a-function.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+exports.colors = [
+  'lightseagreen',
+  'forestgreen',
+  'goldenrod',
+  'dodgerblue',
+  'darkorchid',
+  'crimson'
+];
 
-module.exports = function (it) {
-  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
-  return it;
-};
+/**
+ * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+ * and the Firebug extension (any Firefox version) are known
+ * to support "%c" CSS customizations.
+ *
+ * TODO: add a `localStorage` variable to explicitly enable/disable colors
+ */
 
+function useColors() {
+  // NB: In an Electron preload script, document will be defined but not fully
+  // initialized. Since we know we're in Chrome, we'll just detect this case
+  // explicitly
+  if (typeof window !== 'undefined' && window.process && window.process.type === 'renderer') {
+    return true;
+  }
 
-/***/ }),
+  // is webkit? http://stackoverflow.com/a/16459606/376773
+  // document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
+  return (typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance) ||
+    // is firebug? http://stackoverflow.com/a/398120/376773
+    (typeof window !== 'undefined' && window.console && (window.console.firebug || (window.console.exception && window.console.table))) ||
+    // is firefox >= v31?
+    // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+    (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31) ||
+    // double check webkit in userAgent just in case we are in a worker
+    (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
+}
 
-/***/ "./node_modules/core-js/modules/_add-to-unscopables.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/core-js/modules/_add-to-unscopables.js ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/**
+ * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+ */
 
-// 22.1.3.31 Array.prototype[@@unscopables]
-var UNSCOPABLES = __webpack_require__(/*! ./_wks */ "./node_modules/core-js/modules/_wks.js")('unscopables');
-var ArrayProto = Array.prototype;
-if (ArrayProto[UNSCOPABLES] == undefined) __webpack_require__(/*! ./_hide */ "./node_modules/core-js/modules/_hide.js")(ArrayProto, UNSCOPABLES, {});
-module.exports = function (key) {
-  ArrayProto[UNSCOPABLES][key] = true;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_an-instance.js":
-/*!******************************************************!*\
-  !*** ./node_modules/core-js/modules/_an-instance.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function (it, Constructor, name, forbiddenField) {
-  if (!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)) {
-    throw TypeError(name + ': incorrect invocation!');
-  } return it;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_an-object.js":
-/*!****************************************************!*\
-  !*** ./node_modules/core-js/modules/_an-object.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isObject = __webpack_require__(/*! ./_is-object */ "./node_modules/core-js/modules/_is-object.js");
-module.exports = function (it) {
-  if (!isObject(it)) throw TypeError(it + ' is not an object!');
-  return it;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_array-includes.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/core-js/modules/_array-includes.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// false -> Array#indexOf
-// true  -> Array#includes
-var toIObject = __webpack_require__(/*! ./_to-iobject */ "./node_modules/core-js/modules/_to-iobject.js");
-var toLength = __webpack_require__(/*! ./_to-length */ "./node_modules/core-js/modules/_to-length.js");
-var toAbsoluteIndex = __webpack_require__(/*! ./_to-absolute-index */ "./node_modules/core-js/modules/_to-absolute-index.js");
-module.exports = function (IS_INCLUDES) {
-  return function ($this, el, fromIndex) {
-    var O = toIObject($this);
-    var length = toLength(O.length);
-    var index = toAbsoluteIndex(fromIndex, length);
-    var value;
-    // Array#includes uses SameValueZero equality algorithm
-    // eslint-disable-next-line no-self-compare
-    if (IS_INCLUDES && el != el) while (length > index) {
-      value = O[index++];
-      // eslint-disable-next-line no-self-compare
-      if (value != value) return true;
-    // Array#indexOf ignores holes, Array#includes - not
-    } else for (;length > index; index++) if (IS_INCLUDES || index in O) {
-      if (O[index] === el) return IS_INCLUDES || index || 0;
-    } return !IS_INCLUDES && -1;
-  };
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_classof.js":
-/*!**************************************************!*\
-  !*** ./node_modules/core-js/modules/_classof.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// getting tag from 19.1.3.6 Object.prototype.toString()
-var cof = __webpack_require__(/*! ./_cof */ "./node_modules/core-js/modules/_cof.js");
-var TAG = __webpack_require__(/*! ./_wks */ "./node_modules/core-js/modules/_wks.js")('toStringTag');
-// ES3 wrong here
-var ARG = cof(function () { return arguments; }()) == 'Arguments';
-
-// fallback for IE11 Script Access Denied error
-var tryGet = function (it, key) {
+exports.formatters.j = function(v) {
   try {
-    return it[key];
-  } catch (e) { /* empty */ }
+    return JSON.stringify(v);
+  } catch (err) {
+    return '[UnexpectedJSONParseError]: ' + err.message;
+  }
 };
 
-module.exports = function (it) {
-  var O, T, B;
-  return it === undefined ? 'Undefined' : it === null ? 'Null'
-    // @@toStringTag case
-    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
-    // builtinTag case
-    : ARG ? cof(O)
-    // ES3 arguments fallback
-    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
-};
+
+/**
+ * Colorize log arguments if enabled.
+ *
+ * @api public
+ */
+
+function formatArgs(args) {
+  var useColors = this.useColors;
+
+  args[0] = (useColors ? '%c' : '')
+    + this.namespace
+    + (useColors ? ' %c' : ' ')
+    + args[0]
+    + (useColors ? '%c ' : ' ')
+    + '+' + exports.humanize(this.diff);
+
+  if (!useColors) return;
+
+  var c = 'color: ' + this.color;
+  args.splice(1, 0, c, 'color: inherit')
+
+  // the final "%c" is somewhat tricky, because there could be other
+  // arguments passed either before or after the %c, so we need to
+  // figure out the correct index to insert the CSS into
+  var index = 0;
+  var lastC = 0;
+  args[0].replace(/%[a-zA-Z%]/g, function(match) {
+    if ('%%' === match) return;
+    index++;
+    if ('%c' === match) {
+      // we only are interested in the *last* %c
+      // (the user may have provided their own)
+      lastC = index;
+    }
+  });
+
+  args.splice(lastC, 0, c);
+}
+
+/**
+ * Invokes `console.log()` when available.
+ * No-op when `console.log` is not a "function".
+ *
+ * @api public
+ */
+
+function log() {
+  // this hackery is required for IE8/9, where
+  // the `console.log` function doesn't have 'apply'
+  return 'object' === typeof console
+    && console.log
+    && Function.prototype.apply.call(console.log, console, arguments);
+}
+
+/**
+ * Save `namespaces`.
+ *
+ * @param {String} namespaces
+ * @api private
+ */
+
+function save(namespaces) {
+  try {
+    if (null == namespaces) {
+      exports.storage.removeItem('debug');
+    } else {
+      exports.storage.debug = namespaces;
+    }
+  } catch(e) {}
+}
+
+/**
+ * Load `namespaces`.
+ *
+ * @return {String} returns the previously persisted debug modes
+ * @api private
+ */
+
+function load() {
+  var r;
+  try {
+    r = exports.storage.debug;
+  } catch(e) {}
+
+  // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
+  if (!r && typeof process !== 'undefined' && 'env' in process) {
+    r = process.env.DEBUG;
+  }
+
+  return r;
+}
+
+/**
+ * Enable namespaces listed in `localStorage.debug` initially.
+ */
+
+exports.enable(load());
+
+/**
+ * Localstorage attempts to return the localstorage.
+ *
+ * This is necessary because safari throws
+ * when a user disables cookies/localstorage
+ * and you attempt to access it.
+ *
+ * @return {LocalStorage}
+ * @api private
+ */
+
+function localstorage() {
+  try {
+    return window.localStorage;
+  } catch (e) {}
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../process/browser.js */ "./node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "./node_modules/algoliasearch/node_modules/debug/src/debug.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/algoliasearch/node_modules/debug/src/debug.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/**
+ * This is the common logic for both the Node.js and web browser
+ * implementations of `debug()`.
+ *
+ * Expose `debug()` as the module.
+ */
+
+exports = module.exports = createDebug.debug = createDebug['default'] = createDebug;
+exports.coerce = coerce;
+exports.disable = disable;
+exports.enable = enable;
+exports.enabled = enabled;
+exports.humanize = __webpack_require__(/*! ms */ "./node_modules/ms/index.js");
+
+/**
+ * The currently active debug mode names, and names to skip.
+ */
+
+exports.names = [];
+exports.skips = [];
+
+/**
+ * Map of special "%n" handling functions, for the debug "format" argument.
+ *
+ * Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+ */
+
+exports.formatters = {};
+
+/**
+ * Previous log timestamp.
+ */
+
+var prevTime;
+
+/**
+ * Select a color.
+ * @param {String} namespace
+ * @return {Number}
+ * @api private
+ */
+
+function selectColor(namespace) {
+  var hash = 0, i;
+
+  for (i in namespace) {
+    hash  = ((hash << 5) - hash) + namespace.charCodeAt(i);
+    hash |= 0; // Convert to 32bit integer
+  }
+
+  return exports.colors[Math.abs(hash) % exports.colors.length];
+}
+
+/**
+ * Create a debugger with the given `namespace`.
+ *
+ * @param {String} namespace
+ * @return {Function}
+ * @api public
+ */
+
+function createDebug(namespace) {
+
+  function debug() {
+    // disabled?
+    if (!debug.enabled) return;
+
+    var self = debug;
+
+    // set `diff` timestamp
+    var curr = +new Date();
+    var ms = curr - (prevTime || curr);
+    self.diff = ms;
+    self.prev = prevTime;
+    self.curr = curr;
+    prevTime = curr;
+
+    // turn the `arguments` into a proper Array
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+
+    args[0] = exports.coerce(args[0]);
+
+    if ('string' !== typeof args[0]) {
+      // anything else let's inspect with %O
+      args.unshift('%O');
+    }
+
+    // apply any `formatters` transformations
+    var index = 0;
+    args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
+      // if we encounter an escaped % then don't increase the array index
+      if (match === '%%') return match;
+      index++;
+      var formatter = exports.formatters[format];
+      if ('function' === typeof formatter) {
+        var val = args[index];
+        match = formatter.call(self, val);
+
+        // now we need to remove `args[index]` since it's inlined in the `format`
+        args.splice(index, 1);
+        index--;
+      }
+      return match;
+    });
+
+    // apply env-specific formatting (colors, etc.)
+    exports.formatArgs.call(self, args);
+
+    var logFn = debug.log || exports.log || console.log.bind(console);
+    logFn.apply(self, args);
+  }
+
+  debug.namespace = namespace;
+  debug.enabled = exports.enabled(namespace);
+  debug.useColors = exports.useColors();
+  debug.color = selectColor(namespace);
+
+  // env-specific initialization logic for debug instances
+  if ('function' === typeof exports.init) {
+    exports.init(debug);
+  }
+
+  return debug;
+}
+
+/**
+ * Enables a debug mode by namespaces. This can include modes
+ * separated by a colon and wildcards.
+ *
+ * @param {String} namespaces
+ * @api public
+ */
+
+function enable(namespaces) {
+  exports.save(namespaces);
+
+  exports.names = [];
+  exports.skips = [];
+
+  var split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
+  var len = split.length;
+
+  for (var i = 0; i < len; i++) {
+    if (!split[i]) continue; // ignore empty strings
+    namespaces = split[i].replace(/\*/g, '.*?');
+    if (namespaces[0] === '-') {
+      exports.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+    } else {
+      exports.names.push(new RegExp('^' + namespaces + '$'));
+    }
+  }
+}
+
+/**
+ * Disable debug output.
+ *
+ * @api public
+ */
+
+function disable() {
+  exports.enable('');
+}
+
+/**
+ * Returns true if the given mode name is enabled, false otherwise.
+ *
+ * @param {String} name
+ * @return {Boolean}
+ * @api public
+ */
+
+function enabled(name) {
+  var i, len;
+  for (i = 0, len = exports.skips.length; i < len; i++) {
+    if (exports.skips[i].test(name)) {
+      return false;
+    }
+  }
+  for (i = 0, len = exports.names.length; i < len; i++) {
+    if (exports.names[i].test(name)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Coerce `val`.
+ *
+ * @param {Mixed} val
+ * @return {Mixed}
+ * @api private
+ */
+
+function coerce(val) {
+  if (val instanceof Error) return val.stack || val.message;
+  return val;
+}
 
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/_cof.js":
-/*!**********************************************!*\
-  !*** ./node_modules/core-js/modules/_cof.js ***!
-  \**********************************************/
+/***/ "./node_modules/algoliasearch/node_modules/isarray/index.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/algoliasearch/node_modules/isarray/index.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
 
-module.exports = function (it) {
-  return toString.call(it).slice(8, -1);
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
 };
 
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/_core.js":
-/*!***********************************************!*\
-  !*** ./node_modules/core-js/modules/_core.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var core = module.exports = { version: '2.6.5' };
-if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_ctx.js":
-/*!**********************************************!*\
-  !*** ./node_modules/core-js/modules/_ctx.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// optional / simple context binding
-var aFunction = __webpack_require__(/*! ./_a-function */ "./node_modules/core-js/modules/_a-function.js");
-module.exports = function (fn, that, length) {
-  aFunction(fn);
-  if (that === undefined) return fn;
-  switch (length) {
-    case 1: return function (a) {
-      return fn.call(that, a);
-    };
-    case 2: return function (a, b) {
-      return fn.call(that, a, b);
-    };
-    case 3: return function (a, b, c) {
-      return fn.call(that, a, b, c);
-    };
-  }
-  return function (/* ...args */) {
-    return fn.apply(that, arguments);
-  };
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_defined.js":
-/*!**************************************************!*\
-  !*** ./node_modules/core-js/modules/_defined.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// 7.2.1 RequireObjectCoercible(argument)
-module.exports = function (it) {
-  if (it == undefined) throw TypeError("Can't call method on  " + it);
-  return it;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_descriptors.js":
-/*!******************************************************!*\
-  !*** ./node_modules/core-js/modules/_descriptors.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Thank's IE8 for his funny defineProperty
-module.exports = !__webpack_require__(/*! ./_fails */ "./node_modules/core-js/modules/_fails.js")(function () {
-  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
-});
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_dom-create.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/core-js/modules/_dom-create.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isObject = __webpack_require__(/*! ./_is-object */ "./node_modules/core-js/modules/_is-object.js");
-var document = __webpack_require__(/*! ./_global */ "./node_modules/core-js/modules/_global.js").document;
-// typeof document.createElement is 'object' in old IE
-var is = isObject(document) && isObject(document.createElement);
-module.exports = function (it) {
-  return is ? document.createElement(it) : {};
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_enum-bug-keys.js":
-/*!********************************************************!*\
-  !*** ./node_modules/core-js/modules/_enum-bug-keys.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// IE 8- don't enum bug keys
-module.exports = (
-  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
-).split(',');
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_export.js":
-/*!*************************************************!*\
-  !*** ./node_modules/core-js/modules/_export.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__(/*! ./_global */ "./node_modules/core-js/modules/_global.js");
-var core = __webpack_require__(/*! ./_core */ "./node_modules/core-js/modules/_core.js");
-var hide = __webpack_require__(/*! ./_hide */ "./node_modules/core-js/modules/_hide.js");
-var redefine = __webpack_require__(/*! ./_redefine */ "./node_modules/core-js/modules/_redefine.js");
-var ctx = __webpack_require__(/*! ./_ctx */ "./node_modules/core-js/modules/_ctx.js");
-var PROTOTYPE = 'prototype';
-
-var $export = function (type, name, source) {
-  var IS_FORCED = type & $export.F;
-  var IS_GLOBAL = type & $export.G;
-  var IS_STATIC = type & $export.S;
-  var IS_PROTO = type & $export.P;
-  var IS_BIND = type & $export.B;
-  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] || (global[name] = {}) : (global[name] || {})[PROTOTYPE];
-  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
-  var expProto = exports[PROTOTYPE] || (exports[PROTOTYPE] = {});
-  var key, own, out, exp;
-  if (IS_GLOBAL) source = name;
-  for (key in source) {
-    // contains in native
-    own = !IS_FORCED && target && target[key] !== undefined;
-    // export native or passed
-    out = (own ? target : source)[key];
-    // bind timers to global for call from export context
-    exp = IS_BIND && own ? ctx(out, global) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
-    // extend global
-    if (target) redefine(target, key, out, type & $export.U);
-    // export
-    if (exports[key] != out) hide(exports, key, exp);
-    if (IS_PROTO && expProto[key] != out) expProto[key] = out;
-  }
-};
-global.core = core;
-// type bitmap
-$export.F = 1;   // forced
-$export.G = 2;   // global
-$export.S = 4;   // static
-$export.P = 8;   // proto
-$export.B = 16;  // bind
-$export.W = 32;  // wrap
-$export.U = 64;  // safe
-$export.R = 128; // real proto method for `library`
-module.exports = $export;
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_fails.js":
-/*!************************************************!*\
-  !*** ./node_modules/core-js/modules/_fails.js ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function (exec) {
-  try {
-    return !!exec();
-  } catch (e) {
-    return true;
-  }
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_for-of.js":
-/*!*************************************************!*\
-  !*** ./node_modules/core-js/modules/_for-of.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var ctx = __webpack_require__(/*! ./_ctx */ "./node_modules/core-js/modules/_ctx.js");
-var call = __webpack_require__(/*! ./_iter-call */ "./node_modules/core-js/modules/_iter-call.js");
-var isArrayIter = __webpack_require__(/*! ./_is-array-iter */ "./node_modules/core-js/modules/_is-array-iter.js");
-var anObject = __webpack_require__(/*! ./_an-object */ "./node_modules/core-js/modules/_an-object.js");
-var toLength = __webpack_require__(/*! ./_to-length */ "./node_modules/core-js/modules/_to-length.js");
-var getIterFn = __webpack_require__(/*! ./core.get-iterator-method */ "./node_modules/core-js/modules/core.get-iterator-method.js");
-var BREAK = {};
-var RETURN = {};
-var exports = module.exports = function (iterable, entries, fn, that, ITERATOR) {
-  var iterFn = ITERATOR ? function () { return iterable; } : getIterFn(iterable);
-  var f = ctx(fn, that, entries ? 2 : 1);
-  var index = 0;
-  var length, step, iterator, result;
-  if (typeof iterFn != 'function') throw TypeError(iterable + ' is not iterable!');
-  // fast case for arrays with default iterator
-  if (isArrayIter(iterFn)) for (length = toLength(iterable.length); length > index; index++) {
-    result = entries ? f(anObject(step = iterable[index])[0], step[1]) : f(iterable[index]);
-    if (result === BREAK || result === RETURN) return result;
-  } else for (iterator = iterFn.call(iterable); !(step = iterator.next()).done;) {
-    result = call(iterator, f, step.value, entries);
-    if (result === BREAK || result === RETURN) return result;
-  }
-};
-exports.BREAK = BREAK;
-exports.RETURN = RETURN;
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_function-to-string.js":
+/***/ "./node_modules/algoliasearch/src/AlgoliaSearchCore.js":
 /*!*************************************************************!*\
-  !*** ./node_modules/core-js/modules/_function-to-string.js ***!
+  !*** ./node_modules/algoliasearch/src/AlgoliaSearchCore.js ***!
   \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./_shared */ "./node_modules/core-js/modules/_shared.js")('native-function-to-string', Function.toString);
+/* WEBPACK VAR INJECTION */(function(process) {module.exports = AlgoliaSearchCore;
 
+var errors = __webpack_require__(/*! ./errors */ "./node_modules/algoliasearch/src/errors.js");
+var exitPromise = __webpack_require__(/*! ./exitPromise.js */ "./node_modules/algoliasearch/src/exitPromise.js");
+var IndexCore = __webpack_require__(/*! ./IndexCore.js */ "./node_modules/algoliasearch/src/IndexCore.js");
+var store = __webpack_require__(/*! ./store.js */ "./node_modules/algoliasearch/src/store.js");
 
-/***/ }),
+// We will always put the API KEY in the JSON body in case of too long API KEY,
+// to avoid query string being too long and failing in various conditions (our server limit, browser limit,
+// proxies limit)
+var MAX_API_KEY_LENGTH = 500;
+var RESET_APP_DATA_TIMER =
+  process.env.RESET_APP_DATA_TIMER && parseInt(process.env.RESET_APP_DATA_TIMER, 10) ||
+  60 * 2 * 1000; // after 2 minutes reset to first host
 
-/***/ "./node_modules/core-js/modules/_global.js":
-/*!*************************************************!*\
-  !*** ./node_modules/core-js/modules/_global.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*
+ * Algolia Search library initialization
+ * https://www.algolia.com/
+ *
+ * @param {string} applicationID - Your applicationID, found in your dashboard
+ * @param {string} apiKey - Your API key, found in your dashboard
+ * @param {Object} [opts]
+ * @param {number} [opts.timeout=2000] - The request timeout set in milliseconds,
+ * another request will be issued after this timeout
+ * @param {string} [opts.protocol='https:'] - The protocol used to query Algolia Search API.
+ *                                        Set to 'http:' to force using http.
+ * @param {Object|Array} [opts.hosts={
+ *           read: [this.applicationID + '-dsn.algolia.net'].concat([
+ *             this.applicationID + '-1.algolianet.com',
+ *             this.applicationID + '-2.algolianet.com',
+ *             this.applicationID + '-3.algolianet.com']
+ *           ]),
+ *           write: [this.applicationID + '.algolia.net'].concat([
+ *             this.applicationID + '-1.algolianet.com',
+ *             this.applicationID + '-2.algolianet.com',
+ *             this.applicationID + '-3.algolianet.com']
+ *           ]) - The hosts to use for Algolia Search API.
+ *           If you provide them, you will less benefit from our HA implementation
+ */
+function AlgoliaSearchCore(applicationID, apiKey, opts) {
+  var debug = __webpack_require__(/*! debug */ "./node_modules/algoliasearch/node_modules/debug/src/browser.js")('algoliasearch');
 
-// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-var global = module.exports = typeof window != 'undefined' && window.Math == Math
-  ? window : typeof self != 'undefined' && self.Math == Math ? self
-  // eslint-disable-next-line no-new-func
-  : Function('return this')();
-if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
+  var clone = __webpack_require__(/*! ./clone.js */ "./node_modules/algoliasearch/src/clone.js");
+  var isArray = __webpack_require__(/*! isarray */ "./node_modules/algoliasearch/node_modules/isarray/index.js");
+  var map = __webpack_require__(/*! ./map.js */ "./node_modules/algoliasearch/src/map.js");
 
+  var usage = 'Usage: algoliasearch(applicationID, apiKey, opts)';
 
-/***/ }),
+  if (opts._allowEmptyCredentials !== true && !applicationID) {
+    throw new errors.AlgoliaSearchError('Please provide an application ID. ' + usage);
+  }
 
-/***/ "./node_modules/core-js/modules/_has.js":
-/*!**********************************************!*\
-  !*** ./node_modules/core-js/modules/_has.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+  if (opts._allowEmptyCredentials !== true && !apiKey) {
+    throw new errors.AlgoliaSearchError('Please provide an API key. ' + usage);
+  }
 
-var hasOwnProperty = {}.hasOwnProperty;
-module.exports = function (it, key) {
-  return hasOwnProperty.call(it, key);
+  this.applicationID = applicationID;
+  this.apiKey = apiKey;
+
+  this.hosts = {
+    read: [],
+    write: []
+  };
+
+  opts = opts || {};
+
+  this._timeouts = opts.timeouts || {
+    connect: 1 * 1000, // 500ms connect is GPRS latency
+    read: 2 * 1000,
+    write: 30 * 1000
+  };
+
+  // backward compat, if opts.timeout is passed, we use it to configure all timeouts like before
+  if (opts.timeout) {
+    this._timeouts.connect = this._timeouts.read = this._timeouts.write = opts.timeout;
+  }
+
+  var protocol = opts.protocol || 'https:';
+  // while we advocate for colon-at-the-end values: 'http:' for `opts.protocol`
+  // we also accept `http` and `https`. It's a common error.
+  if (!/:$/.test(protocol)) {
+    protocol = protocol + ':';
+  }
+
+  if (protocol !== 'http:' && protocol !== 'https:') {
+    throw new errors.AlgoliaSearchError('protocol must be `http:` or `https:` (was `' + opts.protocol + '`)');
+  }
+
+  this._checkAppIdData();
+
+  if (!opts.hosts) {
+    var defaultHosts = map(this._shuffleResult, function(hostNumber) {
+      return applicationID + '-' + hostNumber + '.algolianet.com';
+    });
+
+    // no hosts given, compute defaults
+    var mainSuffix = (opts.dsn === false ? '' : '-dsn') + '.algolia.net';
+    this.hosts.read = [this.applicationID + mainSuffix].concat(defaultHosts);
+    this.hosts.write = [this.applicationID + '.algolia.net'].concat(defaultHosts);
+  } else if (isArray(opts.hosts)) {
+    // when passing custom hosts, we need to have a different host index if the number
+    // of write/read hosts are different.
+    this.hosts.read = clone(opts.hosts);
+    this.hosts.write = clone(opts.hosts);
+  } else {
+    this.hosts.read = clone(opts.hosts.read);
+    this.hosts.write = clone(opts.hosts.write);
+  }
+
+  // add protocol and lowercase hosts
+  this.hosts.read = map(this.hosts.read, prepareHost(protocol));
+  this.hosts.write = map(this.hosts.write, prepareHost(protocol));
+
+  this.extraHeaders = {};
+
+  // In some situations you might want to warm the cache
+  this.cache = opts._cache || {};
+
+  this._ua = opts._ua;
+  this._useCache = opts._useCache === undefined || opts._cache ? true : opts._useCache;
+  this._useRequestCache = this._useCache && opts._useRequestCache;
+  this._useFallback = opts.useFallback === undefined ? true : opts.useFallback;
+
+  this._setTimeout = opts._setTimeout;
+
+  debug('init done, %j', this);
+}
+
+/*
+ * Get the index object initialized
+ *
+ * @param indexName the name of index
+ * @param callback the result callback with one argument (the Index instance)
+ */
+AlgoliaSearchCore.prototype.initIndex = function(indexName) {
+  return new IndexCore(this, indexName);
 };
 
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_hide.js":
-/*!***********************************************!*\
-  !*** ./node_modules/core-js/modules/_hide.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var dP = __webpack_require__(/*! ./_object-dp */ "./node_modules/core-js/modules/_object-dp.js");
-var createDesc = __webpack_require__(/*! ./_property-desc */ "./node_modules/core-js/modules/_property-desc.js");
-module.exports = __webpack_require__(/*! ./_descriptors */ "./node_modules/core-js/modules/_descriptors.js") ? function (object, key, value) {
-  return dP.f(object, key, createDesc(1, value));
-} : function (object, key, value) {
-  object[key] = value;
-  return object;
+/**
+* Add an extra field to the HTTP request
+*
+* @param name the header field name
+* @param value the header field value
+*/
+AlgoliaSearchCore.prototype.setExtraHeader = function(name, value) {
+  this.extraHeaders[name.toLowerCase()] = value;
 };
 
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_html.js":
-/*!***********************************************!*\
-  !*** ./node_modules/core-js/modules/_html.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var document = __webpack_require__(/*! ./_global */ "./node_modules/core-js/modules/_global.js").document;
-module.exports = document && document.documentElement;
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_ie8-dom-define.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/core-js/modules/_ie8-dom-define.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = !__webpack_require__(/*! ./_descriptors */ "./node_modules/core-js/modules/_descriptors.js") && !__webpack_require__(/*! ./_fails */ "./node_modules/core-js/modules/_fails.js")(function () {
-  return Object.defineProperty(__webpack_require__(/*! ./_dom-create */ "./node_modules/core-js/modules/_dom-create.js")('div'), 'a', { get: function () { return 7; } }).a != 7;
-});
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_invoke.js":
-/*!*************************************************!*\
-  !*** ./node_modules/core-js/modules/_invoke.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// fast apply, http://jsperf.lnkit.com/fast-apply/5
-module.exports = function (fn, args, that) {
-  var un = that === undefined;
-  switch (args.length) {
-    case 0: return un ? fn()
-                      : fn.call(that);
-    case 1: return un ? fn(args[0])
-                      : fn.call(that, args[0]);
-    case 2: return un ? fn(args[0], args[1])
-                      : fn.call(that, args[0], args[1]);
-    case 3: return un ? fn(args[0], args[1], args[2])
-                      : fn.call(that, args[0], args[1], args[2]);
-    case 4: return un ? fn(args[0], args[1], args[2], args[3])
-                      : fn.call(that, args[0], args[1], args[2], args[3]);
-  } return fn.apply(that, args);
+/**
+* Get the value of an extra HTTP header
+*
+* @param name the header field name
+*/
+AlgoliaSearchCore.prototype.getExtraHeader = function(name) {
+  return this.extraHeaders[name.toLowerCase()];
 };
 
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_iobject.js":
-/*!**************************************************!*\
-  !*** ./node_modules/core-js/modules/_iobject.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(/*! ./_cof */ "./node_modules/core-js/modules/_cof.js");
-// eslint-disable-next-line no-prototype-builtins
-module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
-  return cof(it) == 'String' ? it.split('') : Object(it);
+/**
+* Remove an extra field from the HTTP request
+*
+* @param name the header field name
+*/
+AlgoliaSearchCore.prototype.unsetExtraHeader = function(name) {
+  delete this.extraHeaders[name.toLowerCase()];
 };
 
+/**
+* Augment sent x-algolia-agent with more data, each agent part
+* is automatically separated from the others by a semicolon;
+*
+* @param algoliaAgent the agent to add
+*/
+AlgoliaSearchCore.prototype.addAlgoliaAgent = function(algoliaAgent) {
+  var algoliaAgentWithDelimiter = '; ' + algoliaAgent;
 
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_is-array-iter.js":
-/*!********************************************************!*\
-  !*** ./node_modules/core-js/modules/_is-array-iter.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// check on default Array iterator
-var Iterators = __webpack_require__(/*! ./_iterators */ "./node_modules/core-js/modules/_iterators.js");
-var ITERATOR = __webpack_require__(/*! ./_wks */ "./node_modules/core-js/modules/_wks.js")('iterator');
-var ArrayProto = Array.prototype;
-
-module.exports = function (it) {
-  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_is-object.js":
-/*!****************************************************!*\
-  !*** ./node_modules/core-js/modules/_is-object.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function (it) {
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_iter-call.js":
-/*!****************************************************!*\
-  !*** ./node_modules/core-js/modules/_iter-call.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// call something on iterator step with safe closing on error
-var anObject = __webpack_require__(/*! ./_an-object */ "./node_modules/core-js/modules/_an-object.js");
-module.exports = function (iterator, fn, value, entries) {
-  try {
-    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
-  // 7.4.6 IteratorClose(iterator, completion)
-  } catch (e) {
-    var ret = iterator['return'];
-    if (ret !== undefined) anObject(ret.call(iterator));
-    throw e;
+  if (this._ua.indexOf(algoliaAgentWithDelimiter) === -1) {
+    this._ua += algoliaAgentWithDelimiter;
   }
 };
 
+/*
+ * Wrapper that try all hosts to maximize the quality of service
+ */
+AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
+  this._checkAppIdData();
 
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_iter-create.js":
-/*!******************************************************!*\
-  !*** ./node_modules/core-js/modules/_iter-create.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var create = __webpack_require__(/*! ./_object-create */ "./node_modules/core-js/modules/_object-create.js");
-var descriptor = __webpack_require__(/*! ./_property-desc */ "./node_modules/core-js/modules/_property-desc.js");
-var setToStringTag = __webpack_require__(/*! ./_set-to-string-tag */ "./node_modules/core-js/modules/_set-to-string-tag.js");
-var IteratorPrototype = {};
-
-// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(/*! ./_hide */ "./node_modules/core-js/modules/_hide.js")(IteratorPrototype, __webpack_require__(/*! ./_wks */ "./node_modules/core-js/modules/_wks.js")('iterator'), function () { return this; });
-
-module.exports = function (Constructor, NAME, next) {
-  Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
-  setToStringTag(Constructor, NAME + ' Iterator');
-};
+  var requestDebug = __webpack_require__(/*! debug */ "./node_modules/algoliasearch/node_modules/debug/src/browser.js")('algoliasearch:' + initialOpts.url);
 
 
-/***/ }),
+  var body;
+  var cacheID;
+  var additionalUA = initialOpts.additionalUA || '';
+  var cache = initialOpts.cache;
+  var client = this;
+  var tries = 0;
+  var usingFallback = false;
+  var hasFallback = client._useFallback && client._request.fallback && initialOpts.fallback;
+  var headers;
 
-/***/ "./node_modules/core-js/modules/_iter-define.js":
-/*!******************************************************!*\
-  !*** ./node_modules/core-js/modules/_iter-define.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+  if (
+    this.apiKey.length > MAX_API_KEY_LENGTH &&
+    initialOpts.body !== undefined &&
+    (initialOpts.body.params !== undefined || // index.search()
+    initialOpts.body.requests !== undefined) // client.search()
+  ) {
+    initialOpts.body.apiKey = this.apiKey;
+    headers = this._computeRequestHeaders({
+      additionalUA: additionalUA,
+      withApiKey: false,
+      headers: initialOpts.headers
+    });
+  } else {
+    headers = this._computeRequestHeaders({
+      additionalUA: additionalUA,
+      headers: initialOpts.headers
+    });
+  }
 
-"use strict";
+  if (initialOpts.body !== undefined) {
+    body = safeJSONStringify(initialOpts.body);
+  }
 
-var LIBRARY = __webpack_require__(/*! ./_library */ "./node_modules/core-js/modules/_library.js");
-var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/modules/_export.js");
-var redefine = __webpack_require__(/*! ./_redefine */ "./node_modules/core-js/modules/_redefine.js");
-var hide = __webpack_require__(/*! ./_hide */ "./node_modules/core-js/modules/_hide.js");
-var Iterators = __webpack_require__(/*! ./_iterators */ "./node_modules/core-js/modules/_iterators.js");
-var $iterCreate = __webpack_require__(/*! ./_iter-create */ "./node_modules/core-js/modules/_iter-create.js");
-var setToStringTag = __webpack_require__(/*! ./_set-to-string-tag */ "./node_modules/core-js/modules/_set-to-string-tag.js");
-var getPrototypeOf = __webpack_require__(/*! ./_object-gpo */ "./node_modules/core-js/modules/_object-gpo.js");
-var ITERATOR = __webpack_require__(/*! ./_wks */ "./node_modules/core-js/modules/_wks.js")('iterator');
-var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
-var FF_ITERATOR = '@@iterator';
-var KEYS = 'keys';
-var VALUES = 'values';
+  requestDebug('request start');
+  var debugData = [];
 
-var returnThis = function () { return this; };
 
-module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED) {
-  $iterCreate(Constructor, NAME, next);
-  var getMethod = function (kind) {
-    if (!BUGGY && kind in proto) return proto[kind];
-    switch (kind) {
-      case KEYS: return function keys() { return new Constructor(this, kind); };
-      case VALUES: return function values() { return new Constructor(this, kind); };
-    } return function entries() { return new Constructor(this, kind); };
-  };
-  var TAG = NAME + ' Iterator';
-  var DEF_VALUES = DEFAULT == VALUES;
-  var VALUES_BUG = false;
-  var proto = Base.prototype;
-  var $native = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT];
-  var $default = $native || getMethod(DEFAULT);
-  var $entries = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined;
-  var $anyNative = NAME == 'Array' ? proto.entries || $native : $native;
-  var methods, key, IteratorPrototype;
-  // Fix native
-  if ($anyNative) {
-    IteratorPrototype = getPrototypeOf($anyNative.call(new Base()));
-    if (IteratorPrototype !== Object.prototype && IteratorPrototype.next) {
-      // Set @@toStringTag to native iterators
-      setToStringTag(IteratorPrototype, TAG, true);
-      // fix for some old engines
-      if (!LIBRARY && typeof IteratorPrototype[ITERATOR] != 'function') hide(IteratorPrototype, ITERATOR, returnThis);
+  function doRequest(requester, reqOpts) {
+    client._checkAppIdData();
+
+    var startTime = new Date();
+
+    if (client._useCache && !client._useRequestCache) {
+      cacheID = initialOpts.url;
+    }
+
+    // as we sometime use POST requests to pass parameters (like query='aa'),
+    // the cacheID must also include the body to be different between calls
+    if (client._useCache && !client._useRequestCache && body) {
+      cacheID += '_body_' + reqOpts.body;
+    }
+
+    // handle cache existence
+    if (isCacheValidWithCurrentID(!client._useRequestCache, cache, cacheID)) {
+      requestDebug('serving response from cache');
+
+      var responseText = cache[cacheID];
+
+      // Cache response must match the type of the original one
+      return client._promise.resolve({
+        body: JSON.parse(responseText),
+        responseText: responseText
+      });
+    }
+
+    // if we reached max tries
+    if (tries >= client.hosts[initialOpts.hostType].length) {
+      if (!hasFallback || usingFallback) {
+        requestDebug('could not get any response');
+        // then stop
+        return client._promise.reject(new errors.AlgoliaSearchError(
+          'Cannot connect to the AlgoliaSearch API.' +
+          ' Send an email to support@algolia.com to report and resolve the issue.' +
+          ' Application id was: ' + client.applicationID, {debugData: debugData}
+        ));
+      }
+
+      requestDebug('switching to fallback');
+
+      // let's try the fallback starting from here
+      tries = 0;
+
+      // method, url and body are fallback dependent
+      reqOpts.method = initialOpts.fallback.method;
+      reqOpts.url = initialOpts.fallback.url;
+      reqOpts.jsonBody = initialOpts.fallback.body;
+      if (reqOpts.jsonBody) {
+        reqOpts.body = safeJSONStringify(reqOpts.jsonBody);
+      }
+      // re-compute headers, they could be omitting the API KEY
+      headers = client._computeRequestHeaders({
+        additionalUA: additionalUA,
+        headers: initialOpts.headers
+      });
+
+      reqOpts.timeouts = client._getTimeoutsForRequest(initialOpts.hostType);
+      client._setHostIndexByType(0, initialOpts.hostType);
+      usingFallback = true; // the current request is now using fallback
+      return doRequest(client._request.fallback, reqOpts);
+    }
+
+    var currentHost = client._getHostByType(initialOpts.hostType);
+
+    var url = currentHost + reqOpts.url;
+    var options = {
+      body: reqOpts.body,
+      jsonBody: reqOpts.jsonBody,
+      method: reqOpts.method,
+      headers: headers,
+      timeouts: reqOpts.timeouts,
+      debug: requestDebug,
+      forceAuthHeaders: reqOpts.forceAuthHeaders
+    };
+
+    requestDebug('method: %s, url: %s, headers: %j, timeouts: %d',
+      options.method, url, options.headers, options.timeouts);
+
+    if (requester === client._request.fallback) {
+      requestDebug('using fallback');
+    }
+
+    // `requester` is any of this._request or this._request.fallback
+    // thus it needs to be called using the client as context
+    return requester.call(client, url, options).then(success, tryFallback);
+
+    function success(httpResponse) {
+      // compute the status of the response,
+      //
+      // When in browser mode, using XDR or JSONP, we have no statusCode available
+      // So we rely on our API response `status` property.
+      // But `waitTask` can set a `status` property which is not the statusCode (it's the task status)
+      // So we check if there's a `message` along `status` and it means it's an error
+      //
+      // That's the only case where we have a response.status that's not the http statusCode
+      var status = httpResponse && httpResponse.body && httpResponse.body.message && httpResponse.body.status ||
+
+        // this is important to check the request statusCode AFTER the body eventual
+        // statusCode because some implementations (jQuery XDomainRequest transport) may
+        // send statusCode 200 while we had an error
+        httpResponse.statusCode ||
+
+        // When in browser mode, using XDR or JSONP
+        // we default to success when no error (no response.status && response.message)
+        // If there was a JSON.parse() error then body is null and it fails
+        httpResponse && httpResponse.body && 200;
+
+      requestDebug('received response: statusCode: %s, computed statusCode: %d, headers: %j',
+        httpResponse.statusCode, status, httpResponse.headers);
+
+      var httpResponseOk = Math.floor(status / 100) === 2;
+
+      var endTime = new Date();
+      debugData.push({
+        currentHost: currentHost,
+        headers: removeCredentials(headers),
+        content: body || null,
+        contentLength: body !== undefined ? body.length : null,
+        method: reqOpts.method,
+        timeouts: reqOpts.timeouts,
+        url: reqOpts.url,
+        startTime: startTime,
+        endTime: endTime,
+        duration: endTime - startTime,
+        statusCode: status
+      });
+
+      if (httpResponseOk) {
+        if (client._useCache && !client._useRequestCache && cache) {
+          cache[cacheID] = httpResponse.responseText;
+        }
+
+        return {
+          responseText: httpResponse.responseText,
+          body: httpResponse.body
+        };
+      }
+
+      var shouldRetry = Math.floor(status / 100) !== 4;
+
+      if (shouldRetry) {
+        tries += 1;
+        return retryRequest();
+      }
+
+      requestDebug('unrecoverable error');
+
+      // no success and no retry => fail
+      var unrecoverableError = new errors.AlgoliaSearchError(
+        httpResponse.body && httpResponse.body.message, {debugData: debugData, statusCode: status}
+      );
+
+      return client._promise.reject(unrecoverableError);
+    }
+
+    function tryFallback(err) {
+      // error cases:
+      //  While not in fallback mode:
+      //    - CORS not supported
+      //    - network error
+      //  While in fallback mode:
+      //    - timeout
+      //    - network error
+      //    - badly formatted JSONP (script loaded, did not call our callback)
+      //  In both cases:
+      //    - uncaught exception occurs (TypeError)
+      requestDebug('error: %s, stack: %s', err.message, err.stack);
+
+      var endTime = new Date();
+      debugData.push({
+        currentHost: currentHost,
+        headers: removeCredentials(headers),
+        content: body || null,
+        contentLength: body !== undefined ? body.length : null,
+        method: reqOpts.method,
+        timeouts: reqOpts.timeouts,
+        url: reqOpts.url,
+        startTime: startTime,
+        endTime: endTime,
+        duration: endTime - startTime
+      });
+
+      if (!(err instanceof errors.AlgoliaSearchError)) {
+        err = new errors.Unknown(err && err.message, err);
+      }
+
+      tries += 1;
+
+      // stop the request implementation when:
+      if (
+        // we did not generate this error,
+        // it comes from a throw in some other piece of code
+        err instanceof errors.Unknown ||
+
+        // server sent unparsable JSON
+        err instanceof errors.UnparsableJSON ||
+
+        // max tries and already using fallback or no fallback
+        tries >= client.hosts[initialOpts.hostType].length &&
+        (usingFallback || !hasFallback)) {
+        // stop request implementation for this command
+        err.debugData = debugData;
+        return client._promise.reject(err);
+      }
+
+      // When a timeout occurred, retry by raising timeout
+      if (err instanceof errors.RequestTimeout) {
+        return retryRequestWithHigherTimeout();
+      }
+
+      return retryRequest();
+    }
+
+    function retryRequest() {
+      requestDebug('retrying request');
+      client._incrementHostIndex(initialOpts.hostType);
+      return doRequest(requester, reqOpts);
+    }
+
+    function retryRequestWithHigherTimeout() {
+      requestDebug('retrying request with higher timeout');
+      client._incrementHostIndex(initialOpts.hostType);
+      client._incrementTimeoutMultipler();
+      reqOpts.timeouts = client._getTimeoutsForRequest(initialOpts.hostType);
+      return doRequest(requester, reqOpts);
     }
   }
-  // fix Array#{values, @@iterator}.name in V8 / FF
-  if (DEF_VALUES && $native && $native.name !== VALUES) {
-    VALUES_BUG = true;
-    $default = function values() { return $native.call(this); };
+
+  function isCacheValidWithCurrentID(
+    useRequestCache,
+    currentCache,
+    currentCacheID
+  ) {
+    return (
+      client._useCache &&
+      useRequestCache &&
+      currentCache &&
+      currentCache[currentCacheID] !== undefined
+    );
   }
-  // Define iterator
-  if ((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])) {
-    hide(proto, ITERATOR, $default);
+
+
+  function interopCallbackReturn(request, callback) {
+    if (isCacheValidWithCurrentID(client._useRequestCache, cache, cacheID)) {
+      request.catch(function() {
+        // Release the cache on error
+        delete cache[cacheID];
+      });
+    }
+
+    if (typeof initialOpts.callback === 'function') {
+      // either we have a callback
+      request.then(function okCb(content) {
+        exitPromise(function() {
+          initialOpts.callback(null, callback(content));
+        }, client._setTimeout || setTimeout);
+      }, function nookCb(err) {
+        exitPromise(function() {
+          initialOpts.callback(err);
+        }, client._setTimeout || setTimeout);
+      });
+    } else {
+      // either we are using promises
+      return request.then(callback);
+    }
   }
-  // Plug for library
-  Iterators[NAME] = $default;
-  Iterators[TAG] = returnThis;
-  if (DEFAULT) {
-    methods = {
-      values: DEF_VALUES ? $default : getMethod(VALUES),
-      keys: IS_SET ? $default : getMethod(KEYS),
-      entries: $entries
-    };
-    if (FORCED) for (key in methods) {
-      if (!(key in proto)) redefine(proto, key, methods[key]);
-    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
+
+  if (client._useCache && client._useRequestCache) {
+    cacheID = initialOpts.url;
   }
-  return methods;
+
+  // as we sometime use POST requests to pass parameters (like query='aa'),
+  // the cacheID must also include the body to be different between calls
+  if (client._useCache && client._useRequestCache && body) {
+    cacheID += '_body_' + body;
+  }
+
+  if (isCacheValidWithCurrentID(client._useRequestCache, cache, cacheID)) {
+    requestDebug('serving request from cache');
+
+    var maybePromiseForCache = cache[cacheID];
+
+    // In case the cache is warmup with value that is not a promise
+    var promiseForCache = typeof maybePromiseForCache.then !== 'function'
+      ? client._promise.resolve({responseText: maybePromiseForCache})
+      : maybePromiseForCache;
+
+    return interopCallbackReturn(promiseForCache, function(content) {
+      // In case of the cache request, return the original value
+      return JSON.parse(content.responseText);
+    });
+  }
+
+  var request = doRequest(
+    client._request, {
+      url: initialOpts.url,
+      method: initialOpts.method,
+      body: body,
+      jsonBody: initialOpts.body,
+      timeouts: client._getTimeoutsForRequest(initialOpts.hostType),
+      forceAuthHeaders: initialOpts.forceAuthHeaders
+    }
+  );
+
+  if (client._useCache && client._useRequestCache && cache) {
+    cache[cacheID] = request;
+  }
+
+  return interopCallbackReturn(request, function(content) {
+    // In case of the first request, return the JSON value
+    return content.body;
+  });
 };
 
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_iter-detect.js":
-/*!******************************************************!*\
-  !*** ./node_modules/core-js/modules/_iter-detect.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var ITERATOR = __webpack_require__(/*! ./_wks */ "./node_modules/core-js/modules/_wks.js")('iterator');
-var SAFE_CLOSING = false;
-
-try {
-  var riter = [7][ITERATOR]();
-  riter['return'] = function () { SAFE_CLOSING = true; };
-  // eslint-disable-next-line no-throw-literal
-  Array.from(riter, function () { throw 2; });
-} catch (e) { /* empty */ }
-
-module.exports = function (exec, skipClosing) {
-  if (!skipClosing && !SAFE_CLOSING) return false;
-  var safe = false;
-  try {
-    var arr = [7];
-    var iter = arr[ITERATOR]();
-    iter.next = function () { return { done: safe = true }; };
-    arr[ITERATOR] = function () { return iter; };
-    exec(arr);
-  } catch (e) { /* empty */ }
-  return safe;
+/*
+* Transform search param object in query string
+* @param {object} args arguments to add to the current query string
+* @param {string} params current query string
+* @return {string} the final query string
+*/
+AlgoliaSearchCore.prototype._getSearchParams = function(args, params) {
+  if (args === undefined || args === null) {
+    return params;
+  }
+  for (var key in args) {
+    if (key !== null && args[key] !== undefined && args.hasOwnProperty(key)) {
+      params += params === '' ? '' : '&';
+      params += key + '=' + encodeURIComponent(Object.prototype.toString.call(args[key]) === '[object Array]' ? safeJSONStringify(args[key]) : args[key]);
+    }
+  }
+  return params;
 };
 
+/**
+ * Compute the headers for a request
+ *
+ * @param [string] options.additionalUA semi-colon separated string with other user agents to add
+ * @param [boolean=true] options.withApiKey Send the api key as a header
+ * @param [Object] options.headers Extra headers to send
+ */
+AlgoliaSearchCore.prototype._computeRequestHeaders = function(options) {
+  var forEach = __webpack_require__(/*! foreach */ "./node_modules/foreach/index.js");
 
-/***/ }),
+  var ua = options.additionalUA ?
+    this._ua + '; ' + options.additionalUA :
+    this._ua;
 
-/***/ "./node_modules/core-js/modules/_iter-step.js":
-/*!****************************************************!*\
-  !*** ./node_modules/core-js/modules/_iter-step.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+  var requestHeaders = {
+    'x-algolia-agent': ua,
+    'x-algolia-application-id': this.applicationID
+  };
 
-module.exports = function (done, value) {
-  return { value: value, done: !!done };
+  // browser will inline headers in the url, node.js will use http headers
+  // but in some situations, the API KEY will be too long (big secured API keys)
+  // so if the request is a POST and the KEY is very long, we will be asked to not put
+  // it into headers but in the JSON body
+  if (options.withApiKey !== false) {
+    requestHeaders['x-algolia-api-key'] = this.apiKey;
+  }
+
+  if (this.userToken) {
+    requestHeaders['x-algolia-usertoken'] = this.userToken;
+  }
+
+  if (this.securityTags) {
+    requestHeaders['x-algolia-tagfilters'] = this.securityTags;
+  }
+
+  forEach(this.extraHeaders, function addToRequestHeaders(value, key) {
+    requestHeaders[key] = value;
+  });
+
+  if (options.headers) {
+    forEach(options.headers, function addToRequestHeaders(value, key) {
+      requestHeaders[key] = value;
+    });
+  }
+
+  return requestHeaders;
 };
 
+/**
+ * Search through multiple indices at the same time
+ * @param  {Object[]}   queries  An array of queries you want to run.
+ * @param {string} queries[].indexName The index name you want to target
+ * @param {string} [queries[].query] The query to issue on this index. Can also be passed into `params`
+ * @param {Object} queries[].params Any search param like hitsPerPage, ..
+ * @param  {Function} callback Callback to be called
+ * @return {Promise|undefined} Returns a promise if no callback given
+ */
+AlgoliaSearchCore.prototype.search = function(queries, opts, callback) {
+  var isArray = __webpack_require__(/*! isarray */ "./node_modules/algoliasearch/node_modules/isarray/index.js");
+  var map = __webpack_require__(/*! ./map.js */ "./node_modules/algoliasearch/src/map.js");
 
-/***/ }),
+  var usage = 'Usage: client.search(arrayOfQueries[, callback])';
 
-/***/ "./node_modules/core-js/modules/_iterators.js":
-/*!****************************************************!*\
-  !*** ./node_modules/core-js/modules/_iterators.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+  if (!isArray(queries)) {
+    throw new Error(usage);
+  }
 
-module.exports = {};
+  if (typeof opts === 'function') {
+    callback = opts;
+    opts = {};
+  } else if (opts === undefined) {
+    opts = {};
+  }
 
+  var client = this;
 
-/***/ }),
+  var postObj = {
+    requests: map(queries, function prepareRequest(query) {
+      var params = '';
 
-/***/ "./node_modules/core-js/modules/_library.js":
-/*!**************************************************!*\
-  !*** ./node_modules/core-js/modules/_library.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = false;
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_microtask.js":
-/*!****************************************************!*\
-  !*** ./node_modules/core-js/modules/_microtask.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__(/*! ./_global */ "./node_modules/core-js/modules/_global.js");
-var macrotask = __webpack_require__(/*! ./_task */ "./node_modules/core-js/modules/_task.js").set;
-var Observer = global.MutationObserver || global.WebKitMutationObserver;
-var process = global.process;
-var Promise = global.Promise;
-var isNode = __webpack_require__(/*! ./_cof */ "./node_modules/core-js/modules/_cof.js")(process) == 'process';
-
-module.exports = function () {
-  var head, last, notify;
-
-  var flush = function () {
-    var parent, fn;
-    if (isNode && (parent = process.domain)) parent.exit();
-    while (head) {
-      fn = head.fn;
-      head = head.next;
-      try {
-        fn();
-      } catch (e) {
-        if (head) notify();
-        else last = undefined;
-        throw e;
+      // allow query.query
+      // so we are mimicing the index.search(query, params) method
+      // {indexName:, query:, params:}
+      if (query.query !== undefined) {
+        params += 'query=' + encodeURIComponent(query.query);
       }
-    } last = undefined;
-    if (parent) parent.enter();
+
+      return {
+        indexName: query.indexName,
+        params: client._getSearchParams(query.params, params)
+      };
+    })
   };
 
-  // Node.js
-  if (isNode) {
-    notify = function () {
-      process.nextTick(flush);
-    };
-  // browsers with MutationObserver, except iOS Safari - https://github.com/zloirock/core-js/issues/339
-  } else if (Observer && !(global.navigator && global.navigator.standalone)) {
-    var toggle = true;
-    var node = document.createTextNode('');
-    new Observer(flush).observe(node, { characterData: true }); // eslint-disable-line no-new
-    notify = function () {
-      node.data = toggle = !toggle;
-    };
-  // environments with maybe non-completely correct, but existent Promise
-  } else if (Promise && Promise.resolve) {
-    // Promise.resolve without an argument throws an error in LG WebOS 2
-    var promise = Promise.resolve(undefined);
-    notify = function () {
-      promise.then(flush);
-    };
-  // for other environments - macrotask based on:
-  // - setImmediate
-  // - MessageChannel
-  // - window.postMessag
-  // - onreadystatechange
-  // - setTimeout
-  } else {
-    notify = function () {
-      // strange IE + webpack dev server bug - use .call(global)
-      macrotask.call(global, flush);
-    };
+  var JSONPParams = map(postObj.requests, function prepareJSONPParams(request, requestId) {
+    return requestId + '=' +
+      encodeURIComponent(
+        '/1/indexes/' + encodeURIComponent(request.indexName) + '?' +
+        request.params
+      );
+  }).join('&');
+
+  var url = '/1/indexes/*/queries';
+
+  if (opts.strategy !== undefined) {
+    postObj.strategy = opts.strategy;
   }
 
-  return function (fn) {
-    var task = { fn: fn, next: undefined };
-    if (last) last.next = task;
-    if (!head) {
-      head = task;
-      notify();
-    } last = task;
+  return this._jsonRequest({
+    cache: this.cache,
+    method: 'POST',
+    url: url,
+    body: postObj,
+    hostType: 'read',
+    fallback: {
+      method: 'GET',
+      url: '/1/indexes/*',
+      body: {
+        params: JSONPParams
+      }
+    },
+    callback: callback
+  });
+};
+
+/**
+* Search for facet values
+* https://www.algolia.com/doc/rest-api/search#search-for-facet-values
+* This is the top-level API for SFFV.
+*
+* @param {object[]} queries An array of queries to run.
+* @param {string} queries[].indexName Index name, name of the index to search.
+* @param {object} queries[].params Query parameters.
+* @param {string} queries[].params.facetName Facet name, name of the attribute to search for values in.
+* Must be declared as a facet
+* @param {string} queries[].params.facetQuery Query for the facet search
+* @param {string} [queries[].params.*] Any search parameter of Algolia,
+* see https://www.algolia.com/doc/api-client/javascript/search#search-parameters
+* Pagination is not supported. The page and hitsPerPage parameters will be ignored.
+*/
+AlgoliaSearchCore.prototype.searchForFacetValues = function(queries) {
+  var isArray = __webpack_require__(/*! isarray */ "./node_modules/algoliasearch/node_modules/isarray/index.js");
+  var map = __webpack_require__(/*! ./map.js */ "./node_modules/algoliasearch/src/map.js");
+
+  var usage = 'Usage: client.searchForFacetValues([{indexName, params: {facetName, facetQuery, ...params}}, ...queries])'; // eslint-disable-line max-len
+
+  if (!isArray(queries)) {
+    throw new Error(usage);
+  }
+
+  var client = this;
+
+  return client._promise.all(map(queries, function performQuery(query) {
+    if (
+      !query ||
+      query.indexName === undefined ||
+      query.params.facetName === undefined ||
+      query.params.facetQuery === undefined
+    ) {
+      throw new Error(usage);
+    }
+
+    var clone = __webpack_require__(/*! ./clone.js */ "./node_modules/algoliasearch/src/clone.js");
+    var omit = __webpack_require__(/*! ./omit.js */ "./node_modules/algoliasearch/src/omit.js");
+
+    var indexName = query.indexName;
+    var params = query.params;
+
+    var facetName = params.facetName;
+    var filteredParams = omit(clone(params), function(keyName) {
+      return keyName === 'facetName';
+    });
+    var searchParameters = client._getSearchParams(filteredParams, '');
+
+    return client._jsonRequest({
+      cache: client.cache,
+      method: 'POST',
+      url:
+        '/1/indexes/' +
+        encodeURIComponent(indexName) +
+        '/facets/' +
+        encodeURIComponent(facetName) +
+        '/query',
+      hostType: 'read',
+      body: {params: searchParameters}
+    });
+  }));
+};
+
+/**
+ * Set the extra security tagFilters header
+ * @param {string|array} tags The list of tags defining the current security filters
+ */
+AlgoliaSearchCore.prototype.setSecurityTags = function(tags) {
+  if (Object.prototype.toString.call(tags) === '[object Array]') {
+    var strTags = [];
+    for (var i = 0; i < tags.length; ++i) {
+      if (Object.prototype.toString.call(tags[i]) === '[object Array]') {
+        var oredTags = [];
+        for (var j = 0; j < tags[i].length; ++j) {
+          oredTags.push(tags[i][j]);
+        }
+        strTags.push('(' + oredTags.join(',') + ')');
+      } else {
+        strTags.push(tags[i]);
+      }
+    }
+    tags = strTags.join(',');
+  }
+
+  this.securityTags = tags;
+};
+
+/**
+ * Set the extra user token header
+ * @param {string} userToken The token identifying a uniq user (used to apply rate limits)
+ */
+AlgoliaSearchCore.prototype.setUserToken = function(userToken) {
+  this.userToken = userToken;
+};
+
+/**
+ * Clear all queries in client's cache
+ * @return undefined
+ */
+AlgoliaSearchCore.prototype.clearCache = function() {
+  this.cache = {};
+};
+
+/**
+* Set the number of milliseconds a request can take before automatically being terminated.
+* @deprecated
+* @param {Number} milliseconds
+*/
+AlgoliaSearchCore.prototype.setRequestTimeout = function(milliseconds) {
+  if (milliseconds) {
+    this._timeouts.connect = this._timeouts.read = this._timeouts.write = milliseconds;
+  }
+};
+
+/**
+* Set the three different (connect, read, write) timeouts to be used when requesting
+* @param {Object} timeouts
+*/
+AlgoliaSearchCore.prototype.setTimeouts = function(timeouts) {
+  this._timeouts = timeouts;
+};
+
+/**
+* Get the three different (connect, read, write) timeouts to be used when requesting
+* @param {Object} timeouts
+*/
+AlgoliaSearchCore.prototype.getTimeouts = function() {
+  return this._timeouts;
+};
+
+AlgoliaSearchCore.prototype._getAppIdData = function() {
+  var data = store.get(this.applicationID);
+  if (data !== null) this._cacheAppIdData(data);
+  return data;
+};
+
+AlgoliaSearchCore.prototype._setAppIdData = function(data) {
+  data.lastChange = (new Date()).getTime();
+  this._cacheAppIdData(data);
+  return store.set(this.applicationID, data);
+};
+
+AlgoliaSearchCore.prototype._checkAppIdData = function() {
+  var data = this._getAppIdData();
+  var now = (new Date()).getTime();
+  if (data === null || now - data.lastChange > RESET_APP_DATA_TIMER) {
+    return this._resetInitialAppIdData(data);
+  }
+
+  return data;
+};
+
+AlgoliaSearchCore.prototype._resetInitialAppIdData = function(data) {
+  var newData = data || {};
+  newData.hostIndexes = {read: 0, write: 0};
+  newData.timeoutMultiplier = 1;
+  newData.shuffleResult = newData.shuffleResult || shuffle([1, 2, 3]);
+  return this._setAppIdData(newData);
+};
+
+AlgoliaSearchCore.prototype._cacheAppIdData = function(data) {
+  this._hostIndexes = data.hostIndexes;
+  this._timeoutMultiplier = data.timeoutMultiplier;
+  this._shuffleResult = data.shuffleResult;
+};
+
+AlgoliaSearchCore.prototype._partialAppIdDataUpdate = function(newData) {
+  var foreach = __webpack_require__(/*! foreach */ "./node_modules/foreach/index.js");
+  var currentData = this._getAppIdData();
+  foreach(newData, function(value, key) {
+    currentData[key] = value;
+  });
+
+  return this._setAppIdData(currentData);
+};
+
+AlgoliaSearchCore.prototype._getHostByType = function(hostType) {
+  return this.hosts[hostType][this._getHostIndexByType(hostType)];
+};
+
+AlgoliaSearchCore.prototype._getTimeoutMultiplier = function() {
+  return this._timeoutMultiplier;
+};
+
+AlgoliaSearchCore.prototype._getHostIndexByType = function(hostType) {
+  return this._hostIndexes[hostType];
+};
+
+AlgoliaSearchCore.prototype._setHostIndexByType = function(hostIndex, hostType) {
+  var clone = __webpack_require__(/*! ./clone */ "./node_modules/algoliasearch/src/clone.js");
+  var newHostIndexes = clone(this._hostIndexes);
+  newHostIndexes[hostType] = hostIndex;
+  this._partialAppIdDataUpdate({hostIndexes: newHostIndexes});
+  return hostIndex;
+};
+
+AlgoliaSearchCore.prototype._incrementHostIndex = function(hostType) {
+  return this._setHostIndexByType(
+    (this._getHostIndexByType(hostType) + 1) % this.hosts[hostType].length, hostType
+  );
+};
+
+AlgoliaSearchCore.prototype._incrementTimeoutMultipler = function() {
+  var timeoutMultiplier = Math.max(this._timeoutMultiplier + 1, 4);
+  return this._partialAppIdDataUpdate({timeoutMultiplier: timeoutMultiplier});
+};
+
+AlgoliaSearchCore.prototype._getTimeoutsForRequest = function(hostType) {
+  return {
+    connect: this._timeouts.connect * this._timeoutMultiplier,
+    complete: this._timeouts[hostType] * this._timeoutMultiplier
   };
+};
+
+function prepareHost(protocol) {
+  return function prepare(host) {
+    return protocol + '//' + host.toLowerCase();
+  };
+}
+
+// Prototype.js < 1.7, a widely used library, defines a weird
+// Array.prototype.toJSON function that will fail to stringify our content
+// appropriately
+// refs:
+//   - https://groups.google.com/forum/#!topic/prototype-core/E-SAVvV_V9Q
+//   - https://github.com/sstephenson/prototype/commit/038a2985a70593c1a86c230fadbdfe2e4898a48c
+//   - http://stackoverflow.com/a/3148441/147079
+function safeJSONStringify(obj) {
+  /* eslint no-extend-native:0 */
+
+  if (Array.prototype.toJSON === undefined) {
+    return JSON.stringify(obj);
+  }
+
+  var toJSON = Array.prototype.toJSON;
+  delete Array.prototype.toJSON;
+  var out = JSON.stringify(obj);
+  Array.prototype.toJSON = toJSON;
+
+  return out;
+}
+
+function shuffle(array) {
+  var currentIndex = array.length;
+  var temporaryValue;
+  var randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex !== 0) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+function removeCredentials(headers) {
+  var newHeaders = {};
+
+  for (var headerName in headers) {
+    if (Object.prototype.hasOwnProperty.call(headers, headerName)) {
+      var value;
+
+      if (headerName === 'x-algolia-api-key' || headerName === 'x-algolia-application-id') {
+        value = '**hidden for security purposes**';
+      } else {
+        value = headers[headerName];
+      }
+
+      newHeaders[headerName] = value;
+    }
+  }
+
+  return newHeaders;
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../process/browser.js */ "./node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "./node_modules/algoliasearch/src/IndexCore.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/algoliasearch/src/IndexCore.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var buildSearchMethod = __webpack_require__(/*! ./buildSearchMethod.js */ "./node_modules/algoliasearch/src/buildSearchMethod.js");
+var deprecate = __webpack_require__(/*! ./deprecate.js */ "./node_modules/algoliasearch/src/deprecate.js");
+var deprecatedMessage = __webpack_require__(/*! ./deprecatedMessage.js */ "./node_modules/algoliasearch/src/deprecatedMessage.js");
+
+module.exports = IndexCore;
+
+/*
+* Index class constructor.
+* You should not use this method directly but use initIndex() function
+*/
+function IndexCore(algoliasearch, indexName) {
+  this.indexName = indexName;
+  this.as = algoliasearch;
+  this.typeAheadArgs = null;
+  this.typeAheadValueOption = null;
+
+  // make sure every index instance has it's own cache
+  this.cache = {};
+}
+
+/*
+* Clear all queries in cache
+*/
+IndexCore.prototype.clearCache = function() {
+  this.cache = {};
+};
+
+/*
+* Search inside the index using XMLHttpRequest request (Using a POST query to
+* minimize number of OPTIONS queries: Cross-Origin Resource Sharing).
+*
+* @param {string} [query] the full text query
+* @param {object} [args] (optional) if set, contains an object with query parameters:
+* - page: (integer) Pagination parameter used to select the page to retrieve.
+*                   Page is zero-based and defaults to 0. Thus,
+*                   to retrieve the 10th page you need to set page=9
+* - hitsPerPage: (integer) Pagination parameter used to select the number of hits per page. Defaults to 20.
+* - attributesToRetrieve: a string that contains the list of object attributes
+* you want to retrieve (let you minimize the answer size).
+*   Attributes are separated with a comma (for example "name,address").
+*   You can also use an array (for example ["name","address"]).
+*   By default, all attributes are retrieved. You can also use '*' to retrieve all
+*   values when an attributesToRetrieve setting is specified for your index.
+* - attributesToHighlight: a string that contains the list of attributes you
+*   want to highlight according to the query.
+*   Attributes are separated by a comma. You can also use an array (for example ["name","address"]).
+*   If an attribute has no match for the query, the raw value is returned.
+*   By default all indexed text attributes are highlighted.
+*   You can use `*` if you want to highlight all textual attributes.
+*   Numerical attributes are not highlighted.
+*   A matchLevel is returned for each highlighted attribute and can contain:
+*      - full: if all the query terms were found in the attribute,
+*      - partial: if only some of the query terms were found,
+*      - none: if none of the query terms were found.
+* - attributesToSnippet: a string that contains the list of attributes to snippet alongside
+* the number of words to return (syntax is `attributeName:nbWords`).
+*    Attributes are separated by a comma (Example: attributesToSnippet=name:10,content:10).
+*    You can also use an array (Example: attributesToSnippet: ['name:10','content:10']).
+*    By default no snippet is computed.
+* - minWordSizefor1Typo: the minimum number of characters in a query word to accept one typo in this word.
+* Defaults to 3.
+* - minWordSizefor2Typos: the minimum number of characters in a query word
+* to accept two typos in this word. Defaults to 7.
+* - getRankingInfo: if set to 1, the result hits will contain ranking
+* information in _rankingInfo attribute.
+* - aroundLatLng: search for entries around a given
+* latitude/longitude (specified as two floats separated by a comma).
+*   For example aroundLatLng=47.316669,5.016670).
+*   You can specify the maximum distance in meters with the aroundRadius parameter (in meters)
+*   and the precision for ranking with aroundPrecision
+*   (for example if you set aroundPrecision=100, two objects that are distant of
+*   less than 100m will be considered as identical for "geo" ranking parameter).
+*   At indexing, you should specify geoloc of an object with the _geoloc attribute
+*   (in the form {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+* - insideBoundingBox: search entries inside a given area defined by the two extreme points
+* of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).
+*   For example insideBoundingBox=47.3165,4.9665,47.3424,5.0201).
+*   At indexing, you should specify geoloc of an object with the _geoloc attribute
+*   (in the form {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+* - numericFilters: a string that contains the list of numeric filters you want to
+* apply separated by a comma.
+*   The syntax of one filter is `attributeName` followed by `operand` followed by `value`.
+*   Supported operands are `<`, `<=`, `=`, `>` and `>=`.
+*   You can have multiple conditions on one attribute like for example numericFilters=price>100,price<1000.
+*   You can also use an array (for example numericFilters: ["price>100","price<1000"]).
+* - tagFilters: filter the query by a set of tags. You can AND tags by separating them by commas.
+*   To OR tags, you must add parentheses. For example, tags=tag1,(tag2,tag3) means tag1 AND (tag2 OR tag3).
+*   You can also use an array, for example tagFilters: ["tag1",["tag2","tag3"]]
+*   means tag1 AND (tag2 OR tag3).
+*   At indexing, tags should be added in the _tags** attribute
+*   of objects (for example {"_tags":["tag1","tag2"]}).
+* - facetFilters: filter the query by a list of facets.
+*   Facets are separated by commas and each facet is encoded as `attributeName:value`.
+*   For example: `facetFilters=category:Book,author:John%20Doe`.
+*   You can also use an array (for example `["category:Book","author:John%20Doe"]`).
+* - facets: List of object attributes that you want to use for faceting.
+*   Comma separated list: `"category,author"` or array `['category','author']`
+*   Only attributes that have been added in **attributesForFaceting** index setting
+*   can be used in this parameter.
+*   You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.
+* - queryType: select how the query words are interpreted, it can be one of the following value:
+*    - prefixAll: all query words are interpreted as prefixes,
+*    - prefixLast: only the last word is interpreted as a prefix (default behavior),
+*    - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
+* - optionalWords: a string that contains the list of words that should
+* be considered as optional when found in the query.
+*   Comma separated and array are accepted.
+* - distinct: If set to 1, enable the distinct feature (disabled by default)
+* if the attributeForDistinct index setting is set.
+*   This feature is similar to the SQL "distinct" keyword: when enabled
+*   in a query with the distinct=1 parameter,
+*   all hits containing a duplicate value for the attributeForDistinct attribute are removed from results.
+*   For example, if the chosen attribute is show_name and several hits have
+*   the same value for show_name, then only the best
+*   one is kept and others are removed.
+* - restrictSearchableAttributes: List of attributes you want to use for
+* textual search (must be a subset of the attributesToIndex index setting)
+* either comma separated or as an array
+* @param {function} [callback] the result callback called with two arguments:
+*  error: null or Error('message'). If false, the content contains the error.
+*  content: the server answer that contains the list of results.
+*/
+IndexCore.prototype.search = buildSearchMethod('query');
+
+/*
+* -- BETA --
+* Search a record similar to the query inside the index using XMLHttpRequest request (Using a POST query to
+* minimize number of OPTIONS queries: Cross-Origin Resource Sharing).
+*
+* @param {string} [query] the similar query
+* @param {object} [args] (optional) if set, contains an object with query parameters.
+*   All search parameters are supported (see search function), restrictSearchableAttributes and facetFilters
+*   are the two most useful to restrict the similar results and get more relevant content
+*/
+IndexCore.prototype.similarSearch = deprecate(
+  buildSearchMethod('similarQuery'),
+  deprecatedMessage(
+    'index.similarSearch(query[, callback])',
+    'index.search({ similarQuery: query }[, callback])'
+  )
+);
+
+/*
+* Browse index content. The response content will have a `cursor` property that you can use
+* to browse subsequent pages for this query. Use `index.browseFrom(cursor)` when you want.
+*
+* @param {string} query - The full text query
+* @param {Object} [queryParameters] - Any search query parameter
+* @param {Function} [callback] - The result callback called with two arguments
+*   error: null or Error('message')
+*   content: the server answer with the browse result
+* @return {Promise|undefined} Returns a promise if no callback given
+* @example
+* index.browse('cool songs', {
+*   tagFilters: 'public,comments',
+*   hitsPerPage: 500
+* }, callback);
+* @see {@link https://www.algolia.com/doc/rest_api#Browse|Algolia REST API Documentation}
+*/
+IndexCore.prototype.browse = function(query, queryParameters, callback) {
+  var merge = __webpack_require__(/*! ./merge.js */ "./node_modules/algoliasearch/src/merge.js");
+
+  var indexObj = this;
+
+  var page;
+  var hitsPerPage;
+
+  // we check variadic calls that are not the one defined
+  // .browse()/.browse(fn)
+  // => page = 0
+  if (arguments.length === 0 || arguments.length === 1 && typeof arguments[0] === 'function') {
+    page = 0;
+    callback = arguments[0];
+    query = undefined;
+  } else if (typeof arguments[0] === 'number') {
+    // .browse(2)/.browse(2, 10)/.browse(2, fn)/.browse(2, 10, fn)
+    page = arguments[0];
+    if (typeof arguments[1] === 'number') {
+      hitsPerPage = arguments[1];
+    } else if (typeof arguments[1] === 'function') {
+      callback = arguments[1];
+      hitsPerPage = undefined;
+    }
+    query = undefined;
+    queryParameters = undefined;
+  } else if (typeof arguments[0] === 'object') {
+    // .browse(queryParameters)/.browse(queryParameters, cb)
+    if (typeof arguments[1] === 'function') {
+      callback = arguments[1];
+    }
+    queryParameters = arguments[0];
+    query = undefined;
+  } else if (typeof arguments[0] === 'string' && typeof arguments[1] === 'function') {
+    // .browse(query, cb)
+    callback = arguments[1];
+    queryParameters = undefined;
+  }
+
+  // otherwise it's a .browse(query)/.browse(query, queryParameters)/.browse(query, queryParameters, cb)
+
+  // get search query parameters combining various possible calls
+  // to .browse();
+  queryParameters = merge({}, queryParameters || {}, {
+    page: page,
+    hitsPerPage: hitsPerPage,
+    query: query
+  });
+
+  var params = this.as._getSearchParams(queryParameters, '');
+
+  return this.as._jsonRequest({
+    method: 'POST',
+    url: '/1/indexes/' + encodeURIComponent(indexObj.indexName) + '/browse',
+    body: {params: params},
+    hostType: 'read',
+    callback: callback
+  });
+};
+
+/*
+* Continue browsing from a previous position (cursor), obtained via a call to `.browse()`.
+*
+* @param {string} query - The full text query
+* @param {Object} [queryParameters] - Any search query parameter
+* @param {Function} [callback] - The result callback called with two arguments
+*   error: null or Error('message')
+*   content: the server answer with the browse result
+* @return {Promise|undefined} Returns a promise if no callback given
+* @example
+* index.browseFrom('14lkfsakl32', callback);
+* @see {@link https://www.algolia.com/doc/rest_api#Browse|Algolia REST API Documentation}
+*/
+IndexCore.prototype.browseFrom = function(cursor, callback) {
+  return this.as._jsonRequest({
+    method: 'POST',
+    url: '/1/indexes/' + encodeURIComponent(this.indexName) + '/browse',
+    body: {cursor: cursor},
+    hostType: 'read',
+    callback: callback
+  });
+};
+
+/*
+* Search for facet values
+* https://www.algolia.com/doc/rest-api/search#search-for-facet-values
+*
+* @param {string} params.facetName Facet name, name of the attribute to search for values in.
+* Must be declared as a facet
+* @param {string} params.facetQuery Query for the facet search
+* @param {string} [params.*] Any search parameter of Algolia,
+* see https://www.algolia.com/doc/api-client/javascript/search#search-parameters
+* Pagination is not supported. The page and hitsPerPage parameters will be ignored.
+* @param callback (optional)
+*/
+IndexCore.prototype.searchForFacetValues = function(params, callback) {
+  var clone = __webpack_require__(/*! ./clone.js */ "./node_modules/algoliasearch/src/clone.js");
+  var omit = __webpack_require__(/*! ./omit.js */ "./node_modules/algoliasearch/src/omit.js");
+  var usage = 'Usage: index.searchForFacetValues({facetName, facetQuery, ...params}[, callback])';
+
+  if (params.facetName === undefined || params.facetQuery === undefined) {
+    throw new Error(usage);
+  }
+
+  var facetName = params.facetName;
+  var filteredParams = omit(clone(params), function(keyName) {
+    return keyName === 'facetName';
+  });
+  var searchParameters = this.as._getSearchParams(filteredParams, '');
+
+  return this.as._jsonRequest({
+    method: 'POST',
+    url: '/1/indexes/' +
+      encodeURIComponent(this.indexName) + '/facets/' + encodeURIComponent(facetName) + '/query',
+    hostType: 'read',
+    body: {params: searchParameters},
+    callback: callback
+  });
+};
+
+IndexCore.prototype.searchFacet = deprecate(function(params, callback) {
+  return this.searchForFacetValues(params, callback);
+}, deprecatedMessage(
+  'index.searchFacet(params[, callback])',
+  'index.searchForFacetValues(params[, callback])'
+));
+
+IndexCore.prototype._search = function(params, url, callback, additionalUA) {
+  return this.as._jsonRequest({
+    cache: this.cache,
+    method: 'POST',
+    url: url || '/1/indexes/' + encodeURIComponent(this.indexName) + '/query',
+    body: {params: params},
+    hostType: 'read',
+    fallback: {
+      method: 'GET',
+      url: '/1/indexes/' + encodeURIComponent(this.indexName),
+      body: {params: params}
+    },
+    callback: callback,
+    additionalUA: additionalUA
+  });
+};
+
+/*
+* Get an object from this index
+*
+* @param objectID the unique identifier of the object to retrieve
+* @param attrs (optional) if set, contains the array of attribute names to retrieve
+* @param callback (optional) the result callback called with two arguments
+*  error: null or Error('message')
+*  content: the object to retrieve or the error message if a failure occurred
+*/
+IndexCore.prototype.getObject = function(objectID, attrs, callback) {
+  var indexObj = this;
+
+  if (arguments.length === 1 || typeof attrs === 'function') {
+    callback = attrs;
+    attrs = undefined;
+  }
+
+  var params = '';
+  if (attrs !== undefined) {
+    params = '?attributes=';
+    for (var i = 0; i < attrs.length; ++i) {
+      if (i !== 0) {
+        params += ',';
+      }
+      params += attrs[i];
+    }
+  }
+
+  return this.as._jsonRequest({
+    method: 'GET',
+    url: '/1/indexes/' + encodeURIComponent(indexObj.indexName) + '/' + encodeURIComponent(objectID) + params,
+    hostType: 'read',
+    callback: callback
+  });
+};
+
+/*
+* Get several objects from this index
+*
+* @param objectIDs the array of unique identifier of objects to retrieve
+*/
+IndexCore.prototype.getObjects = function(objectIDs, attributesToRetrieve, callback) {
+  var isArray = __webpack_require__(/*! isarray */ "./node_modules/algoliasearch/node_modules/isarray/index.js");
+  var map = __webpack_require__(/*! ./map.js */ "./node_modules/algoliasearch/src/map.js");
+
+  var usage = 'Usage: index.getObjects(arrayOfObjectIDs[, callback])';
+
+  if (!isArray(objectIDs)) {
+    throw new Error(usage);
+  }
+
+  var indexObj = this;
+
+  if (arguments.length === 1 || typeof attributesToRetrieve === 'function') {
+    callback = attributesToRetrieve;
+    attributesToRetrieve = undefined;
+  }
+
+  var body = {
+    requests: map(objectIDs, function prepareRequest(objectID) {
+      var request = {
+        indexName: indexObj.indexName,
+        objectID: objectID
+      };
+
+      if (attributesToRetrieve) {
+        request.attributesToRetrieve = attributesToRetrieve.join(',');
+      }
+
+      return request;
+    })
+  };
+
+  return this.as._jsonRequest({
+    method: 'POST',
+    url: '/1/indexes/*/objects',
+    hostType: 'read',
+    body: body,
+    callback: callback
+  });
+};
+
+IndexCore.prototype.as = null;
+IndexCore.prototype.indexName = null;
+IndexCore.prototype.typeAheadArgs = null;
+IndexCore.prototype.typeAheadValueOption = null;
+
+
+/***/ }),
+
+/***/ "./node_modules/algoliasearch/src/browser/builds/algoliasearchLite.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/algoliasearch/src/browser/builds/algoliasearchLite.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var AlgoliaSearchCore = __webpack_require__(/*! ../../AlgoliaSearchCore.js */ "./node_modules/algoliasearch/src/AlgoliaSearchCore.js");
+var createAlgoliasearch = __webpack_require__(/*! ../createAlgoliasearch.js */ "./node_modules/algoliasearch/src/browser/createAlgoliasearch.js");
+
+module.exports = createAlgoliasearch(AlgoliaSearchCore, 'Browser (lite)');
+
+
+/***/ }),
+
+/***/ "./node_modules/algoliasearch/src/browser/createAlgoliasearch.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/algoliasearch/src/browser/createAlgoliasearch.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var global = __webpack_require__(/*! global */ "./node_modules/global/window.js");
+var Promise = global.Promise || __webpack_require__(/*! es6-promise */ "./node_modules/es6-promise/dist/es6-promise.js").Promise;
+
+// This is the standalone browser build entry point
+// Browser implementation of the Algolia Search JavaScript client,
+// using XMLHttpRequest, XDomainRequest and JSONP as fallback
+module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
+  var inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
+  var errors = __webpack_require__(/*! ../errors */ "./node_modules/algoliasearch/src/errors.js");
+  var inlineHeaders = __webpack_require__(/*! ./inline-headers */ "./node_modules/algoliasearch/src/browser/inline-headers.js");
+  var jsonpRequest = __webpack_require__(/*! ./jsonp-request */ "./node_modules/algoliasearch/src/browser/jsonp-request.js");
+  var places = __webpack_require__(/*! ../places.js */ "./node_modules/algoliasearch/src/places.js");
+  uaSuffix = uaSuffix || '';
+
+  if (false) {}
+
+  function algoliasearch(applicationID, apiKey, opts) {
+    var cloneDeep = __webpack_require__(/*! ../clone.js */ "./node_modules/algoliasearch/src/clone.js");
+
+    opts = cloneDeep(opts || {});
+
+    opts._ua = opts._ua || algoliasearch.ua;
+
+    return new AlgoliaSearchBrowser(applicationID, apiKey, opts);
+  }
+
+  algoliasearch.version = __webpack_require__(/*! ../version.js */ "./node_modules/algoliasearch/src/version.js");
+
+  algoliasearch.ua =
+    'Algolia for JavaScript (' + algoliasearch.version + '); ' + uaSuffix;
+
+  algoliasearch.initPlaces = places(algoliasearch);
+
+  // we expose into window no matter how we are used, this will allow
+  // us to easily debug any website running algolia
+  global.__algolia = {
+    debug: __webpack_require__(/*! debug */ "./node_modules/algoliasearch/node_modules/debug/src/browser.js"),
+    algoliasearch: algoliasearch
+  };
+
+  var support = {
+    hasXMLHttpRequest: 'XMLHttpRequest' in global,
+    hasXDomainRequest: 'XDomainRequest' in global
+  };
+
+  if (support.hasXMLHttpRequest) {
+    support.cors = 'withCredentials' in new XMLHttpRequest();
+  }
+
+  function AlgoliaSearchBrowser() {
+    // call AlgoliaSearch constructor
+    AlgoliaSearch.apply(this, arguments);
+  }
+
+  inherits(AlgoliaSearchBrowser, AlgoliaSearch);
+
+  AlgoliaSearchBrowser.prototype._request = function request(url, opts) {
+    return new Promise(function wrapRequest(resolve, reject) {
+      // no cors or XDomainRequest, no request
+      if (!support.cors && !support.hasXDomainRequest) {
+        // very old browser, not supported
+        reject(new errors.Network('CORS not supported'));
+        return;
+      }
+
+      url = inlineHeaders(url, opts.headers);
+
+      var body = opts.body;
+      var req = support.cors ? new XMLHttpRequest() : new XDomainRequest();
+      var reqTimeout;
+      var timedOut;
+      var connected = false;
+
+      reqTimeout = setTimeout(onTimeout, opts.timeouts.connect);
+      // we set an empty onprogress listener
+      // so that XDomainRequest on IE9 is not aborted
+      // refs:
+      //  - https://github.com/algolia/algoliasearch-client-js/issues/76
+      //  - https://social.msdn.microsoft.com/Forums/ie/en-US/30ef3add-767c-4436-b8a9-f1ca19b4812e/ie9-rtm-xdomainrequest-issued-requests-may-abort-if-all-event-handlers-not-specified?forum=iewebdevelopment
+      req.onprogress = onProgress;
+      if ('onreadystatechange' in req) req.onreadystatechange = onReadyStateChange;
+      req.onload = onLoad;
+      req.onerror = onError;
+
+      // do not rely on default XHR async flag, as some analytics code like hotjar
+      // breaks it and set it to false by default
+      if (req instanceof XMLHttpRequest) {
+        req.open(opts.method, url, true);
+
+        // The Analytics API never accepts Auth headers as query string
+        // this option exists specifically for them.
+        if (opts.forceAuthHeaders) {
+          req.setRequestHeader(
+            'x-algolia-application-id',
+            opts.headers['x-algolia-application-id']
+          );
+          req.setRequestHeader(
+            'x-algolia-api-key',
+            opts.headers['x-algolia-api-key']
+          );
+        }
+      } else {
+        req.open(opts.method, url);
+      }
+
+      // headers are meant to be sent after open
+      if (support.cors) {
+        if (body) {
+          if (opts.method === 'POST') {
+            // https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Simple_requests
+            req.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+          } else {
+            req.setRequestHeader('content-type', 'application/json');
+          }
+        }
+        req.setRequestHeader('accept', 'application/json');
+      }
+
+      if (body) {
+        req.send(body);
+      } else {
+        req.send();
+      }
+
+      // event object not received in IE8, at least
+      // but we do not use it, still important to note
+      function onLoad(/* event */) {
+        // When browser does not supports req.timeout, we can
+        // have both a load and timeout event, since handled by a dumb setTimeout
+        if (timedOut) {
+          return;
+        }
+
+        clearTimeout(reqTimeout);
+
+        var out;
+
+        try {
+          out = {
+            body: JSON.parse(req.responseText),
+            responseText: req.responseText,
+            statusCode: req.status,
+            // XDomainRequest does not have any response headers
+            headers: req.getAllResponseHeaders && req.getAllResponseHeaders() || {}
+          };
+        } catch (e) {
+          out = new errors.UnparsableJSON({
+            more: req.responseText
+          });
+        }
+
+        if (out instanceof errors.UnparsableJSON) {
+          reject(out);
+        } else {
+          resolve(out);
+        }
+      }
+
+      function onError(event) {
+        if (timedOut) {
+          return;
+        }
+
+        clearTimeout(reqTimeout);
+
+        // error event is trigerred both with XDR/XHR on:
+        //   - DNS error
+        //   - unallowed cross domain request
+        reject(
+          new errors.Network({
+            more: event
+          })
+        );
+      }
+
+      function onTimeout() {
+        timedOut = true;
+        req.abort();
+
+        reject(new errors.RequestTimeout());
+      }
+
+      function onConnect() {
+        connected = true;
+        clearTimeout(reqTimeout);
+        reqTimeout = setTimeout(onTimeout, opts.timeouts.complete);
+      }
+
+      function onProgress() {
+        if (!connected) onConnect();
+      }
+
+      function onReadyStateChange() {
+        if (!connected && req.readyState > 1) onConnect();
+      }
+    });
+  };
+
+  AlgoliaSearchBrowser.prototype._request.fallback = function requestFallback(url, opts) {
+    url = inlineHeaders(url, opts.headers);
+
+    return new Promise(function wrapJsonpRequest(resolve, reject) {
+      jsonpRequest(url, opts, function jsonpRequestDone(err, content) {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        resolve(content);
+      });
+    });
+  };
+
+  AlgoliaSearchBrowser.prototype._promise = {
+    reject: function rejectPromise(val) {
+      return Promise.reject(val);
+    },
+    resolve: function resolvePromise(val) {
+      return Promise.resolve(val);
+    },
+    delay: function delayPromise(ms) {
+      return new Promise(function resolveOnTimeout(resolve/* , reject*/) {
+        setTimeout(resolve, ms);
+      });
+    },
+    all: function all(promises) {
+      return Promise.all(promises);
+    }
+  };
+
+  return algoliasearch;
 };
 
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/_new-promise-capability.js":
+/***/ "./node_modules/algoliasearch/src/browser/inline-headers.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/algoliasearch/src/browser/inline-headers.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = inlineHeaders;
+
+var encode = __webpack_require__(/*! querystring-es3/encode */ "./node_modules/querystring-es3/encode.js");
+
+function inlineHeaders(url, headers) {
+  if (/\?/.test(url)) {
+    url += '&';
+  } else {
+    url += '?';
+  }
+
+  return url + encode(headers);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/algoliasearch/src/browser/jsonp-request.js":
 /*!*****************************************************************!*\
-  !*** ./node_modules/core-js/modules/_new-promise-capability.js ***!
+  !*** ./node_modules/algoliasearch/src/browser/jsonp-request.js ***!
   \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-// 25.4.1.5 NewPromiseCapability(C)
-var aFunction = __webpack_require__(/*! ./_a-function */ "./node_modules/core-js/modules/_a-function.js");
 
-function PromiseCapability(C) {
-  var resolve, reject;
-  this.promise = new C(function ($$resolve, $$reject) {
-    if (resolve !== undefined || reject !== undefined) throw TypeError('Bad Promise constructor');
-    resolve = $$resolve;
-    reject = $$reject;
-  });
-  this.resolve = aFunction(resolve);
-  this.reject = aFunction(reject);
+module.exports = jsonpRequest;
+
+var errors = __webpack_require__(/*! ../errors */ "./node_modules/algoliasearch/src/errors.js");
+
+var JSONPCounter = 0;
+
+function jsonpRequest(url, opts, cb) {
+  if (opts.method !== 'GET') {
+    cb(new Error('Method ' + opts.method + ' ' + url + ' is not supported by JSONP.'));
+    return;
+  }
+
+  opts.debug('JSONP: start');
+
+  var cbCalled = false;
+  var timedOut = false;
+
+  JSONPCounter += 1;
+  var head = document.getElementsByTagName('head')[0];
+  var script = document.createElement('script');
+  var cbName = 'algoliaJSONP_' + JSONPCounter;
+  var done = false;
+
+  window[cbName] = function(data) {
+    removeGlobals();
+
+    if (timedOut) {
+      opts.debug('JSONP: Late answer, ignoring');
+      return;
+    }
+
+    cbCalled = true;
+
+    clean();
+
+    cb(null, {
+      body: data,
+      responseText: JSON.stringify(data)/* ,
+      // We do not send the statusCode, there's no statusCode in JSONP, it will be
+      // computed using data.status && data.message like with XDR
+      statusCode*/
+    });
+  };
+
+  // add callback by hand
+  url += '&callback=' + cbName;
+
+  // add body params manually
+  if (opts.jsonBody && opts.jsonBody.params) {
+    url += '&' + opts.jsonBody.params;
+  }
+
+  var ontimeout = setTimeout(timeout, opts.timeouts.complete);
+
+  // script onreadystatechange needed only for
+  // <= IE8
+  // https://github.com/angular/angular.js/issues/4523
+  script.onreadystatechange = readystatechange;
+  script.onload = success;
+  script.onerror = error;
+
+  script.async = true;
+  script.defer = true;
+  script.src = url;
+  head.appendChild(script);
+
+  function success() {
+    opts.debug('JSONP: success');
+
+    if (done || timedOut) {
+      return;
+    }
+
+    done = true;
+
+    // script loaded but did not call the fn => script loading error
+    if (!cbCalled) {
+      opts.debug('JSONP: Fail. Script loaded but did not call the callback');
+      clean();
+      cb(new errors.JSONPScriptFail());
+    }
+  }
+
+  function readystatechange() {
+    if (this.readyState === 'loaded' || this.readyState === 'complete') {
+      success();
+    }
+  }
+
+  function clean() {
+    clearTimeout(ontimeout);
+    script.onload = null;
+    script.onreadystatechange = null;
+    script.onerror = null;
+    head.removeChild(script);
+  }
+
+  function removeGlobals() {
+    try {
+      delete window[cbName];
+      delete window[cbName + '_loaded'];
+    } catch (e) {
+      window[cbName] = window[cbName + '_loaded'] = undefined;
+    }
+  }
+
+  function timeout() {
+    opts.debug('JSONP: Script timeout');
+    timedOut = true;
+    clean();
+    cb(new errors.RequestTimeout());
+  }
+
+  function error() {
+    opts.debug('JSONP: Script error');
+
+    if (done || timedOut) {
+      return;
+    }
+
+    clean();
+    cb(new errors.JSONPScriptError());
+  }
 }
 
-module.exports.f = function (C) {
-  return new PromiseCapability(C);
-};
-
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/_object-create.js":
-/*!********************************************************!*\
-  !*** ./node_modules/core-js/modules/_object-create.js ***!
-  \********************************************************/
+/***/ "./node_modules/algoliasearch/src/buildSearchMethod.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/algoliasearch/src/buildSearchMethod.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject = __webpack_require__(/*! ./_an-object */ "./node_modules/core-js/modules/_an-object.js");
-var dPs = __webpack_require__(/*! ./_object-dps */ "./node_modules/core-js/modules/_object-dps.js");
-var enumBugKeys = __webpack_require__(/*! ./_enum-bug-keys */ "./node_modules/core-js/modules/_enum-bug-keys.js");
-var IE_PROTO = __webpack_require__(/*! ./_shared-key */ "./node_modules/core-js/modules/_shared-key.js")('IE_PROTO');
-var Empty = function () { /* empty */ };
-var PROTOTYPE = 'prototype';
+module.exports = buildSearchMethod;
 
-// Create object with fake `null` prototype: use iframe Object with cleared prototype
-var createDict = function () {
-  // Thrash, waste and sodomy: IE GC bug
-  var iframe = __webpack_require__(/*! ./_dom-create */ "./node_modules/core-js/modules/_dom-create.js")('iframe');
-  var i = enumBugKeys.length;
-  var lt = '<';
-  var gt = '>';
-  var iframeDocument;
-  iframe.style.display = 'none';
-  __webpack_require__(/*! ./_html */ "./node_modules/core-js/modules/_html.js").appendChild(iframe);
-  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
-  // createDict = iframe.contentWindow.Object;
-  // html.removeChild(iframe);
-  iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
-  iframeDocument.close();
-  createDict = iframeDocument.F;
-  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
-  return createDict();
-};
+var errors = __webpack_require__(/*! ./errors.js */ "./node_modules/algoliasearch/src/errors.js");
 
-module.exports = Object.create || function create(O, Properties) {
-  var result;
-  if (O !== null) {
-    Empty[PROTOTYPE] = anObject(O);
-    result = new Empty();
-    Empty[PROTOTYPE] = null;
-    // add "__proto__" for Object.getPrototypeOf polyfill
-    result[IE_PROTO] = O;
-  } else result = createDict();
-  return Properties === undefined ? result : dPs(result, Properties);
-};
+/**
+ * Creates a search method to be used in clients
+ * @param {string} queryParam the name of the attribute used for the query
+ * @param {string} url the url
+ * @return {function} the search method
+ */
+function buildSearchMethod(queryParam, url) {
+  /**
+   * The search method. Prepares the data and send the query to Algolia.
+   * @param {string} query the string used for query search
+   * @param {object} args additional parameters to send with the search
+   * @param {function} [callback] the callback to be called with the client gets the answer
+   * @return {undefined|Promise} If the callback is not provided then this methods returns a Promise
+   */
+  return function search(query, args, callback) {
+    // warn V2 users on how to search
+    if (typeof query === 'function' && typeof args === 'object' ||
+      typeof callback === 'object') {
+      // .search(query, params, cb)
+      // .search(cb, params)
+      throw new errors.AlgoliaSearchError('index.search usage is index.search(query, params, cb)');
+    }
 
+    // Normalizing the function signature
+    if (arguments.length === 0 || typeof query === 'function') {
+      // Usage : .search(), .search(cb)
+      callback = query;
+      query = '';
+    } else if (arguments.length === 1 || typeof args === 'function') {
+      // Usage : .search(query/args), .search(query, cb)
+      callback = args;
+      args = undefined;
+    }
+    // At this point we have 3 arguments with values
 
-/***/ }),
+    // Usage : .search(args) // careful: typeof null === 'object'
+    if (typeof query === 'object' && query !== null) {
+      args = query;
+      query = undefined;
+    } else if (query === undefined || query === null) { // .search(undefined/null)
+      query = '';
+    }
 
-/***/ "./node_modules/core-js/modules/_object-dp.js":
-/*!****************************************************!*\
-  !*** ./node_modules/core-js/modules/_object-dp.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+    var params = '';
 
-var anObject = __webpack_require__(/*! ./_an-object */ "./node_modules/core-js/modules/_an-object.js");
-var IE8_DOM_DEFINE = __webpack_require__(/*! ./_ie8-dom-define */ "./node_modules/core-js/modules/_ie8-dom-define.js");
-var toPrimitive = __webpack_require__(/*! ./_to-primitive */ "./node_modules/core-js/modules/_to-primitive.js");
-var dP = Object.defineProperty;
+    if (query !== undefined) {
+      params += queryParam + '=' + encodeURIComponent(query);
+    }
 
-exports.f = __webpack_require__(/*! ./_descriptors */ "./node_modules/core-js/modules/_descriptors.js") ? Object.defineProperty : function defineProperty(O, P, Attributes) {
-  anObject(O);
-  P = toPrimitive(P, true);
-  anObject(Attributes);
-  if (IE8_DOM_DEFINE) try {
-    return dP(O, P, Attributes);
-  } catch (e) { /* empty */ }
-  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
-  if ('value' in Attributes) O[P] = Attributes.value;
-  return O;
-};
+    var additionalUA;
+    if (args !== undefined) {
+      if (args.additionalUA) {
+        additionalUA = args.additionalUA;
+        delete args.additionalUA;
+      }
+      // `_getSearchParams` will augment params, do not be fooled by the = versus += from previous if
+      params = this.as._getSearchParams(args, params);
+    }
 
 
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_object-dps.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/core-js/modules/_object-dps.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var dP = __webpack_require__(/*! ./_object-dp */ "./node_modules/core-js/modules/_object-dp.js");
-var anObject = __webpack_require__(/*! ./_an-object */ "./node_modules/core-js/modules/_an-object.js");
-var getKeys = __webpack_require__(/*! ./_object-keys */ "./node_modules/core-js/modules/_object-keys.js");
-
-module.exports = __webpack_require__(/*! ./_descriptors */ "./node_modules/core-js/modules/_descriptors.js") ? Object.defineProperties : function defineProperties(O, Properties) {
-  anObject(O);
-  var keys = getKeys(Properties);
-  var length = keys.length;
-  var i = 0;
-  var P;
-  while (length > i) dP.f(O, P = keys[i++], Properties[P]);
-  return O;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_object-gpo.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/core-js/modules/_object-gpo.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-var has = __webpack_require__(/*! ./_has */ "./node_modules/core-js/modules/_has.js");
-var toObject = __webpack_require__(/*! ./_to-object */ "./node_modules/core-js/modules/_to-object.js");
-var IE_PROTO = __webpack_require__(/*! ./_shared-key */ "./node_modules/core-js/modules/_shared-key.js")('IE_PROTO');
-var ObjectProto = Object.prototype;
-
-module.exports = Object.getPrototypeOf || function (O) {
-  O = toObject(O);
-  if (has(O, IE_PROTO)) return O[IE_PROTO];
-  if (typeof O.constructor == 'function' && O instanceof O.constructor) {
-    return O.constructor.prototype;
-  } return O instanceof Object ? ObjectProto : null;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_object-keys-internal.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/core-js/modules/_object-keys-internal.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var has = __webpack_require__(/*! ./_has */ "./node_modules/core-js/modules/_has.js");
-var toIObject = __webpack_require__(/*! ./_to-iobject */ "./node_modules/core-js/modules/_to-iobject.js");
-var arrayIndexOf = __webpack_require__(/*! ./_array-includes */ "./node_modules/core-js/modules/_array-includes.js")(false);
-var IE_PROTO = __webpack_require__(/*! ./_shared-key */ "./node_modules/core-js/modules/_shared-key.js")('IE_PROTO');
-
-module.exports = function (object, names) {
-  var O = toIObject(object);
-  var i = 0;
-  var result = [];
-  var key;
-  for (key in O) if (key != IE_PROTO) has(O, key) && result.push(key);
-  // Don't enum bug & hidden keys
-  while (names.length > i) if (has(O, key = names[i++])) {
-    ~arrayIndexOf(result, key) || result.push(key);
-  }
-  return result;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_object-keys.js":
-/*!******************************************************!*\
-  !*** ./node_modules/core-js/modules/_object-keys.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys = __webpack_require__(/*! ./_object-keys-internal */ "./node_modules/core-js/modules/_object-keys-internal.js");
-var enumBugKeys = __webpack_require__(/*! ./_enum-bug-keys */ "./node_modules/core-js/modules/_enum-bug-keys.js");
-
-module.exports = Object.keys || function keys(O) {
-  return $keys(O, enumBugKeys);
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_perform.js":
-/*!**************************************************!*\
-  !*** ./node_modules/core-js/modules/_perform.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function (exec) {
-  try {
-    return { e: false, v: exec() };
-  } catch (e) {
-    return { e: true, v: e };
-  }
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_promise-resolve.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/core-js/modules/_promise-resolve.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var anObject = __webpack_require__(/*! ./_an-object */ "./node_modules/core-js/modules/_an-object.js");
-var isObject = __webpack_require__(/*! ./_is-object */ "./node_modules/core-js/modules/_is-object.js");
-var newPromiseCapability = __webpack_require__(/*! ./_new-promise-capability */ "./node_modules/core-js/modules/_new-promise-capability.js");
-
-module.exports = function (C, x) {
-  anObject(C);
-  if (isObject(x) && x.constructor === C) return x;
-  var promiseCapability = newPromiseCapability.f(C);
-  var resolve = promiseCapability.resolve;
-  resolve(x);
-  return promiseCapability.promise;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_property-desc.js":
-/*!********************************************************!*\
-  !*** ./node_modules/core-js/modules/_property-desc.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function (bitmap, value) {
-  return {
-    enumerable: !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable: !(bitmap & 4),
-    value: value
+    return this._search(params, url, callback, additionalUA);
   };
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/algoliasearch/src/clone.js":
+/*!*************************************************!*\
+  !*** ./node_modules/algoliasearch/src/clone.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function clone(obj) {
+  return JSON.parse(JSON.stringify(obj));
 };
 
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/_redefine-all.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/core-js/modules/_redefine-all.js ***!
-  \*******************************************************/
+/***/ "./node_modules/algoliasearch/src/deprecate.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/algoliasearch/src/deprecate.js ***!
+  \*****************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var redefine = __webpack_require__(/*! ./_redefine */ "./node_modules/core-js/modules/_redefine.js");
-module.exports = function (target, src, safe) {
-  for (var key in src) redefine(target, key, src[key], safe);
-  return target;
-};
+module.exports = function deprecate(fn, message) {
+  var warned = false;
 
+  function deprecated() {
+    if (!warned) {
+      /* eslint no-console:0 */
+      console.warn(message);
+      warned = true;
+    }
 
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_redefine.js":
-/*!***************************************************!*\
-  !*** ./node_modules/core-js/modules/_redefine.js ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__(/*! ./_global */ "./node_modules/core-js/modules/_global.js");
-var hide = __webpack_require__(/*! ./_hide */ "./node_modules/core-js/modules/_hide.js");
-var has = __webpack_require__(/*! ./_has */ "./node_modules/core-js/modules/_has.js");
-var SRC = __webpack_require__(/*! ./_uid */ "./node_modules/core-js/modules/_uid.js")('src');
-var $toString = __webpack_require__(/*! ./_function-to-string */ "./node_modules/core-js/modules/_function-to-string.js");
-var TO_STRING = 'toString';
-var TPL = ('' + $toString).split(TO_STRING);
-
-__webpack_require__(/*! ./_core */ "./node_modules/core-js/modules/_core.js").inspectSource = function (it) {
-  return $toString.call(it);
-};
-
-(module.exports = function (O, key, val, safe) {
-  var isFunction = typeof val == 'function';
-  if (isFunction) has(val, 'name') || hide(val, 'name', key);
-  if (O[key] === val) return;
-  if (isFunction) has(val, SRC) || hide(val, SRC, O[key] ? '' + O[key] : TPL.join(String(key)));
-  if (O === global) {
-    O[key] = val;
-  } else if (!safe) {
-    delete O[key];
-    hide(O, key, val);
-  } else if (O[key]) {
-    O[key] = val;
-  } else {
-    hide(O, key, val);
+    return fn.apply(this, arguments);
   }
-// add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
-})(Function.prototype, TO_STRING, function toString() {
-  return typeof this == 'function' && this[SRC] || $toString.call(this);
-});
+
+  return deprecated;
+};
 
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/_set-species.js":
-/*!******************************************************!*\
-  !*** ./node_modules/core-js/modules/_set-species.js ***!
-  \******************************************************/
+/***/ "./node_modules/algoliasearch/src/deprecatedMessage.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/algoliasearch/src/deprecatedMessage.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function deprecatedMessage(previousUsage, newUsage) {
+  var githubAnchorLink = previousUsage.toLowerCase()
+    .replace(/[\.\(\)]/g, '');
+
+  return 'algoliasearch: `' + previousUsage + '` was replaced by `' + newUsage +
+    '`. Please see https://github.com/algolia/algoliasearch-client-javascript/wiki/Deprecated#' + githubAnchorLink;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/algoliasearch/src/errors.js":
+/*!**************************************************!*\
+  !*** ./node_modules/algoliasearch/src/errors.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var global = __webpack_require__(/*! ./_global */ "./node_modules/core-js/modules/_global.js");
-var dP = __webpack_require__(/*! ./_object-dp */ "./node_modules/core-js/modules/_object-dp.js");
-var DESCRIPTORS = __webpack_require__(/*! ./_descriptors */ "./node_modules/core-js/modules/_descriptors.js");
-var SPECIES = __webpack_require__(/*! ./_wks */ "./node_modules/core-js/modules/_wks.js")('species');
 
-module.exports = function (KEY) {
-  var C = global[KEY];
-  if (DESCRIPTORS && C && !C[SPECIES]) dP.f(C, SPECIES, {
-    configurable: true,
-    get: function () { return this; }
-  });
+// This file hosts our error definitions
+// We use custom error "types" so that we can act on them when we need it
+// e.g.: if error instanceof errors.UnparsableJSON then..
+
+var inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
+
+function AlgoliaSearchError(message, extraProperties) {
+  var forEach = __webpack_require__(/*! foreach */ "./node_modules/foreach/index.js");
+
+  var error = this;
+
+  // try to get a stacktrace
+  if (typeof Error.captureStackTrace === 'function') {
+    Error.captureStackTrace(this, this.constructor);
+  } else {
+    error.stack = (new Error()).stack || 'Cannot get a stacktrace, browser is too old';
+  }
+
+  this.name = 'AlgoliaSearchError';
+  this.message = message || 'Unknown error';
+
+  if (extraProperties) {
+    forEach(extraProperties, function addToErrorObject(value, key) {
+      error[key] = value;
+    });
+  }
+}
+
+inherits(AlgoliaSearchError, Error);
+
+function createCustomError(name, message) {
+  function AlgoliaSearchCustomError() {
+    var args = Array.prototype.slice.call(arguments, 0);
+
+    // custom message not set, use default
+    if (typeof args[0] !== 'string') {
+      args.unshift(message);
+    }
+
+    AlgoliaSearchError.apply(this, args);
+    this.name = 'AlgoliaSearch' + name + 'Error';
+  }
+
+  inherits(AlgoliaSearchCustomError, AlgoliaSearchError);
+
+  return AlgoliaSearchCustomError;
+}
+
+// late exports to let various fn defs and inherits take place
+module.exports = {
+  AlgoliaSearchError: AlgoliaSearchError,
+  UnparsableJSON: createCustomError(
+    'UnparsableJSON',
+    'Could not parse the incoming response as JSON, see err.more for details'
+  ),
+  RequestTimeout: createCustomError(
+    'RequestTimeout',
+    'Request timed out before getting a response'
+  ),
+  Network: createCustomError(
+    'Network',
+    'Network issue, see err.more for details'
+  ),
+  JSONPScriptFail: createCustomError(
+    'JSONPScriptFail',
+    '<script> was loaded but did not call our provided callback'
+  ),
+  ValidUntilNotFound: createCustomError(
+    'ValidUntilNotFound',
+    'The SecuredAPIKey does not have a validUntil parameter.'
+  ),
+  JSONPScriptError: createCustomError(
+    'JSONPScriptError',
+    '<script> unable to load due to an `error` event on it'
+  ),
+  ObjectNotFound: createCustomError(
+    'ObjectNotFound',
+    'Object not found'
+  ),
+  Unknown: createCustomError(
+    'Unknown',
+    'Unknown error occured'
+  )
 };
 
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/_set-to-string-tag.js":
-/*!************************************************************!*\
-  !*** ./node_modules/core-js/modules/_set-to-string-tag.js ***!
-  \************************************************************/
+/***/ "./node_modules/algoliasearch/src/exitPromise.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/algoliasearch/src/exitPromise.js ***!
+  \*******************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var def = __webpack_require__(/*! ./_object-dp */ "./node_modules/core-js/modules/_object-dp.js").f;
-var has = __webpack_require__(/*! ./_has */ "./node_modules/core-js/modules/_has.js");
-var TAG = __webpack_require__(/*! ./_wks */ "./node_modules/core-js/modules/_wks.js")('toStringTag');
-
-module.exports = function (it, tag, stat) {
-  if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
+// Parse cloud does not supports setTimeout
+// We do not store a setTimeout reference in the client everytime
+// We only fallback to a fake setTimeout when not available
+// setTimeout cannot be override globally sadly
+module.exports = function exitPromise(fn, _setTimeout) {
+  _setTimeout(fn, 0);
 };
 
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/_shared-key.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/core-js/modules/_shared-key.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var shared = __webpack_require__(/*! ./_shared */ "./node_modules/core-js/modules/_shared.js")('keys');
-var uid = __webpack_require__(/*! ./_uid */ "./node_modules/core-js/modules/_uid.js");
-module.exports = function (key) {
-  return shared[key] || (shared[key] = uid(key));
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_shared.js":
-/*!*************************************************!*\
-  !*** ./node_modules/core-js/modules/_shared.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var core = __webpack_require__(/*! ./_core */ "./node_modules/core-js/modules/_core.js");
-var global = __webpack_require__(/*! ./_global */ "./node_modules/core-js/modules/_global.js");
-var SHARED = '__core-js_shared__';
-var store = global[SHARED] || (global[SHARED] = {});
-
-(module.exports = function (key, value) {
-  return store[key] || (store[key] = value !== undefined ? value : {});
-})('versions', []).push({
-  version: core.version,
-  mode: __webpack_require__(/*! ./_library */ "./node_modules/core-js/modules/_library.js") ? 'pure' : 'global',
-  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
-});
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_species-constructor.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/core-js/modules/_species-constructor.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 7.3.20 SpeciesConstructor(O, defaultConstructor)
-var anObject = __webpack_require__(/*! ./_an-object */ "./node_modules/core-js/modules/_an-object.js");
-var aFunction = __webpack_require__(/*! ./_a-function */ "./node_modules/core-js/modules/_a-function.js");
-var SPECIES = __webpack_require__(/*! ./_wks */ "./node_modules/core-js/modules/_wks.js")('species');
-module.exports = function (O, D) {
-  var C = anObject(O).constructor;
-  var S;
-  return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_string-at.js":
-/*!****************************************************!*\
-  !*** ./node_modules/core-js/modules/_string-at.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var toInteger = __webpack_require__(/*! ./_to-integer */ "./node_modules/core-js/modules/_to-integer.js");
-var defined = __webpack_require__(/*! ./_defined */ "./node_modules/core-js/modules/_defined.js");
-// true  -> String#at
-// false -> String#codePointAt
-module.exports = function (TO_STRING) {
-  return function (that, pos) {
-    var s = String(defined(that));
-    var i = toInteger(pos);
-    var l = s.length;
-    var a, b;
-    if (i < 0 || i >= l) return TO_STRING ? '' : undefined;
-    a = s.charCodeAt(i);
-    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
-      ? TO_STRING ? s.charAt(i) : a
-      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
-  };
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_task.js":
+/***/ "./node_modules/algoliasearch/src/map.js":
 /*!***********************************************!*\
-  !*** ./node_modules/core-js/modules/_task.js ***!
+  !*** ./node_modules/algoliasearch/src/map.js ***!
   \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ctx = __webpack_require__(/*! ./_ctx */ "./node_modules/core-js/modules/_ctx.js");
-var invoke = __webpack_require__(/*! ./_invoke */ "./node_modules/core-js/modules/_invoke.js");
-var html = __webpack_require__(/*! ./_html */ "./node_modules/core-js/modules/_html.js");
-var cel = __webpack_require__(/*! ./_dom-create */ "./node_modules/core-js/modules/_dom-create.js");
-var global = __webpack_require__(/*! ./_global */ "./node_modules/core-js/modules/_global.js");
-var process = global.process;
-var setTask = global.setImmediate;
-var clearTask = global.clearImmediate;
-var MessageChannel = global.MessageChannel;
-var Dispatch = global.Dispatch;
-var counter = 0;
-var queue = {};
-var ONREADYSTATECHANGE = 'onreadystatechange';
-var defer, channel, port;
-var run = function () {
-  var id = +this;
-  // eslint-disable-next-line no-prototype-builtins
-  if (queue.hasOwnProperty(id)) {
-    var fn = queue[id];
-    delete queue[id];
-    fn();
+var foreach = __webpack_require__(/*! foreach */ "./node_modules/foreach/index.js");
+
+module.exports = function map(arr, fn) {
+  var newArr = [];
+  foreach(arr, function(item, itemIndex) {
+    newArr.push(fn(item, itemIndex, arr));
+  });
+  return newArr;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/algoliasearch/src/merge.js":
+/*!*************************************************!*\
+  !*** ./node_modules/algoliasearch/src/merge.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var foreach = __webpack_require__(/*! foreach */ "./node_modules/foreach/index.js");
+
+module.exports = function merge(destination/* , sources */) {
+  var sources = Array.prototype.slice.call(arguments);
+
+  foreach(sources, function(source) {
+    for (var keyName in source) {
+      if (source.hasOwnProperty(keyName)) {
+        if (typeof destination[keyName] === 'object' && typeof source[keyName] === 'object') {
+          destination[keyName] = merge({}, destination[keyName], source[keyName]);
+        } else if (source[keyName] !== undefined) {
+          destination[keyName] = source[keyName];
+        }
+      }
+    }
+  });
+
+  return destination;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/algoliasearch/src/omit.js":
+/*!************************************************!*\
+  !*** ./node_modules/algoliasearch/src/omit.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = function omit(obj, test) {
+  var keys = __webpack_require__(/*! object-keys */ "./node_modules/object-keys/index.js");
+  var foreach = __webpack_require__(/*! foreach */ "./node_modules/foreach/index.js");
+
+  var filtered = {};
+
+  foreach(keys(obj), function doFilter(keyName) {
+    if (test(keyName) !== true) {
+      filtered[keyName] = obj[keyName];
+    }
+  });
+
+  return filtered;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/algoliasearch/src/places.js":
+/*!**************************************************!*\
+  !*** ./node_modules/algoliasearch/src/places.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = createPlacesClient;
+
+var qs3 = __webpack_require__(/*! querystring-es3 */ "./node_modules/querystring-es3/index.js");
+var buildSearchMethod = __webpack_require__(/*! ./buildSearchMethod.js */ "./node_modules/algoliasearch/src/buildSearchMethod.js");
+
+function createPlacesClient(algoliasearch) {
+  return function places(appID, apiKey, opts) {
+    var cloneDeep = __webpack_require__(/*! ./clone.js */ "./node_modules/algoliasearch/src/clone.js");
+
+    opts = opts && cloneDeep(opts) || {};
+    opts.hosts = opts.hosts || [
+      'places-dsn.algolia.net',
+      'places-1.algolianet.com',
+      'places-2.algolianet.com',
+      'places-3.algolianet.com'
+    ];
+
+    // allow initPlaces() no arguments => community rate limited
+    if (arguments.length === 0 || typeof appID === 'object' || appID === undefined) {
+      appID = '';
+      apiKey = '';
+      opts._allowEmptyCredentials = true;
+    }
+
+    var client = algoliasearch(appID, apiKey, opts);
+    var index = client.initIndex('places');
+    index.search = buildSearchMethod('query', '/1/places/query');
+    index.reverse = function(options, callback) {
+      var encoded = qs3.encode(options);
+
+      return this.as._jsonRequest({
+        method: 'GET',
+        url: '/1/places/reverse?' + encoded,
+        hostType: 'read',
+        callback: callback
+      });
+    };
+
+    index.getObject = function(objectID, callback) {
+      return this.as._jsonRequest({
+        method: 'GET',
+        url: '/1/places/' + encodeURIComponent(objectID),
+        hostType: 'read',
+        callback: callback
+      });
+    };
+    return index;
+  };
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/algoliasearch/src/store.js":
+/*!*************************************************!*\
+  !*** ./node_modules/algoliasearch/src/store.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var debug = __webpack_require__(/*! debug */ "./node_modules/algoliasearch/node_modules/debug/src/browser.js")('algoliasearch:src/hostIndexState.js');
+var localStorageNamespace = 'algoliasearch-client-js';
+
+var store;
+var moduleStore = {
+  state: {},
+  set: function(key, data) {
+    this.state[key] = data;
+    return this.state[key];
+  },
+  get: function(key) {
+    return this.state[key] || null;
   }
 };
-var listener = function (event) {
-  run.call(event.data);
+
+var localStorageStore = {
+  set: function(key, data) {
+    moduleStore.set(key, data); // always replicate localStorageStore to moduleStore in case of failure
+
+    try {
+      var namespace = JSON.parse(global.localStorage[localStorageNamespace]);
+      namespace[key] = data;
+      global.localStorage[localStorageNamespace] = JSON.stringify(namespace);
+      return namespace[key];
+    } catch (e) {
+      return localStorageFailure(key, e);
+    }
+  },
+  get: function(key) {
+    try {
+      return JSON.parse(global.localStorage[localStorageNamespace])[key] || null;
+    } catch (e) {
+      return localStorageFailure(key, e);
+    }
+  }
 };
-// Node.js 0.9+ & IE10+ has setImmediate, otherwise:
-if (!setTask || !clearTask) {
-  setTask = function setImmediate(fn) {
-    var args = [];
-    var i = 1;
-    while (arguments.length > i) args.push(arguments[i++]);
-    queue[++counter] = function () {
-      // eslint-disable-next-line no-new-func
-      invoke(typeof fn == 'function' ? fn : Function(fn), args);
-    };
-    defer(counter);
-    return counter;
-  };
-  clearTask = function clearImmediate(id) {
-    delete queue[id];
-  };
-  // Node.js 0.8-
-  if (__webpack_require__(/*! ./_cof */ "./node_modules/core-js/modules/_cof.js")(process) == 'process') {
-    defer = function (id) {
-      process.nextTick(ctx(run, id, 1));
-    };
-  // Sphere (JS game engine) Dispatch API
-  } else if (Dispatch && Dispatch.now) {
-    defer = function (id) {
-      Dispatch.now(ctx(run, id, 1));
-    };
-  // Browsers with MessageChannel, includes WebWorkers
-  } else if (MessageChannel) {
-    channel = new MessageChannel();
-    port = channel.port2;
-    channel.port1.onmessage = listener;
-    defer = ctx(port.postMessage, port, 1);
-  // Browsers with postMessage, skip WebWorkers
-  // IE8 has postMessage, but it's sync & typeof its postMessage is 'object'
-  } else if (global.addEventListener && typeof postMessage == 'function' && !global.importScripts) {
-    defer = function (id) {
-      global.postMessage(id + '', '*');
-    };
-    global.addEventListener('message', listener, false);
-  // IE8-
-  } else if (ONREADYSTATECHANGE in cel('script')) {
-    defer = function (id) {
-      html.appendChild(cel('script'))[ONREADYSTATECHANGE] = function () {
-        html.removeChild(this);
-        run.call(id);
-      };
-    };
-  // Rest old browsers
-  } else {
-    defer = function (id) {
-      setTimeout(ctx(run, id, 1), 0);
-    };
+
+function localStorageFailure(key, e) {
+  debug('localStorage failed with', e);
+  cleanup();
+  store = moduleStore;
+  return store.get(key);
+}
+
+store = supportsLocalStorage() ? localStorageStore : moduleStore;
+
+module.exports = {
+  get: getOrSet,
+  set: getOrSet,
+  supportsLocalStorage: supportsLocalStorage
+};
+
+function getOrSet(key, data) {
+  if (arguments.length === 1) {
+    return store.get(key);
+  }
+
+  return store.set(key, data);
+}
+
+function supportsLocalStorage() {
+  try {
+    if ('localStorage' in global &&
+      global.localStorage !== null) {
+      if (!global.localStorage[localStorageNamespace]) {
+        // actual creation of the namespace
+        global.localStorage.setItem(localStorageNamespace, JSON.stringify({}));
+      }
+      return true;
+    }
+
+    return false;
+  } catch (_) {
+    return false;
   }
 }
-module.exports = {
-  set: setTask,
-  clear: clearTask
-};
 
+// In case of any error on localStorage, we clean our own namespace, this should handle
+// quota errors when a lot of keys + data are used
+function cleanup() {
+  try {
+    global.localStorage.removeItem(localStorageNamespace);
+  } catch (_) {
+    // nothing to do
+  }
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/_to-absolute-index.js":
-/*!************************************************************!*\
-  !*** ./node_modules/core-js/modules/_to-absolute-index.js ***!
-  \************************************************************/
+/***/ "./node_modules/algoliasearch/src/version.js":
+/*!***************************************************!*\
+  !*** ./node_modules/algoliasearch/src/version.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(/*! ./_to-integer */ "./node_modules/core-js/modules/_to-integer.js");
-var max = Math.max;
-var min = Math.min;
-module.exports = function (index, length) {
-  index = toInteger(index);
-  return index < 0 ? max(index + length, 0) : min(index, length);
-};
+"use strict";
+
+
+module.exports = '3.35.1';
 
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/_to-integer.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/core-js/modules/_to-integer.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// 7.1.4 ToInteger
-var ceil = Math.ceil;
-var floor = Math.floor;
-module.exports = function (it) {
-  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_to-iobject.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/core-js/modules/_to-iobject.js ***!
-  \*****************************************************/
+/***/ "./node_modules/es6-promise/dist/es6-promise.js":
+/*!******************************************************!*\
+  !*** ./node_modules/es6-promise/dist/es6-promise.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-// to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(/*! ./_iobject */ "./node_modules/core-js/modules/_iobject.js");
-var defined = __webpack_require__(/*! ./_defined */ "./node_modules/core-js/modules/_defined.js");
-module.exports = function (it) {
-  return IObject(defined(it));
+/* WEBPACK VAR INJECTION */(function(process, global) {/*!
+ * @overview es6-promise - a tiny implementation of Promises/A+.
+ * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
+ * @license   Licensed under MIT license
+ *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
+ * @version   v4.2.8+1e68dce6
+ */
+
+(function (global, factory) {
+	 true ? module.exports = factory() :
+	undefined;
+}(this, (function () { 'use strict';
+
+function objectOrFunction(x) {
+  var type = typeof x;
+  return x !== null && (type === 'object' || type === 'function');
+}
+
+function isFunction(x) {
+  return typeof x === 'function';
+}
+
+
+
+var _isArray = void 0;
+if (Array.isArray) {
+  _isArray = Array.isArray;
+} else {
+  _isArray = function (x) {
+    return Object.prototype.toString.call(x) === '[object Array]';
+  };
+}
+
+var isArray = _isArray;
+
+var len = 0;
+var vertxNext = void 0;
+var customSchedulerFn = void 0;
+
+var asap = function asap(callback, arg) {
+  queue[len] = callback;
+  queue[len + 1] = arg;
+  len += 2;
+  if (len === 2) {
+    // If len is 2, that means that we need to schedule an async flush.
+    // If additional callbacks are queued before the queue is flushed, they
+    // will be processed by this flush that we are scheduling.
+    if (customSchedulerFn) {
+      customSchedulerFn(flush);
+    } else {
+      scheduleFlush();
+    }
+  }
 };
 
+function setScheduler(scheduleFn) {
+  customSchedulerFn = scheduleFn;
+}
 
-/***/ }),
+function setAsap(asapFn) {
+  asap = asapFn;
+}
 
-/***/ "./node_modules/core-js/modules/_to-length.js":
-/*!****************************************************!*\
-  !*** ./node_modules/core-js/modules/_to-length.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+var browserWindow = typeof window !== 'undefined' ? window : undefined;
+var browserGlobal = browserWindow || {};
+var BrowserMutationObserver = browserGlobal.MutationObserver || browserGlobal.WebKitMutationObserver;
+var isNode = typeof self === 'undefined' && typeof process !== 'undefined' && {}.toString.call(process) === '[object process]';
 
-// 7.1.15 ToLength
-var toInteger = __webpack_require__(/*! ./_to-integer */ "./node_modules/core-js/modules/_to-integer.js");
-var min = Math.min;
-module.exports = function (it) {
-  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
-};
+// test for web worker but not in IE10
+var isWorker = typeof Uint8ClampedArray !== 'undefined' && typeof importScripts !== 'undefined' && typeof MessageChannel !== 'undefined';
+
+// node
+function useNextTick() {
+  // node version 0.10.x displays a deprecation warning when nextTick is used recursively
+  // see https://github.com/cujojs/when/issues/410 for details
+  return function () {
+    return process.nextTick(flush);
+  };
+}
+
+// vertx
+function useVertxTimer() {
+  if (typeof vertxNext !== 'undefined') {
+    return function () {
+      vertxNext(flush);
+    };
+  }
+
+  return useSetTimeout();
+}
+
+function useMutationObserver() {
+  var iterations = 0;
+  var observer = new BrowserMutationObserver(flush);
+  var node = document.createTextNode('');
+  observer.observe(node, { characterData: true });
+
+  return function () {
+    node.data = iterations = ++iterations % 2;
+  };
+}
+
+// web worker
+function useMessageChannel() {
+  var channel = new MessageChannel();
+  channel.port1.onmessage = flush;
+  return function () {
+    return channel.port2.postMessage(0);
+  };
+}
+
+function useSetTimeout() {
+  // Store setTimeout reference so es6-promise will be unaffected by
+  // other code modifying setTimeout (like sinon.useFakeTimers())
+  var globalSetTimeout = setTimeout;
+  return function () {
+    return globalSetTimeout(flush, 1);
+  };
+}
+
+var queue = new Array(1000);
+function flush() {
+  for (var i = 0; i < len; i += 2) {
+    var callback = queue[i];
+    var arg = queue[i + 1];
+
+    callback(arg);
+
+    queue[i] = undefined;
+    queue[i + 1] = undefined;
+  }
+
+  len = 0;
+}
+
+function attemptVertx() {
+  try {
+    var vertx = Function('return this')().require('vertx');
+    vertxNext = vertx.runOnLoop || vertx.runOnContext;
+    return useVertxTimer();
+  } catch (e) {
+    return useSetTimeout();
+  }
+}
+
+var scheduleFlush = void 0;
+// Decide what async method to use to triggering processing of queued callbacks:
+if (isNode) {
+  scheduleFlush = useNextTick();
+} else if (BrowserMutationObserver) {
+  scheduleFlush = useMutationObserver();
+} else if (isWorker) {
+  scheduleFlush = useMessageChannel();
+} else if (browserWindow === undefined && "function" === 'function') {
+  scheduleFlush = attemptVertx();
+} else {
+  scheduleFlush = useSetTimeout();
+}
+
+function then(onFulfillment, onRejection) {
+  var parent = this;
+
+  var child = new this.constructor(noop);
+
+  if (child[PROMISE_ID] === undefined) {
+    makePromise(child);
+  }
+
+  var _state = parent._state;
 
 
-/***/ }),
+  if (_state) {
+    var callback = arguments[_state - 1];
+    asap(function () {
+      return invokeCallback(_state, child, callback, parent._result);
+    });
+  } else {
+    subscribe(parent, child, onFulfillment, onRejection);
+  }
 
-/***/ "./node_modules/core-js/modules/_to-object.js":
-/*!****************************************************!*\
-  !*** ./node_modules/core-js/modules/_to-object.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+  return child;
+}
 
-// 7.1.13 ToObject(argument)
-var defined = __webpack_require__(/*! ./_defined */ "./node_modules/core-js/modules/_defined.js");
-module.exports = function (it) {
-  return Object(defined(it));
-};
+/**
+  `Promise.resolve` returns a promise that will become resolved with the
+  passed `value`. It is shorthand for the following:
+
+  ```javascript
+  let promise = new Promise(function(resolve, reject){
+    resolve(1);
+  });
+
+  promise.then(function(value){
+    // value === 1
+  });
+  ```
+
+  Instead of writing the above, your code now simply becomes the following:
+
+  ```javascript
+  let promise = Promise.resolve(1);
+
+  promise.then(function(value){
+    // value === 1
+  });
+  ```
+
+  @method resolve
+  @static
+  @param {Any} value value that the returned promise will be resolved with
+  Useful for tooling.
+  @return {Promise} a promise that will become fulfilled with the given
+  `value`
+*/
+function resolve$1(object) {
+  /*jshint validthis:true */
+  var Constructor = this;
+
+  if (object && typeof object === 'object' && object.constructor === Constructor) {
+    return object;
+  }
+
+  var promise = new Constructor(noop);
+  resolve(promise, object);
+  return promise;
+}
+
+var PROMISE_ID = Math.random().toString(36).substring(2);
+
+function noop() {}
+
+var PENDING = void 0;
+var FULFILLED = 1;
+var REJECTED = 2;
+
+function selfFulfillment() {
+  return new TypeError("You cannot resolve a promise with itself");
+}
+
+function cannotReturnOwn() {
+  return new TypeError('A promises callback cannot return that same promise.');
+}
+
+function tryThen(then$$1, value, fulfillmentHandler, rejectionHandler) {
+  try {
+    then$$1.call(value, fulfillmentHandler, rejectionHandler);
+  } catch (e) {
+    return e;
+  }
+}
+
+function handleForeignThenable(promise, thenable, then$$1) {
+  asap(function (promise) {
+    var sealed = false;
+    var error = tryThen(then$$1, thenable, function (value) {
+      if (sealed) {
+        return;
+      }
+      sealed = true;
+      if (thenable !== value) {
+        resolve(promise, value);
+      } else {
+        fulfill(promise, value);
+      }
+    }, function (reason) {
+      if (sealed) {
+        return;
+      }
+      sealed = true;
+
+      reject(promise, reason);
+    }, 'Settle: ' + (promise._label || ' unknown promise'));
+
+    if (!sealed && error) {
+      sealed = true;
+      reject(promise, error);
+    }
+  }, promise);
+}
+
+function handleOwnThenable(promise, thenable) {
+  if (thenable._state === FULFILLED) {
+    fulfill(promise, thenable._result);
+  } else if (thenable._state === REJECTED) {
+    reject(promise, thenable._result);
+  } else {
+    subscribe(thenable, undefined, function (value) {
+      return resolve(promise, value);
+    }, function (reason) {
+      return reject(promise, reason);
+    });
+  }
+}
+
+function handleMaybeThenable(promise, maybeThenable, then$$1) {
+  if (maybeThenable.constructor === promise.constructor && then$$1 === then && maybeThenable.constructor.resolve === resolve$1) {
+    handleOwnThenable(promise, maybeThenable);
+  } else {
+    if (then$$1 === undefined) {
+      fulfill(promise, maybeThenable);
+    } else if (isFunction(then$$1)) {
+      handleForeignThenable(promise, maybeThenable, then$$1);
+    } else {
+      fulfill(promise, maybeThenable);
+    }
+  }
+}
+
+function resolve(promise, value) {
+  if (promise === value) {
+    reject(promise, selfFulfillment());
+  } else if (objectOrFunction(value)) {
+    var then$$1 = void 0;
+    try {
+      then$$1 = value.then;
+    } catch (error) {
+      reject(promise, error);
+      return;
+    }
+    handleMaybeThenable(promise, value, then$$1);
+  } else {
+    fulfill(promise, value);
+  }
+}
+
+function publishRejection(promise) {
+  if (promise._onerror) {
+    promise._onerror(promise._result);
+  }
+
+  publish(promise);
+}
+
+function fulfill(promise, value) {
+  if (promise._state !== PENDING) {
+    return;
+  }
+
+  promise._result = value;
+  promise._state = FULFILLED;
+
+  if (promise._subscribers.length !== 0) {
+    asap(publish, promise);
+  }
+}
+
+function reject(promise, reason) {
+  if (promise._state !== PENDING) {
+    return;
+  }
+  promise._state = REJECTED;
+  promise._result = reason;
+
+  asap(publishRejection, promise);
+}
+
+function subscribe(parent, child, onFulfillment, onRejection) {
+  var _subscribers = parent._subscribers;
+  var length = _subscribers.length;
 
 
-/***/ }),
+  parent._onerror = null;
 
-/***/ "./node_modules/core-js/modules/_to-primitive.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/core-js/modules/_to-primitive.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+  _subscribers[length] = child;
+  _subscribers[length + FULFILLED] = onFulfillment;
+  _subscribers[length + REJECTED] = onRejection;
 
-// 7.1.1 ToPrimitive(input [, PreferredType])
-var isObject = __webpack_require__(/*! ./_is-object */ "./node_modules/core-js/modules/_is-object.js");
-// instead of the ES6 spec version, we didn't implement @@toPrimitive case
-// and the second argument - flag - preferred type is a string
-module.exports = function (it, S) {
-  if (!isObject(it)) return it;
-  var fn, val;
-  if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
-  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
-  if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
-  throw TypeError("Can't convert object to primitive value");
-};
+  if (length === 0 && parent._state) {
+    asap(publish, parent);
+  }
+}
 
+function publish(promise) {
+  var subscribers = promise._subscribers;
+  var settled = promise._state;
 
-/***/ }),
+  if (subscribers.length === 0) {
+    return;
+  }
 
-/***/ "./node_modules/core-js/modules/_uid.js":
-/*!**********************************************!*\
-  !*** ./node_modules/core-js/modules/_uid.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+  var child = void 0,
+      callback = void 0,
+      detail = promise._result;
+
+  for (var i = 0; i < subscribers.length; i += 3) {
+    child = subscribers[i];
+    callback = subscribers[i + settled];
+
+    if (child) {
+      invokeCallback(settled, child, callback, detail);
+    } else {
+      callback(detail);
+    }
+  }
+
+  promise._subscribers.length = 0;
+}
+
+function invokeCallback(settled, promise, callback, detail) {
+  var hasCallback = isFunction(callback),
+      value = void 0,
+      error = void 0,
+      succeeded = true;
+
+  if (hasCallback) {
+    try {
+      value = callback(detail);
+    } catch (e) {
+      succeeded = false;
+      error = e;
+    }
+
+    if (promise === value) {
+      reject(promise, cannotReturnOwn());
+      return;
+    }
+  } else {
+    value = detail;
+  }
+
+  if (promise._state !== PENDING) {
+    // noop
+  } else if (hasCallback && succeeded) {
+    resolve(promise, value);
+  } else if (succeeded === false) {
+    reject(promise, error);
+  } else if (settled === FULFILLED) {
+    fulfill(promise, value);
+  } else if (settled === REJECTED) {
+    reject(promise, value);
+  }
+}
+
+function initializePromise(promise, resolver) {
+  try {
+    resolver(function resolvePromise(value) {
+      resolve(promise, value);
+    }, function rejectPromise(reason) {
+      reject(promise, reason);
+    });
+  } catch (e) {
+    reject(promise, e);
+  }
+}
 
 var id = 0;
-var px = Math.random();
-module.exports = function (key) {
-  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_user-agent.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/core-js/modules/_user-agent.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__(/*! ./_global */ "./node_modules/core-js/modules/_global.js");
-var navigator = global.navigator;
-
-module.exports = navigator && navigator.userAgent || '';
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/_wks.js":
-/*!**********************************************!*\
-  !*** ./node_modules/core-js/modules/_wks.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var store = __webpack_require__(/*! ./_shared */ "./node_modules/core-js/modules/_shared.js")('wks');
-var uid = __webpack_require__(/*! ./_uid */ "./node_modules/core-js/modules/_uid.js");
-var Symbol = __webpack_require__(/*! ./_global */ "./node_modules/core-js/modules/_global.js").Symbol;
-var USE_SYMBOL = typeof Symbol == 'function';
-
-var $exports = module.exports = function (name) {
-  return store[name] || (store[name] =
-    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
-};
-
-$exports.store = store;
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/core.get-iterator-method.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/core-js/modules/core.get-iterator-method.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var classof = __webpack_require__(/*! ./_classof */ "./node_modules/core-js/modules/_classof.js");
-var ITERATOR = __webpack_require__(/*! ./_wks */ "./node_modules/core-js/modules/_wks.js")('iterator');
-var Iterators = __webpack_require__(/*! ./_iterators */ "./node_modules/core-js/modules/_iterators.js");
-module.exports = __webpack_require__(/*! ./_core */ "./node_modules/core-js/modules/_core.js").getIteratorMethod = function (it) {
-  if (it != undefined) return it[ITERATOR]
-    || it['@@iterator']
-    || Iterators[classof(it)];
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/es6.array.iterator.js":
-/*!************************************************************!*\
-  !*** ./node_modules/core-js/modules/es6.array.iterator.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var addToUnscopables = __webpack_require__(/*! ./_add-to-unscopables */ "./node_modules/core-js/modules/_add-to-unscopables.js");
-var step = __webpack_require__(/*! ./_iter-step */ "./node_modules/core-js/modules/_iter-step.js");
-var Iterators = __webpack_require__(/*! ./_iterators */ "./node_modules/core-js/modules/_iterators.js");
-var toIObject = __webpack_require__(/*! ./_to-iobject */ "./node_modules/core-js/modules/_to-iobject.js");
-
-// 22.1.3.4 Array.prototype.entries()
-// 22.1.3.13 Array.prototype.keys()
-// 22.1.3.29 Array.prototype.values()
-// 22.1.3.30 Array.prototype[@@iterator]()
-module.exports = __webpack_require__(/*! ./_iter-define */ "./node_modules/core-js/modules/_iter-define.js")(Array, 'Array', function (iterated, kind) {
-  this._t = toIObject(iterated); // target
-  this._i = 0;                   // next index
-  this._k = kind;                // kind
-// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
-}, function () {
-  var O = this._t;
-  var kind = this._k;
-  var index = this._i++;
-  if (!O || index >= O.length) {
-    this._t = undefined;
-    return step(1);
-  }
-  if (kind == 'keys') return step(0, index);
-  if (kind == 'values') return step(0, O[index]);
-  return step(0, [index, O[index]]);
-}, 'values');
-
-// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
-Iterators.Arguments = Iterators.Array;
-
-addToUnscopables('keys');
-addToUnscopables('values');
-addToUnscopables('entries');
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/es6.object.to-string.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/core-js/modules/es6.object.to-string.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// 19.1.3.6 Object.prototype.toString()
-var classof = __webpack_require__(/*! ./_classof */ "./node_modules/core-js/modules/_classof.js");
-var test = {};
-test[__webpack_require__(/*! ./_wks */ "./node_modules/core-js/modules/_wks.js")('toStringTag')] = 'z';
-if (test + '' != '[object z]') {
-  __webpack_require__(/*! ./_redefine */ "./node_modules/core-js/modules/_redefine.js")(Object.prototype, 'toString', function toString() {
-    return '[object ' + classof(this) + ']';
-  }, true);
+function nextId() {
+  return id++;
 }
 
+function makePromise(promise) {
+  promise[PROMISE_ID] = id++;
+  promise._state = undefined;
+  promise._result = undefined;
+  promise._subscribers = [];
+}
 
-/***/ }),
+function validationError() {
+  return new Error('Array Methods must be provided an Array');
+}
 
-/***/ "./node_modules/core-js/modules/es6.promise.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/core-js/modules/es6.promise.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+var Enumerator = function () {
+  function Enumerator(Constructor, input) {
+    this._instanceConstructor = Constructor;
+    this.promise = new Constructor(noop);
 
-"use strict";
+    if (!this.promise[PROMISE_ID]) {
+      makePromise(this.promise);
+    }
 
-var LIBRARY = __webpack_require__(/*! ./_library */ "./node_modules/core-js/modules/_library.js");
-var global = __webpack_require__(/*! ./_global */ "./node_modules/core-js/modules/_global.js");
-var ctx = __webpack_require__(/*! ./_ctx */ "./node_modules/core-js/modules/_ctx.js");
-var classof = __webpack_require__(/*! ./_classof */ "./node_modules/core-js/modules/_classof.js");
-var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/modules/_export.js");
-var isObject = __webpack_require__(/*! ./_is-object */ "./node_modules/core-js/modules/_is-object.js");
-var aFunction = __webpack_require__(/*! ./_a-function */ "./node_modules/core-js/modules/_a-function.js");
-var anInstance = __webpack_require__(/*! ./_an-instance */ "./node_modules/core-js/modules/_an-instance.js");
-var forOf = __webpack_require__(/*! ./_for-of */ "./node_modules/core-js/modules/_for-of.js");
-var speciesConstructor = __webpack_require__(/*! ./_species-constructor */ "./node_modules/core-js/modules/_species-constructor.js");
-var task = __webpack_require__(/*! ./_task */ "./node_modules/core-js/modules/_task.js").set;
-var microtask = __webpack_require__(/*! ./_microtask */ "./node_modules/core-js/modules/_microtask.js")();
-var newPromiseCapabilityModule = __webpack_require__(/*! ./_new-promise-capability */ "./node_modules/core-js/modules/_new-promise-capability.js");
-var perform = __webpack_require__(/*! ./_perform */ "./node_modules/core-js/modules/_perform.js");
-var userAgent = __webpack_require__(/*! ./_user-agent */ "./node_modules/core-js/modules/_user-agent.js");
-var promiseResolve = __webpack_require__(/*! ./_promise-resolve */ "./node_modules/core-js/modules/_promise-resolve.js");
-var PROMISE = 'Promise';
-var TypeError = global.TypeError;
-var process = global.process;
-var versions = process && process.versions;
-var v8 = versions && versions.v8 || '';
-var $Promise = global[PROMISE];
-var isNode = classof(process) == 'process';
-var empty = function () { /* empty */ };
-var Internal, newGenericPromiseCapability, OwnPromiseCapability, Wrapper;
-var newPromiseCapability = newGenericPromiseCapability = newPromiseCapabilityModule.f;
+    if (isArray(input)) {
+      this.length = input.length;
+      this._remaining = input.length;
 
-var USE_NATIVE = !!function () {
-  try {
-    // correct subclassing with @@species support
-    var promise = $Promise.resolve(1);
-    var FakePromise = (promise.constructor = {})[__webpack_require__(/*! ./_wks */ "./node_modules/core-js/modules/_wks.js")('species')] = function (exec) {
-      exec(empty, empty);
-    };
-    // unhandled rejections tracking support, NodeJS Promise without it fails @@species test
-    return (isNode || typeof PromiseRejectionEvent == 'function')
-      && promise.then(empty) instanceof FakePromise
-      // v8 6.6 (Node 10 and Chrome 66) have a bug with resolving custom thenables
-      // https://bugs.chromium.org/p/chromium/issues/detail?id=830565
-      // we can't detect it synchronously, so just check versions
-      && v8.indexOf('6.6') !== 0
-      && userAgent.indexOf('Chrome/66') === -1;
-  } catch (e) { /* empty */ }
+      this._result = new Array(this.length);
+
+      if (this.length === 0) {
+        fulfill(this.promise, this._result);
+      } else {
+        this.length = this.length || 0;
+        this._enumerate(input);
+        if (this._remaining === 0) {
+          fulfill(this.promise, this._result);
+        }
+      }
+    } else {
+      reject(this.promise, validationError());
+    }
+  }
+
+  Enumerator.prototype._enumerate = function _enumerate(input) {
+    for (var i = 0; this._state === PENDING && i < input.length; i++) {
+      this._eachEntry(input[i], i);
+    }
+  };
+
+  Enumerator.prototype._eachEntry = function _eachEntry(entry, i) {
+    var c = this._instanceConstructor;
+    var resolve$$1 = c.resolve;
+
+
+    if (resolve$$1 === resolve$1) {
+      var _then = void 0;
+      var error = void 0;
+      var didError = false;
+      try {
+        _then = entry.then;
+      } catch (e) {
+        didError = true;
+        error = e;
+      }
+
+      if (_then === then && entry._state !== PENDING) {
+        this._settledAt(entry._state, i, entry._result);
+      } else if (typeof _then !== 'function') {
+        this._remaining--;
+        this._result[i] = entry;
+      } else if (c === Promise$1) {
+        var promise = new c(noop);
+        if (didError) {
+          reject(promise, error);
+        } else {
+          handleMaybeThenable(promise, entry, _then);
+        }
+        this._willSettleAt(promise, i);
+      } else {
+        this._willSettleAt(new c(function (resolve$$1) {
+          return resolve$$1(entry);
+        }), i);
+      }
+    } else {
+      this._willSettleAt(resolve$$1(entry), i);
+    }
+  };
+
+  Enumerator.prototype._settledAt = function _settledAt(state, i, value) {
+    var promise = this.promise;
+
+
+    if (promise._state === PENDING) {
+      this._remaining--;
+
+      if (state === REJECTED) {
+        reject(promise, value);
+      } else {
+        this._result[i] = value;
+      }
+    }
+
+    if (this._remaining === 0) {
+      fulfill(promise, this._result);
+    }
+  };
+
+  Enumerator.prototype._willSettleAt = function _willSettleAt(promise, i) {
+    var enumerator = this;
+
+    subscribe(promise, undefined, function (value) {
+      return enumerator._settledAt(FULFILLED, i, value);
+    }, function (reason) {
+      return enumerator._settledAt(REJECTED, i, reason);
+    });
+  };
+
+  return Enumerator;
 }();
 
-// helpers
-var isThenable = function (it) {
-  var then;
-  return isObject(it) && typeof (then = it.then) == 'function' ? then : false;
-};
-var notify = function (promise, isReject) {
-  if (promise._n) return;
-  promise._n = true;
-  var chain = promise._c;
-  microtask(function () {
-    var value = promise._v;
-    var ok = promise._s == 1;
-    var i = 0;
-    var run = function (reaction) {
-      var handler = ok ? reaction.ok : reaction.fail;
-      var resolve = reaction.resolve;
-      var reject = reaction.reject;
-      var domain = reaction.domain;
-      var result, then, exited;
-      try {
-        if (handler) {
-          if (!ok) {
-            if (promise._h == 2) onHandleUnhandled(promise);
-            promise._h = 1;
+/**
+  `Promise.all` accepts an array of promises, and returns a new promise which
+  is fulfilled with an array of fulfillment values for the passed promises, or
+  rejected with the reason of the first passed promise to be rejected. It casts all
+  elements of the passed iterable to promises as it runs this algorithm.
+
+  Example:
+
+  ```javascript
+  let promise1 = resolve(1);
+  let promise2 = resolve(2);
+  let promise3 = resolve(3);
+  let promises = [ promise1, promise2, promise3 ];
+
+  Promise.all(promises).then(function(array){
+    // The array here would be [ 1, 2, 3 ];
+  });
+  ```
+
+  If any of the `promises` given to `all` are rejected, the first promise
+  that is rejected will be given as an argument to the returned promises's
+  rejection handler. For example:
+
+  Example:
+
+  ```javascript
+  let promise1 = resolve(1);
+  let promise2 = reject(new Error("2"));
+  let promise3 = reject(new Error("3"));
+  let promises = [ promise1, promise2, promise3 ];
+
+  Promise.all(promises).then(function(array){
+    // Code here never runs because there are rejected promises!
+  }, function(error) {
+    // error.message === "2"
+  });
+  ```
+
+  @method all
+  @static
+  @param {Array} entries array of promises
+  @param {String} label optional string for labeling the promise.
+  Useful for tooling.
+  @return {Promise} promise that is fulfilled when all `promises` have been
+  fulfilled, or rejected if any of them become rejected.
+  @static
+*/
+function all(entries) {
+  return new Enumerator(this, entries).promise;
+}
+
+/**
+  `Promise.race` returns a new promise which is settled in the same way as the
+  first passed promise to settle.
+
+  Example:
+
+  ```javascript
+  let promise1 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      resolve('promise 1');
+    }, 200);
+  });
+
+  let promise2 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      resolve('promise 2');
+    }, 100);
+  });
+
+  Promise.race([promise1, promise2]).then(function(result){
+    // result === 'promise 2' because it was resolved before promise1
+    // was resolved.
+  });
+  ```
+
+  `Promise.race` is deterministic in that only the state of the first
+  settled promise matters. For example, even if other promises given to the
+  `promises` array argument are resolved, but the first settled promise has
+  become rejected before the other promises became fulfilled, the returned
+  promise will become rejected:
+
+  ```javascript
+  let promise1 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      resolve('promise 1');
+    }, 200);
+  });
+
+  let promise2 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      reject(new Error('promise 2'));
+    }, 100);
+  });
+
+  Promise.race([promise1, promise2]).then(function(result){
+    // Code here never runs
+  }, function(reason){
+    // reason.message === 'promise 2' because promise 2 became rejected before
+    // promise 1 became fulfilled
+  });
+  ```
+
+  An example real-world use case is implementing timeouts:
+
+  ```javascript
+  Promise.race([ajax('foo.json'), timeout(5000)])
+  ```
+
+  @method race
+  @static
+  @param {Array} promises array of promises to observe
+  Useful for tooling.
+  @return {Promise} a promise which settles in the same way as the first passed
+  promise to settle.
+*/
+function race(entries) {
+  /*jshint validthis:true */
+  var Constructor = this;
+
+  if (!isArray(entries)) {
+    return new Constructor(function (_, reject) {
+      return reject(new TypeError('You must pass an array to race.'));
+    });
+  } else {
+    return new Constructor(function (resolve, reject) {
+      var length = entries.length;
+      for (var i = 0; i < length; i++) {
+        Constructor.resolve(entries[i]).then(resolve, reject);
+      }
+    });
+  }
+}
+
+/**
+  `Promise.reject` returns a promise rejected with the passed `reason`.
+  It is shorthand for the following:
+
+  ```javascript
+  let promise = new Promise(function(resolve, reject){
+    reject(new Error('WHOOPS'));
+  });
+
+  promise.then(function(value){
+    // Code here doesn't run because the promise is rejected!
+  }, function(reason){
+    // reason.message === 'WHOOPS'
+  });
+  ```
+
+  Instead of writing the above, your code now simply becomes the following:
+
+  ```javascript
+  let promise = Promise.reject(new Error('WHOOPS'));
+
+  promise.then(function(value){
+    // Code here doesn't run because the promise is rejected!
+  }, function(reason){
+    // reason.message === 'WHOOPS'
+  });
+  ```
+
+  @method reject
+  @static
+  @param {Any} reason value that the returned promise will be rejected with.
+  Useful for tooling.
+  @return {Promise} a promise rejected with the given `reason`.
+*/
+function reject$1(reason) {
+  /*jshint validthis:true */
+  var Constructor = this;
+  var promise = new Constructor(noop);
+  reject(promise, reason);
+  return promise;
+}
+
+function needsResolver() {
+  throw new TypeError('You must pass a resolver function as the first argument to the promise constructor');
+}
+
+function needsNew() {
+  throw new TypeError("Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function.");
+}
+
+/**
+  Promise objects represent the eventual result of an asynchronous operation. The
+  primary way of interacting with a promise is through its `then` method, which
+  registers callbacks to receive either a promise's eventual value or the reason
+  why the promise cannot be fulfilled.
+
+  Terminology
+  -----------
+
+  - `promise` is an object or function with a `then` method whose behavior conforms to this specification.
+  - `thenable` is an object or function that defines a `then` method.
+  - `value` is any legal JavaScript value (including undefined, a thenable, or a promise).
+  - `exception` is a value that is thrown using the throw statement.
+  - `reason` is a value that indicates why a promise was rejected.
+  - `settled` the final resting state of a promise, fulfilled or rejected.
+
+  A promise can be in one of three states: pending, fulfilled, or rejected.
+
+  Promises that are fulfilled have a fulfillment value and are in the fulfilled
+  state.  Promises that are rejected have a rejection reason and are in the
+  rejected state.  A fulfillment value is never a thenable.
+
+  Promises can also be said to *resolve* a value.  If this value is also a
+  promise, then the original promise's settled state will match the value's
+  settled state.  So a promise that *resolves* a promise that rejects will
+  itself reject, and a promise that *resolves* a promise that fulfills will
+  itself fulfill.
+
+
+  Basic Usage:
+  ------------
+
+  ```js
+  let promise = new Promise(function(resolve, reject) {
+    // on success
+    resolve(value);
+
+    // on failure
+    reject(reason);
+  });
+
+  promise.then(function(value) {
+    // on fulfillment
+  }, function(reason) {
+    // on rejection
+  });
+  ```
+
+  Advanced Usage:
+  ---------------
+
+  Promises shine when abstracting away asynchronous interactions such as
+  `XMLHttpRequest`s.
+
+  ```js
+  function getJSON(url) {
+    return new Promise(function(resolve, reject){
+      let xhr = new XMLHttpRequest();
+
+      xhr.open('GET', url);
+      xhr.onreadystatechange = handler;
+      xhr.responseType = 'json';
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.send();
+
+      function handler() {
+        if (this.readyState === this.DONE) {
+          if (this.status === 200) {
+            resolve(this.response);
+          } else {
+            reject(new Error('getJSON: `' + url + '` failed with status: [' + this.status + ']'));
           }
-          if (handler === true) result = value;
-          else {
-            if (domain) domain.enter();
-            result = handler(value); // may throw
-            if (domain) {
-              domain.exit();
-              exited = true;
+        }
+      };
+    });
+  }
+
+  getJSON('/posts.json').then(function(json) {
+    // on fulfillment
+  }, function(reason) {
+    // on rejection
+  });
+  ```
+
+  Unlike callbacks, promises are great composable primitives.
+
+  ```js
+  Promise.all([
+    getJSON('/posts'),
+    getJSON('/comments')
+  ]).then(function(values){
+    values[0] // => postsJSON
+    values[1] // => commentsJSON
+
+    return values;
+  });
+  ```
+
+  @class Promise
+  @param {Function} resolver
+  Useful for tooling.
+  @constructor
+*/
+
+var Promise$1 = function () {
+  function Promise(resolver) {
+    this[PROMISE_ID] = nextId();
+    this._result = this._state = undefined;
+    this._subscribers = [];
+
+    if (noop !== resolver) {
+      typeof resolver !== 'function' && needsResolver();
+      this instanceof Promise ? initializePromise(this, resolver) : needsNew();
+    }
+  }
+
+  /**
+  The primary way of interacting with a promise is through its `then` method,
+  which registers callbacks to receive either a promise's eventual value or the
+  reason why the promise cannot be fulfilled.
+   ```js
+  findUser().then(function(user){
+    // user is available
+  }, function(reason){
+    // user is unavailable, and you are given the reason why
+  });
+  ```
+   Chaining
+  --------
+   The return value of `then` is itself a promise.  This second, 'downstream'
+  promise is resolved with the return value of the first promise's fulfillment
+  or rejection handler, or rejected if the handler throws an exception.
+   ```js
+  findUser().then(function (user) {
+    return user.name;
+  }, function (reason) {
+    return 'default name';
+  }).then(function (userName) {
+    // If `findUser` fulfilled, `userName` will be the user's name, otherwise it
+    // will be `'default name'`
+  });
+   findUser().then(function (user) {
+    throw new Error('Found user, but still unhappy');
+  }, function (reason) {
+    throw new Error('`findUser` rejected and we're unhappy');
+  }).then(function (value) {
+    // never reached
+  }, function (reason) {
+    // if `findUser` fulfilled, `reason` will be 'Found user, but still unhappy'.
+    // If `findUser` rejected, `reason` will be '`findUser` rejected and we're unhappy'.
+  });
+  ```
+  If the downstream promise does not specify a rejection handler, rejection reasons will be propagated further downstream.
+   ```js
+  findUser().then(function (user) {
+    throw new PedagogicalException('Upstream error');
+  }).then(function (value) {
+    // never reached
+  }).then(function (value) {
+    // never reached
+  }, function (reason) {
+    // The `PedgagocialException` is propagated all the way down to here
+  });
+  ```
+   Assimilation
+  ------------
+   Sometimes the value you want to propagate to a downstream promise can only be
+  retrieved asynchronously. This can be achieved by returning a promise in the
+  fulfillment or rejection handler. The downstream promise will then be pending
+  until the returned promise is settled. This is called *assimilation*.
+   ```js
+  findUser().then(function (user) {
+    return findCommentsByAuthor(user);
+  }).then(function (comments) {
+    // The user's comments are now available
+  });
+  ```
+   If the assimliated promise rejects, then the downstream promise will also reject.
+   ```js
+  findUser().then(function (user) {
+    return findCommentsByAuthor(user);
+  }).then(function (comments) {
+    // If `findCommentsByAuthor` fulfills, we'll have the value here
+  }, function (reason) {
+    // If `findCommentsByAuthor` rejects, we'll have the reason here
+  });
+  ```
+   Simple Example
+  --------------
+   Synchronous Example
+   ```javascript
+  let result;
+   try {
+    result = findResult();
+    // success
+  } catch(reason) {
+    // failure
+  }
+  ```
+   Errback Example
+   ```js
+  findResult(function(result, err){
+    if (err) {
+      // failure
+    } else {
+      // success
+    }
+  });
+  ```
+   Promise Example;
+   ```javascript
+  findResult().then(function(result){
+    // success
+  }, function(reason){
+    // failure
+  });
+  ```
+   Advanced Example
+  --------------
+   Synchronous Example
+   ```javascript
+  let author, books;
+   try {
+    author = findAuthor();
+    books  = findBooksByAuthor(author);
+    // success
+  } catch(reason) {
+    // failure
+  }
+  ```
+   Errback Example
+   ```js
+   function foundBooks(books) {
+   }
+   function failure(reason) {
+   }
+   findAuthor(function(author, err){
+    if (err) {
+      failure(err);
+      // failure
+    } else {
+      try {
+        findBoooksByAuthor(author, function(books, err) {
+          if (err) {
+            failure(err);
+          } else {
+            try {
+              foundBooks(books);
+            } catch(reason) {
+              failure(reason);
             }
           }
-          if (result === reaction.promise) {
-            reject(TypeError('Promise-chain cycle'));
-          } else if (then = isThenable(result)) {
-            then.call(result, resolve, reject);
-          } else resolve(result);
-        } else reject(value);
-      } catch (e) {
-        if (domain && !exited) domain.exit();
-        reject(e);
+        });
+      } catch(error) {
+        failure(err);
       }
-    };
-    while (chain.length > i) run(chain[i++]); // variable length - can't use forEach
-    promise._c = [];
-    promise._n = false;
-    if (isReject && !promise._h) onUnhandled(promise);
-  });
-};
-var onUnhandled = function (promise) {
-  task.call(global, function () {
-    var value = promise._v;
-    var unhandled = isUnhandled(promise);
-    var result, handler, console;
-    if (unhandled) {
-      result = perform(function () {
-        if (isNode) {
-          process.emit('unhandledRejection', value, promise);
-        } else if (handler = global.onunhandledrejection) {
-          handler({ promise: promise, reason: value });
-        } else if ((console = global.console) && console.error) {
-          console.error('Unhandled promise rejection', value);
-        }
-      });
-      // Browsers should not trigger `rejectionHandled` event if it was handled here, NodeJS - should
-      promise._h = isNode || isUnhandled(promise) ? 2 : 1;
-    } promise._a = undefined;
-    if (unhandled && result.e) throw result.v;
-  });
-};
-var isUnhandled = function (promise) {
-  return promise._h !== 1 && (promise._a || promise._c).length === 0;
-};
-var onHandleUnhandled = function (promise) {
-  task.call(global, function () {
-    var handler;
-    if (isNode) {
-      process.emit('rejectionHandled', promise);
-    } else if (handler = global.onrejectionhandled) {
-      handler({ promise: promise, reason: promise._v });
+      // success
     }
   });
-};
-var $reject = function (value) {
-  var promise = this;
-  if (promise._d) return;
-  promise._d = true;
-  promise = promise._w || promise; // unwrap
-  promise._v = value;
-  promise._s = 2;
-  if (!promise._a) promise._a = promise._c.slice();
-  notify(promise, true);
-};
-var $resolve = function (value) {
-  var promise = this;
-  var then;
-  if (promise._d) return;
-  promise._d = true;
-  promise = promise._w || promise; // unwrap
+  ```
+   Promise Example;
+   ```javascript
+  findAuthor().
+    then(findBooksByAuthor).
+    then(function(books){
+      // found books
+  }).catch(function(reason){
+    // something went wrong
+  });
+  ```
+   @method then
+  @param {Function} onFulfilled
+  @param {Function} onRejected
+  Useful for tooling.
+  @return {Promise}
+  */
+
+  /**
+  `catch` is simply sugar for `then(undefined, onRejection)` which makes it the same
+  as the catch block of a try/catch statement.
+  ```js
+  function findAuthor(){
+  throw new Error('couldn't find that author');
+  }
+  // synchronous
   try {
-    if (promise === value) throw TypeError("Promise can't be resolved itself");
-    if (then = isThenable(value)) {
-      microtask(function () {
-        var wrapper = { _w: promise, _d: false }; // wrap
-        try {
-          then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
-        } catch (e) {
-          $reject.call(wrapper, e);
-        }
-      });
-    } else {
-      promise._v = value;
-      promise._s = 1;
-      notify(promise, false);
-    }
-  } catch (e) {
-    $reject.call({ _w: promise, _d: false }, e); // wrap
+  findAuthor();
+  } catch(reason) {
+  // something went wrong
   }
-};
-
-// constructor polyfill
-if (!USE_NATIVE) {
-  // 25.4.3.1 Promise(executor)
-  $Promise = function Promise(executor) {
-    anInstance(this, $Promise, PROMISE, '_h');
-    aFunction(executor);
-    Internal.call(this);
-    try {
-      executor(ctx($resolve, this, 1), ctx($reject, this, 1));
-    } catch (err) {
-      $reject.call(this, err);
-    }
-  };
-  // eslint-disable-next-line no-unused-vars
-  Internal = function Promise(executor) {
-    this._c = [];             // <- awaiting reactions
-    this._a = undefined;      // <- checked in isUnhandled reactions
-    this._s = 0;              // <- state
-    this._d = false;          // <- done
-    this._v = undefined;      // <- value
-    this._h = 0;              // <- rejection state, 0 - default, 1 - handled, 2 - unhandled
-    this._n = false;          // <- notify
-  };
-  Internal.prototype = __webpack_require__(/*! ./_redefine-all */ "./node_modules/core-js/modules/_redefine-all.js")($Promise.prototype, {
-    // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
-    then: function then(onFulfilled, onRejected) {
-      var reaction = newPromiseCapability(speciesConstructor(this, $Promise));
-      reaction.ok = typeof onFulfilled == 'function' ? onFulfilled : true;
-      reaction.fail = typeof onRejected == 'function' && onRejected;
-      reaction.domain = isNode ? process.domain : undefined;
-      this._c.push(reaction);
-      if (this._a) this._a.push(reaction);
-      if (this._s) notify(this, false);
-      return reaction.promise;
-    },
-    // 25.4.5.1 Promise.prototype.catch(onRejected)
-    'catch': function (onRejected) {
-      return this.then(undefined, onRejected);
-    }
+  // async with promises
+  findAuthor().catch(function(reason){
+  // something went wrong
   });
-  OwnPromiseCapability = function () {
-    var promise = new Internal();
-    this.promise = promise;
-    this.resolve = ctx($resolve, promise, 1);
-    this.reject = ctx($reject, promise, 1);
+  ```
+  @method catch
+  @param {Function} onRejection
+  Useful for tooling.
+  @return {Promise}
+  */
+
+
+  Promise.prototype.catch = function _catch(onRejection) {
+    return this.then(null, onRejection);
   };
-  newPromiseCapabilityModule.f = newPromiseCapability = function (C) {
-    return C === $Promise || C === Wrapper
-      ? new OwnPromiseCapability(C)
-      : newGenericPromiseCapability(C);
+
+  /**
+    `finally` will be invoked regardless of the promise's fate just as native
+    try/catch/finally behaves
+  
+    Synchronous example:
+  
+    ```js
+    findAuthor() {
+      if (Math.random() > 0.5) {
+        throw new Error();
+      }
+      return new Author();
+    }
+  
+    try {
+      return findAuthor(); // succeed or fail
+    } catch(error) {
+      return findOtherAuther();
+    } finally {
+      // always runs
+      // doesn't affect the return value
+    }
+    ```
+  
+    Asynchronous example:
+  
+    ```js
+    findAuthor().catch(function(reason){
+      return findOtherAuther();
+    }).finally(function(){
+      // author was either found, or not
+    });
+    ```
+  
+    @method finally
+    @param {Function} callback
+    @return {Promise}
+  */
+
+
+  Promise.prototype.finally = function _finally(callback) {
+    var promise = this;
+    var constructor = promise.constructor;
+
+    if (isFunction(callback)) {
+      return promise.then(function (value) {
+        return constructor.resolve(callback()).then(function () {
+          return value;
+        });
+      }, function (reason) {
+        return constructor.resolve(callback()).then(function () {
+          throw reason;
+        });
+      });
+    }
+
+    return promise.then(callback, callback);
   };
+
+  return Promise;
+}();
+
+Promise$1.prototype.then = then;
+Promise$1.all = all;
+Promise$1.race = race;
+Promise$1.resolve = resolve$1;
+Promise$1.reject = reject$1;
+Promise$1._setScheduler = setScheduler;
+Promise$1._setAsap = setAsap;
+Promise$1._asap = asap;
+
+/*global self*/
+function polyfill() {
+  var local = void 0;
+
+  if (typeof global !== 'undefined') {
+    local = global;
+  } else if (typeof self !== 'undefined') {
+    local = self;
+  } else {
+    try {
+      local = Function('return this')();
+    } catch (e) {
+      throw new Error('polyfill failed because global object is unavailable in this environment');
+    }
+  }
+
+  var P = local.Promise;
+
+  if (P) {
+    var promiseToString = null;
+    try {
+      promiseToString = Object.prototype.toString.call(P.resolve());
+    } catch (e) {
+      // silently ignored
+    }
+
+    if (promiseToString === '[object Promise]' && !P.cast) {
+      return;
+    }
+  }
+
+  local.Promise = Promise$1;
 }
 
-$export($export.G + $export.W + $export.F * !USE_NATIVE, { Promise: $Promise });
-__webpack_require__(/*! ./_set-to-string-tag */ "./node_modules/core-js/modules/_set-to-string-tag.js")($Promise, PROMISE);
-__webpack_require__(/*! ./_set-species */ "./node_modules/core-js/modules/_set-species.js")(PROMISE);
-Wrapper = __webpack_require__(/*! ./_core */ "./node_modules/core-js/modules/_core.js")[PROMISE];
+// Strange compat..
+Promise$1.polyfill = polyfill;
+Promise$1.Promise = Promise$1;
 
-// statics
-$export($export.S + $export.F * !USE_NATIVE, PROMISE, {
-  // 25.4.4.5 Promise.reject(r)
-  reject: function reject(r) {
-    var capability = newPromiseCapability(this);
-    var $$reject = capability.reject;
-    $$reject(r);
-    return capability.promise;
-  }
-});
-$export($export.S + $export.F * (LIBRARY || !USE_NATIVE), PROMISE, {
-  // 25.4.4.6 Promise.resolve(x)
-  resolve: function resolve(x) {
-    return promiseResolve(LIBRARY && this === Wrapper ? $Promise : this, x);
-  }
-});
-$export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(/*! ./_iter-detect */ "./node_modules/core-js/modules/_iter-detect.js")(function (iter) {
-  $Promise.all(iter)['catch'](empty);
-})), PROMISE, {
-  // 25.4.4.1 Promise.all(iterable)
-  all: function all(iterable) {
-    var C = this;
-    var capability = newPromiseCapability(C);
-    var resolve = capability.resolve;
-    var reject = capability.reject;
-    var result = perform(function () {
-      var values = [];
-      var index = 0;
-      var remaining = 1;
-      forOf(iterable, false, function (promise) {
-        var $index = index++;
-        var alreadyCalled = false;
-        values.push(undefined);
-        remaining++;
-        C.resolve(promise).then(function (value) {
-          if (alreadyCalled) return;
-          alreadyCalled = true;
-          values[$index] = value;
-          --remaining || resolve(values);
-        }, reject);
-      });
-      --remaining || resolve(values);
-    });
-    if (result.e) reject(result.v);
-    return capability.promise;
-  },
-  // 25.4.4.4 Promise.race(iterable)
-  race: function race(iterable) {
-    var C = this;
-    var capability = newPromiseCapability(C);
-    var reject = capability.reject;
-    var result = perform(function () {
-      forOf(iterable, false, function (promise) {
-        C.resolve(promise).then(capability.resolve, reject);
-      });
-    });
-    if (result.e) reject(result.v);
-    return capability.promise;
-  }
-});
+return Promise$1;
 
+})));
+
+
+
+//# sourceMappingURL=es6-promise.map
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../process/browser.js */ "./node_modules/process/browser.js"), __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/es6.string.iterator.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/core-js/modules/es6.string.iterator.js ***!
-  \*************************************************************/
+/***/ "./node_modules/foreach/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/foreach/index.js ***!
+  \***************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $at = __webpack_require__(/*! ./_string-at */ "./node_modules/core-js/modules/_string-at.js")(true);
-
-// 21.1.3.27 String.prototype[@@iterator]()
-__webpack_require__(/*! ./_iter-define */ "./node_modules/core-js/modules/_iter-define.js")(String, 'String', function (iterated) {
-  this._t = String(iterated); // target
-  this._i = 0;                // next index
-// 21.1.5.2.1 %StringIteratorPrototype%.next()
-}, function () {
-  var O = this._t;
-  var index = this._i;
-  var point;
-  if (index >= O.length) return { value: undefined, done: true };
-  point = $at(O, index);
-  this._i += point.length;
-  return { value: point, done: false };
-});
+/***/ (function(module, exports) {
 
 
-/***/ }),
+var hasOwn = Object.prototype.hasOwnProperty;
+var toString = Object.prototype.toString;
 
-/***/ "./node_modules/core-js/modules/es7.promise.finally.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/core-js/modules/es7.promise.finally.js ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// https://github.com/tc39/proposal-promise-finally
-
-var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/modules/_export.js");
-var core = __webpack_require__(/*! ./_core */ "./node_modules/core-js/modules/_core.js");
-var global = __webpack_require__(/*! ./_global */ "./node_modules/core-js/modules/_global.js");
-var speciesConstructor = __webpack_require__(/*! ./_species-constructor */ "./node_modules/core-js/modules/_species-constructor.js");
-var promiseResolve = __webpack_require__(/*! ./_promise-resolve */ "./node_modules/core-js/modules/_promise-resolve.js");
-
-$export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
-  var C = speciesConstructor(this, core.Promise || global.Promise);
-  var isFunction = typeof onFinally == 'function';
-  return this.then(
-    isFunction ? function (x) {
-      return promiseResolve(C, onFinally()).then(function () { return x; });
-    } : onFinally,
-    isFunction ? function (e) {
-      return promiseResolve(C, onFinally()).then(function () { throw e; });
-    } : onFinally
-  );
-} });
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/es7.promise.try.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/core-js/modules/es7.promise.try.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// https://github.com/tc39/proposal-promise-try
-var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/modules/_export.js");
-var newPromiseCapability = __webpack_require__(/*! ./_new-promise-capability */ "./node_modules/core-js/modules/_new-promise-capability.js");
-var perform = __webpack_require__(/*! ./_perform */ "./node_modules/core-js/modules/_perform.js");
-
-$export($export.S, 'Promise', { 'try': function (callbackfn) {
-  var promiseCapability = newPromiseCapability.f(this);
-  var result = perform(callbackfn);
-  (result.e ? promiseCapability.reject : promiseCapability.resolve)(result.v);
-  return promiseCapability.promise;
-} });
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/web.dom.iterable.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/core-js/modules/web.dom.iterable.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var $iterators = __webpack_require__(/*! ./es6.array.iterator */ "./node_modules/core-js/modules/es6.array.iterator.js");
-var getKeys = __webpack_require__(/*! ./_object-keys */ "./node_modules/core-js/modules/_object-keys.js");
-var redefine = __webpack_require__(/*! ./_redefine */ "./node_modules/core-js/modules/_redefine.js");
-var global = __webpack_require__(/*! ./_global */ "./node_modules/core-js/modules/_global.js");
-var hide = __webpack_require__(/*! ./_hide */ "./node_modules/core-js/modules/_hide.js");
-var Iterators = __webpack_require__(/*! ./_iterators */ "./node_modules/core-js/modules/_iterators.js");
-var wks = __webpack_require__(/*! ./_wks */ "./node_modules/core-js/modules/_wks.js");
-var ITERATOR = wks('iterator');
-var TO_STRING_TAG = wks('toStringTag');
-var ArrayValues = Iterators.Array;
-
-var DOMIterables = {
-  CSSRuleList: true, // TODO: Not spec compliant, should be false.
-  CSSStyleDeclaration: false,
-  CSSValueList: false,
-  ClientRectList: false,
-  DOMRectList: false,
-  DOMStringList: false,
-  DOMTokenList: true,
-  DataTransferItemList: false,
-  FileList: false,
-  HTMLAllCollection: false,
-  HTMLCollection: false,
-  HTMLFormElement: false,
-  HTMLSelectElement: false,
-  MediaList: true, // TODO: Not spec compliant, should be false.
-  MimeTypeArray: false,
-  NamedNodeMap: false,
-  NodeList: true,
-  PaintRequestList: false,
-  Plugin: false,
-  PluginArray: false,
-  SVGLengthList: false,
-  SVGNumberList: false,
-  SVGPathSegList: false,
-  SVGPointList: false,
-  SVGStringList: false,
-  SVGTransformList: false,
-  SourceBufferList: false,
-  StyleSheetList: true, // TODO: Not spec compliant, should be false.
-  TextTrackCueList: false,
-  TextTrackList: false,
-  TouchList: false
+module.exports = function forEach (obj, fn, ctx) {
+    if (toString.call(fn) !== '[object Function]') {
+        throw new TypeError('iterator must be a function');
+    }
+    var l = obj.length;
+    if (l === +l) {
+        for (var i = 0; i < l; i++) {
+            fn.call(ctx, obj[i], i, obj);
+        }
+    } else {
+        for (var k in obj) {
+            if (hasOwn.call(obj, k)) {
+                fn.call(ctx, obj[k], k, obj);
+            }
+        }
+    }
 };
 
-for (var collections = getKeys(DOMIterables), i = 0; i < collections.length; i++) {
-  var NAME = collections[i];
-  var explicit = DOMIterables[NAME];
-  var Collection = global[NAME];
-  var proto = Collection && Collection.prototype;
-  var key;
-  if (proto) {
-    if (!proto[ITERATOR]) hide(proto, ITERATOR, ArrayValues);
-    if (!proto[TO_STRING_TAG]) hide(proto, TO_STRING_TAG, NAME);
-    Iterators[NAME] = ArrayValues;
-    if (explicit) for (key in $iterators) if (!proto[key]) redefine(proto, key, $iterators[key], true);
+
+
+/***/ }),
+
+/***/ "./node_modules/global/window.js":
+/*!***************************************!*\
+  !*** ./node_modules/global/window.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var win;
+
+if (typeof window !== "undefined") {
+    win = window;
+} else if (typeof global !== "undefined") {
+    win = global;
+} else if (typeof self !== "undefined"){
+    win = self;
+} else {
+    win = {};
+}
+
+module.exports = win;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/ms/index.js":
+/*!**********************************!*\
+  !*** ./node_modules/ms/index.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Helpers.
+ */
+
+var s = 1000;
+var m = s * 60;
+var h = m * 60;
+var d = h * 24;
+var y = d * 365.25;
+
+/**
+ * Parse or format the given `val`.
+ *
+ * Options:
+ *
+ *  - `long` verbose formatting [false]
+ *
+ * @param {String|Number} val
+ * @param {Object} [options]
+ * @throws {Error} throw an error if val is not a non-empty string or a number
+ * @return {String|Number}
+ * @api public
+ */
+
+module.exports = function(val, options) {
+  options = options || {};
+  var type = typeof val;
+  if (type === 'string' && val.length > 0) {
+    return parse(val);
+  } else if (type === 'number' && isNaN(val) === false) {
+    return options.long ? fmtLong(val) : fmtShort(val);
+  }
+  throw new Error(
+    'val is not a non-empty string or a valid number. val=' +
+      JSON.stringify(val)
+  );
+};
+
+/**
+ * Parse the given `str` and return milliseconds.
+ *
+ * @param {String} str
+ * @return {Number}
+ * @api private
+ */
+
+function parse(str) {
+  str = String(str);
+  if (str.length > 100) {
+    return;
+  }
+  var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(
+    str
+  );
+  if (!match) {
+    return;
+  }
+  var n = parseFloat(match[1]);
+  var type = (match[2] || 'ms').toLowerCase();
+  switch (type) {
+    case 'years':
+    case 'year':
+    case 'yrs':
+    case 'yr':
+    case 'y':
+      return n * y;
+    case 'days':
+    case 'day':
+    case 'd':
+      return n * d;
+    case 'hours':
+    case 'hour':
+    case 'hrs':
+    case 'hr':
+    case 'h':
+      return n * h;
+    case 'minutes':
+    case 'minute':
+    case 'mins':
+    case 'min':
+    case 'm':
+      return n * m;
+    case 'seconds':
+    case 'second':
+    case 'secs':
+    case 'sec':
+    case 's':
+      return n * s;
+    case 'milliseconds':
+    case 'millisecond':
+    case 'msecs':
+    case 'msec':
+    case 'ms':
+      return n;
+    default:
+      return undefined;
   }
 }
+
+/**
+ * Short format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function fmtShort(ms) {
+  if (ms >= d) {
+    return Math.round(ms / d) + 'd';
+  }
+  if (ms >= h) {
+    return Math.round(ms / h) + 'h';
+  }
+  if (ms >= m) {
+    return Math.round(ms / m) + 'm';
+  }
+  if (ms >= s) {
+    return Math.round(ms / s) + 's';
+  }
+  return ms + 'ms';
+}
+
+/**
+ * Long format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function fmtLong(ms) {
+  return plural(ms, d, 'day') ||
+    plural(ms, h, 'hour') ||
+    plural(ms, m, 'minute') ||
+    plural(ms, s, 'second') ||
+    ms + ' ms';
+}
+
+/**
+ * Pluralization helper.
+ */
+
+function plural(ms, n, name) {
+  if (ms < n) {
+    return;
+  }
+  if (ms < n * 1.5) {
+    return Math.floor(ms / n) + ' ' + name;
+  }
+  return Math.ceil(ms / n) + ' ' + name + 's';
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/object-keys/implementation.js":
+/*!****************************************************!*\
+  !*** ./node_modules/object-keys/implementation.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var keysShim;
+if (!Object.keys) {
+	// modified from https://github.com/es-shims/es5-shim
+	var has = Object.prototype.hasOwnProperty;
+	var toStr = Object.prototype.toString;
+	var isArgs = __webpack_require__(/*! ./isArguments */ "./node_modules/object-keys/isArguments.js"); // eslint-disable-line global-require
+	var isEnumerable = Object.prototype.propertyIsEnumerable;
+	var hasDontEnumBug = !isEnumerable.call({ toString: null }, 'toString');
+	var hasProtoEnumBug = isEnumerable.call(function () {}, 'prototype');
+	var dontEnums = [
+		'toString',
+		'toLocaleString',
+		'valueOf',
+		'hasOwnProperty',
+		'isPrototypeOf',
+		'propertyIsEnumerable',
+		'constructor'
+	];
+	var equalsConstructorPrototype = function (o) {
+		var ctor = o.constructor;
+		return ctor && ctor.prototype === o;
+	};
+	var excludedKeys = {
+		$applicationCache: true,
+		$console: true,
+		$external: true,
+		$frame: true,
+		$frameElement: true,
+		$frames: true,
+		$innerHeight: true,
+		$innerWidth: true,
+		$onmozfullscreenchange: true,
+		$onmozfullscreenerror: true,
+		$outerHeight: true,
+		$outerWidth: true,
+		$pageXOffset: true,
+		$pageYOffset: true,
+		$parent: true,
+		$scrollLeft: true,
+		$scrollTop: true,
+		$scrollX: true,
+		$scrollY: true,
+		$self: true,
+		$webkitIndexedDB: true,
+		$webkitStorageInfo: true,
+		$window: true
+	};
+	var hasAutomationEqualityBug = (function () {
+		/* global window */
+		if (typeof window === 'undefined') { return false; }
+		for (var k in window) {
+			try {
+				if (!excludedKeys['$' + k] && has.call(window, k) && window[k] !== null && typeof window[k] === 'object') {
+					try {
+						equalsConstructorPrototype(window[k]);
+					} catch (e) {
+						return true;
+					}
+				}
+			} catch (e) {
+				return true;
+			}
+		}
+		return false;
+	}());
+	var equalsConstructorPrototypeIfNotBuggy = function (o) {
+		/* global window */
+		if (typeof window === 'undefined' || !hasAutomationEqualityBug) {
+			return equalsConstructorPrototype(o);
+		}
+		try {
+			return equalsConstructorPrototype(o);
+		} catch (e) {
+			return false;
+		}
+	};
+
+	keysShim = function keys(object) {
+		var isObject = object !== null && typeof object === 'object';
+		var isFunction = toStr.call(object) === '[object Function]';
+		var isArguments = isArgs(object);
+		var isString = isObject && toStr.call(object) === '[object String]';
+		var theKeys = [];
+
+		if (!isObject && !isFunction && !isArguments) {
+			throw new TypeError('Object.keys called on a non-object');
+		}
+
+		var skipProto = hasProtoEnumBug && isFunction;
+		if (isString && object.length > 0 && !has.call(object, 0)) {
+			for (var i = 0; i < object.length; ++i) {
+				theKeys.push(String(i));
+			}
+		}
+
+		if (isArguments && object.length > 0) {
+			for (var j = 0; j < object.length; ++j) {
+				theKeys.push(String(j));
+			}
+		} else {
+			for (var name in object) {
+				if (!(skipProto && name === 'prototype') && has.call(object, name)) {
+					theKeys.push(String(name));
+				}
+			}
+		}
+
+		if (hasDontEnumBug) {
+			var skipConstructor = equalsConstructorPrototypeIfNotBuggy(object);
+
+			for (var k = 0; k < dontEnums.length; ++k) {
+				if (!(skipConstructor && dontEnums[k] === 'constructor') && has.call(object, dontEnums[k])) {
+					theKeys.push(dontEnums[k]);
+				}
+			}
+		}
+		return theKeys;
+	};
+}
+module.exports = keysShim;
+
+
+/***/ }),
+
+/***/ "./node_modules/object-keys/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/object-keys/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var slice = Array.prototype.slice;
+var isArgs = __webpack_require__(/*! ./isArguments */ "./node_modules/object-keys/isArguments.js");
+
+var origKeys = Object.keys;
+var keysShim = origKeys ? function keys(o) { return origKeys(o); } : __webpack_require__(/*! ./implementation */ "./node_modules/object-keys/implementation.js");
+
+var originalKeys = Object.keys;
+
+keysShim.shim = function shimObjectKeys() {
+	if (Object.keys) {
+		var keysWorksWithArguments = (function () {
+			// Safari 5.0 bug
+			var args = Object.keys(arguments);
+			return args && args.length === arguments.length;
+		}(1, 2));
+		if (!keysWorksWithArguments) {
+			Object.keys = function keys(object) { // eslint-disable-line func-name-matching
+				if (isArgs(object)) {
+					return originalKeys(slice.call(object));
+				}
+				return originalKeys(object);
+			};
+		}
+	} else {
+		Object.keys = keysShim;
+	}
+	return Object.keys || keysShim;
+};
+
+module.exports = keysShim;
+
+
+/***/ }),
+
+/***/ "./node_modules/object-keys/isArguments.js":
+/*!*************************************************!*\
+  !*** ./node_modules/object-keys/isArguments.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var toStr = Object.prototype.toString;
+
+module.exports = function isArguments(value) {
+	var str = toStr.call(value);
+	var isArgs = str === '[object Arguments]';
+	if (!isArgs) {
+		isArgs = str !== '[object Array]' &&
+			value !== null &&
+			typeof value === 'object' &&
+			typeof value.length === 'number' &&
+			value.length >= 0 &&
+			toStr.call(value.callee) === '[object Function]';
+	}
+	return isArgs;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/querystring-es3/decode.js":
+/*!************************************************!*\
+  !*** ./node_modules/querystring-es3/decode.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+// If obj.hasOwnProperty has been overridden, then calling
+// obj.hasOwnProperty(prop) will break.
+// See: https://github.com/joyent/node/issues/1707
+function hasOwnProperty(obj, prop) {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
+module.exports = function(qs, sep, eq, options) {
+  sep = sep || '&';
+  eq = eq || '=';
+  var obj = {};
+
+  if (typeof qs !== 'string' || qs.length === 0) {
+    return obj;
+  }
+
+  var regexp = /\+/g;
+  qs = qs.split(sep);
+
+  var maxKeys = 1000;
+  if (options && typeof options.maxKeys === 'number') {
+    maxKeys = options.maxKeys;
+  }
+
+  var len = qs.length;
+  // maxKeys <= 0 means that we should not limit keys count
+  if (maxKeys > 0 && len > maxKeys) {
+    len = maxKeys;
+  }
+
+  for (var i = 0; i < len; ++i) {
+    var x = qs[i].replace(regexp, '%20'),
+        idx = x.indexOf(eq),
+        kstr, vstr, k, v;
+
+    if (idx >= 0) {
+      kstr = x.substr(0, idx);
+      vstr = x.substr(idx + 1);
+    } else {
+      kstr = x;
+      vstr = '';
+    }
+
+    k = decodeURIComponent(kstr);
+    v = decodeURIComponent(vstr);
+
+    if (!hasOwnProperty(obj, k)) {
+      obj[k] = v;
+    } else if (isArray(obj[k])) {
+      obj[k].push(v);
+    } else {
+      obj[k] = [obj[k], v];
+    }
+  }
+
+  return obj;
+};
+
+var isArray = Array.isArray || function (xs) {
+  return Object.prototype.toString.call(xs) === '[object Array]';
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/querystring-es3/encode.js":
+/*!************************************************!*\
+  !*** ./node_modules/querystring-es3/encode.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+var stringifyPrimitive = function(v) {
+  switch (typeof v) {
+    case 'string':
+      return v;
+
+    case 'boolean':
+      return v ? 'true' : 'false';
+
+    case 'number':
+      return isFinite(v) ? v : '';
+
+    default:
+      return '';
+  }
+};
+
+module.exports = function(obj, sep, eq, name) {
+  sep = sep || '&';
+  eq = eq || '=';
+  if (obj === null) {
+    obj = undefined;
+  }
+
+  if (typeof obj === 'object') {
+    return map(objectKeys(obj), function(k) {
+      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+      if (isArray(obj[k])) {
+        return map(obj[k], function(v) {
+          return ks + encodeURIComponent(stringifyPrimitive(v));
+        }).join(sep);
+      } else {
+        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+      }
+    }).join(sep);
+
+  }
+
+  if (!name) return '';
+  return encodeURIComponent(stringifyPrimitive(name)) + eq +
+         encodeURIComponent(stringifyPrimitive(obj));
+};
+
+var isArray = Array.isArray || function (xs) {
+  return Object.prototype.toString.call(xs) === '[object Array]';
+};
+
+function map (xs, f) {
+  if (xs.map) return xs.map(f);
+  var res = [];
+  for (var i = 0; i < xs.length; i++) {
+    res.push(f(xs[i], i));
+  }
+  return res;
+}
+
+var objectKeys = Object.keys || function (obj) {
+  var res = [];
+  for (var key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) res.push(key);
+  }
+  return res;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/querystring-es3/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/querystring-es3/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.decode = exports.parse = __webpack_require__(/*! ./decode */ "./node_modules/querystring-es3/decode.js");
+exports.encode = exports.stringify = __webpack_require__(/*! ./encode */ "./node_modules/querystring-es3/encode.js");
 
 
 /***/ })

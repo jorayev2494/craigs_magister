@@ -35,10 +35,10 @@ class CategoryController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $this->resolvePaginate($request);
-        $announcementCategories = $this->categoryService->categoryEloquentRepository->all();
-        $announcementCategoriesPaginate = CategoryResource::collection($announcementCategories);
-        return response()->json($announcementCategoriesPaginate);
+        // $this->resolvePaginate($request);
+        $announcementCategories = $this->categoryService->categoryEloquentRepository->all()->sortByDesc('id');
+        // $announcementCategoriesPaginate = CategoryResource::collection($announcementCategories);
+        return response()->json(CategoryResource::collection($announcementCategories));
     }
 
     /**

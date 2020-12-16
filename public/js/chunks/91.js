@@ -147,6 +147,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -309,7 +316,11 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Send Invoice")]
+                      [
+                        _vm._v(
+                          "\n                        Send Invoice\n                    "
+                        )
+                      ]
                     )
                   ],
                   1
@@ -333,7 +344,7 @@ var render = function() {
                     icon: "icon icon-download"
                   }
                 },
-                [_vm._v("Download")]
+                [_vm._v("\n                Download\n            ")]
               ),
               _vm._v(" "),
               _c(
@@ -343,7 +354,7 @@ var render = function() {
                   attrs: { "icon-pack": "feather", icon: "icon icon-file" },
                   on: { click: _vm.printInvoice }
                 },
-                [_vm._v("Print")]
+                [_vm._v("\n                Print\n            ")]
               )
             ],
             1
@@ -592,7 +603,7 @@ var render = function() {
         _c("div", { staticClass: "invoice__footer text-right p-base" }, [
           _c("p", { staticClass: "mb-4" }, [
             _vm._v(
-              "Transfer the amounts to the business amount below. Please include invoice number on your check."
+              "Transfer the amounts to the business amount below. Please include invoice number on your\n                check."
             )
           ]),
           _vm._v(" "),

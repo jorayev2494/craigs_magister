@@ -117,7 +117,8 @@ export default [
                 name: "Managements",
                 icon: "UserIcon",
                 i18n: "managements",
-                submenu: [{
+                submenu: [
+                    {
                         url: '/admin/apps/user/user-list',
                         name: "Users",
                         slug: "admin-app-user-list",
@@ -128,6 +129,12 @@ export default [
                         name: "announcements",
                         slug: "admin-announcements",
                         i18n: "announcements",
+                    },
+                    {
+                        path: '/admin/announcements/categories',
+                        name: "Categories",
+                        slug: "admin-announcements-categories",
+                        i18n: "categories",
                     }
                     // {
                     //     url: '/admin/apps/user/user-view/268',

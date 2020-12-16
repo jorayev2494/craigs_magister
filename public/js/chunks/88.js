@@ -367,7 +367,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ItemListView = function ItemListView() {
-  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./components/ItemListView.vue */ "./resources/js/src/views/apps/eCommerce/components/ItemListView.vue"));
+  return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./components/ItemListView.vue */ "./resources/js/src/views/apps/eCommerce/components/ItemListView.vue"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({

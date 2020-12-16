@@ -324,10 +324,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ItemGridView: function ItemGridView() {
-      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./components/ItemGridView.vue */ "./resources/js/src/views/apps/eCommerce/components/ItemGridView.vue"));
+      return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./components/ItemGridView.vue */ "./resources/js/src/views/apps/eCommerce/components/ItemGridView.vue"));
     },
     ItemListView: function ItemListView() {
-      return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./components/ItemListView.vue */ "./resources/js/src/views/apps/eCommerce/components/ItemListView.vue"));
+      return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./components/ItemListView.vue */ "./resources/js/src/views/apps/eCommerce/components/ItemListView.vue"));
     },
     AisClearRefinements: vue_instantsearch__WEBPACK_IMPORTED_MODULE_0__["AisClearRefinements"],
     AisConfigure: vue_instantsearch__WEBPACK_IMPORTED_MODULE_0__["AisConfigure"],

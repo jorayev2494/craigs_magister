@@ -16,7 +16,7 @@ import VuejsDialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js'; // o
 // include the default style
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 
-require('../bootstrap');
+// require('../bootstrap');
 
 // Tell Vue to install the plugin.
 Vue.use(VuejsDialog);

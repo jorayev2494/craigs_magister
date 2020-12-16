@@ -278,6 +278,22 @@ const router = new Router({
                         rule: 'editor'
                     },
                 },
+                // #region Announcement Category
+                {
+                    path: '/admin/announcements/categories',
+                    name: 'admin-announcements-categories',
+                    component: () => import('@/views/templates/admin/management/category/CategoryListView.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { title: 'Home', url: '/' },
+                            // { title: 'Data List'},
+                            { title: 'Categories', active: true },
+                        ],
+                        pageTitle: 'Categories',
+                        rule: 'editor'
+                    },
+                },
+                // #endregion
         // =============================================================================
         // UI ELEMENTS
         // =============================================================================
