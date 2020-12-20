@@ -182,12 +182,7 @@
                 type: Object,
                 required: true
             },
-        },
-        data() {
-            return {
-                // key: value
-            }
-        },
+        }
     }
 </script>
 

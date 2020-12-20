@@ -127,8 +127,14 @@ class Announcement extends Model
 
     public function getRateAttribute(): float
     {
-        $rate = $this->attributes['rate'] ?: 0;
-        return number_format($rate, 1, '.', ',') ;
+        $reviews = $this->reviews()->select('rating')->get();
+
+        if ($reviews->isNotEmpty()) {
+            $number = $reviews->sum('rating')  /  $reviews->count();
+            return number_format($number, 2, '.', ',');
+        }
+
+        return 0;
     }
 
     public function setImagesAttribute(array $images): void

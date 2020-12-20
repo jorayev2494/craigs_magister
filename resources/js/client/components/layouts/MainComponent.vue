@@ -3,7 +3,8 @@
         <!-- <div class="preloader"></div> -->
         <!-- Main Header Nav -->
         <header-navigation-component></header-navigation-component>
-        <ws-debug-component></ws-debug-component>
+        <!-- <ws-debug-component></ws-debug-component> -->
+        <notifications group="server-response" position="top right" style="margin-top: 92px;" />
         
         <!-- #region Modals -->
         <modal-login-and-register-component></modal-login-and-register-component>

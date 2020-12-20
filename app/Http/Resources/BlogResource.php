@@ -13,19 +13,19 @@ class BlogResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'category' => $this->whenLoaded('category', BlogCategoryResource::make($this->category)),
-            'media_content' => $this->whenLoaded(
-                                                'mediaContent', 
-                                                DocumentResource::make($this->mediaContent),
-                                                $this->getDefaultMediaContent()
-                                            ),
-            'user' => $this->whenLoaded('user', UserResource::make($this->user)),
-            'admin' => $this->whenLoaded('admin', AdminResource::make($this->admin)),
+            'category' => BlogCategoryResource::make($this->whenLoaded('category')),
+            'media_content' => $this->when(
+                $this->whenLoaded('mediaContent'), 
+                DocumentResource::make($this->whenLoaded('mediaContent'), 
+                $this->getDefaultMediaContent())
+            ),
+            'user' => UserResource::make($this->whenLoaded('user')),
+            'admin' => AdminResource::make($this->whenLoaded('admin')),
             'description' => $this->description,
             'status' => $this->status,
             'blocked_description' => $this->blocked_description,

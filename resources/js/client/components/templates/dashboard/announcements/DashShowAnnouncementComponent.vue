@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<show-head-announcement-component :announcement="announcement" v-if="announcementLoaded"></show-head-announcement-component>
+		<show-head-announcement-component :announcement="announcement"></show-head-announcement-component>
+		<!-- <show-head-announcement-component :announcement="announcement" v-if="announcementLoaded"></show-head-announcement-component> -->
 
 		<section class="our-agent-single bgc-f7 pb30-991" v-if="announcement">
 			<div class="container">
@@ -1032,7 +1033,8 @@
 			}
 		},
         components: {
-			ShowHeadAnnouncementComponent: () => import('../../../includes/dashboard/announcements/ShowHeadAnnoucementComponent.vue'),
+			ShowHeadAnnouncementComponent: () => import('../../../includes/announcements/ShowHeadAnnoucementComponent.vue'),
+			// ShowHeadAnnouncementComponent: () => import('../../../includes/dashboard/announcements/ShowHeadAnnoucementComponent.vue'),
 			BlockReviewsComponent: () => import('../../../includes/BlockReviewsComponent.vue')
 		},
 		computed: {

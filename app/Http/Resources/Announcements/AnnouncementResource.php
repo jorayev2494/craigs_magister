@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Announcements;
 
+use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\CountryResource;
 use App\Http\Resources\RecentActivityResource;
@@ -32,15 +33,9 @@ class AnnouncementResource extends JsonResource
             'status_cancelled_description' => $this->status_cancelled_description,
             'status_blocked_description' => $this->status_blocked_description,
             'rate' => $this->rate,
-            'category' => $this->whenLoaded('category', $this->category),
-            'creator' => $this->whenLoaded('creator', UserResource::make($this->creator)),
-            'concrete' => $this->whenLoaded('concrete', array_merge(
-                Arr::except($this->concrete->attributesToArray(), ['id', 'announcement_id']), 
-                [
-                    'created_at' => $this->concrete->created_at->diffForHumans(),
-                    'updated_at' => $this->concrete->updated_at->diffForHumans()
-                ])
-            ),
+            'category' => CategoryResource::make($this->whenLoaded('category')),
+            'creator' => UserResource::make($this->whenLoaded('creator')),
+            'concrete' => ConcreteResource::make($this->whenLoaded('concrete')),
             'location' => $this->whenLoaded('country', [
                 'country' => $this->country->slug,
                 'city' => $this->city->slug,
@@ -51,7 +46,7 @@ class AnnouncementResource extends JsonResource
             'video' => $this->video,
             'viewed' => $this->viewed,
             'unblock_date' => $this->unblock_date,
-            'reviews' => $this->whenLoaded('reviews', ReviewResource::collection($this->reviews)),
+            'reviews' => ReviewResource::collection($this->whenLoaded('reviews')),
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
             // 'recent_activities' => $this->whenLoaded('recentActivities', RecentActivityResource::collection($this->recentActivities)),

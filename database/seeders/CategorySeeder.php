@@ -10,6 +10,7 @@ class CategorySeeder extends Seeder
 
     private array $fakeCategories = [
         'house',
+        'car',
         // 'phone',
         // 'cars'
     ];

@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use FileService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 
 class AnnouncementService extends BaseModelService
@@ -65,6 +66,29 @@ class AnnouncementService extends BaseModelService
             ->get();
 
         return $result;
+    }
+
+    public function getByRequestQuerySortExtent(Builder $query): Collection
+    {
+        $result = $this->getInstancePipeline()
+            ->send($query)
+            ->through(
+                \App\Pipelines\Database\QueryFilters\Sort::class
+            )
+            ->thenReturn()
+            ->get();
+
+        return $result;
+    }
+
+    public function getApproved(): Collection
+    {
+        $builder = $this->announcementEloquentRepository->getModelClone()->newQuery()
+                                                        ->where('status', $this->announcementEloquentRepository->model::STATUS_APPROVED);
+        
+        return $this->getByRequestQuerySortExtent($builder);
+
+        
     }
 
     public function create(User $creatorUser, array $data): void

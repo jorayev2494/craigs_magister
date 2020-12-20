@@ -9,13 +9,10 @@ class ReviewAccessGate
 {
     public function store(User $user, string $type, int $id): bool
     {
+        // dd($user->attributesToArray(), $type, $id);
         // For User Announcement
         if ($type == 'announcement') {
-            $popularType = Str::plural($type, 2);
-            $announcements = $user->$popularType;
-
-            if ($announcements)
-                return $announcements->contains($id);
+            return $user->announcements->contains($id);
         }
 
         // For User Review

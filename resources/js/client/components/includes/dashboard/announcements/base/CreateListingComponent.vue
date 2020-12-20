@@ -24,7 +24,7 @@
             <div class="col-lg-12 col-xl-12">
                 <div class="my_profile_setting_input ui_kit_select_search form-group">
                     <label>Category</label>
-                    <select name="category_id" class="selectpicker" data-live-search="true" v-model="dataCreateListing.category_id" data-width="100%">
+                    <select name="category_id" class="selectpicker" data-live-search="true" @change="changeCategory($event)" v-model="dataCreateListing.category_id" data-width="100%">
                         <option v-for="category in categories" :key="category.id" :value="category.id" data-tokens="type1">{{ category.slug }}</option>
                     </select>
                 </div>
@@ -83,6 +83,12 @@
             return {
                 categories: null,
                 price_permissions: null
+            }
+        },
+        methods: {
+            changeCategory(event) {
+                var selectedCategory = this.categories.find((cat) => event.target.value == cat.id);
+                this.$emit('change-category', selectedCategory.slug);
             }
         },
         created() {

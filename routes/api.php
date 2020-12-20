@@ -43,5 +43,7 @@ Route::group(['middleware' => 'auth:user'], static function(): void {
     });
 
     Route::post('/review/{id}', ['uses' => 'ReviewController', 'as' => 'review']);
+    Route::get('/reviews', ['uses' => 'ReviewController@getByType', 'as' => 'review_get_by_type']);
+
 });
 

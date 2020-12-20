@@ -7,6 +7,7 @@ use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\CountryResource;
 use App\Models\Announcements\Base\Announcement;
+use App\Models\Announcements\Base\Category;
 use App\Services\CategoryService;
 use App\Services\CityService;
 use App\Services\CountryService;
@@ -28,7 +29,16 @@ class ServerPublicDataController extends Controller
 
     public function categories(CategoryService $categoryService): JsonResponse
     {
+        /**
+         * @var Category $categories
+         */
         $categories = $categoryService->categoryEloquentRepository->getNotBlocked();
+        $categories->each(
+            fn(Category $category) => $category->setAttribute(
+                'count_announcements', $category->announcements()->where('status', Announcement::STATUS_APPROVED)->count()
+            )
+        );
+
         return response()->json(CategoryResource::collection($categories));
     }
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="dashboard_sidebar_menu dn-992">
+    <div class="dashboard_sidebar_menu dn-992  bgc-f7">
         <ul class="sidebar-menu">
             <li class="header">
                 <img src="/client/images/header-logo2.png" alt="header-logo2.png">
@@ -74,8 +74,9 @@
                     <span>Saved Search</span>
                 </a>
             </li>
+
             <li class="treeview">
-                <a href="page-my-review.html">
+                <a href="#">
                     <i class="flaticon-chat"></i>
                     <span> Reviews</span>
                     <i class="fa fa-angle-down pull-right"></i>
@@ -95,6 +96,41 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="treeview">
+                <a href="page-my-review.html">
+                    <i class="flaticon-chat"></i>
+                    <span> Reviews</span>
+                    <i class="fa fa-angle-down pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="#myreview"><i class="fa fa-circle"></i> My Reviews</a></li>
+                    <li><a href="#client_myreview"><i class="fa fa-circle"></i> Visitor Reviews</a></li>
+                </ul>
+            </li>
+
+            <li class="title">
+                <span>Reviews</span>
+            </li>
+            <li>
+                <router-link :to="{ name: 'dashboard-announcement-reviews' }">
+                    <i class="flaticon-chat"></i>
+                    <span>Announcement Reviews</span>
+                </router-link>
+            </li>
+            <li>
+                <router-link :to="{ name: 'dashboard-my-reviews' }">
+                    <i class="flaticon-chat"></i>
+                    <span>My Reviews</span>
+                </router-link>
+            </li>
+            <li>
+                <router-link :to="{ name: 'dashboard-my-recorded-reviews' }">
+                    <i class="flaticon-chat"></i>
+                    <span>My Recorded Reviews</span>
+                </router-link>
+            </li>
+
             <li class="title">
                 <span>Manage Account</span>
             </li>

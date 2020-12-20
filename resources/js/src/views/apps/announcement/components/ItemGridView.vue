@@ -18,16 +18,22 @@
                         <!-- <img v-server-image:412="item.images[0]" class="grid-view-img px-4"> -->
                         <admin-carousel-component :images="item.images" :image-size="412" class="grid-view-img px-4"></admin-carousel-component>
                     </div>
+                    <vs-divider />
                     <div class="item-details px-4">
 
                         <!-- RATING & PRICE -->
                         <div class="flex justify-between items-center">
                             <div class="text-warning border border-solid border-warning flex py-1 px-2 rounded">
-                                <span class="text-sm mr-1">{{ item.rate }}</span>
                                 <feather-icon icon="StarIcon" svgClasses="h-4 w-4" />
+                                <span class="text-sm ml-1">{{ item.rate }}</span>
                             </div>
-                            <div class="text-warning border border-solid border-warning flex py-1 px-2 rounded">
-                                <span class="text-sm mr-1">{{ item.status }}</span>
+                            
+                            <div class="text-primary border border-solid border-primary flex py-1 px-2 rounded">
+                                <feather-icon icon="BoxIcon" svgClasses="h-4 w-4" />
+                                <span class="text-sm ml-1">{{ item.category.slug | capitalize }}</span>
+                            </div>
+                            <div :class="'text-' + getStatusColor(item.status) + ' border border-solid border-' + getStatusColor(item.status) + ' flex py-1 px-2 rounded'">
+                                <span class="text-sm mr-1">{{ item.status | capitalize }}</span>
                                 <!-- <feather-icon icon="StarIcon" svgClasses="h-4 w-4" /> -->
                             </div>
                             <h6 class="font-bold">{{ item.front_end_price }}</h6>
@@ -57,10 +63,30 @@ export default{
         },
     },
     methods: {
-      navigate_to_detail_view() {
-        this.$router.push({ name: 'ecommerce-item-detail-view', params: { item_id: this.item.id } })
-          .catch(() => {})
-      }
+        getStatusColor(status) {
+            if (status == 'approved') {
+                return 'success';
+            }
+            if (status == 'waiting') {
+                return 'warning';
+            }
+
+            if (status == 'cancelled') {
+                return 'primary';
+            }
+
+            if (status == 'blocked') {
+                return 'danger';
+            }
+
+            if (status == 'was_appealed') {
+                return 'gray';
+            }
+        },
+        navigate_to_detail_view() {
+            this.$router.push({ name: 'ecommerce-item-detail-view', params: { item_id: this.item.id } })
+            .catch(() => {})
+        }
     }
 }
 </script>

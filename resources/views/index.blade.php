@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="{{ asset('client') }}/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('client') }}/css/style.css">
 
+    {{-- Dashboard --}}
+    <link rel="stylesheet" href="{{ asset('client') }}/css/dashbord_navitaion.css">
+    {{-- End Dashboard --}}
+
     <!-- Responsive stylesheet -->
     <link rel="stylesheet" href="{{ asset('client') }}/css/responsive.css">
 
@@ -36,7 +40,7 @@
     <body>
         <div id="app"></div>    
 
-        <script src="{{ asset('js/main.js') }}"></script>
+        {{-- <script src="{{ asset('js/main.js') }}"></script> --}}
         <!-- Wrapper End -->
         {{--  <script data-cfasync="false" src="{{ asset('client') }}/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>  --}}
         <script type="text/javascript" src="{{ asset('client') }}/js/jquery-3.3.1.js"></script>
@@ -46,7 +50,7 @@
         <script type="text/javascript" src="{{ asset('client') }}/js/jquery.mmenu.all.js"></script>
         <script type="text/javascript" src="{{ asset('client') }}/js/ace-responsive-menu.js"></script>
         <script type="text/javascript" src="{{ asset('client') }}/js/bootstrap-select.min.js"></script>
-        <script type="text/javascript" src="{{ asset('client') }}/js/isotop.js"></script>
+        {{-- <script type="text/javascript" src="{{ asset('client') }}/js/isotop.js"></script> --}}
         <script type="text/javascript" src="{{ asset('client') }}/js/snackbar.min.js"></script>
         <script type="text/javascript" src="{{ asset('client') }}/js/simplebar.js"></script>
         <script type="text/javascript" src="{{ asset('client') }}/js/parallax.js"></script>
@@ -54,11 +58,21 @@
         <script type="text/javascript" src="{{ asset('client') }}/js/jquery-scrolltofixed-min.js"></script>
         <script type="text/javascript" src="{{ asset('client') }}/js/jquery.counterup.js"></script>
         <script type="text/javascript" src="{{ asset('client') }}/js/wow.min.js"></script>
+
+        {{-- Dashboard --}}
+        <script type="text/javascript" src="{{ asset('client') }}/js/progressbar.js"></script>
+        {{-- End Dashboard --}}
+
         <script type="text/javascript" src="{{ asset('client') }}/js/slider.js"></script>
         <script type="text/javascript" src="{{ asset('client') }}/js/timepicker.js"></script>
+        <script type="text/javascript" src="{{ asset('client') }}/js/wow.min.js"></script>
+        {{-- Dashboard --}}
+        <script type="text/javascript" src="{{ asset('client') }}/js/dashboard-script.js"></script>
+        {{-- End Dashboard --}}
+
         <!-- Custom script for all pages -->
         <script type="text/javascript" src="{{ asset('client') }}/js/script.js"></script>
-        {{--  <script src="{{ asset(mix('js/app.js')) }}"></script>  --}}
+        <script src="{{ asset(mix('js/main.js')) }}"></script> 
     </body>
 
 </html>

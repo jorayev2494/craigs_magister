@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 
 class AnnouncementController extends Controller
 {
+    use Pagination;
+
     /**
     * @var AnnouncementService $announcementService
     */
@@ -22,17 +24,24 @@ class AnnouncementController extends Controller
         $this->announcementService = $announcementService;
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $announcements = $this->announcementService->getByRequestQuerySort();
-        return response()->json(
-            AnnouncementResource::collection($announcements)
-        );
+        $this->resolvePaginate($request);
+        $announcements = $this->announcementService->getApproved();
+        $announcementsPaginate = $this->getDataForResponse(AnnouncementResource::collection(
+            $announcements->sortByDesc('created_at')->load('category', 'reviews', 'creator')
+        ));
+        // dd($announcementsPaginate);
+        return response()->json($announcementsPaginate);
     }
 
     public function show(int $id): JsonResponse
     {
+        /**
+         * @var Announcement $foundAnnouncement
+         */
         $foundAnnouncement = $this->announcementService->announcementEloquentRepository->find($id);
-        return response()->json(AnnouncementResource::make($foundAnnouncement));
+        $foundAnnouncement->increment('viewed');
+        return response()->json(AnnouncementResource::make($foundAnnouncement->loadMissing('creator', 'reviews.creator')));
     }
 }

@@ -4,6 +4,17 @@ import Notifications from 'vue-notification';
 import store from './store/index.js';
 import router from './router/index.js';
 import axios from './axios/index.js';
+
+// Star rating
+import StarRating from 'vue-dynamic-star-rating'
+
+// i18n
+import i18n from './i18n/i18n.js';
+
+import * as func from '../helpers/func.js'
+// func
+Vue.prototype.$func = func;
+
 // #region register Advanced Laravel Vue Paginate as a global Vue component
 import 'advanced-laravel-vue-paginate/dist/advanced-laravel-vue-paginate.css'
 Vue.use(require('advanced-laravel-vue-paginate'));
@@ -66,10 +77,12 @@ import './styles/global.css';
 import App from './components/App.vue';
 
 Vue.component('ws-debug-component', require('./components/WSDebugComponent.vue').default);
+Vue.component('star-rating', StarRating);
 
 new Vue({
     store,
     router,
+    i18n,
     render: (h) => h(App),
 }).$mount('#app');
 

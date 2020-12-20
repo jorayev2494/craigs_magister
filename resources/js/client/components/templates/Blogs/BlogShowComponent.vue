@@ -1,14 +1,14 @@
 <template>
-    <section class="blog_post_container bgc-f7 pb30">
+    <section class="blog_post_container bgc-f7 pb30" v-if="blog">
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-6">
 					<div class="breadcrumb_content style2">
 						<ol class="breadcrumb">
 						    <li class="breadcrumb-item">
-                                <a href="#">Home</a>
+                                <router-link :to="{ name: 'index' }">Houme</router-link>
                             </li>
-						    <li class="breadcrumb-item active text-thm" aria-current="page">Simple Listing – Grid View</li>
+						    <li class="breadcrumb-item active text-thm" aria-current="page">Blog</li>
 						</ol>
 						<h2 class="breadcrumb_title">Blog</h2>
 					</div>
@@ -17,47 +17,48 @@
 
 			<div class="row">
 
-				<div class="col-lg-8" v-if="data">
+				<div class="col-lg-8">
 					<div class="main_blog_post_content">
 						<div class="mbp_thumb_post">
 							<div class="blog_sp_tag">
-                                <a href="#">{{ data.category.slug }}</a>
+                                <a href="#">{{ blog.category.slug }}</a>
                             </div>
-							<h3 class="blog_sp_title">{{ data.title }}</h3>
+							<h3 class="blog_sp_title">{{ blog.title }}</h3>
 							<ul class="blog_sp_post_meta">
 								<li class="list-inline-item">
-                                    <a href="#">{{ data.user ? data.user.full_name : data.admin.first_name }}</a>
+									<router-link :to="{ name: 'user-profile', params: { user_id: blog.user.id } }">
+										<img class="avatar-radius" v-server-image:40="blog.user ? blog.user.avatar : blog.admin.avatar">
+									</router-link>
+								</li>
+								<li class="list-inline-item">
+                                    <router-link :to="{ name: 'user-profile', params: { user_id: blog.user.id } }">
+										{{ blog.user ? blog.user.full_name : blog.admin.first_name }}
+									</router-link>
                                 </li>
 								<li class="list-inline-item">
                                     <span class="flaticon-calendar"></span>
                                 </li>
 								<li class="list-inline-item">
-                                    <!-- <a href="#">January 16, 2020</a> -->
-                                    <a href="#">{{ data.created_at }}</a>
+                                    <a href="#">{{ blog.created_at }}</a>
                                 </li>
-								<li class="list-inline-item">
+								<!-- <li class="list-inline-item">
                                     <span class="flaticon-view"></span>
                                 </li>
 								<li class="list-inline-item">
                                     <a href="#"> 341 views</a>
-                                </li>
-								<li class="list-inline-item">
+                                </li> -->
+								<!-- <li class="list-inline-item">
                                     <span class="flaticon-chat"></span>
                                 </li>
 								<li class="list-inline-item">
                                     <a href="#">15</a>
-                                </li>
-								<li class="list-inline-item">
-                                    <a href="#">
-                                        <img v-server-image:689="data.media_content.path">
-                                    </a>
-                                </li>
+                                </li> -->
 							</ul>
 							<div class="thumb">
-								<!-- <img class="img-fluid" v-server-image-size:size="'url'" :src="data.user ? data.user.avatar : data.admin.avatar" :alt="data.user ? data.user.avatar : data.admin.avatar"> -->
-								<img class="img-fluid avatar-radius" v-server-image:40="data.user ? data.user.avatar : data.admin.avatar">
+								<!-- <img class="img-fluid" v-server-image-size:size="'url'" :src="blog.user ? blog.user.avatar : blog.admin.avatar" :alt="blog.user ? blog.user.avatar : blog.admin.avatar"> -->
+								<img v-server-image:689="blog.media_content.path">
 							</div>
-							<div class="details" v-html="data.description">
+							<div class="details" v-html="blog.description">
 								<!-- <p class="mb30">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis et sem sed sollicitudin. Donec non odio neque. Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec. Quisque bibendum orci ac nibh facilisis, at malesuada orci congue. Nullam tempus sollicitudin cursus. Ut et adipiscing erat. Curabitur this is a text link libero tempus congue.</p>
 								<p class="mb30">Duis mattis laoreet neque, et ornare neque sollicitudin at. Proin sagittis dolor sed mi elementum pretium. Donec et justo ante. Vivamus egestas sodales est, eu rhoncus urna semper eu. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer tristique elit lobortis purus bibendum, quis dictum metus mattis. Phasellus posuere felis sed eros porttitor mattis. Curabitur massa magna, tempor in blandit id, porta in ligula. Aliquam laoreet nisl massa, at interdum mauris sollicitudin et.</p>
 								<h4 class="mb15">Housing Markets That Changed the Most This Decade</h4>
@@ -71,16 +72,16 @@
 								<p class="mb25">Curabitur massa magna, tempor in blandit id, porta in ligula. Aliquam laoreet nisl massa, at interdum mauris sollicitudin et. Mauris risus lectus, tristique at nisl at, pharetra tristique enim.</p>
 								<p class="mb25">Nullam this is a link nibh facilisis, at malesuada orci congue. Nullam tempus sollicitudin cursus. Nulla elit mauris, volutpat eu varius malesuada, pulvinar eu ligula. Ut et adipiscing erat. Curabitur adipiscing erat vel libero tempus congue. Nam pharetra interdum vestibulum. Aenean gravida mi non aliquet porttitor. Praesent dapibus, nisi a faucibus tincidunt, quam dolor condimentum metus, in convallis libero ligula ut eros.</p> -->
 							</div>
-							<ul class="blog_post_share">
+							<!-- <ul class="blog_post_share">
 								<li><p>Share</p></li>
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 								<li><a href="#"><i class="fa fa-google"></i></a></li>
 								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-							</ul>
+							</ul> -->
 						</div>
-						<div class="mbp_pagination_tab">
+						<!-- <div class="mbp_pagination_tab">
 							<div class="row">
 								<div class="col-sm-6 col-lg-6">
 									<div class="pag_prev">
@@ -111,7 +112,7 @@
 									<a class="write_review float-right fn-xsd" href="#">Write a Review</a>
 								</div>
 								<div class="mbp_first media">
-									<img class="mr-3 avatar-radius" v-server-image:80="data.user ? data.user.avatar : data.admin.avatar">
+									<img class="mr-3 avatar-radius" v-server-image:80="blog.user ? blog.user.avatar : blog.admin.avatar">
 									<div class="media-body">
 								    	<h4 class="sub_title mt-0">Diana Cooper
 											<span class="sspd_review">
@@ -176,9 +177,9 @@
 								</div>
 								<button type="submit" class="btn btn-thm">Submit Review</button>
 							</form>
-						</div>
+						</div> -->
 					</div>
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-lg-12 mb20">
 							<h4>Related Posts</h4>
 						</div>
@@ -232,11 +233,11 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 
 				<div class="col-lg-4">
-					<div class="sidebar_search_widget">
+					<!-- <div class="sidebar_search_widget">
 						<div class="blog_search_widget">
 							<div class="input-group">
 								<input type="text" class="form-control" placeholder="Search Here" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -245,7 +246,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="terms_condition_widget">
 						<h4 class="title">Categories Property</h4>
 						<div class="widget_list">
@@ -297,16 +298,26 @@
 							</div>
 						</div>
 					</div>
-					<div class="blog_tag_widget">
+					<!-- <div class="blog_tag_widget">
 						<h4 class="title">Tags</h4>
 						<ul class="tag_list">
-							<li class="list-inline-item"><a href="#">Apartment</a></li>
-							<li class="list-inline-item"><a href="#">Real Estate</a></li>
-							<li class="list-inline-item"><a href="#">Estate</a></li>
-							<li class="list-inline-item"><a href="#">Luxury</a></li>
-							<li class="list-inline-item"><a href="#">Real</a></li>
+							<li class="list-inline-item">
+								<a href="#">Apartment</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#">Real Estate</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#">Estate</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#">Luxury</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#">Real</a>
+							</li>
 						</ul>
-					</div>
+					</div> -->
 				</div>
 			</div>
 
@@ -320,17 +331,14 @@
     export default {
         data() {
             return {
-                // data: null
+                blog: null,
             }
         },
-        computed: {
-            ...mapGetters({
-                data: 'blog/GET_BLOG'
-            }),
-        },
-        created() {
-            this.$store.dispatch('blog/ACTION_BLOG', this.$route.params['id']);
-        },
+        async created() {
+            await this.$httpClient.get(`/api/blogs/${this.$route.params['id']}`).then((response) => {
+				this.blog = response.data;
+			}).catch((err) => { });
+		}
     }
 </script>
 

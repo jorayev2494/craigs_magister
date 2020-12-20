@@ -9,6 +9,7 @@ use App\Repositories\Eloquent\AnnouncementReviewRepository;
 use App\Services\Announcements\Base\AnnouncementService;
 use App\Services\Base\Abstracts\BaseModelService;
 use App\Services\Base\Interfaces\IBaseAppGuards;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class AnnouncementReviewService extends BaseModelService
@@ -36,5 +37,10 @@ class AnnouncementReviewService extends BaseModelService
          */
         $announcement = resolve(AnnouncementService::class)->find($id);
         return $announcement->reviews()->create(array_merge($data, ['creator_id' => $this->authUser->id]));
+    }
+
+    public function getAnnouncementReviewsByAuthor(User $author): Collection
+    {
+        return $this->announcementReviewEloquentRepository->getReviewsByAuthor($author);
     }
 }

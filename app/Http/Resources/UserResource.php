@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Announcements\AnnouncementResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -12,7 +13,7 @@ class UserResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'id' => $this->id,
@@ -34,8 +35,10 @@ class UserResource extends JsonResource
             'about' => $this->about,
             'last_login' => $this->last_login,
             'last_activity' => $this->last_activity,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'announcements' => AnnouncementResource::collection($this->whenLoaded('announcements')),
+            'reviews' => ReviewResource::collection($this->whenLoaded('reviews')),
+            'created_at' => $this->created_at->diffForHumans(),
+            'updated_at' => $this->updated_at->diffForHumans(),
         ];
     }
 }

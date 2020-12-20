@@ -23,11 +23,11 @@ class AdminResource extends JsonResource
             'full_name' => $this->full_name,
             'email' => $this->email,
             'avatar' => '/storage' . $this->avatar,
-            'role' => $this->whenLoaded('role', $this->role->slug),
-            'location' => $this->whenLoaded('country', [
-                'country' => $this->country->slug,
-                'city' => $this->city->slug,
-            ]),
+            // 'role' => $this->whenLoaded('role', $this->role->slug),
+            // 'location' => $this->whenLoaded('country', [
+            //     'country' => $this->country->slug,
+            //     'city' => $this->city->slug,
+            // ]),
             'email_confirmed' => $this->email_confirmed,
             'active' => $this->active,
             'last_login' => $this->last_login,

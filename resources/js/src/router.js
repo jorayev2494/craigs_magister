@@ -154,8 +154,8 @@ const router = new Router({
                         authRequired: true,
                         breadcrumb: [
                             { title: 'Home', url: '/' },
-                            { title: 'eCommerce' },
-                            { title: 'Test' },
+                            // { title: 'eCommerce' },
+                            // { title: 'Test' },
                             { title: 'Announcements', active: true },
                         ],
                         pageTitle: 'Announcements',

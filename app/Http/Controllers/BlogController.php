@@ -25,13 +25,14 @@ class BlogController extends Controller
     {
         // $this->resolvePaginate($request);
         $blogs = $this->blogService->getPublishedBlogs();
-        $blogsPaginate = BlogResource::collection($blogs);        //$this->getDataForResponse(BlogResource::collection($blogs));
+        $blogsPaginate = BlogResource::collection($blogs->loadMissing('user', 'category', 'admin'));        //$this->getDataForResponse(BlogResource::collection($blogs));
         return response()->json($blogsPaginate);
     }
 
     public function show(int $id): JsonResponse
     {
-        $foundBlock = $this->blogService->findPublishedBlog($id);
+        $foundBlock = $this->blogService->findPublishedBlog($id)->loadMissing('user', 'category', 'admin');
+        // dd($foundBlock);
         return response()->json(BlogResource::make($foundBlock));
     }
 }

@@ -95,6 +95,14 @@ __webpack_require__.r(__webpack_exports__);
       price_permissions: null
     };
   },
+  methods: {
+    changeCategory: function changeCategory(event) {
+      var selectedCategory = this.categories.find(function (cat) {
+        return event.target.value == cat.id;
+      });
+      this.$emit('change-category', selectedCategory.slug);
+    }
+  },
   created: function created() {
     var _this = this;
 
@@ -231,21 +239,28 @@ var render = function() {
                   "data-width": "100%"
                 },
                 on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.dataCreateListing,
-                      "category_id",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.dataCreateListing,
+                        "category_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                    function($event) {
+                      return _vm.changeCategory($event)
+                    }
+                  ]
                 }
               },
               _vm._l(_vm.categories, function(category) {

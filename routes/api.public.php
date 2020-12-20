@@ -21,8 +21,13 @@ Route::group(['prefix' => 'server', 'namespace' => 'Server'], static function():
     Route::get('/announcements/price_permissions', ['uses' => 'ServerPublicDataController@pricePer']);
 });
 
+Route::get('/users/{id}', ['uses' => 'UserController', 'as' => 'user']);
+
 Route::get('/announcements', ['uses' => 'AnnouncementController@index', 'as' => 'announcements']);
 Route::get('/announcements/{id}', ['uses' => 'AnnouncementController@show', 'as' => 'announcements.show']);
 
 Route::get('/blogs', ['uses' => 'BlogController@index', 'as' => 'blogs']);
 Route::get('/blogs/{id}', ['uses' => 'BlogController@show', 'as' => 'blogs.show']);
+
+// Route::post('/send_message_creator/{id}', ['uses' => 'CreatorMessageController@send', 'as' => 'send_message_creator']);
+Route::post('/send_message_creator/{id}', ['uses' => 'CreatorMessageController@send', 'as' => 'send_message_creator']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Announcements\AnnouncementResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ReviewResource extends JsonResource
@@ -18,8 +19,9 @@ class ReviewResource extends JsonResource
             'id' => $this->id,
             'description' => $this->description,
             'rating' => $this->rating,
-            // 'creator_id' => $this->creator_id,
-            'creator' => $this->whenLoaded('creator', UserResource::make($this->creator)),
+            'creator' => UserResource::make($this->whenLoaded('creator')),
+            'user' => UserResource::make($this->whenLoaded('user')),
+            'announcement' => AnnouncementResource::make($this->whenLoaded('announcement')),
             'created_at' => $this->created_at->format('M d, Y'),
             'updated_at' => $this->updated_at->format('M d, Y'),
         ];

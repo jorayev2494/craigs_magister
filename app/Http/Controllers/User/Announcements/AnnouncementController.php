@@ -45,7 +45,11 @@ class AnnouncementController extends Controller
         $this->authorize('viewAny', Announcement::class);
         $this->resolvePaginate($request);
         $announcements = $this->authUser->announcements;
-        $announcementsPaginate = $this->getDataForResponse(AnnouncementResource::collection($announcements->sortByDesc('created_at')));
+        $announcementsPaginate = $this->getDataForResponse(
+            AnnouncementResource::collection(
+                $announcements->sortByDesc('created_at')->each->loadMissing('category')
+            )
+        );
         return response()->json($announcementsPaginate);
     }
 

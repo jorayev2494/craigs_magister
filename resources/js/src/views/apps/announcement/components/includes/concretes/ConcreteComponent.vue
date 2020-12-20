@@ -15,7 +15,7 @@
                     <vs-tr>
                 </template> -->
 
-                <vs-td :data="key">{{ key }}</vs-td>
+                <vs-td :data="key">{{ $t(`concrete_announcement.${key}`) }}</vs-td>
                 <vs-td :data="val" v-text="val"></vs-td>
             </vs-tr>
         </template>
@@ -28,6 +28,7 @@
             concreteData: {
                 type: Object,
                 required: true
+                
             },
         }
     }

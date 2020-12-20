@@ -8,12 +8,14 @@ use App\Http\Resources\Announcements\AnnouncementResource;
 use App\Services\Admin\Management\AnnouncementManagementService;
 use App\Services\Announcements\Base\AnnouncementService;
 use App\Services\Base\Interfaces\IBaseAppGuards;
+use App\Traits\Pagination;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 final class AnnouncementController extends Controller
 {
+    use Pagination;
 
     /**
     * @var AnnouncementManagementService $announcementManagementService
@@ -30,11 +32,14 @@ final class AnnouncementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $announcements = $this->announcementManagementService->announcementEloquentRepository->getBySortedQuery()->sortByDesc('created_at');
+        $this->perPage = 16;
+        $this->resolvePaginate($request);
+        $announcements = $this->announcementManagementService->announcementEloquentRepository->getBySortedQuery(); // ->sortByDesc('created_at');
+        $announcementsPaginate = $this->getDataForResponse(AnnouncementResource::collection($announcements));
         // $this->authorize('viewAny');
-        return response()->json(AnnouncementResource::collection($announcements));
+        return response()->json($announcementsPaginate);
     }
 
     /**

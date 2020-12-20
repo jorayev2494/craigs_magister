@@ -535,7 +535,7 @@
             StarRating,
             // AnnouncementItemDetailCarousel: () => import('./components/includes/carousels/AnnouncementItemDetailCarousel.vue'),
 
-            HouseConcreteComponent: () => import('./components/includes/concretes/HouseConcreteComponent.vue'),
+            HouseConcreteComponent: () => import('./components/includes/concretes/ConcreteComponent.vue'),
             flatPickr
         },
         async created() {

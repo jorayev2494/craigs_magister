@@ -131,7 +131,7 @@ export default [
                         i18n: "announcements",
                     },
                     {
-                        path: '/admin/announcements/categories',
+                        url: '/admin/announcements/categories',
                         name: "Categories",
                         slug: "admin-announcements-categories",
                         i18n: "categories",

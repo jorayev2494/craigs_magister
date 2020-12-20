@@ -10,7 +10,11 @@
 
 import Vue from 'vue'
 import App from './App.vue'
-import * as func from './helpers/func.js'
+// #region register Advanced Laravel Vue Paginate as a global Vue component
+import 'advanced-laravel-vue-paginate/dist/advanced-laravel-vue-paginate.css'
+Vue.use(require('advanced-laravel-vue-paginate'));
+// #endregion
+import * as func from '../helpers/func.js'
 
 // Vuesax Component Framework
 import Vuesax from 'vuesax'

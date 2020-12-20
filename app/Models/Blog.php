@@ -59,6 +59,10 @@ class Blog extends Model
         'updated_at' => IBaseModel::FORMAT_DATETIME,
     ];
 
+    protected $with = [
+        'mediaContent'
+    ];
+
     public function getMediaContentPath(): string
     {
         return '/blogs/media_content/';

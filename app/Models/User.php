@@ -93,6 +93,18 @@ final class User extends JWTAuthModel implements IBaseUserModel
         return '/images/portrait/small/';
     }
 
+    public function getRateAttribute(): float
+    {
+        $reviews = $this->reviews()->select('rating')->get();
+
+        if ($reviews->isNotEmpty()) {
+            $number = $reviews->sum('rating')  /  $reviews->count();
+            return number_format($number, 2, '.', ',');
+        }
+
+        return 0;
+    }
+
     // private function getAvatarUrl(): string
     // {
     //     return '/images/avatar/';
@@ -101,7 +113,7 @@ final class User extends JWTAuthModel implements IBaseUserModel
     #region Relationships
     public function announcements(): HasMany
     {
-        return $this->hasMany(Announcement::class, 'creator_id', 'id');
+        return $this->hasMany(Announcement::class, 'creator_id', 'id')->orderByDesc('created_at');
     }
 
     public function announcementComplaints(): HasMany

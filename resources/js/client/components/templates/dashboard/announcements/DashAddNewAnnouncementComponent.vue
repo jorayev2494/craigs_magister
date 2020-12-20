@@ -15,7 +15,7 @@
 						<div class="col-lg-12">
                             <!-- Create Listing -->
                             <!-- <pre>{{ $data.create_listing }}</pre> -->
-							<create-listing-component :data-create-listing="create_listing"></create-listing-component>
+							<create-listing-component :data-create-listing="create_listing" @change-category="changeCategoryName($event)"></create-listing-component>
 
                             <!-- Location -->
                             <!-- <pre>{{ $data.location }}</pre> -->
@@ -23,7 +23,10 @@
 
                             <!-- Detailed Information -->
                             <!-- <pre>{{ $data.concrete }}</pre> -->
-                            <house-component :data-concrete="concrete"></house-component>
+                            <!-- <house-component :data-concrete="concrete"></house-component> -->
+                            <keep-alive>
+                                <component :is="componentNameComp" :data-concrete="concrete"></component>
+                            </keep-alive>
 
                             <!-- Media Content -->
                             <!-- <pre>{{ $data.images }}</pre> -->
@@ -54,6 +57,7 @@
                 concrete: {},
                 images: {},
                 formData: new FormData(),
+                componentName: 'CarComponent',
             }
         },
         methods: {
@@ -120,6 +124,20 @@
                         this.$data.objProperty = {};
                     }
                 }                        
+            },
+            changeCategoryName(categoryName) {
+                if(categoryName == 'house') this.componentNameComp = 'HouseComponent';
+                if(categoryName == 'car') this.componentNameComp = 'CarComponent';
+            }
+        },
+        computed: {
+            componentNameComp: {
+                get: function() {
+                    return this.componentName;
+                },
+                set: function(value) {
+                    this.componentName = value;
+                }
             }
         },
         components: {
@@ -128,6 +146,7 @@
             ImagesComponent: () => import('../../../includes/dashboard/announcements/base/ImagesComponent.vue'),
 
             HouseComponent: () => import('../../../includes/dashboard/announcements/concretes/HouseComponent.vue'),
+            CarComponent: () => import('../../../includes/dashboard/announcements/concretes/CarComponent.vue'),
         },
     }
 </script>

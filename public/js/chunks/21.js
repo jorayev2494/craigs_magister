@@ -3273,7 +3273,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var VxTour = function VxTour() {
-  return __webpack_require__.e(/*! import() */ 92).then(__webpack_require__.bind(null, /*! @/components/VxTour.vue */ "./resources/js/src/components/VxTour.vue"));
+  return __webpack_require__.e(/*! import() */ 93).then(__webpack_require__.bind(null, /*! @/components/VxTour.vue */ "./resources/js/src/components/VxTour.vue"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -9765,7 +9765,7 @@ __webpack_require__.r(__webpack_exports__);
       slug: "admin-announcements",
       i18n: "announcements"
     }, {
-      path: '/admin/announcements/categories',
+      url: '/admin/announcements/categories',
       name: "Categories",
       slug: "admin-announcements-categories",
       i18n: "categories"

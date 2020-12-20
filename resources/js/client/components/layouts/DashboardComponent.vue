@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <!-- <div class="preloader"></div> -->
+        <div class="preloader"></div>
 
         <!-- Main Header Nav -->
         <!-- <dashboard-header-navigation-component></dashboard-header-navigation-component> -->

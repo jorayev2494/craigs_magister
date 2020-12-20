@@ -46,6 +46,28 @@ const router = new Router({
                         // rule: 'editor'
                      }
                 },
+                // #region User Profile
+                {
+                    path: '/user/profile/:user_id',
+                    name: 'user-profile',
+                    component: () => import('../components/templates/user/UserProfileComponent.vue'),
+                    props: true
+                },
+                // #endregion
+                // #region Announcements
+                {
+                    path: '/announcements',
+                    name: 'announcements',
+                    component: () => import('../components/templates/announcements/ListAnnouncementsComponent.vue'),
+                },
+                {
+                    path: '/announcement-show/:id',
+                    name: 'announcement-show',
+                    component: () => import('../components/templates/announcements/ShowAnnouncementComponent.vue'),
+                },
+                // #endregion
+
+                // #region Blogs
                 {
                     path: '/blogs',
                     name: 'blogs',
@@ -56,7 +78,7 @@ const router = new Router({
                     name: 'blogs-show',
                     component: () => import('../components/templates/Blogs/BlogShowComponent.vue'),
                 },
-
+                // #endregion
                 // #region Authorize
                 {
                     path: '/auth/forgot_password/send_reset_token_email',
@@ -71,6 +93,7 @@ const router = new Router({
                 // #endregion
             ]
         },
+        // #region User Dashboard
         {
             path: '/',
             name: 'dashboard',
@@ -109,8 +132,27 @@ const router = new Router({
                     component: () => import('../components/templates/dashboard/announcements/DashEditAnnouncementComponent.vue'),
                 },
                 // #endregion
+
+                // #region Reviews
+                {
+                    path: '/dashboard/announcement/reviews',
+                    name: 'dashboard-announcement-reviews',
+                    component: () => import('../components/templates/dashboard/reviews/DashAnnouncementsReviewComponent.vue'),
+                },
+                {
+                    path: '/dashboard/my/reviews',
+                    name: 'dashboard-my-reviews',
+                    component: () => import('../components/templates/dashboard/reviews/DashMyReviewComponent.vue'),
+                },
+                {
+                    path: '/dashboard/my/recorded/reviews',
+                    name: 'dashboard-my-recorded-reviews',
+                    component: () => import('../components/templates/dashboard/reviews/DashMyRecordedReviewComponent.vue'),
+                },
+                // #endregion
             ]
         },
+        // #endregion
     ]
 });
 

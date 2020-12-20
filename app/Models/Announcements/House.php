@@ -28,11 +28,11 @@ class House extends Model
 
     public const VALIDATION_RULES = [
         'total_area' => 'required|string',
-        'exchange_possibility' => 'nullable|boolean',
         'property_type' => 'required|string',
         'number_of_storeys' => 'required|integer',
         'floor' => 'required|integer',
         'quantity_rooms' => 'required|integer',
+        'exchange_possibility' => 'nullable|boolean',
     ];
 
     public function announcement(): BelongsTo 

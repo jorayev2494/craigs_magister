@@ -16,13 +16,15 @@ class CategoryResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
+        // dd($this);
         return [
             'id' => $this->id,
             'slug' => $this->slug,
             'model' => $this->when(auth()->guard(IBaseAppGuards::ADMIN)->check(), $this->model),
             'unblock_date' => $this->when(auth()->guard(IBaseAppGuards::ADMIN)->check(), $this->unblock_date),
+            'count_announcements' => $this->when($this->count_announcements, $this->count_announcements),
             'created_at' => $this->created_at->format(IBaseModel::FORMAT_VALIDATE),
             'updated_at' => $this->updated_at->format(IBaseModel::FORMAT_VALIDATE),
         ];
